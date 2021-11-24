@@ -11,6 +11,7 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/goharbor/harbor/src/pkg/quota/types"
 )
 
 // ProjectSummaryQuota project summary quota
@@ -19,10 +20,10 @@ import (
 type ProjectSummaryQuota struct {
 
 	// The hard limits of the quota
-	Hard ResourceList `json:"hard,omitempty"`
+	Hard types.ResourceList `json:"hard,omitempty"`
 
 	// The used status of the quota
-	Used ResourceList `json:"used,omitempty"`
+	Used types.ResourceList `json:"used,omitempty"`
 }
 
 // Validate validates this project summary quota
@@ -48,15 +49,13 @@ func (m *ProjectSummaryQuota) validateHard(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if m.Hard != nil {
-		if err := m.Hard.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("hard")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("hard")
-			}
-			return err
+	if err := m.Hard.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("hard")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("hard")
 		}
+		return err
 	}
 
 	return nil
@@ -67,15 +66,13 @@ func (m *ProjectSummaryQuota) validateUsed(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if m.Used != nil {
-		if err := m.Used.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("used")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("used")
-			}
-			return err
+	if err := m.Used.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("used")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("used")
 		}
+		return err
 	}
 
 	return nil

@@ -16,73 +16,59 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewGetSystemCVEAllowlistParams creates a new GetSystemCVEAllowlistParams object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewGetSystemCVEAllowlistParams creates a new GetSystemCVEAllowlistParams object
+// with the default values initialized.
 func NewGetSystemCVEAllowlistParams() *GetSystemCVEAllowlistParams {
+	var ()
 	return &GetSystemCVEAllowlistParams{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewGetSystemCVEAllowlistParamsWithTimeout creates a new GetSystemCVEAllowlistParams object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewGetSystemCVEAllowlistParamsWithTimeout(timeout time.Duration) *GetSystemCVEAllowlistParams {
+	var ()
 	return &GetSystemCVEAllowlistParams{
+
 		timeout: timeout,
 	}
 }
 
 // NewGetSystemCVEAllowlistParamsWithContext creates a new GetSystemCVEAllowlistParams object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewGetSystemCVEAllowlistParamsWithContext(ctx context.Context) *GetSystemCVEAllowlistParams {
+	var ()
 	return &GetSystemCVEAllowlistParams{
+
 		Context: ctx,
 	}
 }
 
 // NewGetSystemCVEAllowlistParamsWithHTTPClient creates a new GetSystemCVEAllowlistParams object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewGetSystemCVEAllowlistParamsWithHTTPClient(client *http.Client) *GetSystemCVEAllowlistParams {
+	var ()
 	return &GetSystemCVEAllowlistParams{
 		HTTPClient: client,
 	}
 }
 
-/* GetSystemCVEAllowlistParams contains all the parameters to send to the API endpoint
-   for the get system CVE allowlist operation.
-
-   Typically these are written to a http.Request.
+/*GetSystemCVEAllowlistParams contains all the parameters to send to the API endpoint
+for the get system CVE allowlist operation typically these are written to a http.Request
 */
 type GetSystemCVEAllowlistParams struct {
 
-	/* XRequestID.
+	/*XRequestID
+	  An unique ID for the request
 
-	   An unique ID for the request
 	*/
 	XRequestID *string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the get system CVE allowlist params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *GetSystemCVEAllowlistParams) WithDefaults() *GetSystemCVEAllowlistParams {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the get system CVE allowlist params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *GetSystemCVEAllowlistParams) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the get system CVE allowlist params
@@ -143,6 +129,7 @@ func (o *GetSystemCVEAllowlistParams) WriteToRequest(r runtime.ClientRequest, re
 		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
 			return err
 		}
+
 	}
 
 	if len(res) > 0 {

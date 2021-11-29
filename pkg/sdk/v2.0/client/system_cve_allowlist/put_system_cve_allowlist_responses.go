@@ -47,6 +47,7 @@ func (o *PutSystemCVEAllowlistReader) ReadResponse(response runtime.ClientRespon
 			return nil, err
 		}
 		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -57,7 +58,7 @@ func NewPutSystemCVEAllowlistOK() *PutSystemCVEAllowlistOK {
 	return &PutSystemCVEAllowlistOK{}
 }
 
-/* PutSystemCVEAllowlistOK describes a response with status code 200, with default header values.
+/*PutSystemCVEAllowlistOK handles this case with default header values.
 
 Successfully updated the CVE allowlist.
 */
@@ -78,13 +79,12 @@ func NewPutSystemCVEAllowlistUnauthorized() *PutSystemCVEAllowlistUnauthorized {
 	return &PutSystemCVEAllowlistUnauthorized{}
 }
 
-/* PutSystemCVEAllowlistUnauthorized describes a response with status code 401, with default header values.
+/*PutSystemCVEAllowlistUnauthorized handles this case with default header values.
 
 Unauthorized
 */
 type PutSystemCVEAllowlistUnauthorized struct {
-
-	/* The ID of the corresponding request for the response
+	/*The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
@@ -94,18 +94,15 @@ type PutSystemCVEAllowlistUnauthorized struct {
 func (o *PutSystemCVEAllowlistUnauthorized) Error() string {
 	return fmt.Sprintf("[PUT /system/CVEAllowlist][%d] putSystemCveAllowlistUnauthorized  %+v", 401, o.Payload)
 }
+
 func (o *PutSystemCVEAllowlistUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
 
 func (o *PutSystemCVEAllowlistUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// hydrates response header X-Request-Id
-	hdrXRequestID := response.GetHeader("X-Request-Id")
-
-	if hdrXRequestID != "" {
-		o.XRequestID = hdrXRequestID
-	}
+	// response header X-Request-Id
+	o.XRequestID = response.GetHeader("X-Request-Id")
 
 	o.Payload = new(models.Errors)
 
@@ -122,13 +119,12 @@ func NewPutSystemCVEAllowlistForbidden() *PutSystemCVEAllowlistForbidden {
 	return &PutSystemCVEAllowlistForbidden{}
 }
 
-/* PutSystemCVEAllowlistForbidden describes a response with status code 403, with default header values.
+/*PutSystemCVEAllowlistForbidden handles this case with default header values.
 
 Forbidden
 */
 type PutSystemCVEAllowlistForbidden struct {
-
-	/* The ID of the corresponding request for the response
+	/*The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
@@ -138,18 +134,15 @@ type PutSystemCVEAllowlistForbidden struct {
 func (o *PutSystemCVEAllowlistForbidden) Error() string {
 	return fmt.Sprintf("[PUT /system/CVEAllowlist][%d] putSystemCveAllowlistForbidden  %+v", 403, o.Payload)
 }
+
 func (o *PutSystemCVEAllowlistForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
 
 func (o *PutSystemCVEAllowlistForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// hydrates response header X-Request-Id
-	hdrXRequestID := response.GetHeader("X-Request-Id")
-
-	if hdrXRequestID != "" {
-		o.XRequestID = hdrXRequestID
-	}
+	// response header X-Request-Id
+	o.XRequestID = response.GetHeader("X-Request-Id")
 
 	o.Payload = new(models.Errors)
 
@@ -166,13 +159,12 @@ func NewPutSystemCVEAllowlistInternalServerError() *PutSystemCVEAllowlistInterna
 	return &PutSystemCVEAllowlistInternalServerError{}
 }
 
-/* PutSystemCVEAllowlistInternalServerError describes a response with status code 500, with default header values.
+/*PutSystemCVEAllowlistInternalServerError handles this case with default header values.
 
 Internal server error
 */
 type PutSystemCVEAllowlistInternalServerError struct {
-
-	/* The ID of the corresponding request for the response
+	/*The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
@@ -182,18 +174,15 @@ type PutSystemCVEAllowlistInternalServerError struct {
 func (o *PutSystemCVEAllowlistInternalServerError) Error() string {
 	return fmt.Sprintf("[PUT /system/CVEAllowlist][%d] putSystemCveAllowlistInternalServerError  %+v", 500, o.Payload)
 }
+
 func (o *PutSystemCVEAllowlistInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }
 
 func (o *PutSystemCVEAllowlistInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// hydrates response header X-Request-Id
-	hdrXRequestID := response.GetHeader("X-Request-Id")
-
-	if hdrXRequestID != "" {
-		o.XRequestID = hdrXRequestID
-	}
+	// response header X-Request-Id
+	o.XRequestID = response.GetHeader("X-Request-Id")
 
 	o.Payload = new(models.Errors)
 

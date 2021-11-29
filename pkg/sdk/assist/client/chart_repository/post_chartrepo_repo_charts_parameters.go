@@ -16,85 +16,69 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewPostChartrepoRepoChartsParams creates a new PostChartrepoRepoChartsParams object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewPostChartrepoRepoChartsParams creates a new PostChartrepoRepoChartsParams object
+// with the default values initialized.
 func NewPostChartrepoRepoChartsParams() *PostChartrepoRepoChartsParams {
+	var ()
 	return &PostChartrepoRepoChartsParams{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewPostChartrepoRepoChartsParamsWithTimeout creates a new PostChartrepoRepoChartsParams object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewPostChartrepoRepoChartsParamsWithTimeout(timeout time.Duration) *PostChartrepoRepoChartsParams {
+	var ()
 	return &PostChartrepoRepoChartsParams{
+
 		timeout: timeout,
 	}
 }
 
 // NewPostChartrepoRepoChartsParamsWithContext creates a new PostChartrepoRepoChartsParams object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewPostChartrepoRepoChartsParamsWithContext(ctx context.Context) *PostChartrepoRepoChartsParams {
+	var ()
 	return &PostChartrepoRepoChartsParams{
+
 		Context: ctx,
 	}
 }
 
 // NewPostChartrepoRepoChartsParamsWithHTTPClient creates a new PostChartrepoRepoChartsParams object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewPostChartrepoRepoChartsParamsWithHTTPClient(client *http.Client) *PostChartrepoRepoChartsParams {
+	var ()
 	return &PostChartrepoRepoChartsParams{
 		HTTPClient: client,
 	}
 }
 
-/* PostChartrepoRepoChartsParams contains all the parameters to send to the API endpoint
-   for the post chartrepo repo charts operation.
-
-   Typically these are written to a http.Request.
+/*PostChartrepoRepoChartsParams contains all the parameters to send to the API endpoint
+for the post chartrepo repo charts operation typically these are written to a http.Request
 */
 type PostChartrepoRepoChartsParams struct {
 
-	/* Chart.
+	/*Chart
+	  The chart file
 
-	   The chart file
 	*/
 	Chart runtime.NamedReadCloser
+	/*Prov
+	  The provance file
 
-	/* Prov.
-
-	   The provance file
 	*/
 	Prov runtime.NamedReadCloser
+	/*Repo
+	  The project name
 
-	/* Repo.
-
-	   The project name
 	*/
 	Repo string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the post chartrepo repo charts params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *PostChartrepoRepoChartsParams) WithDefaults() *PostChartrepoRepoChartsParams {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the post chartrepo repo charts params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *PostChartrepoRepoChartsParams) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the post chartrepo repo charts params
@@ -170,6 +154,7 @@ func (o *PostChartrepoRepoChartsParams) WriteToRequest(r runtime.ClientRequest, 
 		return err
 	}
 	var res []error
+
 	// form file param chart
 	if err := r.SetFileParam("chart", o.Chart); err != nil {
 		return err
@@ -178,11 +163,14 @@ func (o *PostChartrepoRepoChartsParams) WriteToRequest(r runtime.ClientRequest, 
 	if o.Prov != nil {
 
 		if o.Prov != nil {
+
 			// form file param prov
 			if err := r.SetFileParam("prov", o.Prov); err != nil {
 				return err
 			}
+
 		}
+
 	}
 
 	// path param repo

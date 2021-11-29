@@ -50,6 +50,7 @@ func (o *PostChartrepoChartsReader) ReadResponse(response runtime.ClientResponse
 			return nil, err
 		}
 		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -60,7 +61,7 @@ func NewPostChartrepoChartsCreated() *PostChartrepoChartsCreated {
 	return &PostChartrepoChartsCreated{}
 }
 
-/* PostChartrepoChartsCreated describes a response with status code 201, with default header values.
+/*PostChartrepoChartsCreated handles this case with default header values.
 
 The specified chart is successfully uploaded.
 */
@@ -81,7 +82,7 @@ func NewPostChartrepoChartsUnauthorized() *PostChartrepoChartsUnauthorized {
 	return &PostChartrepoChartsUnauthorized{}
 }
 
-/* PostChartrepoChartsUnauthorized describes a response with status code 401, with default header values.
+/*PostChartrepoChartsUnauthorized handles this case with default header values.
 
 Unauthorized
 */
@@ -102,7 +103,7 @@ func NewPostChartrepoChartsForbidden() *PostChartrepoChartsForbidden {
 	return &PostChartrepoChartsForbidden{}
 }
 
-/* PostChartrepoChartsForbidden describes a response with status code 403, with default header values.
+/*PostChartrepoChartsForbidden handles this case with default header values.
 
 Operation is forbidden or quota exceeded
 */
@@ -123,7 +124,7 @@ func NewPostChartrepoChartsInternalServerError() *PostChartrepoChartsInternalSer
 	return &PostChartrepoChartsInternalServerError{}
 }
 
-/* PostChartrepoChartsInternalServerError describes a response with status code 500, with default header values.
+/*PostChartrepoChartsInternalServerError handles this case with default header values.
 
 Internal server error occurred
 */
@@ -144,7 +145,7 @@ func NewPostChartrepoChartsInsufficientStorage() *PostChartrepoChartsInsufficien
 	return &PostChartrepoChartsInsufficientStorage{}
 }
 
-/* PostChartrepoChartsInsufficientStorage describes a response with status code 507, with default header values.
+/*PostChartrepoChartsInsufficientStorage handles this case with default header values.
 
 Insufficient storage
 */

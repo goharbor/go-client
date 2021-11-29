@@ -44,6 +44,7 @@ func (o *DeleteChartrepoRepoChartsNameReader) ReadResponse(response runtime.Clie
 			return nil, err
 		}
 		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -54,7 +55,7 @@ func NewDeleteChartrepoRepoChartsNameOK() *DeleteChartrepoRepoChartsNameOK {
 	return &DeleteChartrepoRepoChartsNameOK{}
 }
 
-/* DeleteChartrepoRepoChartsNameOK describes a response with status code 200, with default header values.
+/*DeleteChartrepoRepoChartsNameOK handles this case with default header values.
 
 The specified chart entry is successfully deleted.
 */
@@ -75,7 +76,7 @@ func NewDeleteChartrepoRepoChartsNameUnauthorized() *DeleteChartrepoRepoChartsNa
 	return &DeleteChartrepoRepoChartsNameUnauthorized{}
 }
 
-/* DeleteChartrepoRepoChartsNameUnauthorized describes a response with status code 401, with default header values.
+/*DeleteChartrepoRepoChartsNameUnauthorized handles this case with default header values.
 
 Unauthorized
 */
@@ -96,7 +97,7 @@ func NewDeleteChartrepoRepoChartsNameForbidden() *DeleteChartrepoRepoChartsNameF
 	return &DeleteChartrepoRepoChartsNameForbidden{}
 }
 
-/* DeleteChartrepoRepoChartsNameForbidden describes a response with status code 403, with default header values.
+/*DeleteChartrepoRepoChartsNameForbidden handles this case with default header values.
 
 Operation is forbidden or quota exceeded
 */
@@ -117,7 +118,7 @@ func NewDeleteChartrepoRepoChartsNameInternalServerError() *DeleteChartrepoRepoC
 	return &DeleteChartrepoRepoChartsNameInternalServerError{}
 }
 
-/* DeleteChartrepoRepoChartsNameInternalServerError describes a response with status code 500, with default header values.
+/*DeleteChartrepoRepoChartsNameInternalServerError handles this case with default header values.
 
 Internal server error occurred
 */

@@ -16,91 +16,74 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewStopScanArtifactParams creates a new StopScanArtifactParams object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewStopScanArtifactParams creates a new StopScanArtifactParams object
+// with the default values initialized.
 func NewStopScanArtifactParams() *StopScanArtifactParams {
+	var ()
 	return &StopScanArtifactParams{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewStopScanArtifactParamsWithTimeout creates a new StopScanArtifactParams object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewStopScanArtifactParamsWithTimeout(timeout time.Duration) *StopScanArtifactParams {
+	var ()
 	return &StopScanArtifactParams{
+
 		timeout: timeout,
 	}
 }
 
 // NewStopScanArtifactParamsWithContext creates a new StopScanArtifactParams object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewStopScanArtifactParamsWithContext(ctx context.Context) *StopScanArtifactParams {
+	var ()
 	return &StopScanArtifactParams{
+
 		Context: ctx,
 	}
 }
 
 // NewStopScanArtifactParamsWithHTTPClient creates a new StopScanArtifactParams object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewStopScanArtifactParamsWithHTTPClient(client *http.Client) *StopScanArtifactParams {
+	var ()
 	return &StopScanArtifactParams{
 		HTTPClient: client,
 	}
 }
 
-/* StopScanArtifactParams contains all the parameters to send to the API endpoint
-   for the stop scan artifact operation.
-
-   Typically these are written to a http.Request.
+/*StopScanArtifactParams contains all the parameters to send to the API endpoint
+for the stop scan artifact operation typically these are written to a http.Request
 */
 type StopScanArtifactParams struct {
 
-	/* XRequestID.
+	/*XRequestID
+	  An unique ID for the request
 
-	   An unique ID for the request
 	*/
 	XRequestID *string
+	/*ProjectName
+	  The name of the project
 
-	/* ProjectName.
-
-	   The name of the project
 	*/
 	ProjectName string
+	/*Reference
+	  The reference of the artifact, can be digest or tag
 
-	/* Reference.
-
-	   The reference of the artifact, can be digest or tag
 	*/
 	Reference string
+	/*RepositoryName
+	  The name of the repository. If it contains slash, encode it with URL encoding. e.g. a/b -> a%252Fb
 
-	/* RepositoryName.
-
-	   The name of the repository. If it contains slash, encode it with URL encoding. e.g. a/b -> a%252Fb
 	*/
 	RepositoryName string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the stop scan artifact params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *StopScanArtifactParams) WithDefaults() *StopScanArtifactParams {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the stop scan artifact params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *StopScanArtifactParams) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the stop scan artifact params
@@ -194,6 +177,7 @@ func (o *StopScanArtifactParams) WriteToRequest(r runtime.ClientRequest, reg str
 		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
 			return err
 		}
+
 	}
 
 	// path param project_name

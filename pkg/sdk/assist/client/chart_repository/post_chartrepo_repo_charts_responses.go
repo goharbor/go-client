@@ -50,6 +50,7 @@ func (o *PostChartrepoRepoChartsReader) ReadResponse(response runtime.ClientResp
 			return nil, err
 		}
 		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -60,7 +61,7 @@ func NewPostChartrepoRepoChartsCreated() *PostChartrepoRepoChartsCreated {
 	return &PostChartrepoRepoChartsCreated{}
 }
 
-/* PostChartrepoRepoChartsCreated describes a response with status code 201, with default header values.
+/*PostChartrepoRepoChartsCreated handles this case with default header values.
 
 The specified chart is successfully uploaded.
 */
@@ -81,7 +82,7 @@ func NewPostChartrepoRepoChartsUnauthorized() *PostChartrepoRepoChartsUnauthoriz
 	return &PostChartrepoRepoChartsUnauthorized{}
 }
 
-/* PostChartrepoRepoChartsUnauthorized describes a response with status code 401, with default header values.
+/*PostChartrepoRepoChartsUnauthorized handles this case with default header values.
 
 Unauthorized
 */
@@ -102,7 +103,7 @@ func NewPostChartrepoRepoChartsForbidden() *PostChartrepoRepoChartsForbidden {
 	return &PostChartrepoRepoChartsForbidden{}
 }
 
-/* PostChartrepoRepoChartsForbidden describes a response with status code 403, with default header values.
+/*PostChartrepoRepoChartsForbidden handles this case with default header values.
 
 Operation is forbidden or quota exceeded
 */
@@ -123,7 +124,7 @@ func NewPostChartrepoRepoChartsInternalServerError() *PostChartrepoRepoChartsInt
 	return &PostChartrepoRepoChartsInternalServerError{}
 }
 
-/* PostChartrepoRepoChartsInternalServerError describes a response with status code 500, with default header values.
+/*PostChartrepoRepoChartsInternalServerError handles this case with default header values.
 
 Internal server error occurred
 */
@@ -144,7 +145,7 @@ func NewPostChartrepoRepoChartsInsufficientStorage() *PostChartrepoRepoChartsIns
 	return &PostChartrepoRepoChartsInsufficientStorage{}
 }
 
-/* PostChartrepoRepoChartsInsufficientStorage describes a response with status code 507, with default header values.
+/*PostChartrepoRepoChartsInsufficientStorage handles this case with default header values.
 
 Insufficient storage
 */

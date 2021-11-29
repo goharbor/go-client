@@ -3,7 +3,8 @@ SHELL := /usr/bin/env bash
 .DEFAULT_GOAL := help
 
 DOCKERCMD=$(shell which docker)
-SWAGGER := $(DOCKERCMD) run --rm -it -v $(HOME):$(HOME) -w $(shell pwd) quay.io/goswagger/swagger
+SWAGGER_VERSION=v0.25.0
+SWAGGER := $(DOCKERCMD) run --rm -it -v $(HOME):$(HOME) -w $(shell pwd) quay.io/goswagger/swagger:$(SWAGGER_VERSION)
 
 ifeq ($(VERSION),)
 VERSION := v2.4.0

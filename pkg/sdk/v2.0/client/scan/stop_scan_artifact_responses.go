@@ -59,6 +59,7 @@ func (o *StopScanArtifactReader) ReadResponse(response runtime.ClientResponse, c
 			return nil, err
 		}
 		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -69,13 +70,12 @@ func NewStopScanArtifactAccepted() *StopScanArtifactAccepted {
 	return &StopScanArtifactAccepted{}
 }
 
-/* StopScanArtifactAccepted describes a response with status code 202, with default header values.
+/*StopScanArtifactAccepted handles this case with default header values.
 
 Accepted
 */
 type StopScanArtifactAccepted struct {
-
-	/* The ID of the corresponding request for the response
+	/*The ID of the corresponding request for the response
 	 */
 	XRequestID string
 }
@@ -86,12 +86,8 @@ func (o *StopScanArtifactAccepted) Error() string {
 
 func (o *StopScanArtifactAccepted) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// hydrates response header X-Request-Id
-	hdrXRequestID := response.GetHeader("X-Request-Id")
-
-	if hdrXRequestID != "" {
-		o.XRequestID = hdrXRequestID
-	}
+	// response header X-Request-Id
+	o.XRequestID = response.GetHeader("X-Request-Id")
 
 	return nil
 }
@@ -101,13 +97,12 @@ func NewStopScanArtifactBadRequest() *StopScanArtifactBadRequest {
 	return &StopScanArtifactBadRequest{}
 }
 
-/* StopScanArtifactBadRequest describes a response with status code 400, with default header values.
+/*StopScanArtifactBadRequest handles this case with default header values.
 
 Bad request
 */
 type StopScanArtifactBadRequest struct {
-
-	/* The ID of the corresponding request for the response
+	/*The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
@@ -117,18 +112,15 @@ type StopScanArtifactBadRequest struct {
 func (o *StopScanArtifactBadRequest) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan/stop][%d] stopScanArtifactBadRequest  %+v", 400, o.Payload)
 }
+
 func (o *StopScanArtifactBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
 
 func (o *StopScanArtifactBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// hydrates response header X-Request-Id
-	hdrXRequestID := response.GetHeader("X-Request-Id")
-
-	if hdrXRequestID != "" {
-		o.XRequestID = hdrXRequestID
-	}
+	// response header X-Request-Id
+	o.XRequestID = response.GetHeader("X-Request-Id")
 
 	o.Payload = new(models.Errors)
 
@@ -145,13 +137,12 @@ func NewStopScanArtifactUnauthorized() *StopScanArtifactUnauthorized {
 	return &StopScanArtifactUnauthorized{}
 }
 
-/* StopScanArtifactUnauthorized describes a response with status code 401, with default header values.
+/*StopScanArtifactUnauthorized handles this case with default header values.
 
 Unauthorized
 */
 type StopScanArtifactUnauthorized struct {
-
-	/* The ID of the corresponding request for the response
+	/*The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
@@ -161,18 +152,15 @@ type StopScanArtifactUnauthorized struct {
 func (o *StopScanArtifactUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan/stop][%d] stopScanArtifactUnauthorized  %+v", 401, o.Payload)
 }
+
 func (o *StopScanArtifactUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
 
 func (o *StopScanArtifactUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// hydrates response header X-Request-Id
-	hdrXRequestID := response.GetHeader("X-Request-Id")
-
-	if hdrXRequestID != "" {
-		o.XRequestID = hdrXRequestID
-	}
+	// response header X-Request-Id
+	o.XRequestID = response.GetHeader("X-Request-Id")
 
 	o.Payload = new(models.Errors)
 
@@ -189,13 +177,12 @@ func NewStopScanArtifactForbidden() *StopScanArtifactForbidden {
 	return &StopScanArtifactForbidden{}
 }
 
-/* StopScanArtifactForbidden describes a response with status code 403, with default header values.
+/*StopScanArtifactForbidden handles this case with default header values.
 
 Forbidden
 */
 type StopScanArtifactForbidden struct {
-
-	/* The ID of the corresponding request for the response
+	/*The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
@@ -205,18 +192,15 @@ type StopScanArtifactForbidden struct {
 func (o *StopScanArtifactForbidden) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan/stop][%d] stopScanArtifactForbidden  %+v", 403, o.Payload)
 }
+
 func (o *StopScanArtifactForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
 
 func (o *StopScanArtifactForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// hydrates response header X-Request-Id
-	hdrXRequestID := response.GetHeader("X-Request-Id")
-
-	if hdrXRequestID != "" {
-		o.XRequestID = hdrXRequestID
-	}
+	// response header X-Request-Id
+	o.XRequestID = response.GetHeader("X-Request-Id")
 
 	o.Payload = new(models.Errors)
 
@@ -233,13 +217,12 @@ func NewStopScanArtifactNotFound() *StopScanArtifactNotFound {
 	return &StopScanArtifactNotFound{}
 }
 
-/* StopScanArtifactNotFound describes a response with status code 404, with default header values.
+/*StopScanArtifactNotFound handles this case with default header values.
 
 Not found
 */
 type StopScanArtifactNotFound struct {
-
-	/* The ID of the corresponding request for the response
+	/*The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
@@ -249,18 +232,15 @@ type StopScanArtifactNotFound struct {
 func (o *StopScanArtifactNotFound) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan/stop][%d] stopScanArtifactNotFound  %+v", 404, o.Payload)
 }
+
 func (o *StopScanArtifactNotFound) GetPayload() *models.Errors {
 	return o.Payload
 }
 
 func (o *StopScanArtifactNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// hydrates response header X-Request-Id
-	hdrXRequestID := response.GetHeader("X-Request-Id")
-
-	if hdrXRequestID != "" {
-		o.XRequestID = hdrXRequestID
-	}
+	// response header X-Request-Id
+	o.XRequestID = response.GetHeader("X-Request-Id")
 
 	o.Payload = new(models.Errors)
 
@@ -277,13 +257,12 @@ func NewStopScanArtifactInternalServerError() *StopScanArtifactInternalServerErr
 	return &StopScanArtifactInternalServerError{}
 }
 
-/* StopScanArtifactInternalServerError describes a response with status code 500, with default header values.
+/*StopScanArtifactInternalServerError handles this case with default header values.
 
 Internal server error
 */
 type StopScanArtifactInternalServerError struct {
-
-	/* The ID of the corresponding request for the response
+	/*The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
@@ -293,18 +272,15 @@ type StopScanArtifactInternalServerError struct {
 func (o *StopScanArtifactInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan/stop][%d] stopScanArtifactInternalServerError  %+v", 500, o.Payload)
 }
+
 func (o *StopScanArtifactInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }
 
 func (o *StopScanArtifactInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// hydrates response header X-Request-Id
-	hdrXRequestID := response.GetHeader("X-Request-Id")
-
-	if hdrXRequestID != "" {
-		o.XRequestID = hdrXRequestID
-	}
+	// response header X-Request-Id
+	o.XRequestID = response.GetHeader("X-Request-Id")
 
 	o.Payload = new(models.Errors)
 

@@ -6,7 +6,6 @@ package chart_repository
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"fmt"
 	"io"
 
@@ -41,6 +40,7 @@ func (o *GetChartrepoHealthReader) ReadResponse(response runtime.ClientResponse,
 			return nil, err
 		}
 		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -51,7 +51,7 @@ func NewGetChartrepoHealthOK() *GetChartrepoHealthOK {
 	return &GetChartrepoHealthOK{}
 }
 
-/* GetChartrepoHealthOK describes a response with status code 200, with default header values.
+/*GetChartrepoHealthOK handles this case with default header values.
 
 Health status of chart repository service is returned.
 */
@@ -62,6 +62,7 @@ type GetChartrepoHealthOK struct {
 func (o *GetChartrepoHealthOK) Error() string {
 	return fmt.Sprintf("[GET /chartrepo/health][%d] getChartrepoHealthOK  %+v", 200, o.Payload)
 }
+
 func (o *GetChartrepoHealthOK) GetPayload() *GetChartrepoHealthOKBody {
 	return o.Payload
 }
@@ -83,7 +84,7 @@ func NewGetChartrepoHealthUnauthorized() *GetChartrepoHealthUnauthorized {
 	return &GetChartrepoHealthUnauthorized{}
 }
 
-/* GetChartrepoHealthUnauthorized describes a response with status code 401, with default header values.
+/*GetChartrepoHealthUnauthorized handles this case with default header values.
 
 Unauthorized
 */
@@ -104,7 +105,7 @@ func NewGetChartrepoHealthForbidden() *GetChartrepoHealthForbidden {
 	return &GetChartrepoHealthForbidden{}
 }
 
-/* GetChartrepoHealthForbidden describes a response with status code 403, with default header values.
+/*GetChartrepoHealthForbidden handles this case with default header values.
 
 Operation is forbidden or quota exceeded
 */
@@ -131,11 +132,6 @@ type GetChartrepoHealthOKBody struct {
 
 // Validate validates this get chartrepo health o k body
 func (o *GetChartrepoHealthOKBody) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// ContextValidate validates this get chartrepo health o k body based on context it is used
-func (o *GetChartrepoHealthOKBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

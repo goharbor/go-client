@@ -49,6 +49,7 @@ func (o *ListUserGroupsReader) ReadResponse(response runtime.ClientResponse, con
 			return nil, err
 		}
 		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -59,17 +60,15 @@ func NewListUserGroupsOK() *ListUserGroupsOK {
 	return &ListUserGroupsOK{}
 }
 
-/* ListUserGroupsOK describes a response with status code 200, with default header values.
+/*ListUserGroupsOK handles this case with default header values.
 
 Get user group successfully.
 */
 type ListUserGroupsOK struct {
-
-	/* Link to previous page and next page
+	/*Link to previous page and next page
 	 */
 	Link string
-
-	/* The total count of available items
+	/*The total count of available items
 	 */
 	XTotalCount int64
 
@@ -79,29 +78,22 @@ type ListUserGroupsOK struct {
 func (o *ListUserGroupsOK) Error() string {
 	return fmt.Sprintf("[GET /usergroups][%d] listUserGroupsOK  %+v", 200, o.Payload)
 }
+
 func (o *ListUserGroupsOK) GetPayload() []*models.UserGroup {
 	return o.Payload
 }
 
 func (o *ListUserGroupsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// hydrates response header Link
-	hdrLink := response.GetHeader("Link")
+	// response header Link
+	o.Link = response.GetHeader("Link")
 
-	if hdrLink != "" {
-		o.Link = hdrLink
+	// response header X-Total-Count
+	xTotalCount, err := swag.ConvertInt64(response.GetHeader("X-Total-Count"))
+	if err != nil {
+		return errors.InvalidType("X-Total-Count", "header", "int64", response.GetHeader("X-Total-Count"))
 	}
-
-	// hydrates response header X-Total-Count
-	hdrXTotalCount := response.GetHeader("X-Total-Count")
-
-	if hdrXTotalCount != "" {
-		valxTotalCount, err := swag.ConvertInt64(hdrXTotalCount)
-		if err != nil {
-			return errors.InvalidType("X-Total-Count", "header", "int64", hdrXTotalCount)
-		}
-		o.XTotalCount = valxTotalCount
-	}
+	o.XTotalCount = xTotalCount
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
@@ -116,13 +108,12 @@ func NewListUserGroupsUnauthorized() *ListUserGroupsUnauthorized {
 	return &ListUserGroupsUnauthorized{}
 }
 
-/* ListUserGroupsUnauthorized describes a response with status code 401, with default header values.
+/*ListUserGroupsUnauthorized handles this case with default header values.
 
 Unauthorized
 */
 type ListUserGroupsUnauthorized struct {
-
-	/* The ID of the corresponding request for the response
+	/*The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
@@ -132,18 +123,15 @@ type ListUserGroupsUnauthorized struct {
 func (o *ListUserGroupsUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /usergroups][%d] listUserGroupsUnauthorized  %+v", 401, o.Payload)
 }
+
 func (o *ListUserGroupsUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
 
 func (o *ListUserGroupsUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// hydrates response header X-Request-Id
-	hdrXRequestID := response.GetHeader("X-Request-Id")
-
-	if hdrXRequestID != "" {
-		o.XRequestID = hdrXRequestID
-	}
+	// response header X-Request-Id
+	o.XRequestID = response.GetHeader("X-Request-Id")
 
 	o.Payload = new(models.Errors)
 
@@ -160,13 +148,12 @@ func NewListUserGroupsForbidden() *ListUserGroupsForbidden {
 	return &ListUserGroupsForbidden{}
 }
 
-/* ListUserGroupsForbidden describes a response with status code 403, with default header values.
+/*ListUserGroupsForbidden handles this case with default header values.
 
 Forbidden
 */
 type ListUserGroupsForbidden struct {
-
-	/* The ID of the corresponding request for the response
+	/*The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
@@ -176,18 +163,15 @@ type ListUserGroupsForbidden struct {
 func (o *ListUserGroupsForbidden) Error() string {
 	return fmt.Sprintf("[GET /usergroups][%d] listUserGroupsForbidden  %+v", 403, o.Payload)
 }
+
 func (o *ListUserGroupsForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
 
 func (o *ListUserGroupsForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// hydrates response header X-Request-Id
-	hdrXRequestID := response.GetHeader("X-Request-Id")
-
-	if hdrXRequestID != "" {
-		o.XRequestID = hdrXRequestID
-	}
+	// response header X-Request-Id
+	o.XRequestID = response.GetHeader("X-Request-Id")
 
 	o.Payload = new(models.Errors)
 
@@ -204,13 +188,12 @@ func NewListUserGroupsInternalServerError() *ListUserGroupsInternalServerError {
 	return &ListUserGroupsInternalServerError{}
 }
 
-/* ListUserGroupsInternalServerError describes a response with status code 500, with default header values.
+/*ListUserGroupsInternalServerError handles this case with default header values.
 
 Internal server error
 */
 type ListUserGroupsInternalServerError struct {
-
-	/* The ID of the corresponding request for the response
+	/*The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
@@ -220,18 +203,15 @@ type ListUserGroupsInternalServerError struct {
 func (o *ListUserGroupsInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /usergroups][%d] listUserGroupsInternalServerError  %+v", 500, o.Payload)
 }
+
 func (o *ListUserGroupsInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }
 
 func (o *ListUserGroupsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// hydrates response header X-Request-Id
-	hdrXRequestID := response.GetHeader("X-Request-Id")
-
-	if hdrXRequestID != "" {
-		o.XRequestID = hdrXRequestID
-	}
+	// response header X-Request-Id
+	o.XRequestID = response.GetHeader("X-Request-Id")
 
 	o.Payload = new(models.Errors)
 

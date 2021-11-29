@@ -54,7 +54,7 @@ For Example:
 
 ```go
 c := Config{
-    URL: url,
+	URL: url,
 	Transport: tr,
 	AuthInfo: ai,
 }

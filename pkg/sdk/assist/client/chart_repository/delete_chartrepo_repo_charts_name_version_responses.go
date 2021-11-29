@@ -50,6 +50,7 @@ func (o *DeleteChartrepoRepoChartsNameVersionReader) ReadResponse(response runti
 			return nil, err
 		}
 		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -60,7 +61,7 @@ func NewDeleteChartrepoRepoChartsNameVersionOK() *DeleteChartrepoRepoChartsNameV
 	return &DeleteChartrepoRepoChartsNameVersionOK{}
 }
 
-/* DeleteChartrepoRepoChartsNameVersionOK describes a response with status code 200, with default header values.
+/*DeleteChartrepoRepoChartsNameVersionOK handles this case with default header values.
 
 The specified chart entry is successfully deleted.
 */
@@ -81,7 +82,7 @@ func NewDeleteChartrepoRepoChartsNameVersionUnauthorized() *DeleteChartrepoRepoC
 	return &DeleteChartrepoRepoChartsNameVersionUnauthorized{}
 }
 
-/* DeleteChartrepoRepoChartsNameVersionUnauthorized describes a response with status code 401, with default header values.
+/*DeleteChartrepoRepoChartsNameVersionUnauthorized handles this case with default header values.
 
 Unauthorized
 */
@@ -102,7 +103,7 @@ func NewDeleteChartrepoRepoChartsNameVersionForbidden() *DeleteChartrepoRepoChar
 	return &DeleteChartrepoRepoChartsNameVersionForbidden{}
 }
 
-/* DeleteChartrepoRepoChartsNameVersionForbidden describes a response with status code 403, with default header values.
+/*DeleteChartrepoRepoChartsNameVersionForbidden handles this case with default header values.
 
 Operation is forbidden or quota exceeded
 */
@@ -123,7 +124,7 @@ func NewDeleteChartrepoRepoChartsNameVersionNotFound() *DeleteChartrepoRepoChart
 	return &DeleteChartrepoRepoChartsNameVersionNotFound{}
 }
 
-/* DeleteChartrepoRepoChartsNameVersionNotFound describes a response with status code 404, with default header values.
+/*DeleteChartrepoRepoChartsNameVersionNotFound handles this case with default header values.
 
 Not found
 */
@@ -144,7 +145,7 @@ func NewDeleteChartrepoRepoChartsNameVersionInternalServerError() *DeleteChartre
 	return &DeleteChartrepoRepoChartsNameVersionInternalServerError{}
 }
 
-/* DeleteChartrepoRepoChartsNameVersionInternalServerError describes a response with status code 500, with default header values.
+/*DeleteChartrepoRepoChartsNameVersionInternalServerError handles this case with default header values.
 
 Internal server error occurred
 */

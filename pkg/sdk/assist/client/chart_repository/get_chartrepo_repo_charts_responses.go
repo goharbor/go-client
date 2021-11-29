@@ -47,6 +47,7 @@ func (o *GetChartrepoRepoChartsReader) ReadResponse(response runtime.ClientRespo
 			return nil, err
 		}
 		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -57,7 +58,7 @@ func NewGetChartrepoRepoChartsOK() *GetChartrepoRepoChartsOK {
 	return &GetChartrepoRepoChartsOK{}
 }
 
-/* GetChartrepoRepoChartsOK describes a response with status code 200, with default header values.
+/*GetChartrepoRepoChartsOK handles this case with default header values.
 
 Searched for charts of project in Harbor successfully.
 */
@@ -68,6 +69,7 @@ type GetChartrepoRepoChartsOK struct {
 func (o *GetChartrepoRepoChartsOK) Error() string {
 	return fmt.Sprintf("[GET /chartrepo/{repo}/charts][%d] getChartrepoRepoChartsOK  %+v", 200, o.Payload)
 }
+
 func (o *GetChartrepoRepoChartsOK) GetPayload() []*models.ChartInfoEntry {
 	return o.Payload
 }
@@ -87,7 +89,7 @@ func NewGetChartrepoRepoChartsUnauthorized() *GetChartrepoRepoChartsUnauthorized
 	return &GetChartrepoRepoChartsUnauthorized{}
 }
 
-/* GetChartrepoRepoChartsUnauthorized describes a response with status code 401, with default header values.
+/*GetChartrepoRepoChartsUnauthorized handles this case with default header values.
 
 Unauthorized
 */
@@ -108,7 +110,7 @@ func NewGetChartrepoRepoChartsForbidden() *GetChartrepoRepoChartsForbidden {
 	return &GetChartrepoRepoChartsForbidden{}
 }
 
-/* GetChartrepoRepoChartsForbidden describes a response with status code 403, with default header values.
+/*GetChartrepoRepoChartsForbidden handles this case with default header values.
 
 Operation is forbidden or quota exceeded
 */
@@ -129,7 +131,7 @@ func NewGetChartrepoRepoChartsInternalServerError() *GetChartrepoRepoChartsInter
 	return &GetChartrepoRepoChartsInternalServerError{}
 }
 
-/* GetChartrepoRepoChartsInternalServerError describes a response with status code 500, with default header values.
+/*GetChartrepoRepoChartsInternalServerError handles this case with default header values.
 
 Internal server error occurred
 */

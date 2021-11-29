@@ -17,81 +17,64 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// NewGetGCParams creates a new GetGCParams object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewGetGCParams creates a new GetGCParams object
+// with the default values initialized.
 func NewGetGCParams() *GetGCParams {
+	var ()
 	return &GetGCParams{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewGetGCParamsWithTimeout creates a new GetGCParams object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewGetGCParamsWithTimeout(timeout time.Duration) *GetGCParams {
+	var ()
 	return &GetGCParams{
+
 		timeout: timeout,
 	}
 }
 
 // NewGetGCParamsWithContext creates a new GetGCParams object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewGetGCParamsWithContext(ctx context.Context) *GetGCParams {
+	var ()
 	return &GetGCParams{
+
 		Context: ctx,
 	}
 }
 
 // NewGetGCParamsWithHTTPClient creates a new GetGCParams object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewGetGCParamsWithHTTPClient(client *http.Client) *GetGCParams {
+	var ()
 	return &GetGCParams{
 		HTTPClient: client,
 	}
 }
 
-/* GetGCParams contains all the parameters to send to the API endpoint
-   for the get GC operation.
-
-   Typically these are written to a http.Request.
+/*GetGCParams contains all the parameters to send to the API endpoint
+for the get GC operation typically these are written to a http.Request
 */
 type GetGCParams struct {
 
-	/* XRequestID.
+	/*XRequestID
+	  An unique ID for the request
 
-	   An unique ID for the request
 	*/
 	XRequestID *string
+	/*GCID
+	  The ID of the gc log
 
-	/* GCID.
-
-	   The ID of the gc log
-
-	   Format: int64
 	*/
 	GCID int64
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the get GC params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *GetGCParams) WithDefaults() *GetGCParams {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the get GC params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *GetGCParams) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the get GC params
@@ -163,6 +146,7 @@ func (o *GetGCParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registr
 		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
 			return err
 		}
+
 	}
 
 	// path param gc_id

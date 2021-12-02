@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/go-openapi/runtime"
+	httptransport "github.com/go-openapi/runtime/client"
 	assistclient "github.com/goharbor/go-client/pkg/sdk/assist/client"
 	v2client "github.com/goharbor/go-client/pkg/sdk/v2.0/client"
 	legacyclient "github.com/goharbor/go-client/pkg/sdk/v2.0/legacy/client"
@@ -40,122 +41,163 @@ type Config struct {
 	AuthInfo runtime.ClientAuthInfoWriter
 }
 
+// ClientSetConfig contains config for creating a ClientSet
+type ClientSetConfig struct {
+	URL      string
+	Insecure bool
+	Username string
+	Password string
+}
+
 // ClientSet contains clients for V2, Assist, Legacy
 type ClientSet struct {
-	AssistClient *assistclient.HarborAPI
-	V2Client     *v2client.HarborAPI
-	LegacyClient *legacyclient.HarborAPI
+	assistClient *assistclient.HarborAPI
+	v2Client     *v2client.HarborAPI
+	legacyClient *legacyclient.HarborAPI
 }
 
 // ToAssistConfig convert the Config to assistclient's Config
 func (c *Config) ToAssistConfig() assistclient.Config {
-	if c.URL == nil {
-		c.URL = &url.URL{}
+
+	var (
+		u url.URL                      = url.URL{}
+		t http.RoundTripper            = c.Transport
+		a runtime.ClientAuthInfoWriter = c.AuthInfo
+	)
+
+	if c.URL != nil {
+		u = *c.URL
 	}
 
-	if len(c.URL.Host) == 0 {
-		c.URL.Host = assistclient.DefaultHost
+	if len(u.Host) == 0 {
+		u.Host = assistclient.DefaultHost
 	}
-	if len(c.URL.Path) == 0 {
-		c.URL.Path = assistclient.DefaultBasePath
+	if len(u.Path) == 0 {
+		u.Path = assistclient.DefaultBasePath
 	}
-	if len(c.URL.Scheme) == 0 {
+	if len(u.Scheme) == 0 {
 		// default to https if not set
-		c.URL.Scheme = assistclient.DefaultSchemes[1]
+		u.Scheme = assistclient.DefaultSchemes[1]
 	}
 
-	if c.Transport == nil {
-		c.Transport = InsecureTransport
+	if t == nil {
+		t = InsecureTransport
 	}
 
 	return assistclient.Config{
-		URL:       c.URL,
-		Transport: c.Transport,
-		AuthInfo:  c.AuthInfo,
+		URL:       &u,
+		Transport: t,
+		AuthInfo:  a,
 	}
 }
 
 // ToV2Config convert the Config to v2client's Config
 func (c *Config) ToV2Config() v2client.Config {
-	if c.URL == nil {
-		c.URL = &url.URL{}
+	var (
+		u url.URL                      = url.URL{}
+		t http.RoundTripper            = c.Transport
+		a runtime.ClientAuthInfoWriter = c.AuthInfo
+	)
+
+	if c.URL != nil {
+		u = *c.URL
 	}
 
-	if len(c.URL.Host) == 0 {
-		c.URL.Host = v2client.DefaultHost
+	if len(u.Host) == 0 {
+		u.Host = v2client.DefaultHost
 	}
-	if len(c.URL.Path) == 0 {
-		c.URL.Path = v2client.DefaultBasePath
+	if len(u.Path) == 0 {
+		u.Path = v2client.DefaultBasePath
 	}
-	if len(c.URL.Scheme) == 0 {
+	if len(u.Scheme) == 0 {
 		// default to https if not set
-		c.URL.Scheme = v2client.DefaultSchemes[1]
+		u.Scheme = v2client.DefaultSchemes[1]
 	}
 
-	if c.Transport == nil {
-		c.Transport = InsecureTransport
+	if t == nil {
+		t = InsecureTransport
 	}
 
 	return v2client.Config{
-		URL:       c.URL,
-		Transport: c.Transport,
-		AuthInfo:  c.AuthInfo,
+		URL:       &u,
+		Transport: t,
+		AuthInfo:  a,
 	}
 }
 
 // ToLegacyConfig convert the Config to legacyclient's Config
 func (c *Config) ToLegacyConfig() legacyclient.Config {
-	if c.URL == nil {
-		c.URL = &url.URL{}
+	var (
+		u url.URL                      = url.URL{}
+		t http.RoundTripper            = c.Transport
+		a runtime.ClientAuthInfoWriter = c.AuthInfo
+	)
+
+	if c.URL != nil {
+		u = *c.URL
 	}
 
-	if len(c.URL.Host) == 0 {
-		c.URL.Host = legacyclient.DefaultHost
+	if len(u.Host) == 0 {
+		u.Host = legacyclient.DefaultHost
 	}
-	if len(c.URL.Path) == 0 {
-		c.URL.Path = legacyclient.DefaultBasePath
+	if len(u.Path) == 0 {
+		u.Path = legacyclient.DefaultBasePath
 	}
-	if len(c.URL.Scheme) == 0 {
+	if len(u.Scheme) == 0 {
 		// default to https if not set
-		c.URL.Scheme = legacyclient.DefaultSchemes[1]
+		u.Scheme = legacyclient.DefaultSchemes[1]
 	}
 
-	if c.Transport == nil {
-		c.Transport = InsecureTransport
+	if t == nil {
+		t = InsecureTransport
 	}
 
 	return legacyclient.Config{
-		URL:       c.URL,
-		Transport: c.Transport,
-		AuthInfo:  c.AuthInfo,
+		URL:       &u,
+		Transport: t,
+		AuthInfo:  a,
 	}
 }
 
 // NewAssistClient return assist Client
-func NewClientSet(c *Config) *ClientSet {
-	if c == nil {
-		c = &Config{}
+func NewClientSet(csc *ClientSetConfig) (*ClientSet, error) {
+	if csc == nil {
+		csc = &ClientSetConfig{}
+	}
+
+	u, err := url.Parse(csc.URL)
+	if err != nil {
+		return nil, err
+	}
+
+	c := &Config{
+		URL:      u,
+		AuthInfo: httptransport.BasicAuth(csc.Username, csc.Password),
+	}
+
+	if csc.Insecure {
+		c.Transport = InsecureTransport
 	}
 
 	cs := &ClientSet{}
-	cs.AssistClient = assistclient.New(c.ToAssistConfig())
-	cs.LegacyClient = legacyclient.New(c.ToLegacyConfig())
-	cs.V2Client = v2client.New(c.ToV2Config())
+	cs.assistClient = assistclient.New(c.ToAssistConfig())
+	cs.legacyClient = legacyclient.New(c.ToLegacyConfig())
+	cs.v2Client = v2client.New(c.ToV2Config())
 
-	return cs
+	return cs, nil
 }
 
 // Assist return AssistClient
 func (c *ClientSet) Assist() *assistclient.HarborAPI {
-	return c.AssistClient
+	return c.assistClient
 }
 
 // V2 return V2Client
 func (c *ClientSet) V2() *v2client.HarborAPI {
-	return c.V2Client
+	return c.v2Client
 }
 
 // Legacy return LegacyClient
 func (c *ClientSet) Legacy() *legacyclient.HarborAPI {
-	return c.LegacyClient
+	return c.legacyClient
 }

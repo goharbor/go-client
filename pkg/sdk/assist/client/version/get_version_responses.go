@@ -6,7 +6,6 @@ package version
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"fmt"
 	"io"
 
@@ -29,6 +28,7 @@ func (o *GetVersionReader) ReadResponse(response runtime.ClientResponse, consume
 			return nil, err
 		}
 		return result, nil
+
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -39,7 +39,7 @@ func NewGetVersionOK() *GetVersionOK {
 	return &GetVersionOK{}
 }
 
-/* GetVersionOK describes a response with status code 200, with default header values.
+/*GetVersionOK handles this case with default header values.
 
 The supported API version
 */
@@ -50,6 +50,7 @@ type GetVersionOK struct {
 func (o *GetVersionOK) Error() string {
 	return fmt.Sprintf("[GET /version][%d] getVersionOK  %+v", 200, o.Payload)
 }
+
 func (o *GetVersionOK) GetPayload() *GetVersionOKBody {
 	return o.Payload
 }
@@ -77,11 +78,6 @@ type GetVersionOKBody struct {
 
 // Validate validates this get version o k body
 func (o *GetVersionOKBody) Validate(formats strfmt.Registry) error {
-	return nil
-}
-
-// ContextValidate validates this get version o k body based on context it is used
-func (o *GetVersionOKBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

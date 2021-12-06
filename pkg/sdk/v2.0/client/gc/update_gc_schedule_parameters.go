@@ -18,79 +18,64 @@ import (
 	"github.com/goharbor/go-client/pkg/sdk/v2.0/models"
 )
 
-// NewUpdateGCScheduleParams creates a new UpdateGCScheduleParams object,
-// with the default timeout for this client.
-//
-// Default values are not hydrated, since defaults are normally applied by the API server side.
-//
-// To enforce default values in parameter, use SetDefaults or WithDefaults.
+// NewUpdateGCScheduleParams creates a new UpdateGCScheduleParams object
+// with the default values initialized.
 func NewUpdateGCScheduleParams() *UpdateGCScheduleParams {
+	var ()
 	return &UpdateGCScheduleParams{
+
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewUpdateGCScheduleParamsWithTimeout creates a new UpdateGCScheduleParams object
-// with the ability to set a timeout on a request.
+// with the default values initialized, and the ability to set a timeout on a request
 func NewUpdateGCScheduleParamsWithTimeout(timeout time.Duration) *UpdateGCScheduleParams {
+	var ()
 	return &UpdateGCScheduleParams{
+
 		timeout: timeout,
 	}
 }
 
 // NewUpdateGCScheduleParamsWithContext creates a new UpdateGCScheduleParams object
-// with the ability to set a context for a request.
+// with the default values initialized, and the ability to set a context for a request
 func NewUpdateGCScheduleParamsWithContext(ctx context.Context) *UpdateGCScheduleParams {
+	var ()
 	return &UpdateGCScheduleParams{
+
 		Context: ctx,
 	}
 }
 
 // NewUpdateGCScheduleParamsWithHTTPClient creates a new UpdateGCScheduleParams object
-// with the ability to set a custom HTTPClient for a request.
+// with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewUpdateGCScheduleParamsWithHTTPClient(client *http.Client) *UpdateGCScheduleParams {
+	var ()
 	return &UpdateGCScheduleParams{
 		HTTPClient: client,
 	}
 }
 
-/* UpdateGCScheduleParams contains all the parameters to send to the API endpoint
-   for the update GC schedule operation.
-
-   Typically these are written to a http.Request.
+/*UpdateGCScheduleParams contains all the parameters to send to the API endpoint
+for the update GC schedule operation typically these are written to a http.Request
 */
 type UpdateGCScheduleParams struct {
 
-	/* XRequestID.
+	/*XRequestID
+	  An unique ID for the request
 
-	   An unique ID for the request
 	*/
 	XRequestID *string
+	/*Schedule
+	  Updates of gc's schedule.
 
-	/* Schedule.
-
-	   Updates of gc's schedule.
 	*/
 	Schedule *models.Schedule
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
-}
-
-// WithDefaults hydrates default values in the update GC schedule params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *UpdateGCScheduleParams) WithDefaults() *UpdateGCScheduleParams {
-	o.SetDefaults()
-	return o
-}
-
-// SetDefaults hydrates default values in the update GC schedule params (not the query body).
-//
-// All values with no default are reset to their zero value.
-func (o *UpdateGCScheduleParams) SetDefaults() {
-	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the update GC schedule params
@@ -162,7 +147,9 @@ func (o *UpdateGCScheduleParams) WriteToRequest(r runtime.ClientRequest, reg str
 		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
 			return err
 		}
+
 	}
+
 	if o.Schedule != nil {
 		if err := r.SetBodyParam(o.Schedule); err != nil {
 			return err

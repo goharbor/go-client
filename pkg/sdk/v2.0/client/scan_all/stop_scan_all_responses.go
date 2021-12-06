@@ -53,6 +53,7 @@ func (o *StopScanAllReader) ReadResponse(response runtime.ClientResponse, consum
 			return nil, err
 		}
 		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -63,13 +64,12 @@ func NewStopScanAllAccepted() *StopScanAllAccepted {
 	return &StopScanAllAccepted{}
 }
 
-/* StopScanAllAccepted describes a response with status code 202, with default header values.
+/*StopScanAllAccepted handles this case with default header values.
 
 Accepted
 */
 type StopScanAllAccepted struct {
-
-	/* The ID of the corresponding request for the response
+	/*The ID of the corresponding request for the response
 	 */
 	XRequestID string
 }
@@ -80,12 +80,8 @@ func (o *StopScanAllAccepted) Error() string {
 
 func (o *StopScanAllAccepted) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// hydrates response header X-Request-Id
-	hdrXRequestID := response.GetHeader("X-Request-Id")
-
-	if hdrXRequestID != "" {
-		o.XRequestID = hdrXRequestID
-	}
+	// response header X-Request-Id
+	o.XRequestID = response.GetHeader("X-Request-Id")
 
 	return nil
 }
@@ -95,13 +91,12 @@ func NewStopScanAllBadRequest() *StopScanAllBadRequest {
 	return &StopScanAllBadRequest{}
 }
 
-/* StopScanAllBadRequest describes a response with status code 400, with default header values.
+/*StopScanAllBadRequest handles this case with default header values.
 
 Bad request
 */
 type StopScanAllBadRequest struct {
-
-	/* The ID of the corresponding request for the response
+	/*The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
@@ -111,18 +106,15 @@ type StopScanAllBadRequest struct {
 func (o *StopScanAllBadRequest) Error() string {
 	return fmt.Sprintf("[POST /system/scanAll/stop][%d] stopScanAllBadRequest  %+v", 400, o.Payload)
 }
+
 func (o *StopScanAllBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
 
 func (o *StopScanAllBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// hydrates response header X-Request-Id
-	hdrXRequestID := response.GetHeader("X-Request-Id")
-
-	if hdrXRequestID != "" {
-		o.XRequestID = hdrXRequestID
-	}
+	// response header X-Request-Id
+	o.XRequestID = response.GetHeader("X-Request-Id")
 
 	o.Payload = new(models.Errors)
 
@@ -139,13 +131,12 @@ func NewStopScanAllUnauthorized() *StopScanAllUnauthorized {
 	return &StopScanAllUnauthorized{}
 }
 
-/* StopScanAllUnauthorized describes a response with status code 401, with default header values.
+/*StopScanAllUnauthorized handles this case with default header values.
 
 Unauthorized
 */
 type StopScanAllUnauthorized struct {
-
-	/* The ID of the corresponding request for the response
+	/*The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
@@ -155,18 +146,15 @@ type StopScanAllUnauthorized struct {
 func (o *StopScanAllUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /system/scanAll/stop][%d] stopScanAllUnauthorized  %+v", 401, o.Payload)
 }
+
 func (o *StopScanAllUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
 
 func (o *StopScanAllUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// hydrates response header X-Request-Id
-	hdrXRequestID := response.GetHeader("X-Request-Id")
-
-	if hdrXRequestID != "" {
-		o.XRequestID = hdrXRequestID
-	}
+	// response header X-Request-Id
+	o.XRequestID = response.GetHeader("X-Request-Id")
 
 	o.Payload = new(models.Errors)
 
@@ -183,13 +171,12 @@ func NewStopScanAllForbidden() *StopScanAllForbidden {
 	return &StopScanAllForbidden{}
 }
 
-/* StopScanAllForbidden describes a response with status code 403, with default header values.
+/*StopScanAllForbidden handles this case with default header values.
 
 Forbidden
 */
 type StopScanAllForbidden struct {
-
-	/* The ID of the corresponding request for the response
+	/*The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
@@ -199,18 +186,15 @@ type StopScanAllForbidden struct {
 func (o *StopScanAllForbidden) Error() string {
 	return fmt.Sprintf("[POST /system/scanAll/stop][%d] stopScanAllForbidden  %+v", 403, o.Payload)
 }
+
 func (o *StopScanAllForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
 
 func (o *StopScanAllForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// hydrates response header X-Request-Id
-	hdrXRequestID := response.GetHeader("X-Request-Id")
-
-	if hdrXRequestID != "" {
-		o.XRequestID = hdrXRequestID
-	}
+	// response header X-Request-Id
+	o.XRequestID = response.GetHeader("X-Request-Id")
 
 	o.Payload = new(models.Errors)
 
@@ -227,13 +211,12 @@ func NewStopScanAllInternalServerError() *StopScanAllInternalServerError {
 	return &StopScanAllInternalServerError{}
 }
 
-/* StopScanAllInternalServerError describes a response with status code 500, with default header values.
+/*StopScanAllInternalServerError handles this case with default header values.
 
 Internal server error
 */
 type StopScanAllInternalServerError struct {
-
-	/* The ID of the corresponding request for the response
+	/*The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
@@ -243,18 +226,15 @@ type StopScanAllInternalServerError struct {
 func (o *StopScanAllInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /system/scanAll/stop][%d] stopScanAllInternalServerError  %+v", 500, o.Payload)
 }
+
 func (o *StopScanAllInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }
 
 func (o *StopScanAllInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// hydrates response header X-Request-Id
-	hdrXRequestID := response.GetHeader("X-Request-Id")
-
-	if hdrXRequestID != "" {
-		o.XRequestID = hdrXRequestID
-	}
+	// response header X-Request-Id
+	o.XRequestID = response.GetHeader("X-Request-Id")
 
 	o.Payload = new(models.Errors)
 

@@ -6,7 +6,6 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"context"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -58,6 +57,7 @@ func (m *RetentionPolicy) Validate(formats strfmt.Registry) error {
 }
 
 func (m *RetentionPolicy) validateRules(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.Rules) { // not required
 		return nil
 	}
@@ -71,8 +71,6 @@ func (m *RetentionPolicy) validateRules(formats strfmt.Registry) error {
 			if err := m.Rules[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("rules" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("rules" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -84,6 +82,7 @@ func (m *RetentionPolicy) validateRules(formats strfmt.Registry) error {
 }
 
 func (m *RetentionPolicy) validateScope(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.Scope) { // not required
 		return nil
 	}
@@ -92,8 +91,6 @@ func (m *RetentionPolicy) validateScope(formats strfmt.Registry) error {
 		if err := m.Scope.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("scope")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("scope")
 			}
 			return err
 		}
@@ -103,6 +100,7 @@ func (m *RetentionPolicy) validateScope(formats strfmt.Registry) error {
 }
 
 func (m *RetentionPolicy) validateTrigger(formats strfmt.Registry) error {
+
 	if swag.IsZero(m.Trigger) { // not required
 		return nil
 	}
@@ -111,82 +109,6 @@ func (m *RetentionPolicy) validateTrigger(formats strfmt.Registry) error {
 		if err := m.Trigger.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("trigger")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("trigger")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-// ContextValidate validate this retention policy based on the context it is used
-func (m *RetentionPolicy) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.contextValidateRules(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateScope(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateTrigger(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *RetentionPolicy) contextValidateRules(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.Rules); i++ {
-
-		if m.Rules[i] != nil {
-			if err := m.Rules[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("rules" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("rules" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
-	return nil
-}
-
-func (m *RetentionPolicy) contextValidateScope(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Scope != nil {
-		if err := m.Scope.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("scope")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("scope")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *RetentionPolicy) contextValidateTrigger(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Trigger != nil {
-		if err := m.Trigger.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("trigger")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("trigger")
 			}
 			return err
 		}

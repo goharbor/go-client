@@ -53,6 +53,7 @@ func (o *GetChartrepoRepoChartsNameReader) ReadResponse(response runtime.ClientR
 			return nil, err
 		}
 		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -63,7 +64,7 @@ func NewGetChartrepoRepoChartsNameOK() *GetChartrepoRepoChartsNameOK {
 	return &GetChartrepoRepoChartsNameOK{}
 }
 
-/* GetChartrepoRepoChartsNameOK describes a response with status code 200, with default header values.
+/*GetChartrepoRepoChartsNameOK handles this case with default header values.
 
 Retrieved all versions of the specified chart
 */
@@ -74,6 +75,7 @@ type GetChartrepoRepoChartsNameOK struct {
 func (o *GetChartrepoRepoChartsNameOK) Error() string {
 	return fmt.Sprintf("[GET /chartrepo/{repo}/charts/{name}][%d] getChartrepoRepoChartsNameOK  %+v", 200, o.Payload)
 }
+
 func (o *GetChartrepoRepoChartsNameOK) GetPayload() models.ChartVersions {
 	return o.Payload
 }
@@ -93,7 +95,7 @@ func NewGetChartrepoRepoChartsNameUnauthorized() *GetChartrepoRepoChartsNameUnau
 	return &GetChartrepoRepoChartsNameUnauthorized{}
 }
 
-/* GetChartrepoRepoChartsNameUnauthorized describes a response with status code 401, with default header values.
+/*GetChartrepoRepoChartsNameUnauthorized handles this case with default header values.
 
 Unauthorized
 */
@@ -114,7 +116,7 @@ func NewGetChartrepoRepoChartsNameForbidden() *GetChartrepoRepoChartsNameForbidd
 	return &GetChartrepoRepoChartsNameForbidden{}
 }
 
-/* GetChartrepoRepoChartsNameForbidden describes a response with status code 403, with default header values.
+/*GetChartrepoRepoChartsNameForbidden handles this case with default header values.
 
 Operation is forbidden or quota exceeded
 */
@@ -135,7 +137,7 @@ func NewGetChartrepoRepoChartsNameNotFound() *GetChartrepoRepoChartsNameNotFound
 	return &GetChartrepoRepoChartsNameNotFound{}
 }
 
-/* GetChartrepoRepoChartsNameNotFound describes a response with status code 404, with default header values.
+/*GetChartrepoRepoChartsNameNotFound handles this case with default header values.
 
 Not found
 */
@@ -156,7 +158,7 @@ func NewGetChartrepoRepoChartsNameInternalServerError() *GetChartrepoRepoChartsN
 	return &GetChartrepoRepoChartsNameInternalServerError{}
 }
 
-/* GetChartrepoRepoChartsNameInternalServerError describes a response with status code 500, with default header values.
+/*GetChartrepoRepoChartsNameInternalServerError handles this case with default header values.
 
 Internal server error occurred
 */

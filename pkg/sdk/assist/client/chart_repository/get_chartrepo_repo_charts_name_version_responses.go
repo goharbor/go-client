@@ -53,6 +53,7 @@ func (o *GetChartrepoRepoChartsNameVersionReader) ReadResponse(response runtime.
 			return nil, err
 		}
 		return nil, result
+
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -63,7 +64,7 @@ func NewGetChartrepoRepoChartsNameVersionOK() *GetChartrepoRepoChartsNameVersion
 	return &GetChartrepoRepoChartsNameVersionOK{}
 }
 
-/* GetChartrepoRepoChartsNameVersionOK describes a response with status code 200, with default header values.
+/*GetChartrepoRepoChartsNameVersionOK handles this case with default header values.
 
 Successfully retrieved the chart version
 */
@@ -74,6 +75,7 @@ type GetChartrepoRepoChartsNameVersionOK struct {
 func (o *GetChartrepoRepoChartsNameVersionOK) Error() string {
 	return fmt.Sprintf("[GET /chartrepo/{repo}/charts/{name}/{version}][%d] getChartrepoRepoChartsNameVersionOK  %+v", 200, o.Payload)
 }
+
 func (o *GetChartrepoRepoChartsNameVersionOK) GetPayload() *models.ChartVersionDetails {
 	return o.Payload
 }
@@ -95,7 +97,7 @@ func NewGetChartrepoRepoChartsNameVersionUnauthorized() *GetChartrepoRepoChartsN
 	return &GetChartrepoRepoChartsNameVersionUnauthorized{}
 }
 
-/* GetChartrepoRepoChartsNameVersionUnauthorized describes a response with status code 401, with default header values.
+/*GetChartrepoRepoChartsNameVersionUnauthorized handles this case with default header values.
 
 Unauthorized
 */
@@ -116,7 +118,7 @@ func NewGetChartrepoRepoChartsNameVersionForbidden() *GetChartrepoRepoChartsName
 	return &GetChartrepoRepoChartsNameVersionForbidden{}
 }
 
-/* GetChartrepoRepoChartsNameVersionForbidden describes a response with status code 403, with default header values.
+/*GetChartrepoRepoChartsNameVersionForbidden handles this case with default header values.
 
 Operation is forbidden or quota exceeded
 */
@@ -137,7 +139,7 @@ func NewGetChartrepoRepoChartsNameVersionNotFound() *GetChartrepoRepoChartsNameV
 	return &GetChartrepoRepoChartsNameVersionNotFound{}
 }
 
-/* GetChartrepoRepoChartsNameVersionNotFound describes a response with status code 404, with default header values.
+/*GetChartrepoRepoChartsNameVersionNotFound handles this case with default header values.
 
 Not found
 */
@@ -158,7 +160,7 @@ func NewGetChartrepoRepoChartsNameVersionInternalServerError() *GetChartrepoRepo
 	return &GetChartrepoRepoChartsNameVersionInternalServerError{}
 }
 
-/* GetChartrepoRepoChartsNameVersionInternalServerError describes a response with status code 500, with default header values.
+/*GetChartrepoRepoChartsNameVersionInternalServerError handles this case with default header values.
 
 Internal server error occurred
 */

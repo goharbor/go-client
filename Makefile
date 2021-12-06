@@ -3,7 +3,8 @@ SHELL := /usr/bin/env bash
 .DEFAULT_GOAL := help
 
 DOCKERCMD=$(shell which docker)
-SWAGGER := $(DOCKERCMD) run --rm -it -v $(HOME):$(HOME) -w $(shell pwd) quay.io/goswagger/swagger
+SWAGGER_VERSION=v0.25.0
+SWAGGER := $(DOCKERCMD) run --rm -it -v $(HOME):$(HOME) -w $(shell pwd) quay.io/goswagger/swagger:$(SWAGGER_VERSION)
 
 ifeq ($(VERSION),)
 VERSION := v2.4.0
@@ -44,5 +45,9 @@ gen-harbor-api: update-spec ## generate goswagger client for harbor
 	@$(SWAGGER) generate client -f ${HARBOR_ASSIST_SPEC} --target=$(HARBOR_CLIENT_ASSIST_DIR) --template=stratoscale --additional-initialism=CVE --additional-initialism=GC --additional-initialism=OIDC
 	@$(SWAGGER) generate client -f ${HARBOR_2.0_SPEC} --target=$(HARBOR_CLIENT_2.0_DIR) --template=stratoscale --additional-initialism=CVE --additional-initialism=GC --additional-initialism=OIDC
 	@$(SWAGGER) generate client -f ${HARBOR_2.0_LEGACY_SPEC} --target=$(HARBOR_CLIENT_2.0_LEGACY_DIR) --template=stratoscale --additional-initialism=CVE --additional-initialism=GC --additional-initialism=OIDC
+
+.PHONY: test
+test: ## run the test
+	go test ./...
 
 all: gen-harbor-api

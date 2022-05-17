@@ -24,6 +24,7 @@ func NewGetArtifactParams() *GetArtifactParams {
 		xAcceptVulnerabilitiesDefault = string("application/vnd.scanner.adapter.vuln.report.harbor+json; version=1.0")
 		pageDefault                   = int64(1)
 		pageSizeDefault               = int64(10)
+		withAccessoryDefault          = bool(false)
 		withImmutableStatusDefault    = bool(false)
 		withLabelDefault              = bool(false)
 		withScanOverviewDefault       = bool(false)
@@ -34,6 +35,7 @@ func NewGetArtifactParams() *GetArtifactParams {
 		XAcceptVulnerabilities: &xAcceptVulnerabilitiesDefault,
 		Page:                   &pageDefault,
 		PageSize:               &pageSizeDefault,
+		WithAccessory:          &withAccessoryDefault,
 		WithImmutableStatus:    &withImmutableStatusDefault,
 		WithLabel:              &withLabelDefault,
 		WithScanOverview:       &withScanOverviewDefault,
@@ -51,6 +53,7 @@ func NewGetArtifactParamsWithTimeout(timeout time.Duration) *GetArtifactParams {
 		xAcceptVulnerabilitiesDefault = string("application/vnd.scanner.adapter.vuln.report.harbor+json; version=1.0")
 		pageDefault                   = int64(1)
 		pageSizeDefault               = int64(10)
+		withAccessoryDefault          = bool(false)
 		withImmutableStatusDefault    = bool(false)
 		withLabelDefault              = bool(false)
 		withScanOverviewDefault       = bool(false)
@@ -61,6 +64,7 @@ func NewGetArtifactParamsWithTimeout(timeout time.Duration) *GetArtifactParams {
 		XAcceptVulnerabilities: &xAcceptVulnerabilitiesDefault,
 		Page:                   &pageDefault,
 		PageSize:               &pageSizeDefault,
+		WithAccessory:          &withAccessoryDefault,
 		WithImmutableStatus:    &withImmutableStatusDefault,
 		WithLabel:              &withLabelDefault,
 		WithScanOverview:       &withScanOverviewDefault,
@@ -78,6 +82,7 @@ func NewGetArtifactParamsWithContext(ctx context.Context) *GetArtifactParams {
 		xAcceptVulnerabilitiesDefault = string("application/vnd.scanner.adapter.vuln.report.harbor+json; version=1.0")
 		pageDefault                   = int64(1)
 		pageSizeDefault               = int64(10)
+		withAccessoryDefault          = bool(false)
 		withImmutableStatusDefault    = bool(false)
 		withLabelDefault              = bool(false)
 		withScanOverviewDefault       = bool(false)
@@ -88,6 +93,7 @@ func NewGetArtifactParamsWithContext(ctx context.Context) *GetArtifactParams {
 		XAcceptVulnerabilities: &xAcceptVulnerabilitiesDefault,
 		Page:                   &pageDefault,
 		PageSize:               &pageSizeDefault,
+		WithAccessory:          &withAccessoryDefault,
 		WithImmutableStatus:    &withImmutableStatusDefault,
 		WithLabel:              &withLabelDefault,
 		WithScanOverview:       &withScanOverviewDefault,
@@ -105,6 +111,7 @@ func NewGetArtifactParamsWithHTTPClient(client *http.Client) *GetArtifactParams 
 		xAcceptVulnerabilitiesDefault = string("application/vnd.scanner.adapter.vuln.report.harbor+json; version=1.0")
 		pageDefault                   = int64(1)
 		pageSizeDefault               = int64(10)
+		withAccessoryDefault          = bool(false)
 		withImmutableStatusDefault    = bool(false)
 		withLabelDefault              = bool(false)
 		withScanOverviewDefault       = bool(false)
@@ -115,6 +122,7 @@ func NewGetArtifactParamsWithHTTPClient(client *http.Client) *GetArtifactParams 
 		XAcceptVulnerabilities: &xAcceptVulnerabilitiesDefault,
 		Page:                   &pageDefault,
 		PageSize:               &pageSizeDefault,
+		WithAccessory:          &withAccessoryDefault,
 		WithImmutableStatus:    &withImmutableStatusDefault,
 		WithLabel:              &withLabelDefault,
 		WithScanOverview:       &withScanOverviewDefault,
@@ -165,8 +173,13 @@ type GetArtifactParams struct {
 
 	*/
 	RepositoryName string
+	/*WithAccessory
+	  Specify whether the accessories are included of the returning artifacts.
+
+	*/
+	WithAccessory *bool
 	/*WithImmutableStatus
-	  Specify whether the immutable status is inclued inside the tags of the returning artifacts. Only works when setting "with_tag=true"
+	  Specify whether the immutable status is inclued inside the tags of the returning artifacts.
 
 	*/
 	WithImmutableStatus *bool
@@ -306,6 +319,17 @@ func (o *GetArtifactParams) SetRepositoryName(repositoryName string) {
 	o.RepositoryName = repositoryName
 }
 
+// WithWithAccessory adds the withAccessory to the get artifact params
+func (o *GetArtifactParams) WithWithAccessory(withAccessory *bool) *GetArtifactParams {
+	o.SetWithAccessory(withAccessory)
+	return o
+}
+
+// SetWithAccessory adds the withAccessory to the get artifact params
+func (o *GetArtifactParams) SetWithAccessory(withAccessory *bool) {
+	o.WithAccessory = withAccessory
+}
+
 // WithWithImmutableStatus adds the withImmutableStatus to the get artifact params
 func (o *GetArtifactParams) WithWithImmutableStatus(withImmutableStatus *bool) *GetArtifactParams {
 	o.SetWithImmutableStatus(withImmutableStatus)
@@ -432,6 +456,22 @@ func (o *GetArtifactParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 	// path param repository_name
 	if err := r.SetPathParam("repository_name", o.RepositoryName); err != nil {
 		return err
+	}
+
+	if o.WithAccessory != nil {
+
+		// query param with_accessory
+		var qrWithAccessory bool
+		if o.WithAccessory != nil {
+			qrWithAccessory = *o.WithAccessory
+		}
+		qWithAccessory := swag.FormatBool(qrWithAccessory)
+		if qWithAccessory != "" {
+			if err := r.SetQueryParam("with_accessory", qWithAccessory); err != nil {
+				return err
+			}
+		}
+
 	}
 
 	if o.WithImmutableStatus != nil {

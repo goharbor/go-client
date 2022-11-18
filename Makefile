@@ -3,11 +3,11 @@ SHELL := /usr/bin/env bash
 .DEFAULT_GOAL := help
 
 DOCKERCMD=$(shell which docker)
-SWAGGER_VERSION=v0.25.0
+SWAGGER_VERSION=v0.30.3
 SWAGGER := $(DOCKERCMD) run --rm -it -v $(HOME):$(HOME) -w $(shell pwd) quay.io/goswagger/swagger:$(SWAGGER_VERSION)
 
 ifeq ($(VERSION),)
-VERSION := v2.5.0
+VERSION := v2.6.2
 endif
 
 HARBOR_ASSIST_SPEC=api/swagger.yaml

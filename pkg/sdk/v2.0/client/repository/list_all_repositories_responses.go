@@ -43,7 +43,6 @@ func (o *ListAllRepositoriesReader) ReadResponse(response runtime.ClientResponse
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -54,22 +53,54 @@ func NewListAllRepositoriesOK() *ListAllRepositoriesOK {
 	return &ListAllRepositoriesOK{}
 }
 
-/*ListAllRepositoriesOK handles this case with default header values.
+/*
+ListAllRepositoriesOK describes a response with status code 200, with default header values.
 
 Success
 */
 type ListAllRepositoriesOK struct {
-	/*Link refers to the previous page and next page
+
+	/* Link refers to the previous page and next page
 	 */
 	Link string
-	/*The total count of repositories
+
+	/* The total count of repositories
 	 */
 	XTotalCount int64
 
 	Payload []*models.Repository
 }
 
+// IsSuccess returns true when this list all repositories o k response has a 2xx status code
+func (o *ListAllRepositoriesOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list all repositories o k response has a 3xx status code
+func (o *ListAllRepositoriesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list all repositories o k response has a 4xx status code
+func (o *ListAllRepositoriesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list all repositories o k response has a 5xx status code
+func (o *ListAllRepositoriesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list all repositories o k response a status code equal to that given
+func (o *ListAllRepositoriesOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ListAllRepositoriesOK) Error() string {
+	return fmt.Sprintf("[GET /repositories][%d] listAllRepositoriesOK  %+v", 200, o.Payload)
+}
+
+func (o *ListAllRepositoriesOK) String() string {
 	return fmt.Sprintf("[GET /repositories][%d] listAllRepositoriesOK  %+v", 200, o.Payload)
 }
 
@@ -79,15 +110,23 @@ func (o *ListAllRepositoriesOK) GetPayload() []*models.Repository {
 
 func (o *ListAllRepositoriesOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header Link
-	o.Link = response.GetHeader("Link")
+	// hydrates response header Link
+	hdrLink := response.GetHeader("Link")
 
-	// response header X-Total-Count
-	xTotalCount, err := swag.ConvertInt64(response.GetHeader("X-Total-Count"))
-	if err != nil {
-		return errors.InvalidType("X-Total-Count", "header", "int64", response.GetHeader("X-Total-Count"))
+	if hdrLink != "" {
+		o.Link = hdrLink
 	}
-	o.XTotalCount = xTotalCount
+
+	// hydrates response header X-Total-Count
+	hdrXTotalCount := response.GetHeader("X-Total-Count")
+
+	if hdrXTotalCount != "" {
+		valxTotalCount, err := swag.ConvertInt64(hdrXTotalCount)
+		if err != nil {
+			return errors.InvalidType("X-Total-Count", "header", "int64", hdrXTotalCount)
+		}
+		o.XTotalCount = valxTotalCount
+	}
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
@@ -102,19 +141,50 @@ func NewListAllRepositoriesBadRequest() *ListAllRepositoriesBadRequest {
 	return &ListAllRepositoriesBadRequest{}
 }
 
-/*ListAllRepositoriesBadRequest handles this case with default header values.
+/*
+ListAllRepositoriesBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
 type ListAllRepositoriesBadRequest struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list all repositories bad request response has a 2xx status code
+func (o *ListAllRepositoriesBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list all repositories bad request response has a 3xx status code
+func (o *ListAllRepositoriesBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list all repositories bad request response has a 4xx status code
+func (o *ListAllRepositoriesBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list all repositories bad request response has a 5xx status code
+func (o *ListAllRepositoriesBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list all repositories bad request response a status code equal to that given
+func (o *ListAllRepositoriesBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *ListAllRepositoriesBadRequest) Error() string {
+	return fmt.Sprintf("[GET /repositories][%d] listAllRepositoriesBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *ListAllRepositoriesBadRequest) String() string {
 	return fmt.Sprintf("[GET /repositories][%d] listAllRepositoriesBadRequest  %+v", 400, o.Payload)
 }
 
@@ -124,8 +194,12 @@ func (o *ListAllRepositoriesBadRequest) GetPayload() *models.Errors {
 
 func (o *ListAllRepositoriesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -142,19 +216,50 @@ func NewListAllRepositoriesInternalServerError() *ListAllRepositoriesInternalSer
 	return &ListAllRepositoriesInternalServerError{}
 }
 
-/*ListAllRepositoriesInternalServerError handles this case with default header values.
+/*
+ListAllRepositoriesInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type ListAllRepositoriesInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list all repositories internal server error response has a 2xx status code
+func (o *ListAllRepositoriesInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list all repositories internal server error response has a 3xx status code
+func (o *ListAllRepositoriesInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list all repositories internal server error response has a 4xx status code
+func (o *ListAllRepositoriesInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list all repositories internal server error response has a 5xx status code
+func (o *ListAllRepositoriesInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list all repositories internal server error response a status code equal to that given
+func (o *ListAllRepositoriesInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *ListAllRepositoriesInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /repositories][%d] listAllRepositoriesInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *ListAllRepositoriesInternalServerError) String() string {
 	return fmt.Sprintf("[GET /repositories][%d] listAllRepositoriesInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -164,8 +269,12 @@ func (o *ListAllRepositoriesInternalServerError) GetPayload() *models.Errors {
 
 func (o *ListAllRepositoriesInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

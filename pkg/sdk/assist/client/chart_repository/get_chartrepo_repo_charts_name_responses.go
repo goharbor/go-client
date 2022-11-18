@@ -53,7 +53,6 @@ func (o *GetChartrepoRepoChartsNameReader) ReadResponse(response runtime.ClientR
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -64,7 +63,8 @@ func NewGetChartrepoRepoChartsNameOK() *GetChartrepoRepoChartsNameOK {
 	return &GetChartrepoRepoChartsNameOK{}
 }
 
-/*GetChartrepoRepoChartsNameOK handles this case with default header values.
+/*
+GetChartrepoRepoChartsNameOK describes a response with status code 200, with default header values.
 
 Retrieved all versions of the specified chart
 */
@@ -72,7 +72,36 @@ type GetChartrepoRepoChartsNameOK struct {
 	Payload models.ChartVersions
 }
 
+// IsSuccess returns true when this get chartrepo repo charts name o k response has a 2xx status code
+func (o *GetChartrepoRepoChartsNameOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get chartrepo repo charts name o k response has a 3xx status code
+func (o *GetChartrepoRepoChartsNameOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get chartrepo repo charts name o k response has a 4xx status code
+func (o *GetChartrepoRepoChartsNameOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get chartrepo repo charts name o k response has a 5xx status code
+func (o *GetChartrepoRepoChartsNameOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get chartrepo repo charts name o k response a status code equal to that given
+func (o *GetChartrepoRepoChartsNameOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetChartrepoRepoChartsNameOK) Error() string {
+	return fmt.Sprintf("[GET /chartrepo/{repo}/charts/{name}][%d] getChartrepoRepoChartsNameOK  %+v", 200, o.Payload)
+}
+
+func (o *GetChartrepoRepoChartsNameOK) String() string {
 	return fmt.Sprintf("[GET /chartrepo/{repo}/charts/{name}][%d] getChartrepoRepoChartsNameOK  %+v", 200, o.Payload)
 }
 
@@ -95,14 +124,44 @@ func NewGetChartrepoRepoChartsNameUnauthorized() *GetChartrepoRepoChartsNameUnau
 	return &GetChartrepoRepoChartsNameUnauthorized{}
 }
 
-/*GetChartrepoRepoChartsNameUnauthorized handles this case with default header values.
+/*
+GetChartrepoRepoChartsNameUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type GetChartrepoRepoChartsNameUnauthorized struct {
 }
 
+// IsSuccess returns true when this get chartrepo repo charts name unauthorized response has a 2xx status code
+func (o *GetChartrepoRepoChartsNameUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get chartrepo repo charts name unauthorized response has a 3xx status code
+func (o *GetChartrepoRepoChartsNameUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get chartrepo repo charts name unauthorized response has a 4xx status code
+func (o *GetChartrepoRepoChartsNameUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get chartrepo repo charts name unauthorized response has a 5xx status code
+func (o *GetChartrepoRepoChartsNameUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get chartrepo repo charts name unauthorized response a status code equal to that given
+func (o *GetChartrepoRepoChartsNameUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *GetChartrepoRepoChartsNameUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /chartrepo/{repo}/charts/{name}][%d] getChartrepoRepoChartsNameUnauthorized ", 401)
+}
+
+func (o *GetChartrepoRepoChartsNameUnauthorized) String() string {
 	return fmt.Sprintf("[GET /chartrepo/{repo}/charts/{name}][%d] getChartrepoRepoChartsNameUnauthorized ", 401)
 }
 
@@ -116,14 +175,44 @@ func NewGetChartrepoRepoChartsNameForbidden() *GetChartrepoRepoChartsNameForbidd
 	return &GetChartrepoRepoChartsNameForbidden{}
 }
 
-/*GetChartrepoRepoChartsNameForbidden handles this case with default header values.
+/*
+GetChartrepoRepoChartsNameForbidden describes a response with status code 403, with default header values.
 
 Operation is forbidden or quota exceeded
 */
 type GetChartrepoRepoChartsNameForbidden struct {
 }
 
+// IsSuccess returns true when this get chartrepo repo charts name forbidden response has a 2xx status code
+func (o *GetChartrepoRepoChartsNameForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get chartrepo repo charts name forbidden response has a 3xx status code
+func (o *GetChartrepoRepoChartsNameForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get chartrepo repo charts name forbidden response has a 4xx status code
+func (o *GetChartrepoRepoChartsNameForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get chartrepo repo charts name forbidden response has a 5xx status code
+func (o *GetChartrepoRepoChartsNameForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get chartrepo repo charts name forbidden response a status code equal to that given
+func (o *GetChartrepoRepoChartsNameForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *GetChartrepoRepoChartsNameForbidden) Error() string {
+	return fmt.Sprintf("[GET /chartrepo/{repo}/charts/{name}][%d] getChartrepoRepoChartsNameForbidden ", 403)
+}
+
+func (o *GetChartrepoRepoChartsNameForbidden) String() string {
 	return fmt.Sprintf("[GET /chartrepo/{repo}/charts/{name}][%d] getChartrepoRepoChartsNameForbidden ", 403)
 }
 
@@ -137,14 +226,44 @@ func NewGetChartrepoRepoChartsNameNotFound() *GetChartrepoRepoChartsNameNotFound
 	return &GetChartrepoRepoChartsNameNotFound{}
 }
 
-/*GetChartrepoRepoChartsNameNotFound handles this case with default header values.
+/*
+GetChartrepoRepoChartsNameNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
 type GetChartrepoRepoChartsNameNotFound struct {
 }
 
+// IsSuccess returns true when this get chartrepo repo charts name not found response has a 2xx status code
+func (o *GetChartrepoRepoChartsNameNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get chartrepo repo charts name not found response has a 3xx status code
+func (o *GetChartrepoRepoChartsNameNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get chartrepo repo charts name not found response has a 4xx status code
+func (o *GetChartrepoRepoChartsNameNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get chartrepo repo charts name not found response has a 5xx status code
+func (o *GetChartrepoRepoChartsNameNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get chartrepo repo charts name not found response a status code equal to that given
+func (o *GetChartrepoRepoChartsNameNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *GetChartrepoRepoChartsNameNotFound) Error() string {
+	return fmt.Sprintf("[GET /chartrepo/{repo}/charts/{name}][%d] getChartrepoRepoChartsNameNotFound ", 404)
+}
+
+func (o *GetChartrepoRepoChartsNameNotFound) String() string {
 	return fmt.Sprintf("[GET /chartrepo/{repo}/charts/{name}][%d] getChartrepoRepoChartsNameNotFound ", 404)
 }
 
@@ -158,14 +277,44 @@ func NewGetChartrepoRepoChartsNameInternalServerError() *GetChartrepoRepoChartsN
 	return &GetChartrepoRepoChartsNameInternalServerError{}
 }
 
-/*GetChartrepoRepoChartsNameInternalServerError handles this case with default header values.
+/*
+GetChartrepoRepoChartsNameInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error occurred
 */
 type GetChartrepoRepoChartsNameInternalServerError struct {
 }
 
+// IsSuccess returns true when this get chartrepo repo charts name internal server error response has a 2xx status code
+func (o *GetChartrepoRepoChartsNameInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get chartrepo repo charts name internal server error response has a 3xx status code
+func (o *GetChartrepoRepoChartsNameInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get chartrepo repo charts name internal server error response has a 4xx status code
+func (o *GetChartrepoRepoChartsNameInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get chartrepo repo charts name internal server error response has a 5xx status code
+func (o *GetChartrepoRepoChartsNameInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get chartrepo repo charts name internal server error response a status code equal to that given
+func (o *GetChartrepoRepoChartsNameInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *GetChartrepoRepoChartsNameInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /chartrepo/{repo}/charts/{name}][%d] getChartrepoRepoChartsNameInternalServerError ", 500)
+}
+
+func (o *GetChartrepoRepoChartsNameInternalServerError) String() string {
 	return fmt.Sprintf("[GET /chartrepo/{repo}/charts/{name}][%d] getChartrepoRepoChartsNameInternalServerError ", 500)
 }
 

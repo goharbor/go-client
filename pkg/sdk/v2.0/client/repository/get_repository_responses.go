@@ -59,7 +59,6 @@ func (o *GetRepositoryReader) ReadResponse(response runtime.ClientResponse, cons
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -70,7 +69,8 @@ func NewGetRepositoryOK() *GetRepositoryOK {
 	return &GetRepositoryOK{}
 }
 
-/*GetRepositoryOK handles this case with default header values.
+/*
+GetRepositoryOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -78,7 +78,36 @@ type GetRepositoryOK struct {
 	Payload *models.Repository
 }
 
+// IsSuccess returns true when this get repository o k response has a 2xx status code
+func (o *GetRepositoryOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get repository o k response has a 3xx status code
+func (o *GetRepositoryOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get repository o k response has a 4xx status code
+func (o *GetRepositoryOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get repository o k response has a 5xx status code
+func (o *GetRepositoryOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get repository o k response a status code equal to that given
+func (o *GetRepositoryOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetRepositoryOK) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}][%d] getRepositoryOK  %+v", 200, o.Payload)
+}
+
+func (o *GetRepositoryOK) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}][%d] getRepositoryOK  %+v", 200, o.Payload)
 }
 
@@ -103,19 +132,50 @@ func NewGetRepositoryBadRequest() *GetRepositoryBadRequest {
 	return &GetRepositoryBadRequest{}
 }
 
-/*GetRepositoryBadRequest handles this case with default header values.
+/*
+GetRepositoryBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
 type GetRepositoryBadRequest struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get repository bad request response has a 2xx status code
+func (o *GetRepositoryBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get repository bad request response has a 3xx status code
+func (o *GetRepositoryBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get repository bad request response has a 4xx status code
+func (o *GetRepositoryBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get repository bad request response has a 5xx status code
+func (o *GetRepositoryBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get repository bad request response a status code equal to that given
+func (o *GetRepositoryBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *GetRepositoryBadRequest) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}][%d] getRepositoryBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GetRepositoryBadRequest) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}][%d] getRepositoryBadRequest  %+v", 400, o.Payload)
 }
 
@@ -125,8 +185,12 @@ func (o *GetRepositoryBadRequest) GetPayload() *models.Errors {
 
 func (o *GetRepositoryBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -143,19 +207,50 @@ func NewGetRepositoryUnauthorized() *GetRepositoryUnauthorized {
 	return &GetRepositoryUnauthorized{}
 }
 
-/*GetRepositoryUnauthorized handles this case with default header values.
+/*
+GetRepositoryUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type GetRepositoryUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get repository unauthorized response has a 2xx status code
+func (o *GetRepositoryUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get repository unauthorized response has a 3xx status code
+func (o *GetRepositoryUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get repository unauthorized response has a 4xx status code
+func (o *GetRepositoryUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get repository unauthorized response has a 5xx status code
+func (o *GetRepositoryUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get repository unauthorized response a status code equal to that given
+func (o *GetRepositoryUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *GetRepositoryUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}][%d] getRepositoryUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *GetRepositoryUnauthorized) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}][%d] getRepositoryUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -165,8 +260,12 @@ func (o *GetRepositoryUnauthorized) GetPayload() *models.Errors {
 
 func (o *GetRepositoryUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -183,19 +282,50 @@ func NewGetRepositoryForbidden() *GetRepositoryForbidden {
 	return &GetRepositoryForbidden{}
 }
 
-/*GetRepositoryForbidden handles this case with default header values.
+/*
+GetRepositoryForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type GetRepositoryForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get repository forbidden response has a 2xx status code
+func (o *GetRepositoryForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get repository forbidden response has a 3xx status code
+func (o *GetRepositoryForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get repository forbidden response has a 4xx status code
+func (o *GetRepositoryForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get repository forbidden response has a 5xx status code
+func (o *GetRepositoryForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get repository forbidden response a status code equal to that given
+func (o *GetRepositoryForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *GetRepositoryForbidden) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}][%d] getRepositoryForbidden  %+v", 403, o.Payload)
+}
+
+func (o *GetRepositoryForbidden) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}][%d] getRepositoryForbidden  %+v", 403, o.Payload)
 }
 
@@ -205,8 +335,12 @@ func (o *GetRepositoryForbidden) GetPayload() *models.Errors {
 
 func (o *GetRepositoryForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -223,19 +357,50 @@ func NewGetRepositoryNotFound() *GetRepositoryNotFound {
 	return &GetRepositoryNotFound{}
 }
 
-/*GetRepositoryNotFound handles this case with default header values.
+/*
+GetRepositoryNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
 type GetRepositoryNotFound struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get repository not found response has a 2xx status code
+func (o *GetRepositoryNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get repository not found response has a 3xx status code
+func (o *GetRepositoryNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get repository not found response has a 4xx status code
+func (o *GetRepositoryNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get repository not found response has a 5xx status code
+func (o *GetRepositoryNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get repository not found response a status code equal to that given
+func (o *GetRepositoryNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *GetRepositoryNotFound) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}][%d] getRepositoryNotFound  %+v", 404, o.Payload)
+}
+
+func (o *GetRepositoryNotFound) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}][%d] getRepositoryNotFound  %+v", 404, o.Payload)
 }
 
@@ -245,8 +410,12 @@ func (o *GetRepositoryNotFound) GetPayload() *models.Errors {
 
 func (o *GetRepositoryNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -263,19 +432,50 @@ func NewGetRepositoryInternalServerError() *GetRepositoryInternalServerError {
 	return &GetRepositoryInternalServerError{}
 }
 
-/*GetRepositoryInternalServerError handles this case with default header values.
+/*
+GetRepositoryInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type GetRepositoryInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get repository internal server error response has a 2xx status code
+func (o *GetRepositoryInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get repository internal server error response has a 3xx status code
+func (o *GetRepositoryInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get repository internal server error response has a 4xx status code
+func (o *GetRepositoryInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get repository internal server error response has a 5xx status code
+func (o *GetRepositoryInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get repository internal server error response a status code equal to that given
+func (o *GetRepositoryInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *GetRepositoryInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}][%d] getRepositoryInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *GetRepositoryInternalServerError) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}][%d] getRepositoryInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -285,8 +485,12 @@ func (o *GetRepositoryInternalServerError) GetPayload() *models.Errors {
 
 func (o *GetRepositoryInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

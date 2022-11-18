@@ -53,7 +53,6 @@ func (o *UpdateScannerReader) ReadResponse(response runtime.ClientResponse, cons
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -64,24 +63,59 @@ func NewUpdateScannerOK() *UpdateScannerOK {
 	return &UpdateScannerOK{}
 }
 
-/*UpdateScannerOK handles this case with default header values.
+/*
+UpdateScannerOK describes a response with status code 200, with default header values.
 
 Success
 */
 type UpdateScannerOK struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
+}
+
+// IsSuccess returns true when this update scanner o k response has a 2xx status code
+func (o *UpdateScannerOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this update scanner o k response has a 3xx status code
+func (o *UpdateScannerOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update scanner o k response has a 4xx status code
+func (o *UpdateScannerOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update scanner o k response has a 5xx status code
+func (o *UpdateScannerOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update scanner o k response a status code equal to that given
+func (o *UpdateScannerOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *UpdateScannerOK) Error() string {
 	return fmt.Sprintf("[PUT /scanners/{registration_id}][%d] updateScannerOK ", 200)
 }
 
+func (o *UpdateScannerOK) String() string {
+	return fmt.Sprintf("[PUT /scanners/{registration_id}][%d] updateScannerOK ", 200)
+}
+
 func (o *UpdateScannerOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	return nil
 }
@@ -91,19 +125,50 @@ func NewUpdateScannerUnauthorized() *UpdateScannerUnauthorized {
 	return &UpdateScannerUnauthorized{}
 }
 
-/*UpdateScannerUnauthorized handles this case with default header values.
+/*
+UpdateScannerUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type UpdateScannerUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update scanner unauthorized response has a 2xx status code
+func (o *UpdateScannerUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update scanner unauthorized response has a 3xx status code
+func (o *UpdateScannerUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update scanner unauthorized response has a 4xx status code
+func (o *UpdateScannerUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update scanner unauthorized response has a 5xx status code
+func (o *UpdateScannerUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update scanner unauthorized response a status code equal to that given
+func (o *UpdateScannerUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *UpdateScannerUnauthorized) Error() string {
+	return fmt.Sprintf("[PUT /scanners/{registration_id}][%d] updateScannerUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *UpdateScannerUnauthorized) String() string {
 	return fmt.Sprintf("[PUT /scanners/{registration_id}][%d] updateScannerUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -113,8 +178,12 @@ func (o *UpdateScannerUnauthorized) GetPayload() *models.Errors {
 
 func (o *UpdateScannerUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -131,19 +200,50 @@ func NewUpdateScannerForbidden() *UpdateScannerForbidden {
 	return &UpdateScannerForbidden{}
 }
 
-/*UpdateScannerForbidden handles this case with default header values.
+/*
+UpdateScannerForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type UpdateScannerForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update scanner forbidden response has a 2xx status code
+func (o *UpdateScannerForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update scanner forbidden response has a 3xx status code
+func (o *UpdateScannerForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update scanner forbidden response has a 4xx status code
+func (o *UpdateScannerForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update scanner forbidden response has a 5xx status code
+func (o *UpdateScannerForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update scanner forbidden response a status code equal to that given
+func (o *UpdateScannerForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *UpdateScannerForbidden) Error() string {
+	return fmt.Sprintf("[PUT /scanners/{registration_id}][%d] updateScannerForbidden  %+v", 403, o.Payload)
+}
+
+func (o *UpdateScannerForbidden) String() string {
 	return fmt.Sprintf("[PUT /scanners/{registration_id}][%d] updateScannerForbidden  %+v", 403, o.Payload)
 }
 
@@ -153,8 +253,12 @@ func (o *UpdateScannerForbidden) GetPayload() *models.Errors {
 
 func (o *UpdateScannerForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -171,19 +275,50 @@ func NewUpdateScannerNotFound() *UpdateScannerNotFound {
 	return &UpdateScannerNotFound{}
 }
 
-/*UpdateScannerNotFound handles this case with default header values.
+/*
+UpdateScannerNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
 type UpdateScannerNotFound struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update scanner not found response has a 2xx status code
+func (o *UpdateScannerNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update scanner not found response has a 3xx status code
+func (o *UpdateScannerNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update scanner not found response has a 4xx status code
+func (o *UpdateScannerNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update scanner not found response has a 5xx status code
+func (o *UpdateScannerNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update scanner not found response a status code equal to that given
+func (o *UpdateScannerNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *UpdateScannerNotFound) Error() string {
+	return fmt.Sprintf("[PUT /scanners/{registration_id}][%d] updateScannerNotFound  %+v", 404, o.Payload)
+}
+
+func (o *UpdateScannerNotFound) String() string {
 	return fmt.Sprintf("[PUT /scanners/{registration_id}][%d] updateScannerNotFound  %+v", 404, o.Payload)
 }
 
@@ -193,8 +328,12 @@ func (o *UpdateScannerNotFound) GetPayload() *models.Errors {
 
 func (o *UpdateScannerNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -211,19 +350,50 @@ func NewUpdateScannerInternalServerError() *UpdateScannerInternalServerError {
 	return &UpdateScannerInternalServerError{}
 }
 
-/*UpdateScannerInternalServerError handles this case with default header values.
+/*
+UpdateScannerInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type UpdateScannerInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update scanner internal server error response has a 2xx status code
+func (o *UpdateScannerInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update scanner internal server error response has a 3xx status code
+func (o *UpdateScannerInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update scanner internal server error response has a 4xx status code
+func (o *UpdateScannerInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update scanner internal server error response has a 5xx status code
+func (o *UpdateScannerInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this update scanner internal server error response a status code equal to that given
+func (o *UpdateScannerInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *UpdateScannerInternalServerError) Error() string {
+	return fmt.Sprintf("[PUT /scanners/{registration_id}][%d] updateScannerInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *UpdateScannerInternalServerError) String() string {
 	return fmt.Sprintf("[PUT /scanners/{registration_id}][%d] updateScannerInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -233,8 +403,12 @@ func (o *UpdateScannerInternalServerError) GetPayload() *models.Errors {
 
 func (o *UpdateScannerInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

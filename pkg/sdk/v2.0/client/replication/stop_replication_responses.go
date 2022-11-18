@@ -53,7 +53,6 @@ func (o *StopReplicationReader) ReadResponse(response runtime.ClientResponse, co
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -64,24 +63,59 @@ func NewStopReplicationOK() *StopReplicationOK {
 	return &StopReplicationOK{}
 }
 
-/*StopReplicationOK handles this case with default header values.
+/*
+StopReplicationOK describes a response with status code 200, with default header values.
 
 Success
 */
 type StopReplicationOK struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
+}
+
+// IsSuccess returns true when this stop replication o k response has a 2xx status code
+func (o *StopReplicationOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this stop replication o k response has a 3xx status code
+func (o *StopReplicationOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stop replication o k response has a 4xx status code
+func (o *StopReplicationOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this stop replication o k response has a 5xx status code
+func (o *StopReplicationOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stop replication o k response a status code equal to that given
+func (o *StopReplicationOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *StopReplicationOK) Error() string {
 	return fmt.Sprintf("[PUT /replication/executions/{id}][%d] stopReplicationOK ", 200)
 }
 
+func (o *StopReplicationOK) String() string {
+	return fmt.Sprintf("[PUT /replication/executions/{id}][%d] stopReplicationOK ", 200)
+}
+
 func (o *StopReplicationOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	return nil
 }
@@ -91,19 +125,50 @@ func NewStopReplicationUnauthorized() *StopReplicationUnauthorized {
 	return &StopReplicationUnauthorized{}
 }
 
-/*StopReplicationUnauthorized handles this case with default header values.
+/*
+StopReplicationUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type StopReplicationUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this stop replication unauthorized response has a 2xx status code
+func (o *StopReplicationUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stop replication unauthorized response has a 3xx status code
+func (o *StopReplicationUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stop replication unauthorized response has a 4xx status code
+func (o *StopReplicationUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stop replication unauthorized response has a 5xx status code
+func (o *StopReplicationUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stop replication unauthorized response a status code equal to that given
+func (o *StopReplicationUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *StopReplicationUnauthorized) Error() string {
+	return fmt.Sprintf("[PUT /replication/executions/{id}][%d] stopReplicationUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *StopReplicationUnauthorized) String() string {
 	return fmt.Sprintf("[PUT /replication/executions/{id}][%d] stopReplicationUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -113,8 +178,12 @@ func (o *StopReplicationUnauthorized) GetPayload() *models.Errors {
 
 func (o *StopReplicationUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -131,19 +200,50 @@ func NewStopReplicationForbidden() *StopReplicationForbidden {
 	return &StopReplicationForbidden{}
 }
 
-/*StopReplicationForbidden handles this case with default header values.
+/*
+StopReplicationForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type StopReplicationForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this stop replication forbidden response has a 2xx status code
+func (o *StopReplicationForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stop replication forbidden response has a 3xx status code
+func (o *StopReplicationForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stop replication forbidden response has a 4xx status code
+func (o *StopReplicationForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stop replication forbidden response has a 5xx status code
+func (o *StopReplicationForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stop replication forbidden response a status code equal to that given
+func (o *StopReplicationForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *StopReplicationForbidden) Error() string {
+	return fmt.Sprintf("[PUT /replication/executions/{id}][%d] stopReplicationForbidden  %+v", 403, o.Payload)
+}
+
+func (o *StopReplicationForbidden) String() string {
 	return fmt.Sprintf("[PUT /replication/executions/{id}][%d] stopReplicationForbidden  %+v", 403, o.Payload)
 }
 
@@ -153,8 +253,12 @@ func (o *StopReplicationForbidden) GetPayload() *models.Errors {
 
 func (o *StopReplicationForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -171,19 +275,50 @@ func NewStopReplicationNotFound() *StopReplicationNotFound {
 	return &StopReplicationNotFound{}
 }
 
-/*StopReplicationNotFound handles this case with default header values.
+/*
+StopReplicationNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
 type StopReplicationNotFound struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this stop replication not found response has a 2xx status code
+func (o *StopReplicationNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stop replication not found response has a 3xx status code
+func (o *StopReplicationNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stop replication not found response has a 4xx status code
+func (o *StopReplicationNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stop replication not found response has a 5xx status code
+func (o *StopReplicationNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stop replication not found response a status code equal to that given
+func (o *StopReplicationNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *StopReplicationNotFound) Error() string {
+	return fmt.Sprintf("[PUT /replication/executions/{id}][%d] stopReplicationNotFound  %+v", 404, o.Payload)
+}
+
+func (o *StopReplicationNotFound) String() string {
 	return fmt.Sprintf("[PUT /replication/executions/{id}][%d] stopReplicationNotFound  %+v", 404, o.Payload)
 }
 
@@ -193,8 +328,12 @@ func (o *StopReplicationNotFound) GetPayload() *models.Errors {
 
 func (o *StopReplicationNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -211,19 +350,50 @@ func NewStopReplicationInternalServerError() *StopReplicationInternalServerError
 	return &StopReplicationInternalServerError{}
 }
 
-/*StopReplicationInternalServerError handles this case with default header values.
+/*
+StopReplicationInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type StopReplicationInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this stop replication internal server error response has a 2xx status code
+func (o *StopReplicationInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stop replication internal server error response has a 3xx status code
+func (o *StopReplicationInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stop replication internal server error response has a 4xx status code
+func (o *StopReplicationInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this stop replication internal server error response has a 5xx status code
+func (o *StopReplicationInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this stop replication internal server error response a status code equal to that given
+func (o *StopReplicationInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *StopReplicationInternalServerError) Error() string {
+	return fmt.Sprintf("[PUT /replication/executions/{id}][%d] stopReplicationInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *StopReplicationInternalServerError) String() string {
 	return fmt.Sprintf("[PUT /replication/executions/{id}][%d] stopReplicationInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -233,8 +403,12 @@ func (o *StopReplicationInternalServerError) GetPayload() *models.Errors {
 
 func (o *StopReplicationInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

@@ -59,7 +59,6 @@ func (o *GetProjectMetadataReader) ReadResponse(response runtime.ClientResponse,
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -70,7 +69,8 @@ func NewGetProjectMetadataOK() *GetProjectMetadataOK {
 	return &GetProjectMetadataOK{}
 }
 
-/*GetProjectMetadataOK handles this case with default header values.
+/*
+GetProjectMetadataOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -78,7 +78,36 @@ type GetProjectMetadataOK struct {
 	Payload map[string]string
 }
 
+// IsSuccess returns true when this get project metadata o k response has a 2xx status code
+func (o *GetProjectMetadataOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get project metadata o k response has a 3xx status code
+func (o *GetProjectMetadataOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get project metadata o k response has a 4xx status code
+func (o *GetProjectMetadataOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get project metadata o k response has a 5xx status code
+func (o *GetProjectMetadataOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get project metadata o k response a status code equal to that given
+func (o *GetProjectMetadataOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetProjectMetadataOK) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/metadatas/{meta_name}][%d] getProjectMetadataOK  %+v", 200, o.Payload)
+}
+
+func (o *GetProjectMetadataOK) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/metadatas/{meta_name}][%d] getProjectMetadataOK  %+v", 200, o.Payload)
 }
 
@@ -101,19 +130,50 @@ func NewGetProjectMetadataBadRequest() *GetProjectMetadataBadRequest {
 	return &GetProjectMetadataBadRequest{}
 }
 
-/*GetProjectMetadataBadRequest handles this case with default header values.
+/*
+GetProjectMetadataBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
 type GetProjectMetadataBadRequest struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get project metadata bad request response has a 2xx status code
+func (o *GetProjectMetadataBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get project metadata bad request response has a 3xx status code
+func (o *GetProjectMetadataBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get project metadata bad request response has a 4xx status code
+func (o *GetProjectMetadataBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get project metadata bad request response has a 5xx status code
+func (o *GetProjectMetadataBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get project metadata bad request response a status code equal to that given
+func (o *GetProjectMetadataBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *GetProjectMetadataBadRequest) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/metadatas/{meta_name}][%d] getProjectMetadataBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GetProjectMetadataBadRequest) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/metadatas/{meta_name}][%d] getProjectMetadataBadRequest  %+v", 400, o.Payload)
 }
 
@@ -123,8 +183,12 @@ func (o *GetProjectMetadataBadRequest) GetPayload() *models.Errors {
 
 func (o *GetProjectMetadataBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -141,19 +205,50 @@ func NewGetProjectMetadataUnauthorized() *GetProjectMetadataUnauthorized {
 	return &GetProjectMetadataUnauthorized{}
 }
 
-/*GetProjectMetadataUnauthorized handles this case with default header values.
+/*
+GetProjectMetadataUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type GetProjectMetadataUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get project metadata unauthorized response has a 2xx status code
+func (o *GetProjectMetadataUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get project metadata unauthorized response has a 3xx status code
+func (o *GetProjectMetadataUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get project metadata unauthorized response has a 4xx status code
+func (o *GetProjectMetadataUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get project metadata unauthorized response has a 5xx status code
+func (o *GetProjectMetadataUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get project metadata unauthorized response a status code equal to that given
+func (o *GetProjectMetadataUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *GetProjectMetadataUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/metadatas/{meta_name}][%d] getProjectMetadataUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *GetProjectMetadataUnauthorized) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/metadatas/{meta_name}][%d] getProjectMetadataUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -163,8 +258,12 @@ func (o *GetProjectMetadataUnauthorized) GetPayload() *models.Errors {
 
 func (o *GetProjectMetadataUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -181,19 +280,50 @@ func NewGetProjectMetadataForbidden() *GetProjectMetadataForbidden {
 	return &GetProjectMetadataForbidden{}
 }
 
-/*GetProjectMetadataForbidden handles this case with default header values.
+/*
+GetProjectMetadataForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type GetProjectMetadataForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get project metadata forbidden response has a 2xx status code
+func (o *GetProjectMetadataForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get project metadata forbidden response has a 3xx status code
+func (o *GetProjectMetadataForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get project metadata forbidden response has a 4xx status code
+func (o *GetProjectMetadataForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get project metadata forbidden response has a 5xx status code
+func (o *GetProjectMetadataForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get project metadata forbidden response a status code equal to that given
+func (o *GetProjectMetadataForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *GetProjectMetadataForbidden) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/metadatas/{meta_name}][%d] getProjectMetadataForbidden  %+v", 403, o.Payload)
+}
+
+func (o *GetProjectMetadataForbidden) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/metadatas/{meta_name}][%d] getProjectMetadataForbidden  %+v", 403, o.Payload)
 }
 
@@ -203,8 +333,12 @@ func (o *GetProjectMetadataForbidden) GetPayload() *models.Errors {
 
 func (o *GetProjectMetadataForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -221,19 +355,50 @@ func NewGetProjectMetadataNotFound() *GetProjectMetadataNotFound {
 	return &GetProjectMetadataNotFound{}
 }
 
-/*GetProjectMetadataNotFound handles this case with default header values.
+/*
+GetProjectMetadataNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
 type GetProjectMetadataNotFound struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get project metadata not found response has a 2xx status code
+func (o *GetProjectMetadataNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get project metadata not found response has a 3xx status code
+func (o *GetProjectMetadataNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get project metadata not found response has a 4xx status code
+func (o *GetProjectMetadataNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get project metadata not found response has a 5xx status code
+func (o *GetProjectMetadataNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get project metadata not found response a status code equal to that given
+func (o *GetProjectMetadataNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *GetProjectMetadataNotFound) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/metadatas/{meta_name}][%d] getProjectMetadataNotFound  %+v", 404, o.Payload)
+}
+
+func (o *GetProjectMetadataNotFound) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/metadatas/{meta_name}][%d] getProjectMetadataNotFound  %+v", 404, o.Payload)
 }
 
@@ -243,8 +408,12 @@ func (o *GetProjectMetadataNotFound) GetPayload() *models.Errors {
 
 func (o *GetProjectMetadataNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -261,19 +430,50 @@ func NewGetProjectMetadataInternalServerError() *GetProjectMetadataInternalServe
 	return &GetProjectMetadataInternalServerError{}
 }
 
-/*GetProjectMetadataInternalServerError handles this case with default header values.
+/*
+GetProjectMetadataInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type GetProjectMetadataInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get project metadata internal server error response has a 2xx status code
+func (o *GetProjectMetadataInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get project metadata internal server error response has a 3xx status code
+func (o *GetProjectMetadataInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get project metadata internal server error response has a 4xx status code
+func (o *GetProjectMetadataInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get project metadata internal server error response has a 5xx status code
+func (o *GetProjectMetadataInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get project metadata internal server error response a status code equal to that given
+func (o *GetProjectMetadataInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *GetProjectMetadataInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/metadatas/{meta_name}][%d] getProjectMetadataInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *GetProjectMetadataInternalServerError) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/metadatas/{meta_name}][%d] getProjectMetadataInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -283,8 +483,12 @@ func (o *GetProjectMetadataInternalServerError) GetPayload() *models.Errors {
 
 func (o *GetProjectMetadataInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

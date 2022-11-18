@@ -49,7 +49,6 @@ func (o *GetLogsReader) ReadResponse(response runtime.ClientResponse, consumer r
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -60,22 +59,54 @@ func NewGetLogsOK() *GetLogsOK {
 	return &GetLogsOK{}
 }
 
-/*GetLogsOK handles this case with default header values.
+/*
+GetLogsOK describes a response with status code 200, with default header values.
 
 Success
 */
 type GetLogsOK struct {
-	/*Link refers to the previous page and next page
+
+	/* Link refers to the previous page and next page
 	 */
 	Link string
-	/*The total count of auditlogs
+
+	/* The total count of auditlogs
 	 */
 	XTotalCount int64
 
 	Payload []*models.AuditLog
 }
 
+// IsSuccess returns true when this get logs o k response has a 2xx status code
+func (o *GetLogsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get logs o k response has a 3xx status code
+func (o *GetLogsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get logs o k response has a 4xx status code
+func (o *GetLogsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get logs o k response has a 5xx status code
+func (o *GetLogsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get logs o k response a status code equal to that given
+func (o *GetLogsOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetLogsOK) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/logs][%d] getLogsOK  %+v", 200, o.Payload)
+}
+
+func (o *GetLogsOK) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/logs][%d] getLogsOK  %+v", 200, o.Payload)
 }
 
@@ -85,15 +116,23 @@ func (o *GetLogsOK) GetPayload() []*models.AuditLog {
 
 func (o *GetLogsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header Link
-	o.Link = response.GetHeader("Link")
+	// hydrates response header Link
+	hdrLink := response.GetHeader("Link")
 
-	// response header X-Total-Count
-	xTotalCount, err := swag.ConvertInt64(response.GetHeader("X-Total-Count"))
-	if err != nil {
-		return errors.InvalidType("X-Total-Count", "header", "int64", response.GetHeader("X-Total-Count"))
+	if hdrLink != "" {
+		o.Link = hdrLink
 	}
-	o.XTotalCount = xTotalCount
+
+	// hydrates response header X-Total-Count
+	hdrXTotalCount := response.GetHeader("X-Total-Count")
+
+	if hdrXTotalCount != "" {
+		valxTotalCount, err := swag.ConvertInt64(hdrXTotalCount)
+		if err != nil {
+			return errors.InvalidType("X-Total-Count", "header", "int64", hdrXTotalCount)
+		}
+		o.XTotalCount = valxTotalCount
+	}
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
@@ -108,19 +147,50 @@ func NewGetLogsBadRequest() *GetLogsBadRequest {
 	return &GetLogsBadRequest{}
 }
 
-/*GetLogsBadRequest handles this case with default header values.
+/*
+GetLogsBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
 type GetLogsBadRequest struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get logs bad request response has a 2xx status code
+func (o *GetLogsBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get logs bad request response has a 3xx status code
+func (o *GetLogsBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get logs bad request response has a 4xx status code
+func (o *GetLogsBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get logs bad request response has a 5xx status code
+func (o *GetLogsBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get logs bad request response a status code equal to that given
+func (o *GetLogsBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *GetLogsBadRequest) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/logs][%d] getLogsBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GetLogsBadRequest) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/logs][%d] getLogsBadRequest  %+v", 400, o.Payload)
 }
 
@@ -130,8 +200,12 @@ func (o *GetLogsBadRequest) GetPayload() *models.Errors {
 
 func (o *GetLogsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -148,19 +222,50 @@ func NewGetLogsUnauthorized() *GetLogsUnauthorized {
 	return &GetLogsUnauthorized{}
 }
 
-/*GetLogsUnauthorized handles this case with default header values.
+/*
+GetLogsUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type GetLogsUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get logs unauthorized response has a 2xx status code
+func (o *GetLogsUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get logs unauthorized response has a 3xx status code
+func (o *GetLogsUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get logs unauthorized response has a 4xx status code
+func (o *GetLogsUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get logs unauthorized response has a 5xx status code
+func (o *GetLogsUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get logs unauthorized response a status code equal to that given
+func (o *GetLogsUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *GetLogsUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/logs][%d] getLogsUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *GetLogsUnauthorized) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/logs][%d] getLogsUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -170,8 +275,12 @@ func (o *GetLogsUnauthorized) GetPayload() *models.Errors {
 
 func (o *GetLogsUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -188,19 +297,50 @@ func NewGetLogsInternalServerError() *GetLogsInternalServerError {
 	return &GetLogsInternalServerError{}
 }
 
-/*GetLogsInternalServerError handles this case with default header values.
+/*
+GetLogsInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type GetLogsInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get logs internal server error response has a 2xx status code
+func (o *GetLogsInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get logs internal server error response has a 3xx status code
+func (o *GetLogsInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get logs internal server error response has a 4xx status code
+func (o *GetLogsInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get logs internal server error response has a 5xx status code
+func (o *GetLogsInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get logs internal server error response a status code equal to that given
+func (o *GetLogsInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *GetLogsInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/logs][%d] getLogsInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *GetLogsInternalServerError) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/logs][%d] getLogsInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -210,8 +350,12 @@ func (o *GetLogsInternalServerError) GetPayload() *models.Errors {
 
 func (o *GetLogsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

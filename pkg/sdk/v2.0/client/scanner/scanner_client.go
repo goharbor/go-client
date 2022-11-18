@@ -89,7 +89,6 @@ type Client struct {
 CreateScanner creates a scanner registration
 
 Creats a new scanner registration with the given data.
-
 */
 func (a *Client) CreateScanner(ctx context.Context, params *CreateScannerParams) (*CreateScannerCreated, error) {
 
@@ -117,7 +116,6 @@ func (a *Client) CreateScanner(ctx context.Context, params *CreateScannerParams)
 DeleteScanner deletes a scanner registration
 
 Deletes the specified scanner registration.
-
 */
 func (a *Client) DeleteScanner(ctx context.Context, params *DeleteScannerParams) (*DeleteScannerOK, error) {
 
@@ -145,7 +143,6 @@ func (a *Client) DeleteScanner(ctx context.Context, params *DeleteScannerParams)
 GetScanner gets a scanner registration details
 
 Retruns the details of the specified scanner registration.
-
 */
 func (a *Client) GetScanner(ctx context.Context, params *GetScannerParams) (*GetScannerOK, error) {
 
@@ -173,7 +170,6 @@ func (a *Client) GetScanner(ctx context.Context, params *GetScannerParams) (*Get
 GetScannerMetadata gets the metadata of the specified scanner registration
 
 Get the metadata of the specified scanner registration, including the capabilities and customized properties.
-
 */
 func (a *Client) GetScannerMetadata(ctx context.Context, params *GetScannerMetadataParams) (*GetScannerMetadataOK, error) {
 
@@ -201,7 +197,6 @@ func (a *Client) GetScannerMetadata(ctx context.Context, params *GetScannerMetad
 ListScanners lists scanner registrations
 
 Returns a list of currently configured scanner registrations.
-
 */
 func (a *Client) ListScanners(ctx context.Context, params *ListScannersParams) (*ListScannersOK, error) {
 
@@ -229,7 +224,6 @@ func (a *Client) ListScanners(ctx context.Context, params *ListScannersParams) (
 PingScanner tests scanner registration settings
 
 Pings scanner adapter to test endpoint URL and authorization settings.
-
 */
 func (a *Client) PingScanner(ctx context.Context, params *PingScannerParams) (*PingScannerOK, error) {
 
@@ -257,7 +251,6 @@ func (a *Client) PingScanner(ctx context.Context, params *PingScannerParams) (*P
 SetScannerAsDefault sets system default scanner registration
 
 Set the specified scanner registration as the system default one.
-
 */
 func (a *Client) SetScannerAsDefault(ctx context.Context, params *SetScannerAsDefaultParams) (*SetScannerAsDefaultOK, error) {
 
@@ -285,7 +278,6 @@ func (a *Client) SetScannerAsDefault(ctx context.Context, params *SetScannerAsDe
 UpdateScanner updates a scanner registration
 
 Updates the specified scanner registration.
-
 */
 func (a *Client) UpdateScanner(ctx context.Context, params *UpdateScannerParams) (*UpdateScannerOK, error) {
 

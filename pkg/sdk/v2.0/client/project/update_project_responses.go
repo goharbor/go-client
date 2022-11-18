@@ -59,7 +59,6 @@ func (o *UpdateProjectReader) ReadResponse(response runtime.ClientResponse, cons
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -70,24 +69,59 @@ func NewUpdateProjectOK() *UpdateProjectOK {
 	return &UpdateProjectOK{}
 }
 
-/*UpdateProjectOK handles this case with default header values.
+/*
+UpdateProjectOK describes a response with status code 200, with default header values.
 
 Success
 */
 type UpdateProjectOK struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
+}
+
+// IsSuccess returns true when this update project o k response has a 2xx status code
+func (o *UpdateProjectOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this update project o k response has a 3xx status code
+func (o *UpdateProjectOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update project o k response has a 4xx status code
+func (o *UpdateProjectOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update project o k response has a 5xx status code
+func (o *UpdateProjectOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update project o k response a status code equal to that given
+func (o *UpdateProjectOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *UpdateProjectOK) Error() string {
 	return fmt.Sprintf("[PUT /projects/{project_name_or_id}][%d] updateProjectOK ", 200)
 }
 
+func (o *UpdateProjectOK) String() string {
+	return fmt.Sprintf("[PUT /projects/{project_name_or_id}][%d] updateProjectOK ", 200)
+}
+
 func (o *UpdateProjectOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	return nil
 }
@@ -97,19 +131,50 @@ func NewUpdateProjectBadRequest() *UpdateProjectBadRequest {
 	return &UpdateProjectBadRequest{}
 }
 
-/*UpdateProjectBadRequest handles this case with default header values.
+/*
+UpdateProjectBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
 type UpdateProjectBadRequest struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update project bad request response has a 2xx status code
+func (o *UpdateProjectBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update project bad request response has a 3xx status code
+func (o *UpdateProjectBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update project bad request response has a 4xx status code
+func (o *UpdateProjectBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update project bad request response has a 5xx status code
+func (o *UpdateProjectBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update project bad request response a status code equal to that given
+func (o *UpdateProjectBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *UpdateProjectBadRequest) Error() string {
+	return fmt.Sprintf("[PUT /projects/{project_name_or_id}][%d] updateProjectBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *UpdateProjectBadRequest) String() string {
 	return fmt.Sprintf("[PUT /projects/{project_name_or_id}][%d] updateProjectBadRequest  %+v", 400, o.Payload)
 }
 
@@ -119,8 +184,12 @@ func (o *UpdateProjectBadRequest) GetPayload() *models.Errors {
 
 func (o *UpdateProjectBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -137,19 +206,50 @@ func NewUpdateProjectUnauthorized() *UpdateProjectUnauthorized {
 	return &UpdateProjectUnauthorized{}
 }
 
-/*UpdateProjectUnauthorized handles this case with default header values.
+/*
+UpdateProjectUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type UpdateProjectUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update project unauthorized response has a 2xx status code
+func (o *UpdateProjectUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update project unauthorized response has a 3xx status code
+func (o *UpdateProjectUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update project unauthorized response has a 4xx status code
+func (o *UpdateProjectUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update project unauthorized response has a 5xx status code
+func (o *UpdateProjectUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update project unauthorized response a status code equal to that given
+func (o *UpdateProjectUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *UpdateProjectUnauthorized) Error() string {
+	return fmt.Sprintf("[PUT /projects/{project_name_or_id}][%d] updateProjectUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *UpdateProjectUnauthorized) String() string {
 	return fmt.Sprintf("[PUT /projects/{project_name_or_id}][%d] updateProjectUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -159,8 +259,12 @@ func (o *UpdateProjectUnauthorized) GetPayload() *models.Errors {
 
 func (o *UpdateProjectUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -177,19 +281,50 @@ func NewUpdateProjectForbidden() *UpdateProjectForbidden {
 	return &UpdateProjectForbidden{}
 }
 
-/*UpdateProjectForbidden handles this case with default header values.
+/*
+UpdateProjectForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type UpdateProjectForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update project forbidden response has a 2xx status code
+func (o *UpdateProjectForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update project forbidden response has a 3xx status code
+func (o *UpdateProjectForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update project forbidden response has a 4xx status code
+func (o *UpdateProjectForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update project forbidden response has a 5xx status code
+func (o *UpdateProjectForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update project forbidden response a status code equal to that given
+func (o *UpdateProjectForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *UpdateProjectForbidden) Error() string {
+	return fmt.Sprintf("[PUT /projects/{project_name_or_id}][%d] updateProjectForbidden  %+v", 403, o.Payload)
+}
+
+func (o *UpdateProjectForbidden) String() string {
 	return fmt.Sprintf("[PUT /projects/{project_name_or_id}][%d] updateProjectForbidden  %+v", 403, o.Payload)
 }
 
@@ -199,8 +334,12 @@ func (o *UpdateProjectForbidden) GetPayload() *models.Errors {
 
 func (o *UpdateProjectForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -217,19 +356,50 @@ func NewUpdateProjectNotFound() *UpdateProjectNotFound {
 	return &UpdateProjectNotFound{}
 }
 
-/*UpdateProjectNotFound handles this case with default header values.
+/*
+UpdateProjectNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
 type UpdateProjectNotFound struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update project not found response has a 2xx status code
+func (o *UpdateProjectNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update project not found response has a 3xx status code
+func (o *UpdateProjectNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update project not found response has a 4xx status code
+func (o *UpdateProjectNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update project not found response has a 5xx status code
+func (o *UpdateProjectNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update project not found response a status code equal to that given
+func (o *UpdateProjectNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *UpdateProjectNotFound) Error() string {
+	return fmt.Sprintf("[PUT /projects/{project_name_or_id}][%d] updateProjectNotFound  %+v", 404, o.Payload)
+}
+
+func (o *UpdateProjectNotFound) String() string {
 	return fmt.Sprintf("[PUT /projects/{project_name_or_id}][%d] updateProjectNotFound  %+v", 404, o.Payload)
 }
 
@@ -239,8 +409,12 @@ func (o *UpdateProjectNotFound) GetPayload() *models.Errors {
 
 func (o *UpdateProjectNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -257,19 +431,50 @@ func NewUpdateProjectInternalServerError() *UpdateProjectInternalServerError {
 	return &UpdateProjectInternalServerError{}
 }
 
-/*UpdateProjectInternalServerError handles this case with default header values.
+/*
+UpdateProjectInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type UpdateProjectInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update project internal server error response has a 2xx status code
+func (o *UpdateProjectInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update project internal server error response has a 3xx status code
+func (o *UpdateProjectInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update project internal server error response has a 4xx status code
+func (o *UpdateProjectInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update project internal server error response has a 5xx status code
+func (o *UpdateProjectInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this update project internal server error response a status code equal to that given
+func (o *UpdateProjectInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *UpdateProjectInternalServerError) Error() string {
+	return fmt.Sprintf("[PUT /projects/{project_name_or_id}][%d] updateProjectInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *UpdateProjectInternalServerError) String() string {
 	return fmt.Sprintf("[PUT /projects/{project_name_or_id}][%d] updateProjectInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -279,8 +484,12 @@ func (o *UpdateProjectInternalServerError) GetPayload() *models.Errors {
 
 func (o *UpdateProjectInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

@@ -27,7 +27,6 @@ func (o *GetPingReader) ReadResponse(response runtime.ClientResponse, consumer r
 			return nil, err
 		}
 		return result, nil
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -38,7 +37,8 @@ func NewGetPingOK() *GetPingOK {
 	return &GetPingOK{}
 }
 
-/*GetPingOK handles this case with default header values.
+/*
+GetPingOK describes a response with status code 200, with default header values.
 
 The API server is alive
 */
@@ -46,7 +46,36 @@ type GetPingOK struct {
 	Payload string
 }
 
+// IsSuccess returns true when this get ping o k response has a 2xx status code
+func (o *GetPingOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get ping o k response has a 3xx status code
+func (o *GetPingOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get ping o k response has a 4xx status code
+func (o *GetPingOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get ping o k response has a 5xx status code
+func (o *GetPingOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get ping o k response a status code equal to that given
+func (o *GetPingOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetPingOK) Error() string {
+	return fmt.Sprintf("[GET /ping][%d] getPingOK  %+v", 200, o.Payload)
+}
+
+func (o *GetPingOK) String() string {
 	return fmt.Sprintf("[GET /ping][%d] getPingOK  %+v", 200, o.Payload)
 }
 

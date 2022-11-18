@@ -19,86 +19,104 @@ import (
 	"github.com/goharbor/go-client/pkg/sdk/v2.0/models"
 )
 
-// NewCreateWebhookPolicyOfProjectParams creates a new CreateWebhookPolicyOfProjectParams object
-// with the default values initialized.
+// NewCreateWebhookPolicyOfProjectParams creates a new CreateWebhookPolicyOfProjectParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewCreateWebhookPolicyOfProjectParams() *CreateWebhookPolicyOfProjectParams {
-	var (
-		xIsResourceNameDefault = bool(false)
-	)
 	return &CreateWebhookPolicyOfProjectParams{
-		XIsResourceName: &xIsResourceNameDefault,
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewCreateWebhookPolicyOfProjectParamsWithTimeout creates a new CreateWebhookPolicyOfProjectParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewCreateWebhookPolicyOfProjectParamsWithTimeout(timeout time.Duration) *CreateWebhookPolicyOfProjectParams {
-	var (
-		xIsResourceNameDefault = bool(false)
-	)
 	return &CreateWebhookPolicyOfProjectParams{
-		XIsResourceName: &xIsResourceNameDefault,
-
 		timeout: timeout,
 	}
 }
 
 // NewCreateWebhookPolicyOfProjectParamsWithContext creates a new CreateWebhookPolicyOfProjectParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewCreateWebhookPolicyOfProjectParamsWithContext(ctx context.Context) *CreateWebhookPolicyOfProjectParams {
-	var (
-		xIsResourceNameDefault = bool(false)
-	)
 	return &CreateWebhookPolicyOfProjectParams{
-		XIsResourceName: &xIsResourceNameDefault,
-
 		Context: ctx,
 	}
 }
 
 // NewCreateWebhookPolicyOfProjectParamsWithHTTPClient creates a new CreateWebhookPolicyOfProjectParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewCreateWebhookPolicyOfProjectParamsWithHTTPClient(client *http.Client) *CreateWebhookPolicyOfProjectParams {
-	var (
-		xIsResourceNameDefault = bool(false)
-	)
 	return &CreateWebhookPolicyOfProjectParams{
-		XIsResourceName: &xIsResourceNameDefault,
-		HTTPClient:      client,
+		HTTPClient: client,
 	}
 }
 
-/*CreateWebhookPolicyOfProjectParams contains all the parameters to send to the API endpoint
-for the create webhook policy of project operation typically these are written to a http.Request
+/*
+CreateWebhookPolicyOfProjectParams contains all the parameters to send to the API endpoint
+
+	for the create webhook policy of project operation.
+
+	Typically these are written to a http.Request.
 */
 type CreateWebhookPolicyOfProjectParams struct {
 
-	/*XIsResourceName
-	  The flag to indicate whether the parameter which supports both name and id in the path is the name of the resource. When the X-Is-Resource-Name is false and the parameter can be converted to an integer, the parameter will be as an id, otherwise, it will be as a name.
+	/* XIsResourceName.
 
+	   The flag to indicate whether the parameter which supports both name and id in the path is the name of the resource. When the X-Is-Resource-Name is false and the parameter can be converted to an integer, the parameter will be as an id, otherwise, it will be as a name.
 	*/
 	XIsResourceName *bool
-	/*XRequestID
-	  An unique ID for the request
 
+	/* XRequestID.
+
+	   An unique ID for the request
 	*/
 	XRequestID *string
-	/*Policy
-	  Properties "targets" and "event_types" needed.
 
+	/* Policy.
+
+	   Properties "targets" and "event_types" needed.
 	*/
 	Policy *models.WebhookPolicy
-	/*ProjectNameOrID
-	  The name or id of the project
 
+	/* ProjectNameOrID.
+
+	   The name or id of the project
 	*/
 	ProjectNameOrID string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the create webhook policy of project params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *CreateWebhookPolicyOfProjectParams) WithDefaults() *CreateWebhookPolicyOfProjectParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the create webhook policy of project params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *CreateWebhookPolicyOfProjectParams) SetDefaults() {
+	var (
+		xIsResourceNameDefault = bool(false)
+	)
+
+	val := CreateWebhookPolicyOfProjectParams{
+		XIsResourceName: &xIsResourceNameDefault,
+	}
+
+	val.timeout = o.timeout
+	val.Context = o.Context
+	val.HTTPClient = o.HTTPClient
+	*o = val
 }
 
 // WithTimeout adds the timeout to the create webhook policy of project params
@@ -192,7 +210,6 @@ func (o *CreateWebhookPolicyOfProjectParams) WriteToRequest(r runtime.ClientRequ
 		if err := r.SetHeaderParam("X-Is-Resource-Name", swag.FormatBool(*o.XIsResourceName)); err != nil {
 			return err
 		}
-
 	}
 
 	if o.XRequestID != nil {
@@ -201,9 +218,7 @@ func (o *CreateWebhookPolicyOfProjectParams) WriteToRequest(r runtime.ClientRequ
 		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
 			return err
 		}
-
 	}
-
 	if o.Policy != nil {
 		if err := r.SetBodyParam(o.Policy); err != nil {
 			return err

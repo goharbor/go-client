@@ -65,7 +65,6 @@ func (o *SetCliSecretReader) ReadResponse(response runtime.ClientResponse, consu
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -76,14 +75,44 @@ func NewSetCliSecretOK() *SetCliSecretOK {
 	return &SetCliSecretOK{}
 }
 
-/*SetCliSecretOK handles this case with default header values.
+/*
+SetCliSecretOK describes a response with status code 200, with default header values.
 
 The secret is successfully updated
 */
 type SetCliSecretOK struct {
 }
 
+// IsSuccess returns true when this set cli secret o k response has a 2xx status code
+func (o *SetCliSecretOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this set cli secret o k response has a 3xx status code
+func (o *SetCliSecretOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this set cli secret o k response has a 4xx status code
+func (o *SetCliSecretOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this set cli secret o k response has a 5xx status code
+func (o *SetCliSecretOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this set cli secret o k response a status code equal to that given
+func (o *SetCliSecretOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *SetCliSecretOK) Error() string {
+	return fmt.Sprintf("[PUT /users/{user_id}/cli_secret][%d] setCliSecretOK ", 200)
+}
+
+func (o *SetCliSecretOK) String() string {
 	return fmt.Sprintf("[PUT /users/{user_id}/cli_secret][%d] setCliSecretOK ", 200)
 }
 
@@ -97,14 +126,44 @@ func NewSetCliSecretBadRequest() *SetCliSecretBadRequest {
 	return &SetCliSecretBadRequest{}
 }
 
-/*SetCliSecretBadRequest handles this case with default header values.
+/*
+SetCliSecretBadRequest describes a response with status code 400, with default header values.
 
 Invalid user ID.  Or user is not onboarded via OIDC authentication. Or the secret does not meet the standard.
 */
 type SetCliSecretBadRequest struct {
 }
 
+// IsSuccess returns true when this set cli secret bad request response has a 2xx status code
+func (o *SetCliSecretBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this set cli secret bad request response has a 3xx status code
+func (o *SetCliSecretBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this set cli secret bad request response has a 4xx status code
+func (o *SetCliSecretBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this set cli secret bad request response has a 5xx status code
+func (o *SetCliSecretBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this set cli secret bad request response a status code equal to that given
+func (o *SetCliSecretBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *SetCliSecretBadRequest) Error() string {
+	return fmt.Sprintf("[PUT /users/{user_id}/cli_secret][%d] setCliSecretBadRequest ", 400)
+}
+
+func (o *SetCliSecretBadRequest) String() string {
 	return fmt.Sprintf("[PUT /users/{user_id}/cli_secret][%d] setCliSecretBadRequest ", 400)
 }
 
@@ -118,19 +177,50 @@ func NewSetCliSecretUnauthorized() *SetCliSecretUnauthorized {
 	return &SetCliSecretUnauthorized{}
 }
 
-/*SetCliSecretUnauthorized handles this case with default header values.
+/*
+SetCliSecretUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type SetCliSecretUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this set cli secret unauthorized response has a 2xx status code
+func (o *SetCliSecretUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this set cli secret unauthorized response has a 3xx status code
+func (o *SetCliSecretUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this set cli secret unauthorized response has a 4xx status code
+func (o *SetCliSecretUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this set cli secret unauthorized response has a 5xx status code
+func (o *SetCliSecretUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this set cli secret unauthorized response a status code equal to that given
+func (o *SetCliSecretUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *SetCliSecretUnauthorized) Error() string {
+	return fmt.Sprintf("[PUT /users/{user_id}/cli_secret][%d] setCliSecretUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *SetCliSecretUnauthorized) String() string {
 	return fmt.Sprintf("[PUT /users/{user_id}/cli_secret][%d] setCliSecretUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -140,8 +230,12 @@ func (o *SetCliSecretUnauthorized) GetPayload() *models.Errors {
 
 func (o *SetCliSecretUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -158,19 +252,50 @@ func NewSetCliSecretForbidden() *SetCliSecretForbidden {
 	return &SetCliSecretForbidden{}
 }
 
-/*SetCliSecretForbidden handles this case with default header values.
+/*
+SetCliSecretForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type SetCliSecretForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this set cli secret forbidden response has a 2xx status code
+func (o *SetCliSecretForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this set cli secret forbidden response has a 3xx status code
+func (o *SetCliSecretForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this set cli secret forbidden response has a 4xx status code
+func (o *SetCliSecretForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this set cli secret forbidden response has a 5xx status code
+func (o *SetCliSecretForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this set cli secret forbidden response a status code equal to that given
+func (o *SetCliSecretForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *SetCliSecretForbidden) Error() string {
+	return fmt.Sprintf("[PUT /users/{user_id}/cli_secret][%d] setCliSecretForbidden  %+v", 403, o.Payload)
+}
+
+func (o *SetCliSecretForbidden) String() string {
 	return fmt.Sprintf("[PUT /users/{user_id}/cli_secret][%d] setCliSecretForbidden  %+v", 403, o.Payload)
 }
 
@@ -180,8 +305,12 @@ func (o *SetCliSecretForbidden) GetPayload() *models.Errors {
 
 func (o *SetCliSecretForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -198,19 +327,50 @@ func NewSetCliSecretNotFound() *SetCliSecretNotFound {
 	return &SetCliSecretNotFound{}
 }
 
-/*SetCliSecretNotFound handles this case with default header values.
+/*
+SetCliSecretNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
 type SetCliSecretNotFound struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this set cli secret not found response has a 2xx status code
+func (o *SetCliSecretNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this set cli secret not found response has a 3xx status code
+func (o *SetCliSecretNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this set cli secret not found response has a 4xx status code
+func (o *SetCliSecretNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this set cli secret not found response has a 5xx status code
+func (o *SetCliSecretNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this set cli secret not found response a status code equal to that given
+func (o *SetCliSecretNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *SetCliSecretNotFound) Error() string {
+	return fmt.Sprintf("[PUT /users/{user_id}/cli_secret][%d] setCliSecretNotFound  %+v", 404, o.Payload)
+}
+
+func (o *SetCliSecretNotFound) String() string {
 	return fmt.Sprintf("[PUT /users/{user_id}/cli_secret][%d] setCliSecretNotFound  %+v", 404, o.Payload)
 }
 
@@ -220,8 +380,12 @@ func (o *SetCliSecretNotFound) GetPayload() *models.Errors {
 
 func (o *SetCliSecretNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -238,14 +402,44 @@ func NewSetCliSecretPreconditionFailed() *SetCliSecretPreconditionFailed {
 	return &SetCliSecretPreconditionFailed{}
 }
 
-/*SetCliSecretPreconditionFailed handles this case with default header values.
+/*
+SetCliSecretPreconditionFailed describes a response with status code 412, with default header values.
 
 The auth mode of the system is not "oidc_auth", or the user is not onboarded via OIDC AuthN.
 */
 type SetCliSecretPreconditionFailed struct {
 }
 
+// IsSuccess returns true when this set cli secret precondition failed response has a 2xx status code
+func (o *SetCliSecretPreconditionFailed) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this set cli secret precondition failed response has a 3xx status code
+func (o *SetCliSecretPreconditionFailed) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this set cli secret precondition failed response has a 4xx status code
+func (o *SetCliSecretPreconditionFailed) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this set cli secret precondition failed response has a 5xx status code
+func (o *SetCliSecretPreconditionFailed) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this set cli secret precondition failed response a status code equal to that given
+func (o *SetCliSecretPreconditionFailed) IsCode(code int) bool {
+	return code == 412
+}
+
 func (o *SetCliSecretPreconditionFailed) Error() string {
+	return fmt.Sprintf("[PUT /users/{user_id}/cli_secret][%d] setCliSecretPreconditionFailed ", 412)
+}
+
+func (o *SetCliSecretPreconditionFailed) String() string {
 	return fmt.Sprintf("[PUT /users/{user_id}/cli_secret][%d] setCliSecretPreconditionFailed ", 412)
 }
 
@@ -259,19 +453,50 @@ func NewSetCliSecretInternalServerError() *SetCliSecretInternalServerError {
 	return &SetCliSecretInternalServerError{}
 }
 
-/*SetCliSecretInternalServerError handles this case with default header values.
+/*
+SetCliSecretInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type SetCliSecretInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this set cli secret internal server error response has a 2xx status code
+func (o *SetCliSecretInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this set cli secret internal server error response has a 3xx status code
+func (o *SetCliSecretInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this set cli secret internal server error response has a 4xx status code
+func (o *SetCliSecretInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this set cli secret internal server error response has a 5xx status code
+func (o *SetCliSecretInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this set cli secret internal server error response a status code equal to that given
+func (o *SetCliSecretInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *SetCliSecretInternalServerError) Error() string {
+	return fmt.Sprintf("[PUT /users/{user_id}/cli_secret][%d] setCliSecretInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *SetCliSecretInternalServerError) String() string {
 	return fmt.Sprintf("[PUT /users/{user_id}/cli_secret][%d] setCliSecretInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -281,8 +506,12 @@ func (o *SetCliSecretInternalServerError) GetPayload() *models.Errors {
 
 func (o *SetCliSecretInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

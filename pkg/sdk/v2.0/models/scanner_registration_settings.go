@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -19,6 +21,7 @@ type ScannerRegistrationSettings struct {
 
 	// An optional value of the HTTP Authorization header sent with each request to the Scanner Adapter API.
 	//
+	// Example: Bearer: JWTTOKENGOESHERE
 	AccessCredential string `json:"access_credential,omitempty"`
 
 	// Specify what authentication approach is adopted for the HTTP communications.
@@ -27,10 +30,12 @@ type ScannerRegistrationSettings struct {
 	Auth string `json:"auth,omitempty"`
 
 	// The name of this registration
+	// Example: Trivy
 	// Required: true
 	Name *string `json:"name"`
 
 	// A base URL of the scanner adapter.
+	// Example: http://harbor-scanner-trivy:8080
 	// Required: true
 	// Format: uri
 	URL *strfmt.URI `json:"url"`
@@ -73,6 +78,11 @@ func (m *ScannerRegistrationSettings) validateURL(formats strfmt.Registry) error
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this scanner registration settings based on context it is used
+func (m *ScannerRegistrationSettings) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

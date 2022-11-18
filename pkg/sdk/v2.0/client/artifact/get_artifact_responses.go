@@ -59,7 +59,6 @@ func (o *GetArtifactReader) ReadResponse(response runtime.ClientResponse, consum
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -70,7 +69,8 @@ func NewGetArtifactOK() *GetArtifactOK {
 	return &GetArtifactOK{}
 }
 
-/*GetArtifactOK handles this case with default header values.
+/*
+GetArtifactOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -78,7 +78,36 @@ type GetArtifactOK struct {
 	Payload *models.Artifact
 }
 
+// IsSuccess returns true when this get artifact o k response has a 2xx status code
+func (o *GetArtifactOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get artifact o k response has a 3xx status code
+func (o *GetArtifactOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get artifact o k response has a 4xx status code
+func (o *GetArtifactOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get artifact o k response has a 5xx status code
+func (o *GetArtifactOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get artifact o k response a status code equal to that given
+func (o *GetArtifactOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetArtifactOK) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}][%d] getArtifactOK  %+v", 200, o.Payload)
+}
+
+func (o *GetArtifactOK) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}][%d] getArtifactOK  %+v", 200, o.Payload)
 }
 
@@ -103,19 +132,50 @@ func NewGetArtifactBadRequest() *GetArtifactBadRequest {
 	return &GetArtifactBadRequest{}
 }
 
-/*GetArtifactBadRequest handles this case with default header values.
+/*
+GetArtifactBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
 type GetArtifactBadRequest struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get artifact bad request response has a 2xx status code
+func (o *GetArtifactBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get artifact bad request response has a 3xx status code
+func (o *GetArtifactBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get artifact bad request response has a 4xx status code
+func (o *GetArtifactBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get artifact bad request response has a 5xx status code
+func (o *GetArtifactBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get artifact bad request response a status code equal to that given
+func (o *GetArtifactBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *GetArtifactBadRequest) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}][%d] getArtifactBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GetArtifactBadRequest) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}][%d] getArtifactBadRequest  %+v", 400, o.Payload)
 }
 
@@ -125,8 +185,12 @@ func (o *GetArtifactBadRequest) GetPayload() *models.Errors {
 
 func (o *GetArtifactBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -143,19 +207,50 @@ func NewGetArtifactUnauthorized() *GetArtifactUnauthorized {
 	return &GetArtifactUnauthorized{}
 }
 
-/*GetArtifactUnauthorized handles this case with default header values.
+/*
+GetArtifactUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type GetArtifactUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get artifact unauthorized response has a 2xx status code
+func (o *GetArtifactUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get artifact unauthorized response has a 3xx status code
+func (o *GetArtifactUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get artifact unauthorized response has a 4xx status code
+func (o *GetArtifactUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get artifact unauthorized response has a 5xx status code
+func (o *GetArtifactUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get artifact unauthorized response a status code equal to that given
+func (o *GetArtifactUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *GetArtifactUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}][%d] getArtifactUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *GetArtifactUnauthorized) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}][%d] getArtifactUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -165,8 +260,12 @@ func (o *GetArtifactUnauthorized) GetPayload() *models.Errors {
 
 func (o *GetArtifactUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -183,19 +282,50 @@ func NewGetArtifactForbidden() *GetArtifactForbidden {
 	return &GetArtifactForbidden{}
 }
 
-/*GetArtifactForbidden handles this case with default header values.
+/*
+GetArtifactForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type GetArtifactForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get artifact forbidden response has a 2xx status code
+func (o *GetArtifactForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get artifact forbidden response has a 3xx status code
+func (o *GetArtifactForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get artifact forbidden response has a 4xx status code
+func (o *GetArtifactForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get artifact forbidden response has a 5xx status code
+func (o *GetArtifactForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get artifact forbidden response a status code equal to that given
+func (o *GetArtifactForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *GetArtifactForbidden) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}][%d] getArtifactForbidden  %+v", 403, o.Payload)
+}
+
+func (o *GetArtifactForbidden) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}][%d] getArtifactForbidden  %+v", 403, o.Payload)
 }
 
@@ -205,8 +335,12 @@ func (o *GetArtifactForbidden) GetPayload() *models.Errors {
 
 func (o *GetArtifactForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -223,19 +357,50 @@ func NewGetArtifactNotFound() *GetArtifactNotFound {
 	return &GetArtifactNotFound{}
 }
 
-/*GetArtifactNotFound handles this case with default header values.
+/*
+GetArtifactNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
 type GetArtifactNotFound struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get artifact not found response has a 2xx status code
+func (o *GetArtifactNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get artifact not found response has a 3xx status code
+func (o *GetArtifactNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get artifact not found response has a 4xx status code
+func (o *GetArtifactNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get artifact not found response has a 5xx status code
+func (o *GetArtifactNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get artifact not found response a status code equal to that given
+func (o *GetArtifactNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *GetArtifactNotFound) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}][%d] getArtifactNotFound  %+v", 404, o.Payload)
+}
+
+func (o *GetArtifactNotFound) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}][%d] getArtifactNotFound  %+v", 404, o.Payload)
 }
 
@@ -245,8 +410,12 @@ func (o *GetArtifactNotFound) GetPayload() *models.Errors {
 
 func (o *GetArtifactNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -263,19 +432,50 @@ func NewGetArtifactInternalServerError() *GetArtifactInternalServerError {
 	return &GetArtifactInternalServerError{}
 }
 
-/*GetArtifactInternalServerError handles this case with default header values.
+/*
+GetArtifactInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type GetArtifactInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get artifact internal server error response has a 2xx status code
+func (o *GetArtifactInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get artifact internal server error response has a 3xx status code
+func (o *GetArtifactInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get artifact internal server error response has a 4xx status code
+func (o *GetArtifactInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get artifact internal server error response has a 5xx status code
+func (o *GetArtifactInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get artifact internal server error response a status code equal to that given
+func (o *GetArtifactInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *GetArtifactInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}][%d] getArtifactInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *GetArtifactInternalServerError) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}][%d] getArtifactInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -285,8 +485,12 @@ func (o *GetArtifactInternalServerError) GetPayload() *models.Errors {
 
 func (o *GetArtifactInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

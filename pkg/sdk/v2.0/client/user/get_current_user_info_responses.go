@@ -41,7 +41,6 @@ func (o *GetCurrentUserInfoReader) ReadResponse(response runtime.ClientResponse,
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -52,7 +51,8 @@ func NewGetCurrentUserInfoOK() *GetCurrentUserInfoOK {
 	return &GetCurrentUserInfoOK{}
 }
 
-/*GetCurrentUserInfoOK handles this case with default header values.
+/*
+GetCurrentUserInfoOK describes a response with status code 200, with default header values.
 
 Get current user information successfully.
 */
@@ -60,7 +60,36 @@ type GetCurrentUserInfoOK struct {
 	Payload *models.UserResp
 }
 
+// IsSuccess returns true when this get current user info o k response has a 2xx status code
+func (o *GetCurrentUserInfoOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get current user info o k response has a 3xx status code
+func (o *GetCurrentUserInfoOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get current user info o k response has a 4xx status code
+func (o *GetCurrentUserInfoOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get current user info o k response has a 5xx status code
+func (o *GetCurrentUserInfoOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get current user info o k response a status code equal to that given
+func (o *GetCurrentUserInfoOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetCurrentUserInfoOK) Error() string {
+	return fmt.Sprintf("[GET /users/current][%d] getCurrentUserInfoOK  %+v", 200, o.Payload)
+}
+
+func (o *GetCurrentUserInfoOK) String() string {
 	return fmt.Sprintf("[GET /users/current][%d] getCurrentUserInfoOK  %+v", 200, o.Payload)
 }
 
@@ -85,19 +114,50 @@ func NewGetCurrentUserInfoUnauthorized() *GetCurrentUserInfoUnauthorized {
 	return &GetCurrentUserInfoUnauthorized{}
 }
 
-/*GetCurrentUserInfoUnauthorized handles this case with default header values.
+/*
+GetCurrentUserInfoUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type GetCurrentUserInfoUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get current user info unauthorized response has a 2xx status code
+func (o *GetCurrentUserInfoUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get current user info unauthorized response has a 3xx status code
+func (o *GetCurrentUserInfoUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get current user info unauthorized response has a 4xx status code
+func (o *GetCurrentUserInfoUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get current user info unauthorized response has a 5xx status code
+func (o *GetCurrentUserInfoUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get current user info unauthorized response a status code equal to that given
+func (o *GetCurrentUserInfoUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *GetCurrentUserInfoUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /users/current][%d] getCurrentUserInfoUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *GetCurrentUserInfoUnauthorized) String() string {
 	return fmt.Sprintf("[GET /users/current][%d] getCurrentUserInfoUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -107,8 +167,12 @@ func (o *GetCurrentUserInfoUnauthorized) GetPayload() *models.Errors {
 
 func (o *GetCurrentUserInfoUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -125,19 +189,50 @@ func NewGetCurrentUserInfoInternalServerError() *GetCurrentUserInfoInternalServe
 	return &GetCurrentUserInfoInternalServerError{}
 }
 
-/*GetCurrentUserInfoInternalServerError handles this case with default header values.
+/*
+GetCurrentUserInfoInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type GetCurrentUserInfoInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get current user info internal server error response has a 2xx status code
+func (o *GetCurrentUserInfoInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get current user info internal server error response has a 3xx status code
+func (o *GetCurrentUserInfoInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get current user info internal server error response has a 4xx status code
+func (o *GetCurrentUserInfoInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get current user info internal server error response has a 5xx status code
+func (o *GetCurrentUserInfoInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get current user info internal server error response a status code equal to that given
+func (o *GetCurrentUserInfoInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *GetCurrentUserInfoInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /users/current][%d] getCurrentUserInfoInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *GetCurrentUserInfoInternalServerError) String() string {
 	return fmt.Sprintf("[GET /users/current][%d] getCurrentUserInfoInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -147,8 +242,12 @@ func (o *GetCurrentUserInfoInternalServerError) GetPayload() *models.Errors {
 
 func (o *GetCurrentUserInfoInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

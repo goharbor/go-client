@@ -44,7 +44,6 @@ func (o *UpdateConfigurationsReader) ReadResponse(response runtime.ClientRespons
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -55,14 +54,44 @@ func NewUpdateConfigurationsOK() *UpdateConfigurationsOK {
 	return &UpdateConfigurationsOK{}
 }
 
-/*UpdateConfigurationsOK handles this case with default header values.
+/*
+UpdateConfigurationsOK describes a response with status code 200, with default header values.
 
 Modify system configurations successfully.
 */
 type UpdateConfigurationsOK struct {
 }
 
+// IsSuccess returns true when this update configurations o k response has a 2xx status code
+func (o *UpdateConfigurationsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this update configurations o k response has a 3xx status code
+func (o *UpdateConfigurationsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update configurations o k response has a 4xx status code
+func (o *UpdateConfigurationsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update configurations o k response has a 5xx status code
+func (o *UpdateConfigurationsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update configurations o k response a status code equal to that given
+func (o *UpdateConfigurationsOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *UpdateConfigurationsOK) Error() string {
+	return fmt.Sprintf("[PUT /configurations][%d] updateConfigurationsOK ", 200)
+}
+
+func (o *UpdateConfigurationsOK) String() string {
 	return fmt.Sprintf("[PUT /configurations][%d] updateConfigurationsOK ", 200)
 }
 
@@ -76,14 +105,44 @@ func NewUpdateConfigurationsUnauthorized() *UpdateConfigurationsUnauthorized {
 	return &UpdateConfigurationsUnauthorized{}
 }
 
-/*UpdateConfigurationsUnauthorized handles this case with default header values.
+/*
+UpdateConfigurationsUnauthorized describes a response with status code 401, with default header values.
 
 User need to log in first.
 */
 type UpdateConfigurationsUnauthorized struct {
 }
 
+// IsSuccess returns true when this update configurations unauthorized response has a 2xx status code
+func (o *UpdateConfigurationsUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update configurations unauthorized response has a 3xx status code
+func (o *UpdateConfigurationsUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update configurations unauthorized response has a 4xx status code
+func (o *UpdateConfigurationsUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update configurations unauthorized response has a 5xx status code
+func (o *UpdateConfigurationsUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update configurations unauthorized response a status code equal to that given
+func (o *UpdateConfigurationsUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *UpdateConfigurationsUnauthorized) Error() string {
+	return fmt.Sprintf("[PUT /configurations][%d] updateConfigurationsUnauthorized ", 401)
+}
+
+func (o *UpdateConfigurationsUnauthorized) String() string {
 	return fmt.Sprintf("[PUT /configurations][%d] updateConfigurationsUnauthorized ", 401)
 }
 
@@ -97,14 +156,44 @@ func NewUpdateConfigurationsForbidden() *UpdateConfigurationsForbidden {
 	return &UpdateConfigurationsForbidden{}
 }
 
-/*UpdateConfigurationsForbidden handles this case with default header values.
+/*
+UpdateConfigurationsForbidden describes a response with status code 403, with default header values.
 
 User does not have permission of admin role.
 */
 type UpdateConfigurationsForbidden struct {
 }
 
+// IsSuccess returns true when this update configurations forbidden response has a 2xx status code
+func (o *UpdateConfigurationsForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update configurations forbidden response has a 3xx status code
+func (o *UpdateConfigurationsForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update configurations forbidden response has a 4xx status code
+func (o *UpdateConfigurationsForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update configurations forbidden response has a 5xx status code
+func (o *UpdateConfigurationsForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update configurations forbidden response a status code equal to that given
+func (o *UpdateConfigurationsForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *UpdateConfigurationsForbidden) Error() string {
+	return fmt.Sprintf("[PUT /configurations][%d] updateConfigurationsForbidden ", 403)
+}
+
+func (o *UpdateConfigurationsForbidden) String() string {
 	return fmt.Sprintf("[PUT /configurations][%d] updateConfigurationsForbidden ", 403)
 }
 
@@ -118,14 +207,44 @@ func NewUpdateConfigurationsInternalServerError() *UpdateConfigurationsInternalS
 	return &UpdateConfigurationsInternalServerError{}
 }
 
-/*UpdateConfigurationsInternalServerError handles this case with default header values.
+/*
+UpdateConfigurationsInternalServerError describes a response with status code 500, with default header values.
 
 Unexpected internal errors.
 */
 type UpdateConfigurationsInternalServerError struct {
 }
 
+// IsSuccess returns true when this update configurations internal server error response has a 2xx status code
+func (o *UpdateConfigurationsInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update configurations internal server error response has a 3xx status code
+func (o *UpdateConfigurationsInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update configurations internal server error response has a 4xx status code
+func (o *UpdateConfigurationsInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update configurations internal server error response has a 5xx status code
+func (o *UpdateConfigurationsInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this update configurations internal server error response a status code equal to that given
+func (o *UpdateConfigurationsInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *UpdateConfigurationsInternalServerError) Error() string {
+	return fmt.Sprintf("[PUT /configurations][%d] updateConfigurationsInternalServerError ", 500)
+}
+
+func (o *UpdateConfigurationsInternalServerError) String() string {
 	return fmt.Sprintf("[PUT /configurations][%d] updateConfigurationsInternalServerError ", 500)
 }
 

@@ -49,7 +49,6 @@ func (o *ListUserGroupsReader) ReadResponse(response runtime.ClientResponse, con
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -60,22 +59,54 @@ func NewListUserGroupsOK() *ListUserGroupsOK {
 	return &ListUserGroupsOK{}
 }
 
-/*ListUserGroupsOK handles this case with default header values.
+/*
+ListUserGroupsOK describes a response with status code 200, with default header values.
 
 Get user group successfully.
 */
 type ListUserGroupsOK struct {
-	/*Link to previous page and next page
+
+	/* Link to previous page and next page
 	 */
 	Link string
-	/*The total count of available items
+
+	/* The total count of available items
 	 */
 	XTotalCount int64
 
 	Payload []*models.UserGroup
 }
 
+// IsSuccess returns true when this list user groups o k response has a 2xx status code
+func (o *ListUserGroupsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list user groups o k response has a 3xx status code
+func (o *ListUserGroupsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list user groups o k response has a 4xx status code
+func (o *ListUserGroupsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list user groups o k response has a 5xx status code
+func (o *ListUserGroupsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list user groups o k response a status code equal to that given
+func (o *ListUserGroupsOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ListUserGroupsOK) Error() string {
+	return fmt.Sprintf("[GET /usergroups][%d] listUserGroupsOK  %+v", 200, o.Payload)
+}
+
+func (o *ListUserGroupsOK) String() string {
 	return fmt.Sprintf("[GET /usergroups][%d] listUserGroupsOK  %+v", 200, o.Payload)
 }
 
@@ -85,15 +116,23 @@ func (o *ListUserGroupsOK) GetPayload() []*models.UserGroup {
 
 func (o *ListUserGroupsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header Link
-	o.Link = response.GetHeader("Link")
+	// hydrates response header Link
+	hdrLink := response.GetHeader("Link")
 
-	// response header X-Total-Count
-	xTotalCount, err := swag.ConvertInt64(response.GetHeader("X-Total-Count"))
-	if err != nil {
-		return errors.InvalidType("X-Total-Count", "header", "int64", response.GetHeader("X-Total-Count"))
+	if hdrLink != "" {
+		o.Link = hdrLink
 	}
-	o.XTotalCount = xTotalCount
+
+	// hydrates response header X-Total-Count
+	hdrXTotalCount := response.GetHeader("X-Total-Count")
+
+	if hdrXTotalCount != "" {
+		valxTotalCount, err := swag.ConvertInt64(hdrXTotalCount)
+		if err != nil {
+			return errors.InvalidType("X-Total-Count", "header", "int64", hdrXTotalCount)
+		}
+		o.XTotalCount = valxTotalCount
+	}
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
@@ -108,19 +147,50 @@ func NewListUserGroupsUnauthorized() *ListUserGroupsUnauthorized {
 	return &ListUserGroupsUnauthorized{}
 }
 
-/*ListUserGroupsUnauthorized handles this case with default header values.
+/*
+ListUserGroupsUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type ListUserGroupsUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list user groups unauthorized response has a 2xx status code
+func (o *ListUserGroupsUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list user groups unauthorized response has a 3xx status code
+func (o *ListUserGroupsUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list user groups unauthorized response has a 4xx status code
+func (o *ListUserGroupsUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list user groups unauthorized response has a 5xx status code
+func (o *ListUserGroupsUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list user groups unauthorized response a status code equal to that given
+func (o *ListUserGroupsUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *ListUserGroupsUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /usergroups][%d] listUserGroupsUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *ListUserGroupsUnauthorized) String() string {
 	return fmt.Sprintf("[GET /usergroups][%d] listUserGroupsUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -130,8 +200,12 @@ func (o *ListUserGroupsUnauthorized) GetPayload() *models.Errors {
 
 func (o *ListUserGroupsUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -148,19 +222,50 @@ func NewListUserGroupsForbidden() *ListUserGroupsForbidden {
 	return &ListUserGroupsForbidden{}
 }
 
-/*ListUserGroupsForbidden handles this case with default header values.
+/*
+ListUserGroupsForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type ListUserGroupsForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list user groups forbidden response has a 2xx status code
+func (o *ListUserGroupsForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list user groups forbidden response has a 3xx status code
+func (o *ListUserGroupsForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list user groups forbidden response has a 4xx status code
+func (o *ListUserGroupsForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list user groups forbidden response has a 5xx status code
+func (o *ListUserGroupsForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list user groups forbidden response a status code equal to that given
+func (o *ListUserGroupsForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *ListUserGroupsForbidden) Error() string {
+	return fmt.Sprintf("[GET /usergroups][%d] listUserGroupsForbidden  %+v", 403, o.Payload)
+}
+
+func (o *ListUserGroupsForbidden) String() string {
 	return fmt.Sprintf("[GET /usergroups][%d] listUserGroupsForbidden  %+v", 403, o.Payload)
 }
 
@@ -170,8 +275,12 @@ func (o *ListUserGroupsForbidden) GetPayload() *models.Errors {
 
 func (o *ListUserGroupsForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -188,19 +297,50 @@ func NewListUserGroupsInternalServerError() *ListUserGroupsInternalServerError {
 	return &ListUserGroupsInternalServerError{}
 }
 
-/*ListUserGroupsInternalServerError handles this case with default header values.
+/*
+ListUserGroupsInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type ListUserGroupsInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list user groups internal server error response has a 2xx status code
+func (o *ListUserGroupsInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list user groups internal server error response has a 3xx status code
+func (o *ListUserGroupsInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list user groups internal server error response has a 4xx status code
+func (o *ListUserGroupsInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list user groups internal server error response has a 5xx status code
+func (o *ListUserGroupsInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list user groups internal server error response a status code equal to that given
+func (o *ListUserGroupsInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *ListUserGroupsInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /usergroups][%d] listUserGroupsInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *ListUserGroupsInternalServerError) String() string {
 	return fmt.Sprintf("[GET /usergroups][%d] listUserGroupsInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -210,8 +350,12 @@ func (o *ListUserGroupsInternalServerError) GetPayload() *models.Errors {
 
 func (o *ListUserGroupsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

@@ -16,64 +16,81 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewPingOIDCParams creates a new PingOIDCParams object
-// with the default values initialized.
+// NewPingOIDCParams creates a new PingOIDCParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewPingOIDCParams() *PingOIDCParams {
-	var ()
 	return &PingOIDCParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewPingOIDCParamsWithTimeout creates a new PingOIDCParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewPingOIDCParamsWithTimeout(timeout time.Duration) *PingOIDCParams {
-	var ()
 	return &PingOIDCParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewPingOIDCParamsWithContext creates a new PingOIDCParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewPingOIDCParamsWithContext(ctx context.Context) *PingOIDCParams {
-	var ()
 	return &PingOIDCParams{
-
 		Context: ctx,
 	}
 }
 
 // NewPingOIDCParamsWithHTTPClient creates a new PingOIDCParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewPingOIDCParamsWithHTTPClient(client *http.Client) *PingOIDCParams {
-	var ()
 	return &PingOIDCParams{
 		HTTPClient: client,
 	}
 }
 
-/*PingOIDCParams contains all the parameters to send to the API endpoint
-for the ping OIDC operation typically these are written to a http.Request
+/*
+PingOIDCParams contains all the parameters to send to the API endpoint
+
+	for the ping OIDC operation.
+
+	Typically these are written to a http.Request.
 */
 type PingOIDCParams struct {
 
-	/*XRequestID
-	  An unique ID for the request
+	/* XRequestID.
 
+	   An unique ID for the request
 	*/
 	XRequestID *string
-	/*Endpoint
-	  Request body for OIDC endpoint to be tested.
 
+	/* Endpoint.
+
+	   Request body for OIDC endpoint to be tested.
 	*/
 	Endpoint PingOIDCBody
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the ping OIDC params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *PingOIDCParams) WithDefaults() *PingOIDCParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the ping OIDC params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *PingOIDCParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the ping OIDC params
@@ -145,9 +162,7 @@ func (o *PingOIDCParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regi
 		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
 			return err
 		}
-
 	}
-
 	if err := r.SetBodyParam(o.Endpoint); err != nil {
 		return err
 	}

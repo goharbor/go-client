@@ -53,7 +53,6 @@ func (o *GetUserReader) ReadResponse(response runtime.ClientResponse, consumer r
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -64,7 +63,8 @@ func NewGetUserOK() *GetUserOK {
 	return &GetUserOK{}
 }
 
-/*GetUserOK handles this case with default header values.
+/*
+GetUserOK describes a response with status code 200, with default header values.
 
 Get user's info successfully.
 */
@@ -72,7 +72,36 @@ type GetUserOK struct {
 	Payload *models.UserResp
 }
 
+// IsSuccess returns true when this get user o k response has a 2xx status code
+func (o *GetUserOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get user o k response has a 3xx status code
+func (o *GetUserOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get user o k response has a 4xx status code
+func (o *GetUserOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get user o k response has a 5xx status code
+func (o *GetUserOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get user o k response a status code equal to that given
+func (o *GetUserOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetUserOK) Error() string {
+	return fmt.Sprintf("[GET /users/{user_id}][%d] getUserOK  %+v", 200, o.Payload)
+}
+
+func (o *GetUserOK) String() string {
 	return fmt.Sprintf("[GET /users/{user_id}][%d] getUserOK  %+v", 200, o.Payload)
 }
 
@@ -97,19 +126,50 @@ func NewGetUserUnauthorized() *GetUserUnauthorized {
 	return &GetUserUnauthorized{}
 }
 
-/*GetUserUnauthorized handles this case with default header values.
+/*
+GetUserUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type GetUserUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get user unauthorized response has a 2xx status code
+func (o *GetUserUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get user unauthorized response has a 3xx status code
+func (o *GetUserUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get user unauthorized response has a 4xx status code
+func (o *GetUserUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get user unauthorized response has a 5xx status code
+func (o *GetUserUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get user unauthorized response a status code equal to that given
+func (o *GetUserUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *GetUserUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /users/{user_id}][%d] getUserUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *GetUserUnauthorized) String() string {
 	return fmt.Sprintf("[GET /users/{user_id}][%d] getUserUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -119,8 +179,12 @@ func (o *GetUserUnauthorized) GetPayload() *models.Errors {
 
 func (o *GetUserUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -137,19 +201,50 @@ func NewGetUserForbidden() *GetUserForbidden {
 	return &GetUserForbidden{}
 }
 
-/*GetUserForbidden handles this case with default header values.
+/*
+GetUserForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type GetUserForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get user forbidden response has a 2xx status code
+func (o *GetUserForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get user forbidden response has a 3xx status code
+func (o *GetUserForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get user forbidden response has a 4xx status code
+func (o *GetUserForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get user forbidden response has a 5xx status code
+func (o *GetUserForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get user forbidden response a status code equal to that given
+func (o *GetUserForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *GetUserForbidden) Error() string {
+	return fmt.Sprintf("[GET /users/{user_id}][%d] getUserForbidden  %+v", 403, o.Payload)
+}
+
+func (o *GetUserForbidden) String() string {
 	return fmt.Sprintf("[GET /users/{user_id}][%d] getUserForbidden  %+v", 403, o.Payload)
 }
 
@@ -159,8 +254,12 @@ func (o *GetUserForbidden) GetPayload() *models.Errors {
 
 func (o *GetUserForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -177,19 +276,50 @@ func NewGetUserNotFound() *GetUserNotFound {
 	return &GetUserNotFound{}
 }
 
-/*GetUserNotFound handles this case with default header values.
+/*
+GetUserNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
 type GetUserNotFound struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get user not found response has a 2xx status code
+func (o *GetUserNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get user not found response has a 3xx status code
+func (o *GetUserNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get user not found response has a 4xx status code
+func (o *GetUserNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get user not found response has a 5xx status code
+func (o *GetUserNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get user not found response a status code equal to that given
+func (o *GetUserNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *GetUserNotFound) Error() string {
+	return fmt.Sprintf("[GET /users/{user_id}][%d] getUserNotFound  %+v", 404, o.Payload)
+}
+
+func (o *GetUserNotFound) String() string {
 	return fmt.Sprintf("[GET /users/{user_id}][%d] getUserNotFound  %+v", 404, o.Payload)
 }
 
@@ -199,8 +329,12 @@ func (o *GetUserNotFound) GetPayload() *models.Errors {
 
 func (o *GetUserNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -217,19 +351,50 @@ func NewGetUserInternalServerError() *GetUserInternalServerError {
 	return &GetUserInternalServerError{}
 }
 
-/*GetUserInternalServerError handles this case with default header values.
+/*
+GetUserInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type GetUserInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get user internal server error response has a 2xx status code
+func (o *GetUserInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get user internal server error response has a 3xx status code
+func (o *GetUserInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get user internal server error response has a 4xx status code
+func (o *GetUserInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get user internal server error response has a 5xx status code
+func (o *GetUserInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get user internal server error response a status code equal to that given
+func (o *GetUserInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *GetUserInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /users/{user_id}][%d] getUserInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *GetUserInternalServerError) String() string {
 	return fmt.Sprintf("[GET /users/{user_id}][%d] getUserInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -239,8 +404,12 @@ func (o *GetUserInternalServerError) GetPayload() *models.Errors {
 
 func (o *GetUserInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

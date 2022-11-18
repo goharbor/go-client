@@ -47,7 +47,6 @@ type Client struct {
 PingOIDC tests the OIDC endpoint
 
 Test the OIDC endpoint, the setting of the endpoint is provided in the request.  This API can only be called by system admin.
-
 */
 func (a *Client) PingOIDC(ctx context.Context, params *PingOIDCParams) (*PingOIDCOK, error) {
 

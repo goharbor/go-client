@@ -59,7 +59,6 @@ func (o *CreateUserReader) ReadResponse(response runtime.ClientResponse, consume
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -70,30 +69,70 @@ func NewCreateUserCreated() *CreateUserCreated {
 	return &CreateUserCreated{}
 }
 
-/*CreateUserCreated handles this case with default header values.
+/*
+CreateUserCreated describes a response with status code 201, with default header values.
 
 Created
 */
 type CreateUserCreated struct {
-	/*The location of the resource
+
+	/* The location of the resource
 	 */
 	Location string
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
+}
+
+// IsSuccess returns true when this create user created response has a 2xx status code
+func (o *CreateUserCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create user created response has a 3xx status code
+func (o *CreateUserCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create user created response has a 4xx status code
+func (o *CreateUserCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create user created response has a 5xx status code
+func (o *CreateUserCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create user created response a status code equal to that given
+func (o *CreateUserCreated) IsCode(code int) bool {
+	return code == 201
 }
 
 func (o *CreateUserCreated) Error() string {
 	return fmt.Sprintf("[POST /users][%d] createUserCreated ", 201)
 }
 
+func (o *CreateUserCreated) String() string {
+	return fmt.Sprintf("[POST /users][%d] createUserCreated ", 201)
+}
+
 func (o *CreateUserCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header Location
-	o.Location = response.GetHeader("Location")
+	// hydrates response header Location
+	hdrLocation := response.GetHeader("Location")
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	if hdrLocation != "" {
+		o.Location = hdrLocation
+	}
+
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	return nil
 }
@@ -103,19 +142,50 @@ func NewCreateUserBadRequest() *CreateUserBadRequest {
 	return &CreateUserBadRequest{}
 }
 
-/*CreateUserBadRequest handles this case with default header values.
+/*
+CreateUserBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
 type CreateUserBadRequest struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create user bad request response has a 2xx status code
+func (o *CreateUserBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create user bad request response has a 3xx status code
+func (o *CreateUserBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create user bad request response has a 4xx status code
+func (o *CreateUserBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create user bad request response has a 5xx status code
+func (o *CreateUserBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create user bad request response a status code equal to that given
+func (o *CreateUserBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *CreateUserBadRequest) Error() string {
+	return fmt.Sprintf("[POST /users][%d] createUserBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *CreateUserBadRequest) String() string {
 	return fmt.Sprintf("[POST /users][%d] createUserBadRequest  %+v", 400, o.Payload)
 }
 
@@ -125,8 +195,12 @@ func (o *CreateUserBadRequest) GetPayload() *models.Errors {
 
 func (o *CreateUserBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -143,19 +217,50 @@ func NewCreateUserUnauthorized() *CreateUserUnauthorized {
 	return &CreateUserUnauthorized{}
 }
 
-/*CreateUserUnauthorized handles this case with default header values.
+/*
+CreateUserUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type CreateUserUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create user unauthorized response has a 2xx status code
+func (o *CreateUserUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create user unauthorized response has a 3xx status code
+func (o *CreateUserUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create user unauthorized response has a 4xx status code
+func (o *CreateUserUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create user unauthorized response has a 5xx status code
+func (o *CreateUserUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create user unauthorized response a status code equal to that given
+func (o *CreateUserUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *CreateUserUnauthorized) Error() string {
+	return fmt.Sprintf("[POST /users][%d] createUserUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *CreateUserUnauthorized) String() string {
 	return fmt.Sprintf("[POST /users][%d] createUserUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -165,8 +270,12 @@ func (o *CreateUserUnauthorized) GetPayload() *models.Errors {
 
 func (o *CreateUserUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -183,14 +292,44 @@ func NewCreateUserForbidden() *CreateUserForbidden {
 	return &CreateUserForbidden{}
 }
 
-/*CreateUserForbidden handles this case with default header values.
+/*
+CreateUserForbidden describes a response with status code 403, with default header values.
 
 When the  self registration is disabled, non-admin does not have permission to create user.  When self registration is enabled, this API can only be called from UI portal, calling it via script will get a 403 error.
 */
 type CreateUserForbidden struct {
 }
 
+// IsSuccess returns true when this create user forbidden response has a 2xx status code
+func (o *CreateUserForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create user forbidden response has a 3xx status code
+func (o *CreateUserForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create user forbidden response has a 4xx status code
+func (o *CreateUserForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create user forbidden response has a 5xx status code
+func (o *CreateUserForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create user forbidden response a status code equal to that given
+func (o *CreateUserForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *CreateUserForbidden) Error() string {
+	return fmt.Sprintf("[POST /users][%d] createUserForbidden ", 403)
+}
+
+func (o *CreateUserForbidden) String() string {
 	return fmt.Sprintf("[POST /users][%d] createUserForbidden ", 403)
 }
 
@@ -204,19 +343,50 @@ func NewCreateUserConflict() *CreateUserConflict {
 	return &CreateUserConflict{}
 }
 
-/*CreateUserConflict handles this case with default header values.
+/*
+CreateUserConflict describes a response with status code 409, with default header values.
 
 Conflict
 */
 type CreateUserConflict struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create user conflict response has a 2xx status code
+func (o *CreateUserConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create user conflict response has a 3xx status code
+func (o *CreateUserConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create user conflict response has a 4xx status code
+func (o *CreateUserConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create user conflict response has a 5xx status code
+func (o *CreateUserConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create user conflict response a status code equal to that given
+func (o *CreateUserConflict) IsCode(code int) bool {
+	return code == 409
+}
+
 func (o *CreateUserConflict) Error() string {
+	return fmt.Sprintf("[POST /users][%d] createUserConflict  %+v", 409, o.Payload)
+}
+
+func (o *CreateUserConflict) String() string {
 	return fmt.Sprintf("[POST /users][%d] createUserConflict  %+v", 409, o.Payload)
 }
 
@@ -226,8 +396,12 @@ func (o *CreateUserConflict) GetPayload() *models.Errors {
 
 func (o *CreateUserConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -244,19 +418,50 @@ func NewCreateUserInternalServerError() *CreateUserInternalServerError {
 	return &CreateUserInternalServerError{}
 }
 
-/*CreateUserInternalServerError handles this case with default header values.
+/*
+CreateUserInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type CreateUserInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create user internal server error response has a 2xx status code
+func (o *CreateUserInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create user internal server error response has a 3xx status code
+func (o *CreateUserInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create user internal server error response has a 4xx status code
+func (o *CreateUserInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create user internal server error response has a 5xx status code
+func (o *CreateUserInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this create user internal server error response a status code equal to that given
+func (o *CreateUserInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *CreateUserInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /users][%d] createUserInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *CreateUserInternalServerError) String() string {
 	return fmt.Sprintf("[POST /users][%d] createUserInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -266,8 +471,12 @@ func (o *CreateUserInternalServerError) GetPayload() *models.Errors {
 
 func (o *CreateUserInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

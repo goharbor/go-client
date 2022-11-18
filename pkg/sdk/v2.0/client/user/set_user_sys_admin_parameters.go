@@ -19,66 +19,86 @@ import (
 	"github.com/goharbor/go-client/pkg/sdk/v2.0/models"
 )
 
-// NewSetUserSysAdminParams creates a new SetUserSysAdminParams object
-// with the default values initialized.
+// NewSetUserSysAdminParams creates a new SetUserSysAdminParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewSetUserSysAdminParams() *SetUserSysAdminParams {
-	var ()
 	return &SetUserSysAdminParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewSetUserSysAdminParamsWithTimeout creates a new SetUserSysAdminParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewSetUserSysAdminParamsWithTimeout(timeout time.Duration) *SetUserSysAdminParams {
-	var ()
 	return &SetUserSysAdminParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewSetUserSysAdminParamsWithContext creates a new SetUserSysAdminParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewSetUserSysAdminParamsWithContext(ctx context.Context) *SetUserSysAdminParams {
-	var ()
 	return &SetUserSysAdminParams{
-
 		Context: ctx,
 	}
 }
 
 // NewSetUserSysAdminParamsWithHTTPClient creates a new SetUserSysAdminParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewSetUserSysAdminParamsWithHTTPClient(client *http.Client) *SetUserSysAdminParams {
-	var ()
 	return &SetUserSysAdminParams{
 		HTTPClient: client,
 	}
 }
 
-/*SetUserSysAdminParams contains all the parameters to send to the API endpoint
-for the set user sys admin operation typically these are written to a http.Request
+/*
+SetUserSysAdminParams contains all the parameters to send to the API endpoint
+
+	for the set user sys admin operation.
+
+	Typically these are written to a http.Request.
 */
 type SetUserSysAdminParams struct {
 
-	/*XRequestID
-	  An unique ID for the request
+	/* XRequestID.
 
+	   An unique ID for the request
 	*/
 	XRequestID *string
-	/*SysadminFlag
-	  Toggle a user to admin or not.
 
+	/* SysadminFlag.
+
+	   Toggle a user to admin or not.
 	*/
 	SysadminFlag *models.UserSysAdminFlag
-	/*UserID*/
+
+	// UserID.
+	//
+	// Format: int
 	UserID int64
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the set user sys admin params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *SetUserSysAdminParams) WithDefaults() *SetUserSysAdminParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the set user sys admin params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *SetUserSysAdminParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the set user sys admin params
@@ -161,9 +181,7 @@ func (o *SetUserSysAdminParams) WriteToRequest(r runtime.ClientRequest, reg strf
 		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
 			return err
 		}
-
 	}
-
 	if o.SysadminFlag != nil {
 		if err := r.SetBodyParam(o.SysadminFlag); err != nil {
 			return err

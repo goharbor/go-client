@@ -59,7 +59,6 @@ type Client struct {
 GetConfigurations gets system configurations
 
 This endpoint is for retrieving system configurations that only provides for admin user.
-
 */
 func (a *Client) GetConfigurations(ctx context.Context, params *GetConfigurationsParams) (*GetConfigurationsOK, error) {
 
@@ -87,7 +86,6 @@ func (a *Client) GetConfigurations(ctx context.Context, params *GetConfiguration
 GetInternalconfig gets internal configurations
 
 This endpoint is for retrieving system configurations that only provides for internal api call.
-
 */
 func (a *Client) GetInternalconfig(ctx context.Context, params *GetInternalconfigParams) (*GetInternalconfigOK, error) {
 
@@ -115,7 +113,6 @@ func (a *Client) GetInternalconfig(ctx context.Context, params *GetInternalconfi
 UpdateConfigurations modifies system configurations
 
 This endpoint is for modifying system configurations that only provides for admin user.
-
 */
 func (a *Client) UpdateConfigurations(ctx context.Context, params *UpdateConfigurationsParams) (*UpdateConfigurationsOK, error) {
 

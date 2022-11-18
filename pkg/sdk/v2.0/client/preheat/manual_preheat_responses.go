@@ -59,7 +59,6 @@ func (o *ManualPreheatReader) ReadResponse(response runtime.ClientResponse, cons
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -70,30 +69,70 @@ func NewManualPreheatCreated() *ManualPreheatCreated {
 	return &ManualPreheatCreated{}
 }
 
-/*ManualPreheatCreated handles this case with default header values.
+/*
+ManualPreheatCreated describes a response with status code 201, with default header values.
 
 Created
 */
 type ManualPreheatCreated struct {
-	/*The location of the resource
+
+	/* The location of the resource
 	 */
 	Location string
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
+}
+
+// IsSuccess returns true when this manual preheat created response has a 2xx status code
+func (o *ManualPreheatCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this manual preheat created response has a 3xx status code
+func (o *ManualPreheatCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this manual preheat created response has a 4xx status code
+func (o *ManualPreheatCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this manual preheat created response has a 5xx status code
+func (o *ManualPreheatCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this manual preheat created response a status code equal to that given
+func (o *ManualPreheatCreated) IsCode(code int) bool {
+	return code == 201
 }
 
 func (o *ManualPreheatCreated) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name}/preheat/policies/{preheat_policy_name}][%d] manualPreheatCreated ", 201)
 }
 
+func (o *ManualPreheatCreated) String() string {
+	return fmt.Sprintf("[POST /projects/{project_name}/preheat/policies/{preheat_policy_name}][%d] manualPreheatCreated ", 201)
+}
+
 func (o *ManualPreheatCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header Location
-	o.Location = response.GetHeader("Location")
+	// hydrates response header Location
+	hdrLocation := response.GetHeader("Location")
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	if hdrLocation != "" {
+		o.Location = hdrLocation
+	}
+
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	return nil
 }
@@ -103,19 +142,50 @@ func NewManualPreheatBadRequest() *ManualPreheatBadRequest {
 	return &ManualPreheatBadRequest{}
 }
 
-/*ManualPreheatBadRequest handles this case with default header values.
+/*
+ManualPreheatBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
 type ManualPreheatBadRequest struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this manual preheat bad request response has a 2xx status code
+func (o *ManualPreheatBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this manual preheat bad request response has a 3xx status code
+func (o *ManualPreheatBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this manual preheat bad request response has a 4xx status code
+func (o *ManualPreheatBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this manual preheat bad request response has a 5xx status code
+func (o *ManualPreheatBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this manual preheat bad request response a status code equal to that given
+func (o *ManualPreheatBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *ManualPreheatBadRequest) Error() string {
+	return fmt.Sprintf("[POST /projects/{project_name}/preheat/policies/{preheat_policy_name}][%d] manualPreheatBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *ManualPreheatBadRequest) String() string {
 	return fmt.Sprintf("[POST /projects/{project_name}/preheat/policies/{preheat_policy_name}][%d] manualPreheatBadRequest  %+v", 400, o.Payload)
 }
 
@@ -125,8 +195,12 @@ func (o *ManualPreheatBadRequest) GetPayload() *models.Errors {
 
 func (o *ManualPreheatBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -143,19 +217,50 @@ func NewManualPreheatUnauthorized() *ManualPreheatUnauthorized {
 	return &ManualPreheatUnauthorized{}
 }
 
-/*ManualPreheatUnauthorized handles this case with default header values.
+/*
+ManualPreheatUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type ManualPreheatUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this manual preheat unauthorized response has a 2xx status code
+func (o *ManualPreheatUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this manual preheat unauthorized response has a 3xx status code
+func (o *ManualPreheatUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this manual preheat unauthorized response has a 4xx status code
+func (o *ManualPreheatUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this manual preheat unauthorized response has a 5xx status code
+func (o *ManualPreheatUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this manual preheat unauthorized response a status code equal to that given
+func (o *ManualPreheatUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *ManualPreheatUnauthorized) Error() string {
+	return fmt.Sprintf("[POST /projects/{project_name}/preheat/policies/{preheat_policy_name}][%d] manualPreheatUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *ManualPreheatUnauthorized) String() string {
 	return fmt.Sprintf("[POST /projects/{project_name}/preheat/policies/{preheat_policy_name}][%d] manualPreheatUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -165,8 +270,12 @@ func (o *ManualPreheatUnauthorized) GetPayload() *models.Errors {
 
 func (o *ManualPreheatUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -183,19 +292,50 @@ func NewManualPreheatForbidden() *ManualPreheatForbidden {
 	return &ManualPreheatForbidden{}
 }
 
-/*ManualPreheatForbidden handles this case with default header values.
+/*
+ManualPreheatForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type ManualPreheatForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this manual preheat forbidden response has a 2xx status code
+func (o *ManualPreheatForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this manual preheat forbidden response has a 3xx status code
+func (o *ManualPreheatForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this manual preheat forbidden response has a 4xx status code
+func (o *ManualPreheatForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this manual preheat forbidden response has a 5xx status code
+func (o *ManualPreheatForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this manual preheat forbidden response a status code equal to that given
+func (o *ManualPreheatForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *ManualPreheatForbidden) Error() string {
+	return fmt.Sprintf("[POST /projects/{project_name}/preheat/policies/{preheat_policy_name}][%d] manualPreheatForbidden  %+v", 403, o.Payload)
+}
+
+func (o *ManualPreheatForbidden) String() string {
 	return fmt.Sprintf("[POST /projects/{project_name}/preheat/policies/{preheat_policy_name}][%d] manualPreheatForbidden  %+v", 403, o.Payload)
 }
 
@@ -205,8 +345,12 @@ func (o *ManualPreheatForbidden) GetPayload() *models.Errors {
 
 func (o *ManualPreheatForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -223,19 +367,50 @@ func NewManualPreheatNotFound() *ManualPreheatNotFound {
 	return &ManualPreheatNotFound{}
 }
 
-/*ManualPreheatNotFound handles this case with default header values.
+/*
+ManualPreheatNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
 type ManualPreheatNotFound struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this manual preheat not found response has a 2xx status code
+func (o *ManualPreheatNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this manual preheat not found response has a 3xx status code
+func (o *ManualPreheatNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this manual preheat not found response has a 4xx status code
+func (o *ManualPreheatNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this manual preheat not found response has a 5xx status code
+func (o *ManualPreheatNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this manual preheat not found response a status code equal to that given
+func (o *ManualPreheatNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *ManualPreheatNotFound) Error() string {
+	return fmt.Sprintf("[POST /projects/{project_name}/preheat/policies/{preheat_policy_name}][%d] manualPreheatNotFound  %+v", 404, o.Payload)
+}
+
+func (o *ManualPreheatNotFound) String() string {
 	return fmt.Sprintf("[POST /projects/{project_name}/preheat/policies/{preheat_policy_name}][%d] manualPreheatNotFound  %+v", 404, o.Payload)
 }
 
@@ -245,8 +420,12 @@ func (o *ManualPreheatNotFound) GetPayload() *models.Errors {
 
 func (o *ManualPreheatNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -263,19 +442,50 @@ func NewManualPreheatInternalServerError() *ManualPreheatInternalServerError {
 	return &ManualPreheatInternalServerError{}
 }
 
-/*ManualPreheatInternalServerError handles this case with default header values.
+/*
+ManualPreheatInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type ManualPreheatInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this manual preheat internal server error response has a 2xx status code
+func (o *ManualPreheatInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this manual preheat internal server error response has a 3xx status code
+func (o *ManualPreheatInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this manual preheat internal server error response has a 4xx status code
+func (o *ManualPreheatInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this manual preheat internal server error response has a 5xx status code
+func (o *ManualPreheatInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this manual preheat internal server error response a status code equal to that given
+func (o *ManualPreheatInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *ManualPreheatInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /projects/{project_name}/preheat/policies/{preheat_policy_name}][%d] manualPreheatInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *ManualPreheatInternalServerError) String() string {
 	return fmt.Sprintf("[POST /projects/{project_name}/preheat/policies/{preheat_policy_name}][%d] manualPreheatInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -285,8 +495,12 @@ func (o *ManualPreheatInternalServerError) GetPayload() *models.Errors {
 
 func (o *ManualPreheatInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

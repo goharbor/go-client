@@ -6,6 +6,7 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -81,7 +82,6 @@ func (m *Robot) Validate(formats strfmt.Registry) error {
 }
 
 func (m *Robot) validateCreationTime(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.CreationTime) { // not required
 		return nil
 	}
@@ -94,7 +94,6 @@ func (m *Robot) validateCreationTime(formats strfmt.Registry) error {
 }
 
 func (m *Robot) validatePermissions(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Permissions) { // not required
 		return nil
 	}
@@ -108,6 +107,8 @@ func (m *Robot) validatePermissions(formats strfmt.Registry) error {
 			if err := m.Permissions[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("permissions" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("permissions" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -119,13 +120,46 @@ func (m *Robot) validatePermissions(formats strfmt.Registry) error {
 }
 
 func (m *Robot) validateUpdateTime(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.UpdateTime) { // not required
 		return nil
 	}
 
 	if err := validate.FormatOf("update_time", "body", "date-time", m.UpdateTime.String(), formats); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this robot based on the context it is used
+func (m *Robot) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidatePermissions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *Robot) contextValidatePermissions(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Permissions); i++ {
+
+		if m.Permissions[i] != nil {
+			if err := m.Permissions[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("permissions" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("permissions" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil

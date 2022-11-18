@@ -6,6 +6,7 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -18,6 +19,9 @@ import (
 //
 // swagger:model ReplicationPolicy
 type ReplicationPolicy struct {
+
+	// Whether to enable copy by chunk.
+	CopyByChunk *bool `json:"copy_by_chunk,omitempty"`
 
 	// The create time of the policy.
 	// Format: date-time
@@ -106,7 +110,6 @@ func (m *ReplicationPolicy) Validate(formats strfmt.Registry) error {
 }
 
 func (m *ReplicationPolicy) validateCreationTime(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.CreationTime) { // not required
 		return nil
 	}
@@ -119,7 +122,6 @@ func (m *ReplicationPolicy) validateCreationTime(formats strfmt.Registry) error 
 }
 
 func (m *ReplicationPolicy) validateDestRegistry(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.DestRegistry) { // not required
 		return nil
 	}
@@ -128,6 +130,8 @@ func (m *ReplicationPolicy) validateDestRegistry(formats strfmt.Registry) error 
 		if err := m.DestRegistry.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("dest_registry")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("dest_registry")
 			}
 			return err
 		}
@@ -137,7 +141,6 @@ func (m *ReplicationPolicy) validateDestRegistry(formats strfmt.Registry) error 
 }
 
 func (m *ReplicationPolicy) validateFilters(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Filters) { // not required
 		return nil
 	}
@@ -151,6 +154,8 @@ func (m *ReplicationPolicy) validateFilters(formats strfmt.Registry) error {
 			if err := m.Filters[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("filters" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("filters" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -162,7 +167,6 @@ func (m *ReplicationPolicy) validateFilters(formats strfmt.Registry) error {
 }
 
 func (m *ReplicationPolicy) validateSrcRegistry(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.SrcRegistry) { // not required
 		return nil
 	}
@@ -171,6 +175,8 @@ func (m *ReplicationPolicy) validateSrcRegistry(formats strfmt.Registry) error {
 		if err := m.SrcRegistry.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("src_registry")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("src_registry")
 			}
 			return err
 		}
@@ -180,7 +186,6 @@ func (m *ReplicationPolicy) validateSrcRegistry(formats strfmt.Registry) error {
 }
 
 func (m *ReplicationPolicy) validateTrigger(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Trigger) { // not required
 		return nil
 	}
@@ -189,6 +194,8 @@ func (m *ReplicationPolicy) validateTrigger(formats strfmt.Registry) error {
 		if err := m.Trigger.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("trigger")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("trigger")
 			}
 			return err
 		}
@@ -198,13 +205,106 @@ func (m *ReplicationPolicy) validateTrigger(formats strfmt.Registry) error {
 }
 
 func (m *ReplicationPolicy) validateUpdateTime(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.UpdateTime) { // not required
 		return nil
 	}
 
 	if err := validate.FormatOf("update_time", "body", "date-time", m.UpdateTime.String(), formats); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this replication policy based on the context it is used
+func (m *ReplicationPolicy) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateDestRegistry(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateFilters(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSrcRegistry(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateTrigger(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ReplicationPolicy) contextValidateDestRegistry(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.DestRegistry != nil {
+		if err := m.DestRegistry.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("dest_registry")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("dest_registry")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ReplicationPolicy) contextValidateFilters(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Filters); i++ {
+
+		if m.Filters[i] != nil {
+			if err := m.Filters[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("filters" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("filters" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *ReplicationPolicy) contextValidateSrcRegistry(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.SrcRegistry != nil {
+		if err := m.SrcRegistry.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("src_registry")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("src_registry")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ReplicationPolicy) contextValidateTrigger(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Trigger != nil {
+		if err := m.Trigger.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("trigger")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("trigger")
+			}
+			return err
+		}
 	}
 
 	return nil

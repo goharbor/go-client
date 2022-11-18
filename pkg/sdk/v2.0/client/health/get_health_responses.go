@@ -35,7 +35,6 @@ func (o *GetHealthReader) ReadResponse(response runtime.ClientResponse, consumer
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -46,7 +45,8 @@ func NewGetHealthOK() *GetHealthOK {
 	return &GetHealthOK{}
 }
 
-/*GetHealthOK handles this case with default header values.
+/*
+GetHealthOK describes a response with status code 200, with default header values.
 
 The health status of Harbor components
 */
@@ -54,7 +54,36 @@ type GetHealthOK struct {
 	Payload *models.OverallHealthStatus
 }
 
+// IsSuccess returns true when this get health o k response has a 2xx status code
+func (o *GetHealthOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get health o k response has a 3xx status code
+func (o *GetHealthOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get health o k response has a 4xx status code
+func (o *GetHealthOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get health o k response has a 5xx status code
+func (o *GetHealthOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get health o k response a status code equal to that given
+func (o *GetHealthOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetHealthOK) Error() string {
+	return fmt.Sprintf("[GET /health][%d] getHealthOK  %+v", 200, o.Payload)
+}
+
+func (o *GetHealthOK) String() string {
 	return fmt.Sprintf("[GET /health][%d] getHealthOK  %+v", 200, o.Payload)
 }
 
@@ -79,19 +108,50 @@ func NewGetHealthInternalServerError() *GetHealthInternalServerError {
 	return &GetHealthInternalServerError{}
 }
 
-/*GetHealthInternalServerError handles this case with default header values.
+/*
+GetHealthInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type GetHealthInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get health internal server error response has a 2xx status code
+func (o *GetHealthInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get health internal server error response has a 3xx status code
+func (o *GetHealthInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get health internal server error response has a 4xx status code
+func (o *GetHealthInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get health internal server error response has a 5xx status code
+func (o *GetHealthInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get health internal server error response a status code equal to that given
+func (o *GetHealthInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *GetHealthInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /health][%d] getHealthInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *GetHealthInternalServerError) String() string {
 	return fmt.Sprintf("[GET /health][%d] getHealthInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -101,8 +161,12 @@ func (o *GetHealthInternalServerError) GetPayload() *models.Errors {
 
 func (o *GetHealthInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

@@ -49,7 +49,6 @@ func (o *ListReplicationExecutionsReader) ReadResponse(response runtime.ClientRe
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -60,22 +59,54 @@ func NewListReplicationExecutionsOK() *ListReplicationExecutionsOK {
 	return &ListReplicationExecutionsOK{}
 }
 
-/*ListReplicationExecutionsOK handles this case with default header values.
+/*
+ListReplicationExecutionsOK describes a response with status code 200, with default header values.
 
 Success
 */
 type ListReplicationExecutionsOK struct {
-	/*Link refers to the previous page and next page
+
+	/* Link refers to the previous page and next page
 	 */
 	Link string
-	/*The total count of the resources
+
+	/* The total count of the resources
 	 */
 	XTotalCount int64
 
 	Payload []*models.ReplicationExecution
 }
 
+// IsSuccess returns true when this list replication executions o k response has a 2xx status code
+func (o *ListReplicationExecutionsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list replication executions o k response has a 3xx status code
+func (o *ListReplicationExecutionsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list replication executions o k response has a 4xx status code
+func (o *ListReplicationExecutionsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list replication executions o k response has a 5xx status code
+func (o *ListReplicationExecutionsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list replication executions o k response a status code equal to that given
+func (o *ListReplicationExecutionsOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ListReplicationExecutionsOK) Error() string {
+	return fmt.Sprintf("[GET /replication/executions][%d] listReplicationExecutionsOK  %+v", 200, o.Payload)
+}
+
+func (o *ListReplicationExecutionsOK) String() string {
 	return fmt.Sprintf("[GET /replication/executions][%d] listReplicationExecutionsOK  %+v", 200, o.Payload)
 }
 
@@ -85,15 +116,23 @@ func (o *ListReplicationExecutionsOK) GetPayload() []*models.ReplicationExecutio
 
 func (o *ListReplicationExecutionsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header Link
-	o.Link = response.GetHeader("Link")
+	// hydrates response header Link
+	hdrLink := response.GetHeader("Link")
 
-	// response header X-Total-Count
-	xTotalCount, err := swag.ConvertInt64(response.GetHeader("X-Total-Count"))
-	if err != nil {
-		return errors.InvalidType("X-Total-Count", "header", "int64", response.GetHeader("X-Total-Count"))
+	if hdrLink != "" {
+		o.Link = hdrLink
 	}
-	o.XTotalCount = xTotalCount
+
+	// hydrates response header X-Total-Count
+	hdrXTotalCount := response.GetHeader("X-Total-Count")
+
+	if hdrXTotalCount != "" {
+		valxTotalCount, err := swag.ConvertInt64(hdrXTotalCount)
+		if err != nil {
+			return errors.InvalidType("X-Total-Count", "header", "int64", hdrXTotalCount)
+		}
+		o.XTotalCount = valxTotalCount
+	}
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
@@ -108,19 +147,50 @@ func NewListReplicationExecutionsUnauthorized() *ListReplicationExecutionsUnauth
 	return &ListReplicationExecutionsUnauthorized{}
 }
 
-/*ListReplicationExecutionsUnauthorized handles this case with default header values.
+/*
+ListReplicationExecutionsUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type ListReplicationExecutionsUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list replication executions unauthorized response has a 2xx status code
+func (o *ListReplicationExecutionsUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list replication executions unauthorized response has a 3xx status code
+func (o *ListReplicationExecutionsUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list replication executions unauthorized response has a 4xx status code
+func (o *ListReplicationExecutionsUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list replication executions unauthorized response has a 5xx status code
+func (o *ListReplicationExecutionsUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list replication executions unauthorized response a status code equal to that given
+func (o *ListReplicationExecutionsUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *ListReplicationExecutionsUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /replication/executions][%d] listReplicationExecutionsUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *ListReplicationExecutionsUnauthorized) String() string {
 	return fmt.Sprintf("[GET /replication/executions][%d] listReplicationExecutionsUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -130,8 +200,12 @@ func (o *ListReplicationExecutionsUnauthorized) GetPayload() *models.Errors {
 
 func (o *ListReplicationExecutionsUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -148,19 +222,50 @@ func NewListReplicationExecutionsForbidden() *ListReplicationExecutionsForbidden
 	return &ListReplicationExecutionsForbidden{}
 }
 
-/*ListReplicationExecutionsForbidden handles this case with default header values.
+/*
+ListReplicationExecutionsForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type ListReplicationExecutionsForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list replication executions forbidden response has a 2xx status code
+func (o *ListReplicationExecutionsForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list replication executions forbidden response has a 3xx status code
+func (o *ListReplicationExecutionsForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list replication executions forbidden response has a 4xx status code
+func (o *ListReplicationExecutionsForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list replication executions forbidden response has a 5xx status code
+func (o *ListReplicationExecutionsForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list replication executions forbidden response a status code equal to that given
+func (o *ListReplicationExecutionsForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *ListReplicationExecutionsForbidden) Error() string {
+	return fmt.Sprintf("[GET /replication/executions][%d] listReplicationExecutionsForbidden  %+v", 403, o.Payload)
+}
+
+func (o *ListReplicationExecutionsForbidden) String() string {
 	return fmt.Sprintf("[GET /replication/executions][%d] listReplicationExecutionsForbidden  %+v", 403, o.Payload)
 }
 
@@ -170,8 +275,12 @@ func (o *ListReplicationExecutionsForbidden) GetPayload() *models.Errors {
 
 func (o *ListReplicationExecutionsForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -188,19 +297,50 @@ func NewListReplicationExecutionsInternalServerError() *ListReplicationExecution
 	return &ListReplicationExecutionsInternalServerError{}
 }
 
-/*ListReplicationExecutionsInternalServerError handles this case with default header values.
+/*
+ListReplicationExecutionsInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type ListReplicationExecutionsInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list replication executions internal server error response has a 2xx status code
+func (o *ListReplicationExecutionsInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list replication executions internal server error response has a 3xx status code
+func (o *ListReplicationExecutionsInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list replication executions internal server error response has a 4xx status code
+func (o *ListReplicationExecutionsInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list replication executions internal server error response has a 5xx status code
+func (o *ListReplicationExecutionsInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list replication executions internal server error response a status code equal to that given
+func (o *ListReplicationExecutionsInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *ListReplicationExecutionsInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /replication/executions][%d] listReplicationExecutionsInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *ListReplicationExecutionsInternalServerError) String() string {
 	return fmt.Sprintf("[GET /replication/executions][%d] listReplicationExecutionsInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -210,8 +350,12 @@ func (o *ListReplicationExecutionsInternalServerError) GetPayload() *models.Erro
 
 func (o *ListReplicationExecutionsInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

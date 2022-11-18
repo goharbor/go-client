@@ -114,7 +114,6 @@ func (a *Client) CreateUser(ctx context.Context, params *CreateUserParams) (*Cre
 DeleteUser marks a registered user as be removed
 
 This endpoint let administrator of Harbor mark a registered user as removed.It actually won't be deleted from DB.
-
 */
 func (a *Client) DeleteUser(ctx context.Context, params *DeleteUserParams) (*DeleteUserOK, error) {
 
@@ -242,7 +241,6 @@ func (a *Client) ListUsers(ctx context.Context, params *ListUsersParams) (*ListU
 SearchUsers searches users by username
 
 This endpoint is to search the users by username.  It's open for all authenticated requests.
-
 */
 func (a *Client) SearchUsers(ctx context.Context, params *SearchUsersParams) (*SearchUsersOK, error) {
 
@@ -322,7 +320,6 @@ func (a *Client) SetUserSysAdmin(ctx context.Context, params *SetUserSysAdminPar
 UpdateUserPassword changes the password on a user that already exists
 
 This endpoint is for user to update password. Users with the admin role can change any user's password. Regular users can change only their own password.
-
 */
 func (a *Client) UpdateUserPassword(ctx context.Context, params *UpdateUserPasswordParams) (*UpdateUserPasswordOK, error) {
 

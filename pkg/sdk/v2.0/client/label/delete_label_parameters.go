@@ -17,64 +17,83 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// NewDeleteLabelParams creates a new DeleteLabelParams object
-// with the default values initialized.
+// NewDeleteLabelParams creates a new DeleteLabelParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewDeleteLabelParams() *DeleteLabelParams {
-	var ()
 	return &DeleteLabelParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewDeleteLabelParamsWithTimeout creates a new DeleteLabelParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewDeleteLabelParamsWithTimeout(timeout time.Duration) *DeleteLabelParams {
-	var ()
 	return &DeleteLabelParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewDeleteLabelParamsWithContext creates a new DeleteLabelParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewDeleteLabelParamsWithContext(ctx context.Context) *DeleteLabelParams {
-	var ()
 	return &DeleteLabelParams{
-
 		Context: ctx,
 	}
 }
 
 // NewDeleteLabelParamsWithHTTPClient creates a new DeleteLabelParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewDeleteLabelParamsWithHTTPClient(client *http.Client) *DeleteLabelParams {
-	var ()
 	return &DeleteLabelParams{
 		HTTPClient: client,
 	}
 }
 
-/*DeleteLabelParams contains all the parameters to send to the API endpoint
-for the delete label operation typically these are written to a http.Request
+/*
+DeleteLabelParams contains all the parameters to send to the API endpoint
+
+	for the delete label operation.
+
+	Typically these are written to a http.Request.
 */
 type DeleteLabelParams struct {
 
-	/*XRequestID
-	  An unique ID for the request
+	/* XRequestID.
 
+	   An unique ID for the request
 	*/
 	XRequestID *string
-	/*LabelID
-	  Label ID
 
+	/* LabelID.
+
+	   Label ID
+
+	   Format: int64
 	*/
 	LabelID int64
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the delete label params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *DeleteLabelParams) WithDefaults() *DeleteLabelParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the delete label params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *DeleteLabelParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the delete label params
@@ -146,7 +165,6 @@ func (o *DeleteLabelParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
 			return err
 		}
-
 	}
 
 	// path param label_id

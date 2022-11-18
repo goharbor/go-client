@@ -17,64 +17,83 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// NewGetLabelByIDParams creates a new GetLabelByIDParams object
-// with the default values initialized.
+// NewGetLabelByIDParams creates a new GetLabelByIDParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewGetLabelByIDParams() *GetLabelByIDParams {
-	var ()
 	return &GetLabelByIDParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewGetLabelByIDParamsWithTimeout creates a new GetLabelByIDParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewGetLabelByIDParamsWithTimeout(timeout time.Duration) *GetLabelByIDParams {
-	var ()
 	return &GetLabelByIDParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewGetLabelByIDParamsWithContext creates a new GetLabelByIDParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewGetLabelByIDParamsWithContext(ctx context.Context) *GetLabelByIDParams {
-	var ()
 	return &GetLabelByIDParams{
-
 		Context: ctx,
 	}
 }
 
 // NewGetLabelByIDParamsWithHTTPClient creates a new GetLabelByIDParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewGetLabelByIDParamsWithHTTPClient(client *http.Client) *GetLabelByIDParams {
-	var ()
 	return &GetLabelByIDParams{
 		HTTPClient: client,
 	}
 }
 
-/*GetLabelByIDParams contains all the parameters to send to the API endpoint
-for the get label by ID operation typically these are written to a http.Request
+/*
+GetLabelByIDParams contains all the parameters to send to the API endpoint
+
+	for the get label by ID operation.
+
+	Typically these are written to a http.Request.
 */
 type GetLabelByIDParams struct {
 
-	/*XRequestID
-	  An unique ID for the request
+	/* XRequestID.
 
+	   An unique ID for the request
 	*/
 	XRequestID *string
-	/*LabelID
-	  Label ID
 
+	/* LabelID.
+
+	   Label ID
+
+	   Format: int64
 	*/
 	LabelID int64
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the get label by ID params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *GetLabelByIDParams) WithDefaults() *GetLabelByIDParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the get label by ID params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *GetLabelByIDParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the get label by ID params
@@ -146,7 +165,6 @@ func (o *GetLabelByIDParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
 			return err
 		}
-
 	}
 
 	// path param label_id

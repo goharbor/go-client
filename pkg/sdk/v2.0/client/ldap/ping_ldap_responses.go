@@ -53,7 +53,6 @@ func (o *PingLdapReader) ReadResponse(response runtime.ClientResponse, consumer 
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -64,7 +63,8 @@ func NewPingLdapOK() *PingLdapOK {
 	return &PingLdapOK{}
 }
 
-/*PingLdapOK handles this case with default header values.
+/*
+PingLdapOK describes a response with status code 200, with default header values.
 
 Ping ldap service successfully.
 */
@@ -72,7 +72,36 @@ type PingLdapOK struct {
 	Payload *models.LdapPingResult
 }
 
+// IsSuccess returns true when this ping ldap o k response has a 2xx status code
+func (o *PingLdapOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this ping ldap o k response has a 3xx status code
+func (o *PingLdapOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ping ldap o k response has a 4xx status code
+func (o *PingLdapOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this ping ldap o k response has a 5xx status code
+func (o *PingLdapOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ping ldap o k response a status code equal to that given
+func (o *PingLdapOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *PingLdapOK) Error() string {
+	return fmt.Sprintf("[POST /ldap/ping][%d] pingLdapOK  %+v", 200, o.Payload)
+}
+
+func (o *PingLdapOK) String() string {
 	return fmt.Sprintf("[POST /ldap/ping][%d] pingLdapOK  %+v", 200, o.Payload)
 }
 
@@ -97,19 +126,50 @@ func NewPingLdapBadRequest() *PingLdapBadRequest {
 	return &PingLdapBadRequest{}
 }
 
-/*PingLdapBadRequest handles this case with default header values.
+/*
+PingLdapBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
 type PingLdapBadRequest struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this ping ldap bad request response has a 2xx status code
+func (o *PingLdapBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this ping ldap bad request response has a 3xx status code
+func (o *PingLdapBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ping ldap bad request response has a 4xx status code
+func (o *PingLdapBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this ping ldap bad request response has a 5xx status code
+func (o *PingLdapBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ping ldap bad request response a status code equal to that given
+func (o *PingLdapBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *PingLdapBadRequest) Error() string {
+	return fmt.Sprintf("[POST /ldap/ping][%d] pingLdapBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *PingLdapBadRequest) String() string {
 	return fmt.Sprintf("[POST /ldap/ping][%d] pingLdapBadRequest  %+v", 400, o.Payload)
 }
 
@@ -119,8 +179,12 @@ func (o *PingLdapBadRequest) GetPayload() *models.Errors {
 
 func (o *PingLdapBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -137,19 +201,50 @@ func NewPingLdapUnauthorized() *PingLdapUnauthorized {
 	return &PingLdapUnauthorized{}
 }
 
-/*PingLdapUnauthorized handles this case with default header values.
+/*
+PingLdapUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type PingLdapUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this ping ldap unauthorized response has a 2xx status code
+func (o *PingLdapUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this ping ldap unauthorized response has a 3xx status code
+func (o *PingLdapUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ping ldap unauthorized response has a 4xx status code
+func (o *PingLdapUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this ping ldap unauthorized response has a 5xx status code
+func (o *PingLdapUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ping ldap unauthorized response a status code equal to that given
+func (o *PingLdapUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *PingLdapUnauthorized) Error() string {
+	return fmt.Sprintf("[POST /ldap/ping][%d] pingLdapUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *PingLdapUnauthorized) String() string {
 	return fmt.Sprintf("[POST /ldap/ping][%d] pingLdapUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -159,8 +254,12 @@ func (o *PingLdapUnauthorized) GetPayload() *models.Errors {
 
 func (o *PingLdapUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -177,19 +276,50 @@ func NewPingLdapForbidden() *PingLdapForbidden {
 	return &PingLdapForbidden{}
 }
 
-/*PingLdapForbidden handles this case with default header values.
+/*
+PingLdapForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type PingLdapForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this ping ldap forbidden response has a 2xx status code
+func (o *PingLdapForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this ping ldap forbidden response has a 3xx status code
+func (o *PingLdapForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ping ldap forbidden response has a 4xx status code
+func (o *PingLdapForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this ping ldap forbidden response has a 5xx status code
+func (o *PingLdapForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ping ldap forbidden response a status code equal to that given
+func (o *PingLdapForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *PingLdapForbidden) Error() string {
+	return fmt.Sprintf("[POST /ldap/ping][%d] pingLdapForbidden  %+v", 403, o.Payload)
+}
+
+func (o *PingLdapForbidden) String() string {
 	return fmt.Sprintf("[POST /ldap/ping][%d] pingLdapForbidden  %+v", 403, o.Payload)
 }
 
@@ -199,8 +329,12 @@ func (o *PingLdapForbidden) GetPayload() *models.Errors {
 
 func (o *PingLdapForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -217,19 +351,50 @@ func NewPingLdapInternalServerError() *PingLdapInternalServerError {
 	return &PingLdapInternalServerError{}
 }
 
-/*PingLdapInternalServerError handles this case with default header values.
+/*
+PingLdapInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type PingLdapInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this ping ldap internal server error response has a 2xx status code
+func (o *PingLdapInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this ping ldap internal server error response has a 3xx status code
+func (o *PingLdapInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ping ldap internal server error response has a 4xx status code
+func (o *PingLdapInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this ping ldap internal server error response has a 5xx status code
+func (o *PingLdapInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this ping ldap internal server error response a status code equal to that given
+func (o *PingLdapInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *PingLdapInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /ldap/ping][%d] pingLdapInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *PingLdapInternalServerError) String() string {
 	return fmt.Sprintf("[POST /ldap/ping][%d] pingLdapInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -239,8 +404,12 @@ func (o *PingLdapInternalServerError) GetPayload() *models.Errors {
 
 func (o *PingLdapInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

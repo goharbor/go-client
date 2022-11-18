@@ -59,7 +59,6 @@ func (o *UpdateWebhookPolicyOfProjectReader) ReadResponse(response runtime.Clien
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -70,24 +69,59 @@ func NewUpdateWebhookPolicyOfProjectOK() *UpdateWebhookPolicyOfProjectOK {
 	return &UpdateWebhookPolicyOfProjectOK{}
 }
 
-/*UpdateWebhookPolicyOfProjectOK handles this case with default header values.
+/*
+UpdateWebhookPolicyOfProjectOK describes a response with status code 200, with default header values.
 
 Success
 */
 type UpdateWebhookPolicyOfProjectOK struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
+}
+
+// IsSuccess returns true when this update webhook policy of project o k response has a 2xx status code
+func (o *UpdateWebhookPolicyOfProjectOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this update webhook policy of project o k response has a 3xx status code
+func (o *UpdateWebhookPolicyOfProjectOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update webhook policy of project o k response has a 4xx status code
+func (o *UpdateWebhookPolicyOfProjectOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update webhook policy of project o k response has a 5xx status code
+func (o *UpdateWebhookPolicyOfProjectOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update webhook policy of project o k response a status code equal to that given
+func (o *UpdateWebhookPolicyOfProjectOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *UpdateWebhookPolicyOfProjectOK) Error() string {
 	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/webhook/policies/{webhook_policy_id}][%d] updateWebhookPolicyOfProjectOK ", 200)
 }
 
+func (o *UpdateWebhookPolicyOfProjectOK) String() string {
+	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/webhook/policies/{webhook_policy_id}][%d] updateWebhookPolicyOfProjectOK ", 200)
+}
+
 func (o *UpdateWebhookPolicyOfProjectOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	return nil
 }
@@ -97,19 +131,50 @@ func NewUpdateWebhookPolicyOfProjectBadRequest() *UpdateWebhookPolicyOfProjectBa
 	return &UpdateWebhookPolicyOfProjectBadRequest{}
 }
 
-/*UpdateWebhookPolicyOfProjectBadRequest handles this case with default header values.
+/*
+UpdateWebhookPolicyOfProjectBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
 type UpdateWebhookPolicyOfProjectBadRequest struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update webhook policy of project bad request response has a 2xx status code
+func (o *UpdateWebhookPolicyOfProjectBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update webhook policy of project bad request response has a 3xx status code
+func (o *UpdateWebhookPolicyOfProjectBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update webhook policy of project bad request response has a 4xx status code
+func (o *UpdateWebhookPolicyOfProjectBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update webhook policy of project bad request response has a 5xx status code
+func (o *UpdateWebhookPolicyOfProjectBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update webhook policy of project bad request response a status code equal to that given
+func (o *UpdateWebhookPolicyOfProjectBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *UpdateWebhookPolicyOfProjectBadRequest) Error() string {
+	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/webhook/policies/{webhook_policy_id}][%d] updateWebhookPolicyOfProjectBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *UpdateWebhookPolicyOfProjectBadRequest) String() string {
 	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/webhook/policies/{webhook_policy_id}][%d] updateWebhookPolicyOfProjectBadRequest  %+v", 400, o.Payload)
 }
 
@@ -119,8 +184,12 @@ func (o *UpdateWebhookPolicyOfProjectBadRequest) GetPayload() *models.Errors {
 
 func (o *UpdateWebhookPolicyOfProjectBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -137,19 +206,50 @@ func NewUpdateWebhookPolicyOfProjectUnauthorized() *UpdateWebhookPolicyOfProject
 	return &UpdateWebhookPolicyOfProjectUnauthorized{}
 }
 
-/*UpdateWebhookPolicyOfProjectUnauthorized handles this case with default header values.
+/*
+UpdateWebhookPolicyOfProjectUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type UpdateWebhookPolicyOfProjectUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update webhook policy of project unauthorized response has a 2xx status code
+func (o *UpdateWebhookPolicyOfProjectUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update webhook policy of project unauthorized response has a 3xx status code
+func (o *UpdateWebhookPolicyOfProjectUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update webhook policy of project unauthorized response has a 4xx status code
+func (o *UpdateWebhookPolicyOfProjectUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update webhook policy of project unauthorized response has a 5xx status code
+func (o *UpdateWebhookPolicyOfProjectUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update webhook policy of project unauthorized response a status code equal to that given
+func (o *UpdateWebhookPolicyOfProjectUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *UpdateWebhookPolicyOfProjectUnauthorized) Error() string {
+	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/webhook/policies/{webhook_policy_id}][%d] updateWebhookPolicyOfProjectUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *UpdateWebhookPolicyOfProjectUnauthorized) String() string {
 	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/webhook/policies/{webhook_policy_id}][%d] updateWebhookPolicyOfProjectUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -159,8 +259,12 @@ func (o *UpdateWebhookPolicyOfProjectUnauthorized) GetPayload() *models.Errors {
 
 func (o *UpdateWebhookPolicyOfProjectUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -177,19 +281,50 @@ func NewUpdateWebhookPolicyOfProjectForbidden() *UpdateWebhookPolicyOfProjectFor
 	return &UpdateWebhookPolicyOfProjectForbidden{}
 }
 
-/*UpdateWebhookPolicyOfProjectForbidden handles this case with default header values.
+/*
+UpdateWebhookPolicyOfProjectForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type UpdateWebhookPolicyOfProjectForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update webhook policy of project forbidden response has a 2xx status code
+func (o *UpdateWebhookPolicyOfProjectForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update webhook policy of project forbidden response has a 3xx status code
+func (o *UpdateWebhookPolicyOfProjectForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update webhook policy of project forbidden response has a 4xx status code
+func (o *UpdateWebhookPolicyOfProjectForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update webhook policy of project forbidden response has a 5xx status code
+func (o *UpdateWebhookPolicyOfProjectForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update webhook policy of project forbidden response a status code equal to that given
+func (o *UpdateWebhookPolicyOfProjectForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *UpdateWebhookPolicyOfProjectForbidden) Error() string {
+	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/webhook/policies/{webhook_policy_id}][%d] updateWebhookPolicyOfProjectForbidden  %+v", 403, o.Payload)
+}
+
+func (o *UpdateWebhookPolicyOfProjectForbidden) String() string {
 	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/webhook/policies/{webhook_policy_id}][%d] updateWebhookPolicyOfProjectForbidden  %+v", 403, o.Payload)
 }
 
@@ -199,8 +334,12 @@ func (o *UpdateWebhookPolicyOfProjectForbidden) GetPayload() *models.Errors {
 
 func (o *UpdateWebhookPolicyOfProjectForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -217,19 +356,50 @@ func NewUpdateWebhookPolicyOfProjectNotFound() *UpdateWebhookPolicyOfProjectNotF
 	return &UpdateWebhookPolicyOfProjectNotFound{}
 }
 
-/*UpdateWebhookPolicyOfProjectNotFound handles this case with default header values.
+/*
+UpdateWebhookPolicyOfProjectNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
 type UpdateWebhookPolicyOfProjectNotFound struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update webhook policy of project not found response has a 2xx status code
+func (o *UpdateWebhookPolicyOfProjectNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update webhook policy of project not found response has a 3xx status code
+func (o *UpdateWebhookPolicyOfProjectNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update webhook policy of project not found response has a 4xx status code
+func (o *UpdateWebhookPolicyOfProjectNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update webhook policy of project not found response has a 5xx status code
+func (o *UpdateWebhookPolicyOfProjectNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update webhook policy of project not found response a status code equal to that given
+func (o *UpdateWebhookPolicyOfProjectNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *UpdateWebhookPolicyOfProjectNotFound) Error() string {
+	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/webhook/policies/{webhook_policy_id}][%d] updateWebhookPolicyOfProjectNotFound  %+v", 404, o.Payload)
+}
+
+func (o *UpdateWebhookPolicyOfProjectNotFound) String() string {
 	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/webhook/policies/{webhook_policy_id}][%d] updateWebhookPolicyOfProjectNotFound  %+v", 404, o.Payload)
 }
 
@@ -239,8 +409,12 @@ func (o *UpdateWebhookPolicyOfProjectNotFound) GetPayload() *models.Errors {
 
 func (o *UpdateWebhookPolicyOfProjectNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -257,19 +431,50 @@ func NewUpdateWebhookPolicyOfProjectInternalServerError() *UpdateWebhookPolicyOf
 	return &UpdateWebhookPolicyOfProjectInternalServerError{}
 }
 
-/*UpdateWebhookPolicyOfProjectInternalServerError handles this case with default header values.
+/*
+UpdateWebhookPolicyOfProjectInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type UpdateWebhookPolicyOfProjectInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update webhook policy of project internal server error response has a 2xx status code
+func (o *UpdateWebhookPolicyOfProjectInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update webhook policy of project internal server error response has a 3xx status code
+func (o *UpdateWebhookPolicyOfProjectInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update webhook policy of project internal server error response has a 4xx status code
+func (o *UpdateWebhookPolicyOfProjectInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update webhook policy of project internal server error response has a 5xx status code
+func (o *UpdateWebhookPolicyOfProjectInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this update webhook policy of project internal server error response a status code equal to that given
+func (o *UpdateWebhookPolicyOfProjectInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *UpdateWebhookPolicyOfProjectInternalServerError) Error() string {
+	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/webhook/policies/{webhook_policy_id}][%d] updateWebhookPolicyOfProjectInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *UpdateWebhookPolicyOfProjectInternalServerError) String() string {
 	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/webhook/policies/{webhook_policy_id}][%d] updateWebhookPolicyOfProjectInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -279,8 +484,12 @@ func (o *UpdateWebhookPolicyOfProjectInternalServerError) GetPayload() *models.E
 
 func (o *UpdateWebhookPolicyOfProjectInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

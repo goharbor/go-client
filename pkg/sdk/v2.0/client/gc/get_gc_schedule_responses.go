@@ -47,7 +47,6 @@ func (o *GetGCScheduleReader) ReadResponse(response runtime.ClientResponse, cons
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -58,7 +57,8 @@ func NewGetGCScheduleOK() *GetGCScheduleOK {
 	return &GetGCScheduleOK{}
 }
 
-/*GetGCScheduleOK handles this case with default header values.
+/*
+GetGCScheduleOK describes a response with status code 200, with default header values.
 
 Get gc's schedule.
 */
@@ -66,7 +66,36 @@ type GetGCScheduleOK struct {
 	Payload *models.GCHistory
 }
 
+// IsSuccess returns true when this get Gc schedule o k response has a 2xx status code
+func (o *GetGCScheduleOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get Gc schedule o k response has a 3xx status code
+func (o *GetGCScheduleOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get Gc schedule o k response has a 4xx status code
+func (o *GetGCScheduleOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get Gc schedule o k response has a 5xx status code
+func (o *GetGCScheduleOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get Gc schedule o k response a status code equal to that given
+func (o *GetGCScheduleOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetGCScheduleOK) Error() string {
+	return fmt.Sprintf("[GET /system/gc/schedule][%d] getGcScheduleOK  %+v", 200, o.Payload)
+}
+
+func (o *GetGCScheduleOK) String() string {
 	return fmt.Sprintf("[GET /system/gc/schedule][%d] getGcScheduleOK  %+v", 200, o.Payload)
 }
 
@@ -91,19 +120,50 @@ func NewGetGCScheduleUnauthorized() *GetGCScheduleUnauthorized {
 	return &GetGCScheduleUnauthorized{}
 }
 
-/*GetGCScheduleUnauthorized handles this case with default header values.
+/*
+GetGCScheduleUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type GetGCScheduleUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get Gc schedule unauthorized response has a 2xx status code
+func (o *GetGCScheduleUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get Gc schedule unauthorized response has a 3xx status code
+func (o *GetGCScheduleUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get Gc schedule unauthorized response has a 4xx status code
+func (o *GetGCScheduleUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get Gc schedule unauthorized response has a 5xx status code
+func (o *GetGCScheduleUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get Gc schedule unauthorized response a status code equal to that given
+func (o *GetGCScheduleUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *GetGCScheduleUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /system/gc/schedule][%d] getGcScheduleUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *GetGCScheduleUnauthorized) String() string {
 	return fmt.Sprintf("[GET /system/gc/schedule][%d] getGcScheduleUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -113,8 +173,12 @@ func (o *GetGCScheduleUnauthorized) GetPayload() *models.Errors {
 
 func (o *GetGCScheduleUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -131,19 +195,50 @@ func NewGetGCScheduleForbidden() *GetGCScheduleForbidden {
 	return &GetGCScheduleForbidden{}
 }
 
-/*GetGCScheduleForbidden handles this case with default header values.
+/*
+GetGCScheduleForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type GetGCScheduleForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get Gc schedule forbidden response has a 2xx status code
+func (o *GetGCScheduleForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get Gc schedule forbidden response has a 3xx status code
+func (o *GetGCScheduleForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get Gc schedule forbidden response has a 4xx status code
+func (o *GetGCScheduleForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get Gc schedule forbidden response has a 5xx status code
+func (o *GetGCScheduleForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get Gc schedule forbidden response a status code equal to that given
+func (o *GetGCScheduleForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *GetGCScheduleForbidden) Error() string {
+	return fmt.Sprintf("[GET /system/gc/schedule][%d] getGcScheduleForbidden  %+v", 403, o.Payload)
+}
+
+func (o *GetGCScheduleForbidden) String() string {
 	return fmt.Sprintf("[GET /system/gc/schedule][%d] getGcScheduleForbidden  %+v", 403, o.Payload)
 }
 
@@ -153,8 +248,12 @@ func (o *GetGCScheduleForbidden) GetPayload() *models.Errors {
 
 func (o *GetGCScheduleForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -171,19 +270,50 @@ func NewGetGCScheduleInternalServerError() *GetGCScheduleInternalServerError {
 	return &GetGCScheduleInternalServerError{}
 }
 
-/*GetGCScheduleInternalServerError handles this case with default header values.
+/*
+GetGCScheduleInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type GetGCScheduleInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get Gc schedule internal server error response has a 2xx status code
+func (o *GetGCScheduleInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get Gc schedule internal server error response has a 3xx status code
+func (o *GetGCScheduleInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get Gc schedule internal server error response has a 4xx status code
+func (o *GetGCScheduleInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get Gc schedule internal server error response has a 5xx status code
+func (o *GetGCScheduleInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get Gc schedule internal server error response a status code equal to that given
+func (o *GetGCScheduleInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *GetGCScheduleInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /system/gc/schedule][%d] getGcScheduleInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *GetGCScheduleInternalServerError) String() string {
 	return fmt.Sprintf("[GET /system/gc/schedule][%d] getGcScheduleInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -193,8 +323,12 @@ func (o *GetGCScheduleInternalServerError) GetPayload() *models.Errors {
 
 func (o *GetGCScheduleInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

@@ -42,7 +42,6 @@ func (o *GetCertReader) ReadResponse(response runtime.ClientResponse, consumer r
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -51,23 +50,55 @@ func (o *GetCertReader) ReadResponse(response runtime.ClientResponse, consumer r
 // NewGetCertOK creates a GetCertOK with default headers values
 func NewGetCertOK(writer io.Writer) *GetCertOK {
 	return &GetCertOK{
+
 		Payload: writer,
 	}
 }
 
-/*GetCertOK handles this case with default header values.
+/*
+GetCertOK describes a response with status code 200, with default header values.
 
 Get default root certificate successfully.
 */
 type GetCertOK struct {
-	/*To set the filename of the downloaded file.
+
+	/* To set the filename of the downloaded file.
 	 */
 	ContentDisposition string
 
 	Payload io.Writer
 }
 
+// IsSuccess returns true when this get cert o k response has a 2xx status code
+func (o *GetCertOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get cert o k response has a 3xx status code
+func (o *GetCertOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get cert o k response has a 4xx status code
+func (o *GetCertOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get cert o k response has a 5xx status code
+func (o *GetCertOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get cert o k response a status code equal to that given
+func (o *GetCertOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetCertOK) Error() string {
+	return fmt.Sprintf("[GET /systeminfo/getcert][%d] getCertOK  %+v", 200, o.Payload)
+}
+
+func (o *GetCertOK) String() string {
 	return fmt.Sprintf("[GET /systeminfo/getcert][%d] getCertOK  %+v", 200, o.Payload)
 }
 
@@ -77,8 +108,12 @@ func (o *GetCertOK) GetPayload() io.Writer {
 
 func (o *GetCertOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header Content-Disposition
-	o.ContentDisposition = response.GetHeader("Content-Disposition")
+	// hydrates response header Content-Disposition
+	hdrContentDisposition := response.GetHeader("Content-Disposition")
+
+	if hdrContentDisposition != "" {
+		o.ContentDisposition = hdrContentDisposition
+	}
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -93,14 +128,44 @@ func NewGetCertNotFound() *GetCertNotFound {
 	return &GetCertNotFound{}
 }
 
-/*GetCertNotFound handles this case with default header values.
+/*
+GetCertNotFound describes a response with status code 404, with default header values.
 
 Not found the default root certificate.
 */
 type GetCertNotFound struct {
 }
 
+// IsSuccess returns true when this get cert not found response has a 2xx status code
+func (o *GetCertNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get cert not found response has a 3xx status code
+func (o *GetCertNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get cert not found response has a 4xx status code
+func (o *GetCertNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get cert not found response has a 5xx status code
+func (o *GetCertNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get cert not found response a status code equal to that given
+func (o *GetCertNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *GetCertNotFound) Error() string {
+	return fmt.Sprintf("[GET /systeminfo/getcert][%d] getCertNotFound ", 404)
+}
+
+func (o *GetCertNotFound) String() string {
 	return fmt.Sprintf("[GET /systeminfo/getcert][%d] getCertNotFound ", 404)
 }
 
@@ -114,19 +179,50 @@ func NewGetCertInternalServerError() *GetCertInternalServerError {
 	return &GetCertInternalServerError{}
 }
 
-/*GetCertInternalServerError handles this case with default header values.
+/*
+GetCertInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type GetCertInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get cert internal server error response has a 2xx status code
+func (o *GetCertInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get cert internal server error response has a 3xx status code
+func (o *GetCertInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get cert internal server error response has a 4xx status code
+func (o *GetCertInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get cert internal server error response has a 5xx status code
+func (o *GetCertInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get cert internal server error response a status code equal to that given
+func (o *GetCertInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *GetCertInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /systeminfo/getcert][%d] getCertInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *GetCertInternalServerError) String() string {
 	return fmt.Sprintf("[GET /systeminfo/getcert][%d] getCertInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -136,8 +232,12 @@ func (o *GetCertInternalServerError) GetPayload() *models.Errors {
 
 func (o *GetCertInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

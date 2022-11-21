@@ -47,7 +47,6 @@ func (o *DeleteRetentionReader) ReadResponse(response runtime.ClientResponse, co
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -58,14 +57,44 @@ func NewDeleteRetentionOK() *DeleteRetentionOK {
 	return &DeleteRetentionOK{}
 }
 
-/*DeleteRetentionOK handles this case with default header values.
+/*
+DeleteRetentionOK describes a response with status code 200, with default header values.
 
 Update Retention Policy successfully.
 */
 type DeleteRetentionOK struct {
 }
 
+// IsSuccess returns true when this delete retention o k response has a 2xx status code
+func (o *DeleteRetentionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this delete retention o k response has a 3xx status code
+func (o *DeleteRetentionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete retention o k response has a 4xx status code
+func (o *DeleteRetentionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete retention o k response has a 5xx status code
+func (o *DeleteRetentionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete retention o k response a status code equal to that given
+func (o *DeleteRetentionOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DeleteRetentionOK) Error() string {
+	return fmt.Sprintf("[DELETE /retentions/{id}][%d] deleteRetentionOK ", 200)
+}
+
+func (o *DeleteRetentionOK) String() string {
 	return fmt.Sprintf("[DELETE /retentions/{id}][%d] deleteRetentionOK ", 200)
 }
 
@@ -79,19 +108,50 @@ func NewDeleteRetentionUnauthorized() *DeleteRetentionUnauthorized {
 	return &DeleteRetentionUnauthorized{}
 }
 
-/*DeleteRetentionUnauthorized handles this case with default header values.
+/*
+DeleteRetentionUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type DeleteRetentionUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete retention unauthorized response has a 2xx status code
+func (o *DeleteRetentionUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete retention unauthorized response has a 3xx status code
+func (o *DeleteRetentionUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete retention unauthorized response has a 4xx status code
+func (o *DeleteRetentionUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete retention unauthorized response has a 5xx status code
+func (o *DeleteRetentionUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete retention unauthorized response a status code equal to that given
+func (o *DeleteRetentionUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *DeleteRetentionUnauthorized) Error() string {
+	return fmt.Sprintf("[DELETE /retentions/{id}][%d] deleteRetentionUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *DeleteRetentionUnauthorized) String() string {
 	return fmt.Sprintf("[DELETE /retentions/{id}][%d] deleteRetentionUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -101,8 +161,12 @@ func (o *DeleteRetentionUnauthorized) GetPayload() *models.Errors {
 
 func (o *DeleteRetentionUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -119,19 +183,50 @@ func NewDeleteRetentionForbidden() *DeleteRetentionForbidden {
 	return &DeleteRetentionForbidden{}
 }
 
-/*DeleteRetentionForbidden handles this case with default header values.
+/*
+DeleteRetentionForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type DeleteRetentionForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete retention forbidden response has a 2xx status code
+func (o *DeleteRetentionForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete retention forbidden response has a 3xx status code
+func (o *DeleteRetentionForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete retention forbidden response has a 4xx status code
+func (o *DeleteRetentionForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete retention forbidden response has a 5xx status code
+func (o *DeleteRetentionForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete retention forbidden response a status code equal to that given
+func (o *DeleteRetentionForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *DeleteRetentionForbidden) Error() string {
+	return fmt.Sprintf("[DELETE /retentions/{id}][%d] deleteRetentionForbidden  %+v", 403, o.Payload)
+}
+
+func (o *DeleteRetentionForbidden) String() string {
 	return fmt.Sprintf("[DELETE /retentions/{id}][%d] deleteRetentionForbidden  %+v", 403, o.Payload)
 }
 
@@ -141,8 +236,12 @@ func (o *DeleteRetentionForbidden) GetPayload() *models.Errors {
 
 func (o *DeleteRetentionForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -159,19 +258,50 @@ func NewDeleteRetentionInternalServerError() *DeleteRetentionInternalServerError
 	return &DeleteRetentionInternalServerError{}
 }
 
-/*DeleteRetentionInternalServerError handles this case with default header values.
+/*
+DeleteRetentionInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type DeleteRetentionInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete retention internal server error response has a 2xx status code
+func (o *DeleteRetentionInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete retention internal server error response has a 3xx status code
+func (o *DeleteRetentionInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete retention internal server error response has a 4xx status code
+func (o *DeleteRetentionInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete retention internal server error response has a 5xx status code
+func (o *DeleteRetentionInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this delete retention internal server error response a status code equal to that given
+func (o *DeleteRetentionInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *DeleteRetentionInternalServerError) Error() string {
+	return fmt.Sprintf("[DELETE /retentions/{id}][%d] deleteRetentionInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *DeleteRetentionInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /retentions/{id}][%d] deleteRetentionInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -181,8 +311,12 @@ func (o *DeleteRetentionInternalServerError) GetPayload() *models.Errors {
 
 func (o *DeleteRetentionInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

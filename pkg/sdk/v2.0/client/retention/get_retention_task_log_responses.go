@@ -47,7 +47,6 @@ func (o *GetRetentionTaskLogReader) ReadResponse(response runtime.ClientResponse
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -58,7 +57,8 @@ func NewGetRetentionTaskLogOK() *GetRetentionTaskLogOK {
 	return &GetRetentionTaskLogOK{}
 }
 
-/*GetRetentionTaskLogOK handles this case with default header values.
+/*
+GetRetentionTaskLogOK describes a response with status code 200, with default header values.
 
 Get Retention job task log successfully.
 */
@@ -66,7 +66,36 @@ type GetRetentionTaskLogOK struct {
 	Payload string
 }
 
+// IsSuccess returns true when this get retention task log o k response has a 2xx status code
+func (o *GetRetentionTaskLogOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get retention task log o k response has a 3xx status code
+func (o *GetRetentionTaskLogOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get retention task log o k response has a 4xx status code
+func (o *GetRetentionTaskLogOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get retention task log o k response has a 5xx status code
+func (o *GetRetentionTaskLogOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get retention task log o k response a status code equal to that given
+func (o *GetRetentionTaskLogOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetRetentionTaskLogOK) Error() string {
+	return fmt.Sprintf("[GET /retentions/{id}/executions/{eid}/tasks/{tid}][%d] getRetentionTaskLogOK  %+v", 200, o.Payload)
+}
+
+func (o *GetRetentionTaskLogOK) String() string {
 	return fmt.Sprintf("[GET /retentions/{id}/executions/{eid}/tasks/{tid}][%d] getRetentionTaskLogOK  %+v", 200, o.Payload)
 }
 
@@ -89,19 +118,50 @@ func NewGetRetentionTaskLogUnauthorized() *GetRetentionTaskLogUnauthorized {
 	return &GetRetentionTaskLogUnauthorized{}
 }
 
-/*GetRetentionTaskLogUnauthorized handles this case with default header values.
+/*
+GetRetentionTaskLogUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type GetRetentionTaskLogUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get retention task log unauthorized response has a 2xx status code
+func (o *GetRetentionTaskLogUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get retention task log unauthorized response has a 3xx status code
+func (o *GetRetentionTaskLogUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get retention task log unauthorized response has a 4xx status code
+func (o *GetRetentionTaskLogUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get retention task log unauthorized response has a 5xx status code
+func (o *GetRetentionTaskLogUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get retention task log unauthorized response a status code equal to that given
+func (o *GetRetentionTaskLogUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *GetRetentionTaskLogUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /retentions/{id}/executions/{eid}/tasks/{tid}][%d] getRetentionTaskLogUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *GetRetentionTaskLogUnauthorized) String() string {
 	return fmt.Sprintf("[GET /retentions/{id}/executions/{eid}/tasks/{tid}][%d] getRetentionTaskLogUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -111,8 +171,12 @@ func (o *GetRetentionTaskLogUnauthorized) GetPayload() *models.Errors {
 
 func (o *GetRetentionTaskLogUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -129,19 +193,50 @@ func NewGetRetentionTaskLogForbidden() *GetRetentionTaskLogForbidden {
 	return &GetRetentionTaskLogForbidden{}
 }
 
-/*GetRetentionTaskLogForbidden handles this case with default header values.
+/*
+GetRetentionTaskLogForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type GetRetentionTaskLogForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get retention task log forbidden response has a 2xx status code
+func (o *GetRetentionTaskLogForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get retention task log forbidden response has a 3xx status code
+func (o *GetRetentionTaskLogForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get retention task log forbidden response has a 4xx status code
+func (o *GetRetentionTaskLogForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get retention task log forbidden response has a 5xx status code
+func (o *GetRetentionTaskLogForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get retention task log forbidden response a status code equal to that given
+func (o *GetRetentionTaskLogForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *GetRetentionTaskLogForbidden) Error() string {
+	return fmt.Sprintf("[GET /retentions/{id}/executions/{eid}/tasks/{tid}][%d] getRetentionTaskLogForbidden  %+v", 403, o.Payload)
+}
+
+func (o *GetRetentionTaskLogForbidden) String() string {
 	return fmt.Sprintf("[GET /retentions/{id}/executions/{eid}/tasks/{tid}][%d] getRetentionTaskLogForbidden  %+v", 403, o.Payload)
 }
 
@@ -151,8 +246,12 @@ func (o *GetRetentionTaskLogForbidden) GetPayload() *models.Errors {
 
 func (o *GetRetentionTaskLogForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -169,19 +268,50 @@ func NewGetRetentionTaskLogInternalServerError() *GetRetentionTaskLogInternalSer
 	return &GetRetentionTaskLogInternalServerError{}
 }
 
-/*GetRetentionTaskLogInternalServerError handles this case with default header values.
+/*
+GetRetentionTaskLogInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type GetRetentionTaskLogInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get retention task log internal server error response has a 2xx status code
+func (o *GetRetentionTaskLogInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get retention task log internal server error response has a 3xx status code
+func (o *GetRetentionTaskLogInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get retention task log internal server error response has a 4xx status code
+func (o *GetRetentionTaskLogInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get retention task log internal server error response has a 5xx status code
+func (o *GetRetentionTaskLogInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get retention task log internal server error response a status code equal to that given
+func (o *GetRetentionTaskLogInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *GetRetentionTaskLogInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /retentions/{id}/executions/{eid}/tasks/{tid}][%d] getRetentionTaskLogInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *GetRetentionTaskLogInternalServerError) String() string {
 	return fmt.Sprintf("[GET /retentions/{id}/executions/{eid}/tasks/{tid}][%d] getRetentionTaskLogInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -191,8 +321,12 @@ func (o *GetRetentionTaskLogInternalServerError) GetPayload() *models.Errors {
 
 func (o *GetRetentionTaskLogInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

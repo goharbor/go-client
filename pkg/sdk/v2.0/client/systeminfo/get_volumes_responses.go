@@ -53,7 +53,6 @@ func (o *GetVolumesReader) ReadResponse(response runtime.ClientResponse, consume
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -64,7 +63,8 @@ func NewGetVolumesOK() *GetVolumesOK {
 	return &GetVolumesOK{}
 }
 
-/*GetVolumesOK handles this case with default header values.
+/*
+GetVolumesOK describes a response with status code 200, with default header values.
 
 Get system volumes successfully.
 */
@@ -72,7 +72,36 @@ type GetVolumesOK struct {
 	Payload *models.SystemInfo
 }
 
+// IsSuccess returns true when this get volumes o k response has a 2xx status code
+func (o *GetVolumesOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get volumes o k response has a 3xx status code
+func (o *GetVolumesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get volumes o k response has a 4xx status code
+func (o *GetVolumesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get volumes o k response has a 5xx status code
+func (o *GetVolumesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get volumes o k response a status code equal to that given
+func (o *GetVolumesOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetVolumesOK) Error() string {
+	return fmt.Sprintf("[GET /systeminfo/volumes][%d] getVolumesOK  %+v", 200, o.Payload)
+}
+
+func (o *GetVolumesOK) String() string {
 	return fmt.Sprintf("[GET /systeminfo/volumes][%d] getVolumesOK  %+v", 200, o.Payload)
 }
 
@@ -97,19 +126,50 @@ func NewGetVolumesUnauthorized() *GetVolumesUnauthorized {
 	return &GetVolumesUnauthorized{}
 }
 
-/*GetVolumesUnauthorized handles this case with default header values.
+/*
+GetVolumesUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type GetVolumesUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get volumes unauthorized response has a 2xx status code
+func (o *GetVolumesUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get volumes unauthorized response has a 3xx status code
+func (o *GetVolumesUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get volumes unauthorized response has a 4xx status code
+func (o *GetVolumesUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get volumes unauthorized response has a 5xx status code
+func (o *GetVolumesUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get volumes unauthorized response a status code equal to that given
+func (o *GetVolumesUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *GetVolumesUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /systeminfo/volumes][%d] getVolumesUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *GetVolumesUnauthorized) String() string {
 	return fmt.Sprintf("[GET /systeminfo/volumes][%d] getVolumesUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -119,8 +179,12 @@ func (o *GetVolumesUnauthorized) GetPayload() *models.Errors {
 
 func (o *GetVolumesUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -137,19 +201,50 @@ func NewGetVolumesForbidden() *GetVolumesForbidden {
 	return &GetVolumesForbidden{}
 }
 
-/*GetVolumesForbidden handles this case with default header values.
+/*
+GetVolumesForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type GetVolumesForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get volumes forbidden response has a 2xx status code
+func (o *GetVolumesForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get volumes forbidden response has a 3xx status code
+func (o *GetVolumesForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get volumes forbidden response has a 4xx status code
+func (o *GetVolumesForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get volumes forbidden response has a 5xx status code
+func (o *GetVolumesForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get volumes forbidden response a status code equal to that given
+func (o *GetVolumesForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *GetVolumesForbidden) Error() string {
+	return fmt.Sprintf("[GET /systeminfo/volumes][%d] getVolumesForbidden  %+v", 403, o.Payload)
+}
+
+func (o *GetVolumesForbidden) String() string {
 	return fmt.Sprintf("[GET /systeminfo/volumes][%d] getVolumesForbidden  %+v", 403, o.Payload)
 }
 
@@ -159,8 +254,12 @@ func (o *GetVolumesForbidden) GetPayload() *models.Errors {
 
 func (o *GetVolumesForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -177,19 +276,50 @@ func NewGetVolumesNotFound() *GetVolumesNotFound {
 	return &GetVolumesNotFound{}
 }
 
-/*GetVolumesNotFound handles this case with default header values.
+/*
+GetVolumesNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
 type GetVolumesNotFound struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get volumes not found response has a 2xx status code
+func (o *GetVolumesNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get volumes not found response has a 3xx status code
+func (o *GetVolumesNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get volumes not found response has a 4xx status code
+func (o *GetVolumesNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get volumes not found response has a 5xx status code
+func (o *GetVolumesNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get volumes not found response a status code equal to that given
+func (o *GetVolumesNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *GetVolumesNotFound) Error() string {
+	return fmt.Sprintf("[GET /systeminfo/volumes][%d] getVolumesNotFound  %+v", 404, o.Payload)
+}
+
+func (o *GetVolumesNotFound) String() string {
 	return fmt.Sprintf("[GET /systeminfo/volumes][%d] getVolumesNotFound  %+v", 404, o.Payload)
 }
 
@@ -199,8 +329,12 @@ func (o *GetVolumesNotFound) GetPayload() *models.Errors {
 
 func (o *GetVolumesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -217,19 +351,50 @@ func NewGetVolumesInternalServerError() *GetVolumesInternalServerError {
 	return &GetVolumesInternalServerError{}
 }
 
-/*GetVolumesInternalServerError handles this case with default header values.
+/*
+GetVolumesInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type GetVolumesInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get volumes internal server error response has a 2xx status code
+func (o *GetVolumesInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get volumes internal server error response has a 3xx status code
+func (o *GetVolumesInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get volumes internal server error response has a 4xx status code
+func (o *GetVolumesInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get volumes internal server error response has a 5xx status code
+func (o *GetVolumesInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get volumes internal server error response a status code equal to that given
+func (o *GetVolumesInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *GetVolumesInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /systeminfo/volumes][%d] getVolumesInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *GetVolumesInternalServerError) String() string {
 	return fmt.Sprintf("[GET /systeminfo/volumes][%d] getVolumesInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -239,8 +404,12 @@ func (o *GetVolumesInternalServerError) GetPayload() *models.Errors {
 
 func (o *GetVolumesInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

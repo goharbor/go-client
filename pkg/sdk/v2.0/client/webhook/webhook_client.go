@@ -82,7 +82,6 @@ type Client struct {
 CreateWebhookPolicyOfProject creates project webhook policy
 
 This endpoint create a webhook policy if the project does not have one.
-
 */
 func (a *Client) CreateWebhookPolicyOfProject(ctx context.Context, params *CreateWebhookPolicyOfProjectParams) (*CreateWebhookPolicyOfProjectCreated, error) {
 
@@ -110,7 +109,6 @@ func (a *Client) CreateWebhookPolicyOfProject(ctx context.Context, params *Creat
 DeleteWebhookPolicyOfProject deletes webhook policy of a project
 
 This endpoint is aimed to delete webhookpolicy of a project.
-
 */
 func (a *Client) DeleteWebhookPolicyOfProject(ctx context.Context, params *DeleteWebhookPolicyOfProjectParams) (*DeleteWebhookPolicyOfProjectOK, error) {
 
@@ -165,7 +163,6 @@ func (a *Client) GetSupportedEventTypes(ctx context.Context, params *GetSupporte
 GetWebhookPolicyOfProject gets project webhook policy
 
 This endpoint returns specified webhook policy of a project.
-
 */
 func (a *Client) GetWebhookPolicyOfProject(ctx context.Context, params *GetWebhookPolicyOfProjectParams) (*GetWebhookPolicyOfProjectOK, error) {
 
@@ -193,7 +190,6 @@ func (a *Client) GetWebhookPolicyOfProject(ctx context.Context, params *GetWebho
 LastTrigger gets project webhook policy last trigger info
 
 This endpoint returns last trigger information of project webhook policy.
-
 */
 func (a *Client) LastTrigger(ctx context.Context, params *LastTriggerParams) (*LastTriggerOK, error) {
 
@@ -221,7 +217,6 @@ func (a *Client) LastTrigger(ctx context.Context, params *LastTriggerParams) (*L
 ListWebhookPoliciesOfProject lists project webhook policies
 
 This endpoint returns webhook policies of a project.
-
 */
 func (a *Client) ListWebhookPoliciesOfProject(ctx context.Context, params *ListWebhookPoliciesOfProjectParams) (*ListWebhookPoliciesOfProjectOK, error) {
 
@@ -249,7 +244,6 @@ func (a *Client) ListWebhookPoliciesOfProject(ctx context.Context, params *ListW
 UpdateWebhookPolicyOfProject updates webhook policy of a project
 
 This endpoint is aimed to update the webhook policy of a project.
-
 */
 func (a *Client) UpdateWebhookPolicyOfProject(ctx context.Context, params *UpdateWebhookPolicyOfProjectParams) (*UpdateWebhookPolicyOfProjectOK, error) {
 

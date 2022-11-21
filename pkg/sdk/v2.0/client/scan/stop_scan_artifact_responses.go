@@ -59,7 +59,6 @@ func (o *StopScanArtifactReader) ReadResponse(response runtime.ClientResponse, c
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -70,24 +69,59 @@ func NewStopScanArtifactAccepted() *StopScanArtifactAccepted {
 	return &StopScanArtifactAccepted{}
 }
 
-/*StopScanArtifactAccepted handles this case with default header values.
+/*
+StopScanArtifactAccepted describes a response with status code 202, with default header values.
 
 Accepted
 */
 type StopScanArtifactAccepted struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
+}
+
+// IsSuccess returns true when this stop scan artifact accepted response has a 2xx status code
+func (o *StopScanArtifactAccepted) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this stop scan artifact accepted response has a 3xx status code
+func (o *StopScanArtifactAccepted) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stop scan artifact accepted response has a 4xx status code
+func (o *StopScanArtifactAccepted) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this stop scan artifact accepted response has a 5xx status code
+func (o *StopScanArtifactAccepted) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stop scan artifact accepted response a status code equal to that given
+func (o *StopScanArtifactAccepted) IsCode(code int) bool {
+	return code == 202
 }
 
 func (o *StopScanArtifactAccepted) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan/stop][%d] stopScanArtifactAccepted ", 202)
 }
 
+func (o *StopScanArtifactAccepted) String() string {
+	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan/stop][%d] stopScanArtifactAccepted ", 202)
+}
+
 func (o *StopScanArtifactAccepted) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	return nil
 }
@@ -97,19 +131,50 @@ func NewStopScanArtifactBadRequest() *StopScanArtifactBadRequest {
 	return &StopScanArtifactBadRequest{}
 }
 
-/*StopScanArtifactBadRequest handles this case with default header values.
+/*
+StopScanArtifactBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
 type StopScanArtifactBadRequest struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this stop scan artifact bad request response has a 2xx status code
+func (o *StopScanArtifactBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stop scan artifact bad request response has a 3xx status code
+func (o *StopScanArtifactBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stop scan artifact bad request response has a 4xx status code
+func (o *StopScanArtifactBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stop scan artifact bad request response has a 5xx status code
+func (o *StopScanArtifactBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stop scan artifact bad request response a status code equal to that given
+func (o *StopScanArtifactBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *StopScanArtifactBadRequest) Error() string {
+	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan/stop][%d] stopScanArtifactBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *StopScanArtifactBadRequest) String() string {
 	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan/stop][%d] stopScanArtifactBadRequest  %+v", 400, o.Payload)
 }
 
@@ -119,8 +184,12 @@ func (o *StopScanArtifactBadRequest) GetPayload() *models.Errors {
 
 func (o *StopScanArtifactBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -137,19 +206,50 @@ func NewStopScanArtifactUnauthorized() *StopScanArtifactUnauthorized {
 	return &StopScanArtifactUnauthorized{}
 }
 
-/*StopScanArtifactUnauthorized handles this case with default header values.
+/*
+StopScanArtifactUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type StopScanArtifactUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this stop scan artifact unauthorized response has a 2xx status code
+func (o *StopScanArtifactUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stop scan artifact unauthorized response has a 3xx status code
+func (o *StopScanArtifactUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stop scan artifact unauthorized response has a 4xx status code
+func (o *StopScanArtifactUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stop scan artifact unauthorized response has a 5xx status code
+func (o *StopScanArtifactUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stop scan artifact unauthorized response a status code equal to that given
+func (o *StopScanArtifactUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *StopScanArtifactUnauthorized) Error() string {
+	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan/stop][%d] stopScanArtifactUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *StopScanArtifactUnauthorized) String() string {
 	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan/stop][%d] stopScanArtifactUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -159,8 +259,12 @@ func (o *StopScanArtifactUnauthorized) GetPayload() *models.Errors {
 
 func (o *StopScanArtifactUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -177,19 +281,50 @@ func NewStopScanArtifactForbidden() *StopScanArtifactForbidden {
 	return &StopScanArtifactForbidden{}
 }
 
-/*StopScanArtifactForbidden handles this case with default header values.
+/*
+StopScanArtifactForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type StopScanArtifactForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this stop scan artifact forbidden response has a 2xx status code
+func (o *StopScanArtifactForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stop scan artifact forbidden response has a 3xx status code
+func (o *StopScanArtifactForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stop scan artifact forbidden response has a 4xx status code
+func (o *StopScanArtifactForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stop scan artifact forbidden response has a 5xx status code
+func (o *StopScanArtifactForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stop scan artifact forbidden response a status code equal to that given
+func (o *StopScanArtifactForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *StopScanArtifactForbidden) Error() string {
+	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan/stop][%d] stopScanArtifactForbidden  %+v", 403, o.Payload)
+}
+
+func (o *StopScanArtifactForbidden) String() string {
 	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan/stop][%d] stopScanArtifactForbidden  %+v", 403, o.Payload)
 }
 
@@ -199,8 +334,12 @@ func (o *StopScanArtifactForbidden) GetPayload() *models.Errors {
 
 func (o *StopScanArtifactForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -217,19 +356,50 @@ func NewStopScanArtifactNotFound() *StopScanArtifactNotFound {
 	return &StopScanArtifactNotFound{}
 }
 
-/*StopScanArtifactNotFound handles this case with default header values.
+/*
+StopScanArtifactNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
 type StopScanArtifactNotFound struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this stop scan artifact not found response has a 2xx status code
+func (o *StopScanArtifactNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stop scan artifact not found response has a 3xx status code
+func (o *StopScanArtifactNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stop scan artifact not found response has a 4xx status code
+func (o *StopScanArtifactNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stop scan artifact not found response has a 5xx status code
+func (o *StopScanArtifactNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stop scan artifact not found response a status code equal to that given
+func (o *StopScanArtifactNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *StopScanArtifactNotFound) Error() string {
+	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan/stop][%d] stopScanArtifactNotFound  %+v", 404, o.Payload)
+}
+
+func (o *StopScanArtifactNotFound) String() string {
 	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan/stop][%d] stopScanArtifactNotFound  %+v", 404, o.Payload)
 }
 
@@ -239,8 +409,12 @@ func (o *StopScanArtifactNotFound) GetPayload() *models.Errors {
 
 func (o *StopScanArtifactNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -257,19 +431,50 @@ func NewStopScanArtifactInternalServerError() *StopScanArtifactInternalServerErr
 	return &StopScanArtifactInternalServerError{}
 }
 
-/*StopScanArtifactInternalServerError handles this case with default header values.
+/*
+StopScanArtifactInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type StopScanArtifactInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this stop scan artifact internal server error response has a 2xx status code
+func (o *StopScanArtifactInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stop scan artifact internal server error response has a 3xx status code
+func (o *StopScanArtifactInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stop scan artifact internal server error response has a 4xx status code
+func (o *StopScanArtifactInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this stop scan artifact internal server error response has a 5xx status code
+func (o *StopScanArtifactInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this stop scan artifact internal server error response a status code equal to that given
+func (o *StopScanArtifactInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *StopScanArtifactInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan/stop][%d] stopScanArtifactInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *StopScanArtifactInternalServerError) String() string {
 	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan/stop][%d] stopScanArtifactInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -279,8 +484,12 @@ func (o *StopScanArtifactInternalServerError) GetPayload() *models.Errors {
 
 func (o *StopScanArtifactInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

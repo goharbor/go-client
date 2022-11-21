@@ -62,7 +62,6 @@ func (o *PostChartrepoRepoChartsNameVersionLabelsReader) ReadResponse(response r
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -73,14 +72,44 @@ func NewPostChartrepoRepoChartsNameVersionLabelsOK() *PostChartrepoRepoChartsNam
 	return &PostChartrepoRepoChartsNameVersionLabelsOK{}
 }
 
-/*PostChartrepoRepoChartsNameVersionLabelsOK handles this case with default header values.
+/*
+PostChartrepoRepoChartsNameVersionLabelsOK describes a response with status code 200, with default header values.
 
 The label is successfully marked to the chart version.
 */
 type PostChartrepoRepoChartsNameVersionLabelsOK struct {
 }
 
+// IsSuccess returns true when this post chartrepo repo charts name version labels o k response has a 2xx status code
+func (o *PostChartrepoRepoChartsNameVersionLabelsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this post chartrepo repo charts name version labels o k response has a 3xx status code
+func (o *PostChartrepoRepoChartsNameVersionLabelsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post chartrepo repo charts name version labels o k response has a 4xx status code
+func (o *PostChartrepoRepoChartsNameVersionLabelsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this post chartrepo repo charts name version labels o k response has a 5xx status code
+func (o *PostChartrepoRepoChartsNameVersionLabelsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post chartrepo repo charts name version labels o k response a status code equal to that given
+func (o *PostChartrepoRepoChartsNameVersionLabelsOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *PostChartrepoRepoChartsNameVersionLabelsOK) Error() string {
+	return fmt.Sprintf("[POST /chartrepo/{repo}/charts/{name}/{version}/labels][%d] postChartrepoRepoChartsNameVersionLabelsOK ", 200)
+}
+
+func (o *PostChartrepoRepoChartsNameVersionLabelsOK) String() string {
 	return fmt.Sprintf("[POST /chartrepo/{repo}/charts/{name}/{version}/labels][%d] postChartrepoRepoChartsNameVersionLabelsOK ", 200)
 }
 
@@ -94,14 +123,44 @@ func NewPostChartrepoRepoChartsNameVersionLabelsBadRequest() *PostChartrepoRepoC
 	return &PostChartrepoRepoChartsNameVersionLabelsBadRequest{}
 }
 
-/*PostChartrepoRepoChartsNameVersionLabelsBadRequest handles this case with default header values.
+/*
+PostChartrepoRepoChartsNameVersionLabelsBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
 type PostChartrepoRepoChartsNameVersionLabelsBadRequest struct {
 }
 
+// IsSuccess returns true when this post chartrepo repo charts name version labels bad request response has a 2xx status code
+func (o *PostChartrepoRepoChartsNameVersionLabelsBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post chartrepo repo charts name version labels bad request response has a 3xx status code
+func (o *PostChartrepoRepoChartsNameVersionLabelsBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post chartrepo repo charts name version labels bad request response has a 4xx status code
+func (o *PostChartrepoRepoChartsNameVersionLabelsBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post chartrepo repo charts name version labels bad request response has a 5xx status code
+func (o *PostChartrepoRepoChartsNameVersionLabelsBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post chartrepo repo charts name version labels bad request response a status code equal to that given
+func (o *PostChartrepoRepoChartsNameVersionLabelsBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *PostChartrepoRepoChartsNameVersionLabelsBadRequest) Error() string {
+	return fmt.Sprintf("[POST /chartrepo/{repo}/charts/{name}/{version}/labels][%d] postChartrepoRepoChartsNameVersionLabelsBadRequest ", 400)
+}
+
+func (o *PostChartrepoRepoChartsNameVersionLabelsBadRequest) String() string {
 	return fmt.Sprintf("[POST /chartrepo/{repo}/charts/{name}/{version}/labels][%d] postChartrepoRepoChartsNameVersionLabelsBadRequest ", 400)
 }
 
@@ -115,14 +174,44 @@ func NewPostChartrepoRepoChartsNameVersionLabelsUnauthorized() *PostChartrepoRep
 	return &PostChartrepoRepoChartsNameVersionLabelsUnauthorized{}
 }
 
-/*PostChartrepoRepoChartsNameVersionLabelsUnauthorized handles this case with default header values.
+/*
+PostChartrepoRepoChartsNameVersionLabelsUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type PostChartrepoRepoChartsNameVersionLabelsUnauthorized struct {
 }
 
+// IsSuccess returns true when this post chartrepo repo charts name version labels unauthorized response has a 2xx status code
+func (o *PostChartrepoRepoChartsNameVersionLabelsUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post chartrepo repo charts name version labels unauthorized response has a 3xx status code
+func (o *PostChartrepoRepoChartsNameVersionLabelsUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post chartrepo repo charts name version labels unauthorized response has a 4xx status code
+func (o *PostChartrepoRepoChartsNameVersionLabelsUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post chartrepo repo charts name version labels unauthorized response has a 5xx status code
+func (o *PostChartrepoRepoChartsNameVersionLabelsUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post chartrepo repo charts name version labels unauthorized response a status code equal to that given
+func (o *PostChartrepoRepoChartsNameVersionLabelsUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *PostChartrepoRepoChartsNameVersionLabelsUnauthorized) Error() string {
+	return fmt.Sprintf("[POST /chartrepo/{repo}/charts/{name}/{version}/labels][%d] postChartrepoRepoChartsNameVersionLabelsUnauthorized ", 401)
+}
+
+func (o *PostChartrepoRepoChartsNameVersionLabelsUnauthorized) String() string {
 	return fmt.Sprintf("[POST /chartrepo/{repo}/charts/{name}/{version}/labels][%d] postChartrepoRepoChartsNameVersionLabelsUnauthorized ", 401)
 }
 
@@ -136,14 +225,44 @@ func NewPostChartrepoRepoChartsNameVersionLabelsForbidden() *PostChartrepoRepoCh
 	return &PostChartrepoRepoChartsNameVersionLabelsForbidden{}
 }
 
-/*PostChartrepoRepoChartsNameVersionLabelsForbidden handles this case with default header values.
+/*
+PostChartrepoRepoChartsNameVersionLabelsForbidden describes a response with status code 403, with default header values.
 
 Operation is forbidden or quota exceeded
 */
 type PostChartrepoRepoChartsNameVersionLabelsForbidden struct {
 }
 
+// IsSuccess returns true when this post chartrepo repo charts name version labels forbidden response has a 2xx status code
+func (o *PostChartrepoRepoChartsNameVersionLabelsForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post chartrepo repo charts name version labels forbidden response has a 3xx status code
+func (o *PostChartrepoRepoChartsNameVersionLabelsForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post chartrepo repo charts name version labels forbidden response has a 4xx status code
+func (o *PostChartrepoRepoChartsNameVersionLabelsForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post chartrepo repo charts name version labels forbidden response has a 5xx status code
+func (o *PostChartrepoRepoChartsNameVersionLabelsForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post chartrepo repo charts name version labels forbidden response a status code equal to that given
+func (o *PostChartrepoRepoChartsNameVersionLabelsForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *PostChartrepoRepoChartsNameVersionLabelsForbidden) Error() string {
+	return fmt.Sprintf("[POST /chartrepo/{repo}/charts/{name}/{version}/labels][%d] postChartrepoRepoChartsNameVersionLabelsForbidden ", 403)
+}
+
+func (o *PostChartrepoRepoChartsNameVersionLabelsForbidden) String() string {
 	return fmt.Sprintf("[POST /chartrepo/{repo}/charts/{name}/{version}/labels][%d] postChartrepoRepoChartsNameVersionLabelsForbidden ", 403)
 }
 
@@ -157,14 +276,44 @@ func NewPostChartrepoRepoChartsNameVersionLabelsNotFound() *PostChartrepoRepoCha
 	return &PostChartrepoRepoChartsNameVersionLabelsNotFound{}
 }
 
-/*PostChartrepoRepoChartsNameVersionLabelsNotFound handles this case with default header values.
+/*
+PostChartrepoRepoChartsNameVersionLabelsNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
 type PostChartrepoRepoChartsNameVersionLabelsNotFound struct {
 }
 
+// IsSuccess returns true when this post chartrepo repo charts name version labels not found response has a 2xx status code
+func (o *PostChartrepoRepoChartsNameVersionLabelsNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post chartrepo repo charts name version labels not found response has a 3xx status code
+func (o *PostChartrepoRepoChartsNameVersionLabelsNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post chartrepo repo charts name version labels not found response has a 4xx status code
+func (o *PostChartrepoRepoChartsNameVersionLabelsNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post chartrepo repo charts name version labels not found response has a 5xx status code
+func (o *PostChartrepoRepoChartsNameVersionLabelsNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post chartrepo repo charts name version labels not found response a status code equal to that given
+func (o *PostChartrepoRepoChartsNameVersionLabelsNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *PostChartrepoRepoChartsNameVersionLabelsNotFound) Error() string {
+	return fmt.Sprintf("[POST /chartrepo/{repo}/charts/{name}/{version}/labels][%d] postChartrepoRepoChartsNameVersionLabelsNotFound ", 404)
+}
+
+func (o *PostChartrepoRepoChartsNameVersionLabelsNotFound) String() string {
 	return fmt.Sprintf("[POST /chartrepo/{repo}/charts/{name}/{version}/labels][%d] postChartrepoRepoChartsNameVersionLabelsNotFound ", 404)
 }
 
@@ -178,14 +327,44 @@ func NewPostChartrepoRepoChartsNameVersionLabelsConflict() *PostChartrepoRepoCha
 	return &PostChartrepoRepoChartsNameVersionLabelsConflict{}
 }
 
-/*PostChartrepoRepoChartsNameVersionLabelsConflict handles this case with default header values.
+/*
+PostChartrepoRepoChartsNameVersionLabelsConflict describes a response with status code 409, with default header values.
 
 Conflicts
 */
 type PostChartrepoRepoChartsNameVersionLabelsConflict struct {
 }
 
+// IsSuccess returns true when this post chartrepo repo charts name version labels conflict response has a 2xx status code
+func (o *PostChartrepoRepoChartsNameVersionLabelsConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post chartrepo repo charts name version labels conflict response has a 3xx status code
+func (o *PostChartrepoRepoChartsNameVersionLabelsConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post chartrepo repo charts name version labels conflict response has a 4xx status code
+func (o *PostChartrepoRepoChartsNameVersionLabelsConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post chartrepo repo charts name version labels conflict response has a 5xx status code
+func (o *PostChartrepoRepoChartsNameVersionLabelsConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post chartrepo repo charts name version labels conflict response a status code equal to that given
+func (o *PostChartrepoRepoChartsNameVersionLabelsConflict) IsCode(code int) bool {
+	return code == 409
+}
+
 func (o *PostChartrepoRepoChartsNameVersionLabelsConflict) Error() string {
+	return fmt.Sprintf("[POST /chartrepo/{repo}/charts/{name}/{version}/labels][%d] postChartrepoRepoChartsNameVersionLabelsConflict ", 409)
+}
+
+func (o *PostChartrepoRepoChartsNameVersionLabelsConflict) String() string {
 	return fmt.Sprintf("[POST /chartrepo/{repo}/charts/{name}/{version}/labels][%d] postChartrepoRepoChartsNameVersionLabelsConflict ", 409)
 }
 
@@ -199,14 +378,44 @@ func NewPostChartrepoRepoChartsNameVersionLabelsInternalServerError() *PostChart
 	return &PostChartrepoRepoChartsNameVersionLabelsInternalServerError{}
 }
 
-/*PostChartrepoRepoChartsNameVersionLabelsInternalServerError handles this case with default header values.
+/*
+PostChartrepoRepoChartsNameVersionLabelsInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error occurred
 */
 type PostChartrepoRepoChartsNameVersionLabelsInternalServerError struct {
 }
 
+// IsSuccess returns true when this post chartrepo repo charts name version labels internal server error response has a 2xx status code
+func (o *PostChartrepoRepoChartsNameVersionLabelsInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post chartrepo repo charts name version labels internal server error response has a 3xx status code
+func (o *PostChartrepoRepoChartsNameVersionLabelsInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post chartrepo repo charts name version labels internal server error response has a 4xx status code
+func (o *PostChartrepoRepoChartsNameVersionLabelsInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this post chartrepo repo charts name version labels internal server error response has a 5xx status code
+func (o *PostChartrepoRepoChartsNameVersionLabelsInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this post chartrepo repo charts name version labels internal server error response a status code equal to that given
+func (o *PostChartrepoRepoChartsNameVersionLabelsInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *PostChartrepoRepoChartsNameVersionLabelsInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /chartrepo/{repo}/charts/{name}/{version}/labels][%d] postChartrepoRepoChartsNameVersionLabelsInternalServerError ", 500)
+}
+
+func (o *PostChartrepoRepoChartsNameVersionLabelsInternalServerError) String() string {
 	return fmt.Sprintf("[POST /chartrepo/{repo}/charts/{name}/{version}/labels][%d] postChartrepoRepoChartsNameVersionLabelsInternalServerError ", 500)
 }
 

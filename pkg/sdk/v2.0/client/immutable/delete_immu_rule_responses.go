@@ -53,7 +53,6 @@ func (o *DeleteImmuRuleReader) ReadResponse(response runtime.ClientResponse, con
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -64,24 +63,59 @@ func NewDeleteImmuRuleOK() *DeleteImmuRuleOK {
 	return &DeleteImmuRuleOK{}
 }
 
-/*DeleteImmuRuleOK handles this case with default header values.
+/*
+DeleteImmuRuleOK describes a response with status code 200, with default header values.
 
 Success
 */
 type DeleteImmuRuleOK struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
+}
+
+// IsSuccess returns true when this delete immu rule o k response has a 2xx status code
+func (o *DeleteImmuRuleOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this delete immu rule o k response has a 3xx status code
+func (o *DeleteImmuRuleOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete immu rule o k response has a 4xx status code
+func (o *DeleteImmuRuleOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete immu rule o k response has a 5xx status code
+func (o *DeleteImmuRuleOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete immu rule o k response a status code equal to that given
+func (o *DeleteImmuRuleOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *DeleteImmuRuleOK) Error() string {
 	return fmt.Sprintf("[DELETE /projects/{project_name_or_id}/immutabletagrules/{immutable_rule_id}][%d] deleteImmuRuleOK ", 200)
 }
 
+func (o *DeleteImmuRuleOK) String() string {
+	return fmt.Sprintf("[DELETE /projects/{project_name_or_id}/immutabletagrules/{immutable_rule_id}][%d] deleteImmuRuleOK ", 200)
+}
+
 func (o *DeleteImmuRuleOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	return nil
 }
@@ -91,19 +125,50 @@ func NewDeleteImmuRuleBadRequest() *DeleteImmuRuleBadRequest {
 	return &DeleteImmuRuleBadRequest{}
 }
 
-/*DeleteImmuRuleBadRequest handles this case with default header values.
+/*
+DeleteImmuRuleBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
 type DeleteImmuRuleBadRequest struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete immu rule bad request response has a 2xx status code
+func (o *DeleteImmuRuleBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete immu rule bad request response has a 3xx status code
+func (o *DeleteImmuRuleBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete immu rule bad request response has a 4xx status code
+func (o *DeleteImmuRuleBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete immu rule bad request response has a 5xx status code
+func (o *DeleteImmuRuleBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete immu rule bad request response a status code equal to that given
+func (o *DeleteImmuRuleBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *DeleteImmuRuleBadRequest) Error() string {
+	return fmt.Sprintf("[DELETE /projects/{project_name_or_id}/immutabletagrules/{immutable_rule_id}][%d] deleteImmuRuleBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *DeleteImmuRuleBadRequest) String() string {
 	return fmt.Sprintf("[DELETE /projects/{project_name_or_id}/immutabletagrules/{immutable_rule_id}][%d] deleteImmuRuleBadRequest  %+v", 400, o.Payload)
 }
 
@@ -113,8 +178,12 @@ func (o *DeleteImmuRuleBadRequest) GetPayload() *models.Errors {
 
 func (o *DeleteImmuRuleBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -131,19 +200,50 @@ func NewDeleteImmuRuleUnauthorized() *DeleteImmuRuleUnauthorized {
 	return &DeleteImmuRuleUnauthorized{}
 }
 
-/*DeleteImmuRuleUnauthorized handles this case with default header values.
+/*
+DeleteImmuRuleUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type DeleteImmuRuleUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete immu rule unauthorized response has a 2xx status code
+func (o *DeleteImmuRuleUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete immu rule unauthorized response has a 3xx status code
+func (o *DeleteImmuRuleUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete immu rule unauthorized response has a 4xx status code
+func (o *DeleteImmuRuleUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete immu rule unauthorized response has a 5xx status code
+func (o *DeleteImmuRuleUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete immu rule unauthorized response a status code equal to that given
+func (o *DeleteImmuRuleUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *DeleteImmuRuleUnauthorized) Error() string {
+	return fmt.Sprintf("[DELETE /projects/{project_name_or_id}/immutabletagrules/{immutable_rule_id}][%d] deleteImmuRuleUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *DeleteImmuRuleUnauthorized) String() string {
 	return fmt.Sprintf("[DELETE /projects/{project_name_or_id}/immutabletagrules/{immutable_rule_id}][%d] deleteImmuRuleUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -153,8 +253,12 @@ func (o *DeleteImmuRuleUnauthorized) GetPayload() *models.Errors {
 
 func (o *DeleteImmuRuleUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -171,19 +275,50 @@ func NewDeleteImmuRuleForbidden() *DeleteImmuRuleForbidden {
 	return &DeleteImmuRuleForbidden{}
 }
 
-/*DeleteImmuRuleForbidden handles this case with default header values.
+/*
+DeleteImmuRuleForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type DeleteImmuRuleForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete immu rule forbidden response has a 2xx status code
+func (o *DeleteImmuRuleForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete immu rule forbidden response has a 3xx status code
+func (o *DeleteImmuRuleForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete immu rule forbidden response has a 4xx status code
+func (o *DeleteImmuRuleForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete immu rule forbidden response has a 5xx status code
+func (o *DeleteImmuRuleForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete immu rule forbidden response a status code equal to that given
+func (o *DeleteImmuRuleForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *DeleteImmuRuleForbidden) Error() string {
+	return fmt.Sprintf("[DELETE /projects/{project_name_or_id}/immutabletagrules/{immutable_rule_id}][%d] deleteImmuRuleForbidden  %+v", 403, o.Payload)
+}
+
+func (o *DeleteImmuRuleForbidden) String() string {
 	return fmt.Sprintf("[DELETE /projects/{project_name_or_id}/immutabletagrules/{immutable_rule_id}][%d] deleteImmuRuleForbidden  %+v", 403, o.Payload)
 }
 
@@ -193,8 +328,12 @@ func (o *DeleteImmuRuleForbidden) GetPayload() *models.Errors {
 
 func (o *DeleteImmuRuleForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -211,19 +350,50 @@ func NewDeleteImmuRuleInternalServerError() *DeleteImmuRuleInternalServerError {
 	return &DeleteImmuRuleInternalServerError{}
 }
 
-/*DeleteImmuRuleInternalServerError handles this case with default header values.
+/*
+DeleteImmuRuleInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type DeleteImmuRuleInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete immu rule internal server error response has a 2xx status code
+func (o *DeleteImmuRuleInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete immu rule internal server error response has a 3xx status code
+func (o *DeleteImmuRuleInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete immu rule internal server error response has a 4xx status code
+func (o *DeleteImmuRuleInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete immu rule internal server error response has a 5xx status code
+func (o *DeleteImmuRuleInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this delete immu rule internal server error response a status code equal to that given
+func (o *DeleteImmuRuleInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *DeleteImmuRuleInternalServerError) Error() string {
+	return fmt.Sprintf("[DELETE /projects/{project_name_or_id}/immutabletagrules/{immutable_rule_id}][%d] deleteImmuRuleInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *DeleteImmuRuleInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /projects/{project_name_or_id}/immutabletagrules/{immutable_rule_id}][%d] deleteImmuRuleInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -233,8 +403,12 @@ func (o *DeleteImmuRuleInternalServerError) GetPayload() *models.Errors {
 
 func (o *DeleteImmuRuleInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

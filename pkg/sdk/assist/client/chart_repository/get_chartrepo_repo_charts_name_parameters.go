@@ -16,64 +16,81 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// NewGetChartrepoRepoChartsNameParams creates a new GetChartrepoRepoChartsNameParams object
-// with the default values initialized.
+// NewGetChartrepoRepoChartsNameParams creates a new GetChartrepoRepoChartsNameParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewGetChartrepoRepoChartsNameParams() *GetChartrepoRepoChartsNameParams {
-	var ()
 	return &GetChartrepoRepoChartsNameParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewGetChartrepoRepoChartsNameParamsWithTimeout creates a new GetChartrepoRepoChartsNameParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewGetChartrepoRepoChartsNameParamsWithTimeout(timeout time.Duration) *GetChartrepoRepoChartsNameParams {
-	var ()
 	return &GetChartrepoRepoChartsNameParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewGetChartrepoRepoChartsNameParamsWithContext creates a new GetChartrepoRepoChartsNameParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewGetChartrepoRepoChartsNameParamsWithContext(ctx context.Context) *GetChartrepoRepoChartsNameParams {
-	var ()
 	return &GetChartrepoRepoChartsNameParams{
-
 		Context: ctx,
 	}
 }
 
 // NewGetChartrepoRepoChartsNameParamsWithHTTPClient creates a new GetChartrepoRepoChartsNameParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewGetChartrepoRepoChartsNameParamsWithHTTPClient(client *http.Client) *GetChartrepoRepoChartsNameParams {
-	var ()
 	return &GetChartrepoRepoChartsNameParams{
 		HTTPClient: client,
 	}
 }
 
-/*GetChartrepoRepoChartsNameParams contains all the parameters to send to the API endpoint
-for the get chartrepo repo charts name operation typically these are written to a http.Request
+/*
+GetChartrepoRepoChartsNameParams contains all the parameters to send to the API endpoint
+
+	for the get chartrepo repo charts name operation.
+
+	Typically these are written to a http.Request.
 */
 type GetChartrepoRepoChartsNameParams struct {
 
-	/*Name
-	  The chart name
+	/* Name.
 
+	   The chart name
 	*/
 	Name string
-	/*Repo
-	  The project name
 
+	/* Repo.
+
+	   The project name
 	*/
 	Repo string
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the get chartrepo repo charts name params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *GetChartrepoRepoChartsNameParams) WithDefaults() *GetChartrepoRepoChartsNameParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the get chartrepo repo charts name params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *GetChartrepoRepoChartsNameParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the get chartrepo repo charts name params

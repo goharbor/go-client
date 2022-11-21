@@ -53,7 +53,6 @@ func (o *GetProjectDeletableReader) ReadResponse(response runtime.ClientResponse
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -64,7 +63,8 @@ func NewGetProjectDeletableOK() *GetProjectDeletableOK {
 	return &GetProjectDeletableOK{}
 }
 
-/*GetProjectDeletableOK handles this case with default header values.
+/*
+GetProjectDeletableOK describes a response with status code 200, with default header values.
 
 Return deletable status of the project.
 */
@@ -72,7 +72,36 @@ type GetProjectDeletableOK struct {
 	Payload *models.ProjectDeletable
 }
 
+// IsSuccess returns true when this get project deletable o k response has a 2xx status code
+func (o *GetProjectDeletableOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get project deletable o k response has a 3xx status code
+func (o *GetProjectDeletableOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get project deletable o k response has a 4xx status code
+func (o *GetProjectDeletableOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get project deletable o k response has a 5xx status code
+func (o *GetProjectDeletableOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get project deletable o k response a status code equal to that given
+func (o *GetProjectDeletableOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetProjectDeletableOK) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/_deletable][%d] getProjectDeletableOK  %+v", 200, o.Payload)
+}
+
+func (o *GetProjectDeletableOK) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/_deletable][%d] getProjectDeletableOK  %+v", 200, o.Payload)
 }
 
@@ -97,19 +126,50 @@ func NewGetProjectDeletableUnauthorized() *GetProjectDeletableUnauthorized {
 	return &GetProjectDeletableUnauthorized{}
 }
 
-/*GetProjectDeletableUnauthorized handles this case with default header values.
+/*
+GetProjectDeletableUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type GetProjectDeletableUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get project deletable unauthorized response has a 2xx status code
+func (o *GetProjectDeletableUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get project deletable unauthorized response has a 3xx status code
+func (o *GetProjectDeletableUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get project deletable unauthorized response has a 4xx status code
+func (o *GetProjectDeletableUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get project deletable unauthorized response has a 5xx status code
+func (o *GetProjectDeletableUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get project deletable unauthorized response a status code equal to that given
+func (o *GetProjectDeletableUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *GetProjectDeletableUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/_deletable][%d] getProjectDeletableUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *GetProjectDeletableUnauthorized) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/_deletable][%d] getProjectDeletableUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -119,8 +179,12 @@ func (o *GetProjectDeletableUnauthorized) GetPayload() *models.Errors {
 
 func (o *GetProjectDeletableUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -137,19 +201,50 @@ func NewGetProjectDeletableForbidden() *GetProjectDeletableForbidden {
 	return &GetProjectDeletableForbidden{}
 }
 
-/*GetProjectDeletableForbidden handles this case with default header values.
+/*
+GetProjectDeletableForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type GetProjectDeletableForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get project deletable forbidden response has a 2xx status code
+func (o *GetProjectDeletableForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get project deletable forbidden response has a 3xx status code
+func (o *GetProjectDeletableForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get project deletable forbidden response has a 4xx status code
+func (o *GetProjectDeletableForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get project deletable forbidden response has a 5xx status code
+func (o *GetProjectDeletableForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get project deletable forbidden response a status code equal to that given
+func (o *GetProjectDeletableForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *GetProjectDeletableForbidden) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/_deletable][%d] getProjectDeletableForbidden  %+v", 403, o.Payload)
+}
+
+func (o *GetProjectDeletableForbidden) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/_deletable][%d] getProjectDeletableForbidden  %+v", 403, o.Payload)
 }
 
@@ -159,8 +254,12 @@ func (o *GetProjectDeletableForbidden) GetPayload() *models.Errors {
 
 func (o *GetProjectDeletableForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -177,19 +276,50 @@ func NewGetProjectDeletableNotFound() *GetProjectDeletableNotFound {
 	return &GetProjectDeletableNotFound{}
 }
 
-/*GetProjectDeletableNotFound handles this case with default header values.
+/*
+GetProjectDeletableNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
 type GetProjectDeletableNotFound struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get project deletable not found response has a 2xx status code
+func (o *GetProjectDeletableNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get project deletable not found response has a 3xx status code
+func (o *GetProjectDeletableNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get project deletable not found response has a 4xx status code
+func (o *GetProjectDeletableNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get project deletable not found response has a 5xx status code
+func (o *GetProjectDeletableNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get project deletable not found response a status code equal to that given
+func (o *GetProjectDeletableNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *GetProjectDeletableNotFound) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/_deletable][%d] getProjectDeletableNotFound  %+v", 404, o.Payload)
+}
+
+func (o *GetProjectDeletableNotFound) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/_deletable][%d] getProjectDeletableNotFound  %+v", 404, o.Payload)
 }
 
@@ -199,8 +329,12 @@ func (o *GetProjectDeletableNotFound) GetPayload() *models.Errors {
 
 func (o *GetProjectDeletableNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -217,19 +351,50 @@ func NewGetProjectDeletableInternalServerError() *GetProjectDeletableInternalSer
 	return &GetProjectDeletableInternalServerError{}
 }
 
-/*GetProjectDeletableInternalServerError handles this case with default header values.
+/*
+GetProjectDeletableInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type GetProjectDeletableInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get project deletable internal server error response has a 2xx status code
+func (o *GetProjectDeletableInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get project deletable internal server error response has a 3xx status code
+func (o *GetProjectDeletableInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get project deletable internal server error response has a 4xx status code
+func (o *GetProjectDeletableInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get project deletable internal server error response has a 5xx status code
+func (o *GetProjectDeletableInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get project deletable internal server error response a status code equal to that given
+func (o *GetProjectDeletableInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *GetProjectDeletableInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/_deletable][%d] getProjectDeletableInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *GetProjectDeletableInternalServerError) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/_deletable][%d] getProjectDeletableInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -239,8 +404,12 @@ func (o *GetProjectDeletableInternalServerError) GetPayload() *models.Errors {
 
 func (o *GetProjectDeletableInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

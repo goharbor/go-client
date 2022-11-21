@@ -6,6 +6,7 @@ package retention
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 
@@ -54,7 +55,6 @@ func (o *TriggerRetentionExecutionReader) ReadResponse(response runtime.ClientRe
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -65,14 +65,44 @@ func NewTriggerRetentionExecutionOK() *TriggerRetentionExecutionOK {
 	return &TriggerRetentionExecutionOK{}
 }
 
-/*TriggerRetentionExecutionOK handles this case with default header values.
+/*
+TriggerRetentionExecutionOK describes a response with status code 200, with default header values.
 
 Trigger a Retention job successfully.
 */
 type TriggerRetentionExecutionOK struct {
 }
 
+// IsSuccess returns true when this trigger retention execution o k response has a 2xx status code
+func (o *TriggerRetentionExecutionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this trigger retention execution o k response has a 3xx status code
+func (o *TriggerRetentionExecutionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this trigger retention execution o k response has a 4xx status code
+func (o *TriggerRetentionExecutionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this trigger retention execution o k response has a 5xx status code
+func (o *TriggerRetentionExecutionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this trigger retention execution o k response a status code equal to that given
+func (o *TriggerRetentionExecutionOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *TriggerRetentionExecutionOK) Error() string {
+	return fmt.Sprintf("[POST /retentions/{id}/executions][%d] triggerRetentionExecutionOK ", 200)
+}
+
+func (o *TriggerRetentionExecutionOK) String() string {
 	return fmt.Sprintf("[POST /retentions/{id}/executions][%d] triggerRetentionExecutionOK ", 200)
 }
 
@@ -86,30 +116,70 @@ func NewTriggerRetentionExecutionCreated() *TriggerRetentionExecutionCreated {
 	return &TriggerRetentionExecutionCreated{}
 }
 
-/*TriggerRetentionExecutionCreated handles this case with default header values.
+/*
+TriggerRetentionExecutionCreated describes a response with status code 201, with default header values.
 
 Created
 */
 type TriggerRetentionExecutionCreated struct {
-	/*The location of the resource
+
+	/* The location of the resource
 	 */
 	Location string
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
+}
+
+// IsSuccess returns true when this trigger retention execution created response has a 2xx status code
+func (o *TriggerRetentionExecutionCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this trigger retention execution created response has a 3xx status code
+func (o *TriggerRetentionExecutionCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this trigger retention execution created response has a 4xx status code
+func (o *TriggerRetentionExecutionCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this trigger retention execution created response has a 5xx status code
+func (o *TriggerRetentionExecutionCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this trigger retention execution created response a status code equal to that given
+func (o *TriggerRetentionExecutionCreated) IsCode(code int) bool {
+	return code == 201
 }
 
 func (o *TriggerRetentionExecutionCreated) Error() string {
 	return fmt.Sprintf("[POST /retentions/{id}/executions][%d] triggerRetentionExecutionCreated ", 201)
 }
 
+func (o *TriggerRetentionExecutionCreated) String() string {
+	return fmt.Sprintf("[POST /retentions/{id}/executions][%d] triggerRetentionExecutionCreated ", 201)
+}
+
 func (o *TriggerRetentionExecutionCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header Location
-	o.Location = response.GetHeader("Location")
+	// hydrates response header Location
+	hdrLocation := response.GetHeader("Location")
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	if hdrLocation != "" {
+		o.Location = hdrLocation
+	}
+
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	return nil
 }
@@ -119,19 +189,50 @@ func NewTriggerRetentionExecutionUnauthorized() *TriggerRetentionExecutionUnauth
 	return &TriggerRetentionExecutionUnauthorized{}
 }
 
-/*TriggerRetentionExecutionUnauthorized handles this case with default header values.
+/*
+TriggerRetentionExecutionUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type TriggerRetentionExecutionUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this trigger retention execution unauthorized response has a 2xx status code
+func (o *TriggerRetentionExecutionUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this trigger retention execution unauthorized response has a 3xx status code
+func (o *TriggerRetentionExecutionUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this trigger retention execution unauthorized response has a 4xx status code
+func (o *TriggerRetentionExecutionUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this trigger retention execution unauthorized response has a 5xx status code
+func (o *TriggerRetentionExecutionUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this trigger retention execution unauthorized response a status code equal to that given
+func (o *TriggerRetentionExecutionUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *TriggerRetentionExecutionUnauthorized) Error() string {
+	return fmt.Sprintf("[POST /retentions/{id}/executions][%d] triggerRetentionExecutionUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *TriggerRetentionExecutionUnauthorized) String() string {
 	return fmt.Sprintf("[POST /retentions/{id}/executions][%d] triggerRetentionExecutionUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -141,8 +242,12 @@ func (o *TriggerRetentionExecutionUnauthorized) GetPayload() *models.Errors {
 
 func (o *TriggerRetentionExecutionUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -159,19 +264,50 @@ func NewTriggerRetentionExecutionForbidden() *TriggerRetentionExecutionForbidden
 	return &TriggerRetentionExecutionForbidden{}
 }
 
-/*TriggerRetentionExecutionForbidden handles this case with default header values.
+/*
+TriggerRetentionExecutionForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type TriggerRetentionExecutionForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this trigger retention execution forbidden response has a 2xx status code
+func (o *TriggerRetentionExecutionForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this trigger retention execution forbidden response has a 3xx status code
+func (o *TriggerRetentionExecutionForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this trigger retention execution forbidden response has a 4xx status code
+func (o *TriggerRetentionExecutionForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this trigger retention execution forbidden response has a 5xx status code
+func (o *TriggerRetentionExecutionForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this trigger retention execution forbidden response a status code equal to that given
+func (o *TriggerRetentionExecutionForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *TriggerRetentionExecutionForbidden) Error() string {
+	return fmt.Sprintf("[POST /retentions/{id}/executions][%d] triggerRetentionExecutionForbidden  %+v", 403, o.Payload)
+}
+
+func (o *TriggerRetentionExecutionForbidden) String() string {
 	return fmt.Sprintf("[POST /retentions/{id}/executions][%d] triggerRetentionExecutionForbidden  %+v", 403, o.Payload)
 }
 
@@ -181,8 +317,12 @@ func (o *TriggerRetentionExecutionForbidden) GetPayload() *models.Errors {
 
 func (o *TriggerRetentionExecutionForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -199,19 +339,50 @@ func NewTriggerRetentionExecutionInternalServerError() *TriggerRetentionExecutio
 	return &TriggerRetentionExecutionInternalServerError{}
 }
 
-/*TriggerRetentionExecutionInternalServerError handles this case with default header values.
+/*
+TriggerRetentionExecutionInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type TriggerRetentionExecutionInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this trigger retention execution internal server error response has a 2xx status code
+func (o *TriggerRetentionExecutionInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this trigger retention execution internal server error response has a 3xx status code
+func (o *TriggerRetentionExecutionInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this trigger retention execution internal server error response has a 4xx status code
+func (o *TriggerRetentionExecutionInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this trigger retention execution internal server error response has a 5xx status code
+func (o *TriggerRetentionExecutionInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this trigger retention execution internal server error response a status code equal to that given
+func (o *TriggerRetentionExecutionInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *TriggerRetentionExecutionInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /retentions/{id}/executions][%d] triggerRetentionExecutionInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *TriggerRetentionExecutionInternalServerError) String() string {
 	return fmt.Sprintf("[POST /retentions/{id}/executions][%d] triggerRetentionExecutionInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -221,8 +392,12 @@ func (o *TriggerRetentionExecutionInternalServerError) GetPayload() *models.Erro
 
 func (o *TriggerRetentionExecutionInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -234,7 +409,8 @@ func (o *TriggerRetentionExecutionInternalServerError) readResponse(response run
 	return nil
 }
 
-/*TriggerRetentionExecutionBody trigger retention execution body
+/*
+TriggerRetentionExecutionBody trigger retention execution body
 swagger:model TriggerRetentionExecutionBody
 */
 type TriggerRetentionExecutionBody struct {
@@ -245,6 +421,11 @@ type TriggerRetentionExecutionBody struct {
 
 // Validate validates this trigger retention execution body
 func (o *TriggerRetentionExecutionBody) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this trigger retention execution body based on context it is used
+func (o *TriggerRetentionExecutionBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

@@ -59,7 +59,6 @@ func (o *CreateProjectMemberReader) ReadResponse(response runtime.ClientResponse
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -70,24 +69,59 @@ func NewCreateProjectMemberCreated() *CreateProjectMemberCreated {
 	return &CreateProjectMemberCreated{}
 }
 
-/*CreateProjectMemberCreated handles this case with default header values.
+/*
+CreateProjectMemberCreated describes a response with status code 201, with default header values.
 
 Project member created successfully.
 */
 type CreateProjectMemberCreated struct {
-	/*The URL of the created resource
+
+	/* The URL of the created resource
 	 */
 	Location string
+}
+
+// IsSuccess returns true when this create project member created response has a 2xx status code
+func (o *CreateProjectMemberCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create project member created response has a 3xx status code
+func (o *CreateProjectMemberCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create project member created response has a 4xx status code
+func (o *CreateProjectMemberCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create project member created response has a 5xx status code
+func (o *CreateProjectMemberCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create project member created response a status code equal to that given
+func (o *CreateProjectMemberCreated) IsCode(code int) bool {
+	return code == 201
 }
 
 func (o *CreateProjectMemberCreated) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name_or_id}/members][%d] createProjectMemberCreated ", 201)
 }
 
+func (o *CreateProjectMemberCreated) String() string {
+	return fmt.Sprintf("[POST /projects/{project_name_or_id}/members][%d] createProjectMemberCreated ", 201)
+}
+
 func (o *CreateProjectMemberCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header Location
-	o.Location = response.GetHeader("Location")
+	// hydrates response header Location
+	hdrLocation := response.GetHeader("Location")
+
+	if hdrLocation != "" {
+		o.Location = hdrLocation
+	}
 
 	return nil
 }
@@ -97,19 +131,50 @@ func NewCreateProjectMemberBadRequest() *CreateProjectMemberBadRequest {
 	return &CreateProjectMemberBadRequest{}
 }
 
-/*CreateProjectMemberBadRequest handles this case with default header values.
+/*
+CreateProjectMemberBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
 type CreateProjectMemberBadRequest struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create project member bad request response has a 2xx status code
+func (o *CreateProjectMemberBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create project member bad request response has a 3xx status code
+func (o *CreateProjectMemberBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create project member bad request response has a 4xx status code
+func (o *CreateProjectMemberBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create project member bad request response has a 5xx status code
+func (o *CreateProjectMemberBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create project member bad request response a status code equal to that given
+func (o *CreateProjectMemberBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *CreateProjectMemberBadRequest) Error() string {
+	return fmt.Sprintf("[POST /projects/{project_name_or_id}/members][%d] createProjectMemberBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *CreateProjectMemberBadRequest) String() string {
 	return fmt.Sprintf("[POST /projects/{project_name_or_id}/members][%d] createProjectMemberBadRequest  %+v", 400, o.Payload)
 }
 
@@ -119,8 +184,12 @@ func (o *CreateProjectMemberBadRequest) GetPayload() *models.Errors {
 
 func (o *CreateProjectMemberBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -137,19 +206,50 @@ func NewCreateProjectMemberUnauthorized() *CreateProjectMemberUnauthorized {
 	return &CreateProjectMemberUnauthorized{}
 }
 
-/*CreateProjectMemberUnauthorized handles this case with default header values.
+/*
+CreateProjectMemberUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type CreateProjectMemberUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create project member unauthorized response has a 2xx status code
+func (o *CreateProjectMemberUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create project member unauthorized response has a 3xx status code
+func (o *CreateProjectMemberUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create project member unauthorized response has a 4xx status code
+func (o *CreateProjectMemberUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create project member unauthorized response has a 5xx status code
+func (o *CreateProjectMemberUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create project member unauthorized response a status code equal to that given
+func (o *CreateProjectMemberUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *CreateProjectMemberUnauthorized) Error() string {
+	return fmt.Sprintf("[POST /projects/{project_name_or_id}/members][%d] createProjectMemberUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *CreateProjectMemberUnauthorized) String() string {
 	return fmt.Sprintf("[POST /projects/{project_name_or_id}/members][%d] createProjectMemberUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -159,8 +259,12 @@ func (o *CreateProjectMemberUnauthorized) GetPayload() *models.Errors {
 
 func (o *CreateProjectMemberUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -177,19 +281,50 @@ func NewCreateProjectMemberForbidden() *CreateProjectMemberForbidden {
 	return &CreateProjectMemberForbidden{}
 }
 
-/*CreateProjectMemberForbidden handles this case with default header values.
+/*
+CreateProjectMemberForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type CreateProjectMemberForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create project member forbidden response has a 2xx status code
+func (o *CreateProjectMemberForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create project member forbidden response has a 3xx status code
+func (o *CreateProjectMemberForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create project member forbidden response has a 4xx status code
+func (o *CreateProjectMemberForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create project member forbidden response has a 5xx status code
+func (o *CreateProjectMemberForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create project member forbidden response a status code equal to that given
+func (o *CreateProjectMemberForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *CreateProjectMemberForbidden) Error() string {
+	return fmt.Sprintf("[POST /projects/{project_name_or_id}/members][%d] createProjectMemberForbidden  %+v", 403, o.Payload)
+}
+
+func (o *CreateProjectMemberForbidden) String() string {
 	return fmt.Sprintf("[POST /projects/{project_name_or_id}/members][%d] createProjectMemberForbidden  %+v", 403, o.Payload)
 }
 
@@ -199,8 +334,12 @@ func (o *CreateProjectMemberForbidden) GetPayload() *models.Errors {
 
 func (o *CreateProjectMemberForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -217,19 +356,50 @@ func NewCreateProjectMemberConflict() *CreateProjectMemberConflict {
 	return &CreateProjectMemberConflict{}
 }
 
-/*CreateProjectMemberConflict handles this case with default header values.
+/*
+CreateProjectMemberConflict describes a response with status code 409, with default header values.
 
 Conflict
 */
 type CreateProjectMemberConflict struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create project member conflict response has a 2xx status code
+func (o *CreateProjectMemberConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create project member conflict response has a 3xx status code
+func (o *CreateProjectMemberConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create project member conflict response has a 4xx status code
+func (o *CreateProjectMemberConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create project member conflict response has a 5xx status code
+func (o *CreateProjectMemberConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create project member conflict response a status code equal to that given
+func (o *CreateProjectMemberConflict) IsCode(code int) bool {
+	return code == 409
+}
+
 func (o *CreateProjectMemberConflict) Error() string {
+	return fmt.Sprintf("[POST /projects/{project_name_or_id}/members][%d] createProjectMemberConflict  %+v", 409, o.Payload)
+}
+
+func (o *CreateProjectMemberConflict) String() string {
 	return fmt.Sprintf("[POST /projects/{project_name_or_id}/members][%d] createProjectMemberConflict  %+v", 409, o.Payload)
 }
 
@@ -239,8 +409,12 @@ func (o *CreateProjectMemberConflict) GetPayload() *models.Errors {
 
 func (o *CreateProjectMemberConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -257,19 +431,50 @@ func NewCreateProjectMemberInternalServerError() *CreateProjectMemberInternalSer
 	return &CreateProjectMemberInternalServerError{}
 }
 
-/*CreateProjectMemberInternalServerError handles this case with default header values.
+/*
+CreateProjectMemberInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type CreateProjectMemberInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create project member internal server error response has a 2xx status code
+func (o *CreateProjectMemberInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create project member internal server error response has a 3xx status code
+func (o *CreateProjectMemberInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create project member internal server error response has a 4xx status code
+func (o *CreateProjectMemberInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create project member internal server error response has a 5xx status code
+func (o *CreateProjectMemberInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this create project member internal server error response a status code equal to that given
+func (o *CreateProjectMemberInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *CreateProjectMemberInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /projects/{project_name_or_id}/members][%d] createProjectMemberInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *CreateProjectMemberInternalServerError) String() string {
 	return fmt.Sprintf("[POST /projects/{project_name_or_id}/members][%d] createProjectMemberInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -279,8 +484,12 @@ func (o *CreateProjectMemberInternalServerError) GetPayload() *models.Errors {
 
 func (o *CreateProjectMemberInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

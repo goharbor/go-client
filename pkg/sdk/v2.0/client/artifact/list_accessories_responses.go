@@ -61,7 +61,6 @@ func (o *ListAccessoriesReader) ReadResponse(response runtime.ClientResponse, co
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -72,22 +71,54 @@ func NewListAccessoriesOK() *ListAccessoriesOK {
 	return &ListAccessoriesOK{}
 }
 
-/*ListAccessoriesOK handles this case with default header values.
+/*
+ListAccessoriesOK describes a response with status code 200, with default header values.
 
 Success
 */
 type ListAccessoriesOK struct {
-	/*Link refers to the previous page and next page
+
+	/* Link refers to the previous page and next page
 	 */
 	Link string
-	/*The total count of accessories
+
+	/* The total count of accessories
 	 */
 	XTotalCount int64
 
 	Payload []*models.Accessory
 }
 
+// IsSuccess returns true when this list accessories o k response has a 2xx status code
+func (o *ListAccessoriesOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list accessories o k response has a 3xx status code
+func (o *ListAccessoriesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list accessories o k response has a 4xx status code
+func (o *ListAccessoriesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list accessories o k response has a 5xx status code
+func (o *ListAccessoriesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list accessories o k response a status code equal to that given
+func (o *ListAccessoriesOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ListAccessoriesOK) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/accessories][%d] listAccessoriesOK  %+v", 200, o.Payload)
+}
+
+func (o *ListAccessoriesOK) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/accessories][%d] listAccessoriesOK  %+v", 200, o.Payload)
 }
 
@@ -97,15 +128,23 @@ func (o *ListAccessoriesOK) GetPayload() []*models.Accessory {
 
 func (o *ListAccessoriesOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header Link
-	o.Link = response.GetHeader("Link")
+	// hydrates response header Link
+	hdrLink := response.GetHeader("Link")
 
-	// response header X-Total-Count
-	xTotalCount, err := swag.ConvertInt64(response.GetHeader("X-Total-Count"))
-	if err != nil {
-		return errors.InvalidType("X-Total-Count", "header", "int64", response.GetHeader("X-Total-Count"))
+	if hdrLink != "" {
+		o.Link = hdrLink
 	}
-	o.XTotalCount = xTotalCount
+
+	// hydrates response header X-Total-Count
+	hdrXTotalCount := response.GetHeader("X-Total-Count")
+
+	if hdrXTotalCount != "" {
+		valxTotalCount, err := swag.ConvertInt64(hdrXTotalCount)
+		if err != nil {
+			return errors.InvalidType("X-Total-Count", "header", "int64", hdrXTotalCount)
+		}
+		o.XTotalCount = valxTotalCount
+	}
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
@@ -120,19 +159,50 @@ func NewListAccessoriesBadRequest() *ListAccessoriesBadRequest {
 	return &ListAccessoriesBadRequest{}
 }
 
-/*ListAccessoriesBadRequest handles this case with default header values.
+/*
+ListAccessoriesBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
 type ListAccessoriesBadRequest struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list accessories bad request response has a 2xx status code
+func (o *ListAccessoriesBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list accessories bad request response has a 3xx status code
+func (o *ListAccessoriesBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list accessories bad request response has a 4xx status code
+func (o *ListAccessoriesBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list accessories bad request response has a 5xx status code
+func (o *ListAccessoriesBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list accessories bad request response a status code equal to that given
+func (o *ListAccessoriesBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *ListAccessoriesBadRequest) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/accessories][%d] listAccessoriesBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *ListAccessoriesBadRequest) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/accessories][%d] listAccessoriesBadRequest  %+v", 400, o.Payload)
 }
 
@@ -142,8 +212,12 @@ func (o *ListAccessoriesBadRequest) GetPayload() *models.Errors {
 
 func (o *ListAccessoriesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -160,19 +234,50 @@ func NewListAccessoriesUnauthorized() *ListAccessoriesUnauthorized {
 	return &ListAccessoriesUnauthorized{}
 }
 
-/*ListAccessoriesUnauthorized handles this case with default header values.
+/*
+ListAccessoriesUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type ListAccessoriesUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list accessories unauthorized response has a 2xx status code
+func (o *ListAccessoriesUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list accessories unauthorized response has a 3xx status code
+func (o *ListAccessoriesUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list accessories unauthorized response has a 4xx status code
+func (o *ListAccessoriesUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list accessories unauthorized response has a 5xx status code
+func (o *ListAccessoriesUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list accessories unauthorized response a status code equal to that given
+func (o *ListAccessoriesUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *ListAccessoriesUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/accessories][%d] listAccessoriesUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *ListAccessoriesUnauthorized) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/accessories][%d] listAccessoriesUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -182,8 +287,12 @@ func (o *ListAccessoriesUnauthorized) GetPayload() *models.Errors {
 
 func (o *ListAccessoriesUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -200,19 +309,50 @@ func NewListAccessoriesForbidden() *ListAccessoriesForbidden {
 	return &ListAccessoriesForbidden{}
 }
 
-/*ListAccessoriesForbidden handles this case with default header values.
+/*
+ListAccessoriesForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type ListAccessoriesForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list accessories forbidden response has a 2xx status code
+func (o *ListAccessoriesForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list accessories forbidden response has a 3xx status code
+func (o *ListAccessoriesForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list accessories forbidden response has a 4xx status code
+func (o *ListAccessoriesForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list accessories forbidden response has a 5xx status code
+func (o *ListAccessoriesForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list accessories forbidden response a status code equal to that given
+func (o *ListAccessoriesForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *ListAccessoriesForbidden) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/accessories][%d] listAccessoriesForbidden  %+v", 403, o.Payload)
+}
+
+func (o *ListAccessoriesForbidden) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/accessories][%d] listAccessoriesForbidden  %+v", 403, o.Payload)
 }
 
@@ -222,8 +362,12 @@ func (o *ListAccessoriesForbidden) GetPayload() *models.Errors {
 
 func (o *ListAccessoriesForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -240,19 +384,50 @@ func NewListAccessoriesNotFound() *ListAccessoriesNotFound {
 	return &ListAccessoriesNotFound{}
 }
 
-/*ListAccessoriesNotFound handles this case with default header values.
+/*
+ListAccessoriesNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
 type ListAccessoriesNotFound struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list accessories not found response has a 2xx status code
+func (o *ListAccessoriesNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list accessories not found response has a 3xx status code
+func (o *ListAccessoriesNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list accessories not found response has a 4xx status code
+func (o *ListAccessoriesNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list accessories not found response has a 5xx status code
+func (o *ListAccessoriesNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list accessories not found response a status code equal to that given
+func (o *ListAccessoriesNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *ListAccessoriesNotFound) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/accessories][%d] listAccessoriesNotFound  %+v", 404, o.Payload)
+}
+
+func (o *ListAccessoriesNotFound) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/accessories][%d] listAccessoriesNotFound  %+v", 404, o.Payload)
 }
 
@@ -262,8 +437,12 @@ func (o *ListAccessoriesNotFound) GetPayload() *models.Errors {
 
 func (o *ListAccessoriesNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -280,19 +459,50 @@ func NewListAccessoriesInternalServerError() *ListAccessoriesInternalServerError
 	return &ListAccessoriesInternalServerError{}
 }
 
-/*ListAccessoriesInternalServerError handles this case with default header values.
+/*
+ListAccessoriesInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type ListAccessoriesInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list accessories internal server error response has a 2xx status code
+func (o *ListAccessoriesInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list accessories internal server error response has a 3xx status code
+func (o *ListAccessoriesInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list accessories internal server error response has a 4xx status code
+func (o *ListAccessoriesInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list accessories internal server error response has a 5xx status code
+func (o *ListAccessoriesInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list accessories internal server error response a status code equal to that given
+func (o *ListAccessoriesInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *ListAccessoriesInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/accessories][%d] listAccessoriesInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *ListAccessoriesInternalServerError) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/accessories][%d] listAccessoriesInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -302,8 +512,12 @@ func (o *ListAccessoriesInternalServerError) GetPayload() *models.Errors {
 
 func (o *ListAccessoriesInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

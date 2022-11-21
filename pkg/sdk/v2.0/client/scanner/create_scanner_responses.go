@@ -53,7 +53,6 @@ func (o *CreateScannerReader) ReadResponse(response runtime.ClientResponse, cons
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -64,24 +63,59 @@ func NewCreateScannerCreated() *CreateScannerCreated {
 	return &CreateScannerCreated{}
 }
 
-/*CreateScannerCreated handles this case with default header values.
+/*
+CreateScannerCreated describes a response with status code 201, with default header values.
 
 Created successfully
 */
 type CreateScannerCreated struct {
-	/*The URL of the created resource
+
+	/* The URL of the created resource
 	 */
 	Location string
+}
+
+// IsSuccess returns true when this create scanner created response has a 2xx status code
+func (o *CreateScannerCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create scanner created response has a 3xx status code
+func (o *CreateScannerCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create scanner created response has a 4xx status code
+func (o *CreateScannerCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create scanner created response has a 5xx status code
+func (o *CreateScannerCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create scanner created response a status code equal to that given
+func (o *CreateScannerCreated) IsCode(code int) bool {
+	return code == 201
 }
 
 func (o *CreateScannerCreated) Error() string {
 	return fmt.Sprintf("[POST /scanners][%d] createScannerCreated ", 201)
 }
 
+func (o *CreateScannerCreated) String() string {
+	return fmt.Sprintf("[POST /scanners][%d] createScannerCreated ", 201)
+}
+
 func (o *CreateScannerCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header Location
-	o.Location = response.GetHeader("Location")
+	// hydrates response header Location
+	hdrLocation := response.GetHeader("Location")
+
+	if hdrLocation != "" {
+		o.Location = hdrLocation
+	}
 
 	return nil
 }
@@ -91,19 +125,50 @@ func NewCreateScannerBadRequest() *CreateScannerBadRequest {
 	return &CreateScannerBadRequest{}
 }
 
-/*CreateScannerBadRequest handles this case with default header values.
+/*
+CreateScannerBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
 type CreateScannerBadRequest struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create scanner bad request response has a 2xx status code
+func (o *CreateScannerBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create scanner bad request response has a 3xx status code
+func (o *CreateScannerBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create scanner bad request response has a 4xx status code
+func (o *CreateScannerBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create scanner bad request response has a 5xx status code
+func (o *CreateScannerBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create scanner bad request response a status code equal to that given
+func (o *CreateScannerBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *CreateScannerBadRequest) Error() string {
+	return fmt.Sprintf("[POST /scanners][%d] createScannerBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *CreateScannerBadRequest) String() string {
 	return fmt.Sprintf("[POST /scanners][%d] createScannerBadRequest  %+v", 400, o.Payload)
 }
 
@@ -113,8 +178,12 @@ func (o *CreateScannerBadRequest) GetPayload() *models.Errors {
 
 func (o *CreateScannerBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -131,19 +200,50 @@ func NewCreateScannerUnauthorized() *CreateScannerUnauthorized {
 	return &CreateScannerUnauthorized{}
 }
 
-/*CreateScannerUnauthorized handles this case with default header values.
+/*
+CreateScannerUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type CreateScannerUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create scanner unauthorized response has a 2xx status code
+func (o *CreateScannerUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create scanner unauthorized response has a 3xx status code
+func (o *CreateScannerUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create scanner unauthorized response has a 4xx status code
+func (o *CreateScannerUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create scanner unauthorized response has a 5xx status code
+func (o *CreateScannerUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create scanner unauthorized response a status code equal to that given
+func (o *CreateScannerUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *CreateScannerUnauthorized) Error() string {
+	return fmt.Sprintf("[POST /scanners][%d] createScannerUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *CreateScannerUnauthorized) String() string {
 	return fmt.Sprintf("[POST /scanners][%d] createScannerUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -153,8 +253,12 @@ func (o *CreateScannerUnauthorized) GetPayload() *models.Errors {
 
 func (o *CreateScannerUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -171,19 +275,50 @@ func NewCreateScannerForbidden() *CreateScannerForbidden {
 	return &CreateScannerForbidden{}
 }
 
-/*CreateScannerForbidden handles this case with default header values.
+/*
+CreateScannerForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type CreateScannerForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create scanner forbidden response has a 2xx status code
+func (o *CreateScannerForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create scanner forbidden response has a 3xx status code
+func (o *CreateScannerForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create scanner forbidden response has a 4xx status code
+func (o *CreateScannerForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create scanner forbidden response has a 5xx status code
+func (o *CreateScannerForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create scanner forbidden response a status code equal to that given
+func (o *CreateScannerForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *CreateScannerForbidden) Error() string {
+	return fmt.Sprintf("[POST /scanners][%d] createScannerForbidden  %+v", 403, o.Payload)
+}
+
+func (o *CreateScannerForbidden) String() string {
 	return fmt.Sprintf("[POST /scanners][%d] createScannerForbidden  %+v", 403, o.Payload)
 }
 
@@ -193,8 +328,12 @@ func (o *CreateScannerForbidden) GetPayload() *models.Errors {
 
 func (o *CreateScannerForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -211,19 +350,50 @@ func NewCreateScannerInternalServerError() *CreateScannerInternalServerError {
 	return &CreateScannerInternalServerError{}
 }
 
-/*CreateScannerInternalServerError handles this case with default header values.
+/*
+CreateScannerInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type CreateScannerInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create scanner internal server error response has a 2xx status code
+func (o *CreateScannerInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create scanner internal server error response has a 3xx status code
+func (o *CreateScannerInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create scanner internal server error response has a 4xx status code
+func (o *CreateScannerInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create scanner internal server error response has a 5xx status code
+func (o *CreateScannerInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this create scanner internal server error response a status code equal to that given
+func (o *CreateScannerInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *CreateScannerInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /scanners][%d] createScannerInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *CreateScannerInternalServerError) String() string {
 	return fmt.Sprintf("[POST /scanners][%d] createScannerInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -233,8 +403,12 @@ func (o *CreateScannerInternalServerError) GetPayload() *models.Errors {
 
 func (o *CreateScannerInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

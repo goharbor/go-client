@@ -47,7 +47,6 @@ type Client struct {
 ListAuditLogs gets recent logs of the projects which the user is a member of
 
 This endpoint let user see the recent operation logs of the projects which he is member of
-
 */
 func (a *Client) ListAuditLogs(ctx context.Context, params *ListAuditLogsParams) (*ListAuditLogsOK, error) {
 

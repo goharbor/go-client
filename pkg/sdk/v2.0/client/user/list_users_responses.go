@@ -49,7 +49,6 @@ func (o *ListUsersReader) ReadResponse(response runtime.ClientResponse, consumer
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -60,22 +59,54 @@ func NewListUsersOK() *ListUsersOK {
 	return &ListUsersOK{}
 }
 
-/*ListUsersOK handles this case with default header values.
+/*
+ListUsersOK describes a response with status code 200, with default header values.
 
 return the list of users.
 */
 type ListUsersOK struct {
-	/*Link to previous page and next page
+
+	/* Link to previous page and next page
 	 */
 	Link string
-	/*The total count of users
+
+	/* The total count of users
 	 */
 	XTotalCount int64
 
 	Payload []*models.UserResp
 }
 
+// IsSuccess returns true when this list users o k response has a 2xx status code
+func (o *ListUsersOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list users o k response has a 3xx status code
+func (o *ListUsersOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list users o k response has a 4xx status code
+func (o *ListUsersOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list users o k response has a 5xx status code
+func (o *ListUsersOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list users o k response a status code equal to that given
+func (o *ListUsersOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ListUsersOK) Error() string {
+	return fmt.Sprintf("[GET /users][%d] listUsersOK  %+v", 200, o.Payload)
+}
+
+func (o *ListUsersOK) String() string {
 	return fmt.Sprintf("[GET /users][%d] listUsersOK  %+v", 200, o.Payload)
 }
 
@@ -85,15 +116,23 @@ func (o *ListUsersOK) GetPayload() []*models.UserResp {
 
 func (o *ListUsersOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header Link
-	o.Link = response.GetHeader("Link")
+	// hydrates response header Link
+	hdrLink := response.GetHeader("Link")
 
-	// response header X-Total-Count
-	xTotalCount, err := swag.ConvertInt64(response.GetHeader("X-Total-Count"))
-	if err != nil {
-		return errors.InvalidType("X-Total-Count", "header", "int64", response.GetHeader("X-Total-Count"))
+	if hdrLink != "" {
+		o.Link = hdrLink
 	}
-	o.XTotalCount = xTotalCount
+
+	// hydrates response header X-Total-Count
+	hdrXTotalCount := response.GetHeader("X-Total-Count")
+
+	if hdrXTotalCount != "" {
+		valxTotalCount, err := swag.ConvertInt64(hdrXTotalCount)
+		if err != nil {
+			return errors.InvalidType("X-Total-Count", "header", "int64", hdrXTotalCount)
+		}
+		o.XTotalCount = valxTotalCount
+	}
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
@@ -108,19 +147,50 @@ func NewListUsersUnauthorized() *ListUsersUnauthorized {
 	return &ListUsersUnauthorized{}
 }
 
-/*ListUsersUnauthorized handles this case with default header values.
+/*
+ListUsersUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type ListUsersUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list users unauthorized response has a 2xx status code
+func (o *ListUsersUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list users unauthorized response has a 3xx status code
+func (o *ListUsersUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list users unauthorized response has a 4xx status code
+func (o *ListUsersUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list users unauthorized response has a 5xx status code
+func (o *ListUsersUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list users unauthorized response a status code equal to that given
+func (o *ListUsersUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *ListUsersUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /users][%d] listUsersUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *ListUsersUnauthorized) String() string {
 	return fmt.Sprintf("[GET /users][%d] listUsersUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -130,8 +200,12 @@ func (o *ListUsersUnauthorized) GetPayload() *models.Errors {
 
 func (o *ListUsersUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -148,19 +222,50 @@ func NewListUsersForbidden() *ListUsersForbidden {
 	return &ListUsersForbidden{}
 }
 
-/*ListUsersForbidden handles this case with default header values.
+/*
+ListUsersForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type ListUsersForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list users forbidden response has a 2xx status code
+func (o *ListUsersForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list users forbidden response has a 3xx status code
+func (o *ListUsersForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list users forbidden response has a 4xx status code
+func (o *ListUsersForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list users forbidden response has a 5xx status code
+func (o *ListUsersForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list users forbidden response a status code equal to that given
+func (o *ListUsersForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *ListUsersForbidden) Error() string {
+	return fmt.Sprintf("[GET /users][%d] listUsersForbidden  %+v", 403, o.Payload)
+}
+
+func (o *ListUsersForbidden) String() string {
 	return fmt.Sprintf("[GET /users][%d] listUsersForbidden  %+v", 403, o.Payload)
 }
 
@@ -170,8 +275,12 @@ func (o *ListUsersForbidden) GetPayload() *models.Errors {
 
 func (o *ListUsersForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -188,19 +297,50 @@ func NewListUsersInternalServerError() *ListUsersInternalServerError {
 	return &ListUsersInternalServerError{}
 }
 
-/*ListUsersInternalServerError handles this case with default header values.
+/*
+ListUsersInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type ListUsersInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list users internal server error response has a 2xx status code
+func (o *ListUsersInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list users internal server error response has a 3xx status code
+func (o *ListUsersInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list users internal server error response has a 4xx status code
+func (o *ListUsersInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list users internal server error response has a 5xx status code
+func (o *ListUsersInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list users internal server error response a status code equal to that given
+func (o *ListUsersInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *ListUsersInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /users][%d] listUsersInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *ListUsersInternalServerError) String() string {
 	return fmt.Sprintf("[GET /users][%d] listUsersInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -210,8 +350,12 @@ func (o *ListUsersInternalServerError) GetPayload() *models.Errors {
 
 func (o *ListUsersInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

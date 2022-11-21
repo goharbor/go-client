@@ -60,7 +60,6 @@ type Client struct {
 GetCert gets default root certificate
 
 This endpoint is for downloading a default root certificate.
-
 */
 func (a *Client) GetCert(ctx context.Context, params *GetCertParams, writer io.Writer) (*GetCertOK, error) {
 
@@ -88,7 +87,6 @@ func (a *Client) GetCert(ctx context.Context, params *GetCertParams, writer io.W
 GetSystemInfo gets general system info
 
 This API is for retrieving general system info, this can be called by anonymous request.  Some attributes will be omitted in the response when this API is called by anonymous request.
-
 */
 func (a *Client) GetSystemInfo(ctx context.Context, params *GetSystemInfoParams) (*GetSystemInfoOK, error) {
 
@@ -116,7 +114,6 @@ func (a *Client) GetSystemInfo(ctx context.Context, params *GetSystemInfoParams)
 GetVolumes gets system volume info total free size
 
 This endpoint is for retrieving system volume info that only provides for admin user.  Note that the response only reflects the storage status of local disk.
-
 */
 func (a *Client) GetVolumes(ctx context.Context, params *GetVolumesParams) (*GetVolumesOK, error) {
 

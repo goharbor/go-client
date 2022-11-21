@@ -17,94 +17,119 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// NewListUserGroupsParams creates a new ListUserGroupsParams object
-// with the default values initialized.
+// NewListUserGroupsParams creates a new ListUserGroupsParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewListUserGroupsParams() *ListUserGroupsParams {
-	var (
-		pageDefault     = int64(1)
-		pageSizeDefault = int64(10)
-	)
 	return &ListUserGroupsParams{
-		Page:     &pageDefault,
-		PageSize: &pageSizeDefault,
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewListUserGroupsParamsWithTimeout creates a new ListUserGroupsParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewListUserGroupsParamsWithTimeout(timeout time.Duration) *ListUserGroupsParams {
-	var (
-		pageDefault     = int64(1)
-		pageSizeDefault = int64(10)
-	)
 	return &ListUserGroupsParams{
-		Page:     &pageDefault,
-		PageSize: &pageSizeDefault,
-
 		timeout: timeout,
 	}
 }
 
 // NewListUserGroupsParamsWithContext creates a new ListUserGroupsParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewListUserGroupsParamsWithContext(ctx context.Context) *ListUserGroupsParams {
-	var (
-		pageDefault     = int64(1)
-		pageSizeDefault = int64(10)
-	)
 	return &ListUserGroupsParams{
-		Page:     &pageDefault,
-		PageSize: &pageSizeDefault,
-
 		Context: ctx,
 	}
 }
 
 // NewListUserGroupsParamsWithHTTPClient creates a new ListUserGroupsParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewListUserGroupsParamsWithHTTPClient(client *http.Client) *ListUserGroupsParams {
-	var (
-		pageDefault     = int64(1)
-		pageSizeDefault = int64(10)
-	)
 	return &ListUserGroupsParams{
-		Page:       &pageDefault,
-		PageSize:   &pageSizeDefault,
 		HTTPClient: client,
 	}
 }
 
-/*ListUserGroupsParams contains all the parameters to send to the API endpoint
-for the list user groups operation typically these are written to a http.Request
+/*
+ListUserGroupsParams contains all the parameters to send to the API endpoint
+
+	for the list user groups operation.
+
+	Typically these are written to a http.Request.
 */
 type ListUserGroupsParams struct {
 
-	/*XRequestID
-	  An unique ID for the request
+	/* XRequestID.
 
+	   An unique ID for the request
 	*/
 	XRequestID *string
-	/*LdapGroupDn
-	  search with ldap group DN
 
+	/* GroupName.
+
+	   group name need to search, fuzzy matches
+	*/
+	GroupName *string
+
+	/* LdapGroupDn.
+
+	   search with ldap group DN
 	*/
 	LdapGroupDn *string
-	/*Page
-	  The page number
 
+	/* Page.
+
+	   The page number
+
+	   Format: int64
+	   Default: 1
 	*/
 	Page *int64
-	/*PageSize
-	  The size of per page
 
+	/* PageSize.
+
+	   The size of per page
+
+	   Format: int64
+	   Default: 10
 	*/
 	PageSize *int64
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the list user groups params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *ListUserGroupsParams) WithDefaults() *ListUserGroupsParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the list user groups params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *ListUserGroupsParams) SetDefaults() {
+	var (
+		pageDefault = int64(1)
+
+		pageSizeDefault = int64(10)
+	)
+
+	val := ListUserGroupsParams{
+		Page:     &pageDefault,
+		PageSize: &pageSizeDefault,
+	}
+
+	val.timeout = o.timeout
+	val.Context = o.Context
+	val.HTTPClient = o.HTTPClient
+	*o = val
 }
 
 // WithTimeout adds the timeout to the list user groups params
@@ -149,6 +174,17 @@ func (o *ListUserGroupsParams) WithXRequestID(xRequestID *string) *ListUserGroup
 // SetXRequestID adds the xRequestId to the list user groups params
 func (o *ListUserGroupsParams) SetXRequestID(xRequestID *string) {
 	o.XRequestID = xRequestID
+}
+
+// WithGroupName adds the groupName to the list user groups params
+func (o *ListUserGroupsParams) WithGroupName(groupName *string) *ListUserGroupsParams {
+	o.SetGroupName(groupName)
+	return o
+}
+
+// SetGroupName adds the groupName to the list user groups params
+func (o *ListUserGroupsParams) SetGroupName(groupName *string) {
+	o.GroupName = groupName
 }
 
 // WithLdapGroupDn adds the ldapGroupDn to the list user groups params
@@ -198,55 +234,74 @@ func (o *ListUserGroupsParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
 			return err
 		}
+	}
 
+	if o.GroupName != nil {
+
+		// query param group_name
+		var qrGroupName string
+
+		if o.GroupName != nil {
+			qrGroupName = *o.GroupName
+		}
+		qGroupName := qrGroupName
+		if qGroupName != "" {
+
+			if err := r.SetQueryParam("group_name", qGroupName); err != nil {
+				return err
+			}
+		}
 	}
 
 	if o.LdapGroupDn != nil {
 
 		// query param ldap_group_dn
 		var qrLdapGroupDn string
+
 		if o.LdapGroupDn != nil {
 			qrLdapGroupDn = *o.LdapGroupDn
 		}
 		qLdapGroupDn := qrLdapGroupDn
 		if qLdapGroupDn != "" {
+
 			if err := r.SetQueryParam("ldap_group_dn", qLdapGroupDn); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if o.Page != nil {
 
 		// query param page
 		var qrPage int64
+
 		if o.Page != nil {
 			qrPage = *o.Page
 		}
 		qPage := swag.FormatInt64(qrPage)
 		if qPage != "" {
+
 			if err := r.SetQueryParam("page", qPage); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if o.PageSize != nil {
 
 		// query param page_size
 		var qrPageSize int64
+
 		if o.PageSize != nil {
 			qrPageSize = *o.PageSize
 		}
 		qPageSize := swag.FormatInt64(qrPageSize)
 		if qPageSize != "" {
+
 			if err := r.SetQueryParam("page_size", qPageSize); err != nil {
 				return err
 			}
 		}
-
 	}
 
 	if len(res) > 0 {

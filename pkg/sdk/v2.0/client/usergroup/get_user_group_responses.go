@@ -59,7 +59,6 @@ func (o *GetUserGroupReader) ReadResponse(response runtime.ClientResponse, consu
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -70,7 +69,8 @@ func NewGetUserGroupOK() *GetUserGroupOK {
 	return &GetUserGroupOK{}
 }
 
-/*GetUserGroupOK handles this case with default header values.
+/*
+GetUserGroupOK describes a response with status code 200, with default header values.
 
 User group get successfully.
 */
@@ -78,7 +78,36 @@ type GetUserGroupOK struct {
 	Payload *models.UserGroup
 }
 
+// IsSuccess returns true when this get user group o k response has a 2xx status code
+func (o *GetUserGroupOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get user group o k response has a 3xx status code
+func (o *GetUserGroupOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get user group o k response has a 4xx status code
+func (o *GetUserGroupOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get user group o k response has a 5xx status code
+func (o *GetUserGroupOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get user group o k response a status code equal to that given
+func (o *GetUserGroupOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetUserGroupOK) Error() string {
+	return fmt.Sprintf("[GET /usergroups/{group_id}][%d] getUserGroupOK  %+v", 200, o.Payload)
+}
+
+func (o *GetUserGroupOK) String() string {
 	return fmt.Sprintf("[GET /usergroups/{group_id}][%d] getUserGroupOK  %+v", 200, o.Payload)
 }
 
@@ -103,19 +132,50 @@ func NewGetUserGroupBadRequest() *GetUserGroupBadRequest {
 	return &GetUserGroupBadRequest{}
 }
 
-/*GetUserGroupBadRequest handles this case with default header values.
+/*
+GetUserGroupBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
 type GetUserGroupBadRequest struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get user group bad request response has a 2xx status code
+func (o *GetUserGroupBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get user group bad request response has a 3xx status code
+func (o *GetUserGroupBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get user group bad request response has a 4xx status code
+func (o *GetUserGroupBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get user group bad request response has a 5xx status code
+func (o *GetUserGroupBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get user group bad request response a status code equal to that given
+func (o *GetUserGroupBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *GetUserGroupBadRequest) Error() string {
+	return fmt.Sprintf("[GET /usergroups/{group_id}][%d] getUserGroupBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GetUserGroupBadRequest) String() string {
 	return fmt.Sprintf("[GET /usergroups/{group_id}][%d] getUserGroupBadRequest  %+v", 400, o.Payload)
 }
 
@@ -125,8 +185,12 @@ func (o *GetUserGroupBadRequest) GetPayload() *models.Errors {
 
 func (o *GetUserGroupBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -143,19 +207,50 @@ func NewGetUserGroupUnauthorized() *GetUserGroupUnauthorized {
 	return &GetUserGroupUnauthorized{}
 }
 
-/*GetUserGroupUnauthorized handles this case with default header values.
+/*
+GetUserGroupUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type GetUserGroupUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get user group unauthorized response has a 2xx status code
+func (o *GetUserGroupUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get user group unauthorized response has a 3xx status code
+func (o *GetUserGroupUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get user group unauthorized response has a 4xx status code
+func (o *GetUserGroupUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get user group unauthorized response has a 5xx status code
+func (o *GetUserGroupUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get user group unauthorized response a status code equal to that given
+func (o *GetUserGroupUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *GetUserGroupUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /usergroups/{group_id}][%d] getUserGroupUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *GetUserGroupUnauthorized) String() string {
 	return fmt.Sprintf("[GET /usergroups/{group_id}][%d] getUserGroupUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -165,8 +260,12 @@ func (o *GetUserGroupUnauthorized) GetPayload() *models.Errors {
 
 func (o *GetUserGroupUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -183,19 +282,50 @@ func NewGetUserGroupForbidden() *GetUserGroupForbidden {
 	return &GetUserGroupForbidden{}
 }
 
-/*GetUserGroupForbidden handles this case with default header values.
+/*
+GetUserGroupForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type GetUserGroupForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get user group forbidden response has a 2xx status code
+func (o *GetUserGroupForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get user group forbidden response has a 3xx status code
+func (o *GetUserGroupForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get user group forbidden response has a 4xx status code
+func (o *GetUserGroupForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get user group forbidden response has a 5xx status code
+func (o *GetUserGroupForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get user group forbidden response a status code equal to that given
+func (o *GetUserGroupForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *GetUserGroupForbidden) Error() string {
+	return fmt.Sprintf("[GET /usergroups/{group_id}][%d] getUserGroupForbidden  %+v", 403, o.Payload)
+}
+
+func (o *GetUserGroupForbidden) String() string {
 	return fmt.Sprintf("[GET /usergroups/{group_id}][%d] getUserGroupForbidden  %+v", 403, o.Payload)
 }
 
@@ -205,8 +335,12 @@ func (o *GetUserGroupForbidden) GetPayload() *models.Errors {
 
 func (o *GetUserGroupForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -223,19 +357,50 @@ func NewGetUserGroupNotFound() *GetUserGroupNotFound {
 	return &GetUserGroupNotFound{}
 }
 
-/*GetUserGroupNotFound handles this case with default header values.
+/*
+GetUserGroupNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
 type GetUserGroupNotFound struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get user group not found response has a 2xx status code
+func (o *GetUserGroupNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get user group not found response has a 3xx status code
+func (o *GetUserGroupNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get user group not found response has a 4xx status code
+func (o *GetUserGroupNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get user group not found response has a 5xx status code
+func (o *GetUserGroupNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get user group not found response a status code equal to that given
+func (o *GetUserGroupNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *GetUserGroupNotFound) Error() string {
+	return fmt.Sprintf("[GET /usergroups/{group_id}][%d] getUserGroupNotFound  %+v", 404, o.Payload)
+}
+
+func (o *GetUserGroupNotFound) String() string {
 	return fmt.Sprintf("[GET /usergroups/{group_id}][%d] getUserGroupNotFound  %+v", 404, o.Payload)
 }
 
@@ -245,8 +410,12 @@ func (o *GetUserGroupNotFound) GetPayload() *models.Errors {
 
 func (o *GetUserGroupNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -263,19 +432,50 @@ func NewGetUserGroupInternalServerError() *GetUserGroupInternalServerError {
 	return &GetUserGroupInternalServerError{}
 }
 
-/*GetUserGroupInternalServerError handles this case with default header values.
+/*
+GetUserGroupInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type GetUserGroupInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get user group internal server error response has a 2xx status code
+func (o *GetUserGroupInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get user group internal server error response has a 3xx status code
+func (o *GetUserGroupInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get user group internal server error response has a 4xx status code
+func (o *GetUserGroupInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get user group internal server error response has a 5xx status code
+func (o *GetUserGroupInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get user group internal server error response a status code equal to that given
+func (o *GetUserGroupInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *GetUserGroupInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /usergroups/{group_id}][%d] getUserGroupInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *GetUserGroupInternalServerError) String() string {
 	return fmt.Sprintf("[GET /usergroups/{group_id}][%d] getUserGroupInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -285,8 +485,12 @@ func (o *GetUserGroupInternalServerError) GetPayload() *models.Errors {
 
 func (o *GetUserGroupInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

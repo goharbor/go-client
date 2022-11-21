@@ -6,6 +6,7 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -44,7 +45,6 @@ func (m *SupportedWebhookEventTypes) Validate(formats strfmt.Registry) error {
 }
 
 func (m *SupportedWebhookEventTypes) validateEventType(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.EventType) { // not required
 		return nil
 	}
@@ -54,6 +54,8 @@ func (m *SupportedWebhookEventTypes) validateEventType(formats strfmt.Registry) 
 		if err := m.EventType[i].Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("event_type" + "." + strconv.Itoa(i))
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("event_type" + "." + strconv.Itoa(i))
 			}
 			return err
 		}
@@ -64,7 +66,6 @@ func (m *SupportedWebhookEventTypes) validateEventType(formats strfmt.Registry) 
 }
 
 func (m *SupportedWebhookEventTypes) validateNotifyType(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.NotifyType) { // not required
 		return nil
 	}
@@ -74,6 +75,62 @@ func (m *SupportedWebhookEventTypes) validateNotifyType(formats strfmt.Registry)
 		if err := m.NotifyType[i].Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("notify_type" + "." + strconv.Itoa(i))
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("notify_type" + "." + strconv.Itoa(i))
+			}
+			return err
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this supported webhook event types based on the context it is used
+func (m *SupportedWebhookEventTypes) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateEventType(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateNotifyType(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *SupportedWebhookEventTypes) contextValidateEventType(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.EventType); i++ {
+
+		if err := m.EventType[i].ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("event_type" + "." + strconv.Itoa(i))
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("event_type" + "." + strconv.Itoa(i))
+			}
+			return err
+		}
+
+	}
+
+	return nil
+}
+
+func (m *SupportedWebhookEventTypes) contextValidateNotifyType(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.NotifyType); i++ {
+
+		if err := m.NotifyType[i].ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("notify_type" + "." + strconv.Itoa(i))
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("notify_type" + "." + strconv.Itoa(i))
 			}
 			return err
 		}

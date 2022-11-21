@@ -59,7 +59,6 @@ func (o *CreateRobotReader) ReadResponse(response runtime.ClientResponse, consum
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -70,22 +69,54 @@ func NewCreateRobotCreated() *CreateRobotCreated {
 	return &CreateRobotCreated{}
 }
 
-/*CreateRobotCreated handles this case with default header values.
+/*
+CreateRobotCreated describes a response with status code 201, with default header values.
 
 Created
 */
 type CreateRobotCreated struct {
-	/*The location of the resource
+
+	/* The location of the resource
 	 */
 	Location string
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.RobotCreated
 }
 
+// IsSuccess returns true when this create robot created response has a 2xx status code
+func (o *CreateRobotCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create robot created response has a 3xx status code
+func (o *CreateRobotCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create robot created response has a 4xx status code
+func (o *CreateRobotCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create robot created response has a 5xx status code
+func (o *CreateRobotCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create robot created response a status code equal to that given
+func (o *CreateRobotCreated) IsCode(code int) bool {
+	return code == 201
+}
+
 func (o *CreateRobotCreated) Error() string {
+	return fmt.Sprintf("[POST /robots][%d] createRobotCreated  %+v", 201, o.Payload)
+}
+
+func (o *CreateRobotCreated) String() string {
 	return fmt.Sprintf("[POST /robots][%d] createRobotCreated  %+v", 201, o.Payload)
 }
 
@@ -95,11 +126,19 @@ func (o *CreateRobotCreated) GetPayload() *models.RobotCreated {
 
 func (o *CreateRobotCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header Location
-	o.Location = response.GetHeader("Location")
+	// hydrates response header Location
+	hdrLocation := response.GetHeader("Location")
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	if hdrLocation != "" {
+		o.Location = hdrLocation
+	}
+
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.RobotCreated)
 
@@ -116,19 +155,50 @@ func NewCreateRobotBadRequest() *CreateRobotBadRequest {
 	return &CreateRobotBadRequest{}
 }
 
-/*CreateRobotBadRequest handles this case with default header values.
+/*
+CreateRobotBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
 type CreateRobotBadRequest struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create robot bad request response has a 2xx status code
+func (o *CreateRobotBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create robot bad request response has a 3xx status code
+func (o *CreateRobotBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create robot bad request response has a 4xx status code
+func (o *CreateRobotBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create robot bad request response has a 5xx status code
+func (o *CreateRobotBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create robot bad request response a status code equal to that given
+func (o *CreateRobotBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *CreateRobotBadRequest) Error() string {
+	return fmt.Sprintf("[POST /robots][%d] createRobotBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *CreateRobotBadRequest) String() string {
 	return fmt.Sprintf("[POST /robots][%d] createRobotBadRequest  %+v", 400, o.Payload)
 }
 
@@ -138,8 +208,12 @@ func (o *CreateRobotBadRequest) GetPayload() *models.Errors {
 
 func (o *CreateRobotBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -156,19 +230,50 @@ func NewCreateRobotUnauthorized() *CreateRobotUnauthorized {
 	return &CreateRobotUnauthorized{}
 }
 
-/*CreateRobotUnauthorized handles this case with default header values.
+/*
+CreateRobotUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type CreateRobotUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create robot unauthorized response has a 2xx status code
+func (o *CreateRobotUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create robot unauthorized response has a 3xx status code
+func (o *CreateRobotUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create robot unauthorized response has a 4xx status code
+func (o *CreateRobotUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create robot unauthorized response has a 5xx status code
+func (o *CreateRobotUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create robot unauthorized response a status code equal to that given
+func (o *CreateRobotUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *CreateRobotUnauthorized) Error() string {
+	return fmt.Sprintf("[POST /robots][%d] createRobotUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *CreateRobotUnauthorized) String() string {
 	return fmt.Sprintf("[POST /robots][%d] createRobotUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -178,8 +283,12 @@ func (o *CreateRobotUnauthorized) GetPayload() *models.Errors {
 
 func (o *CreateRobotUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -196,19 +305,50 @@ func NewCreateRobotForbidden() *CreateRobotForbidden {
 	return &CreateRobotForbidden{}
 }
 
-/*CreateRobotForbidden handles this case with default header values.
+/*
+CreateRobotForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type CreateRobotForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create robot forbidden response has a 2xx status code
+func (o *CreateRobotForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create robot forbidden response has a 3xx status code
+func (o *CreateRobotForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create robot forbidden response has a 4xx status code
+func (o *CreateRobotForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create robot forbidden response has a 5xx status code
+func (o *CreateRobotForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create robot forbidden response a status code equal to that given
+func (o *CreateRobotForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *CreateRobotForbidden) Error() string {
+	return fmt.Sprintf("[POST /robots][%d] createRobotForbidden  %+v", 403, o.Payload)
+}
+
+func (o *CreateRobotForbidden) String() string {
 	return fmt.Sprintf("[POST /robots][%d] createRobotForbidden  %+v", 403, o.Payload)
 }
 
@@ -218,8 +358,12 @@ func (o *CreateRobotForbidden) GetPayload() *models.Errors {
 
 func (o *CreateRobotForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -236,19 +380,50 @@ func NewCreateRobotNotFound() *CreateRobotNotFound {
 	return &CreateRobotNotFound{}
 }
 
-/*CreateRobotNotFound handles this case with default header values.
+/*
+CreateRobotNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
 type CreateRobotNotFound struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create robot not found response has a 2xx status code
+func (o *CreateRobotNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create robot not found response has a 3xx status code
+func (o *CreateRobotNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create robot not found response has a 4xx status code
+func (o *CreateRobotNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create robot not found response has a 5xx status code
+func (o *CreateRobotNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create robot not found response a status code equal to that given
+func (o *CreateRobotNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *CreateRobotNotFound) Error() string {
+	return fmt.Sprintf("[POST /robots][%d] createRobotNotFound  %+v", 404, o.Payload)
+}
+
+func (o *CreateRobotNotFound) String() string {
 	return fmt.Sprintf("[POST /robots][%d] createRobotNotFound  %+v", 404, o.Payload)
 }
 
@@ -258,8 +433,12 @@ func (o *CreateRobotNotFound) GetPayload() *models.Errors {
 
 func (o *CreateRobotNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -276,19 +455,50 @@ func NewCreateRobotInternalServerError() *CreateRobotInternalServerError {
 	return &CreateRobotInternalServerError{}
 }
 
-/*CreateRobotInternalServerError handles this case with default header values.
+/*
+CreateRobotInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type CreateRobotInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create robot internal server error response has a 2xx status code
+func (o *CreateRobotInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create robot internal server error response has a 3xx status code
+func (o *CreateRobotInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create robot internal server error response has a 4xx status code
+func (o *CreateRobotInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create robot internal server error response has a 5xx status code
+func (o *CreateRobotInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this create robot internal server error response a status code equal to that given
+func (o *CreateRobotInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *CreateRobotInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /robots][%d] createRobotInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *CreateRobotInternalServerError) String() string {
 	return fmt.Sprintf("[POST /robots][%d] createRobotInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -298,8 +508,12 @@ func (o *CreateRobotInternalServerError) GetPayload() *models.Errors {
 
 func (o *CreateRobotInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

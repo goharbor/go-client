@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -18,7 +20,7 @@ type UserGroupSearchItem struct {
 	// The name of the user group
 	GroupName string `json:"group_name,omitempty"`
 
-	// The group type, 1 for LDAP group, 2 for HTTP group.
+	// The group type, 1 for LDAP group, 2 for HTTP group, 3 for OIDC group.
 	GroupType int64 `json:"group_type,omitempty"`
 
 	// The ID of the user group
@@ -27,6 +29,11 @@ type UserGroupSearchItem struct {
 
 // Validate validates this user group search item
 func (m *UserGroupSearchItem) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this user group search item based on context it is used
+func (m *UserGroupSearchItem) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

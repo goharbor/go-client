@@ -6,6 +6,7 @@ package version
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 
@@ -28,7 +29,6 @@ func (o *GetVersionReader) ReadResponse(response runtime.ClientResponse, consume
 			return nil, err
 		}
 		return result, nil
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -39,7 +39,8 @@ func NewGetVersionOK() *GetVersionOK {
 	return &GetVersionOK{}
 }
 
-/*GetVersionOK handles this case with default header values.
+/*
+GetVersionOK describes a response with status code 200, with default header values.
 
 The supported API version
 */
@@ -47,7 +48,36 @@ type GetVersionOK struct {
 	Payload *GetVersionOKBody
 }
 
+// IsSuccess returns true when this get version o k response has a 2xx status code
+func (o *GetVersionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get version o k response has a 3xx status code
+func (o *GetVersionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get version o k response has a 4xx status code
+func (o *GetVersionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get version o k response has a 5xx status code
+func (o *GetVersionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get version o k response a status code equal to that given
+func (o *GetVersionOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetVersionOK) Error() string {
+	return fmt.Sprintf("[GET /version][%d] getVersionOK  %+v", 200, o.Payload)
+}
+
+func (o *GetVersionOK) String() string {
 	return fmt.Sprintf("[GET /version][%d] getVersionOK  %+v", 200, o.Payload)
 }
 
@@ -67,7 +97,8 @@ func (o *GetVersionOK) readResponse(response runtime.ClientResponse, consumer ru
 	return nil
 }
 
-/*GetVersionOKBody get version o k body
+/*
+GetVersionOKBody get version o k body
 swagger:model GetVersionOKBody
 */
 type GetVersionOKBody struct {
@@ -78,6 +109,11 @@ type GetVersionOKBody struct {
 
 // Validate validates this get version o k body
 func (o *GetVersionOKBody) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this get version o k body based on context it is used
+func (o *GetVersionOKBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

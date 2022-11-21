@@ -71,7 +71,6 @@ type Client struct {
 CreateLabel posts creates a label
 
 This endpoint let user creates a label.
-
 */
 func (a *Client) CreateLabel(ctx context.Context, params *CreateLabelParams) (*CreateLabelCreated, error) {
 
@@ -99,7 +98,6 @@ func (a *Client) CreateLabel(ctx context.Context, params *CreateLabelParams) (*C
 DeleteLabel deletes the label specified by ID
 
 Delete the label specified by ID.
-
 */
 func (a *Client) DeleteLabel(ctx context.Context, params *DeleteLabelParams) (*DeleteLabelOK, error) {
 
@@ -127,7 +125,6 @@ func (a *Client) DeleteLabel(ctx context.Context, params *DeleteLabelParams) (*D
 GetLabelByID gets the label specified by ID
 
 This endpoint let user get the label by specific ID.
-
 */
 func (a *Client) GetLabelByID(ctx context.Context, params *GetLabelByIDParams) (*GetLabelByIDOK, error) {
 
@@ -155,7 +152,6 @@ func (a *Client) GetLabelByID(ctx context.Context, params *GetLabelByIDParams) (
 ListLabels lists labels according to the query strings
 
 This endpoint let user list labels by name, scope and project_id
-
 */
 func (a *Client) ListLabels(ctx context.Context, params *ListLabelsParams) (*ListLabelsOK, error) {
 
@@ -183,7 +179,6 @@ func (a *Client) ListLabels(ctx context.Context, params *ListLabelsParams) (*Lis
 UpdateLabel updates the label properties
 
 This endpoint let user update label properties.
-
 */
 func (a *Client) UpdateLabel(ctx context.Context, params *UpdateLabelParams) (*UpdateLabelOK, error) {
 

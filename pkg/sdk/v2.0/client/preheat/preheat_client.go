@@ -542,7 +542,6 @@ func (a *Client) ManualPreheat(ctx context.Context, params *ManualPreheatParams)
 PingInstances pings status of a instance
 
 This endpoint checks status of a instance, the instance can be given by ID or Endpoint URL (together with credential)
-
 */
 func (a *Client) PingInstances(ctx context.Context, params *PingInstancesParams) (*PingInstancesOK, error) {
 

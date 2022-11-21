@@ -65,7 +65,6 @@ type Client struct {
 ImportLdapUser imports selected available ldap users
 
 This endpoint adds the selected available ldap users to harbor based on related configuration parameters from the system. System will try to guess the user email address and realname, add to harbor user information. If have errors when import user, will return the list of importing failed uid and the failed reason.
-
 */
 func (a *Client) ImportLdapUser(ctx context.Context, params *ImportLdapUserParams) (*ImportLdapUserOK, error) {
 
@@ -93,7 +92,6 @@ func (a *Client) ImportLdapUser(ctx context.Context, params *ImportLdapUserParam
 PingLdap pings available ldap service
 
 This endpoint ping the available ldap service for test related configuration parameters.
-
 */
 func (a *Client) PingLdap(ctx context.Context, params *PingLdapParams) (*PingLdapOK, error) {
 
@@ -121,7 +119,6 @@ func (a *Client) PingLdap(ctx context.Context, params *PingLdapParams) (*PingLda
 SearchLdapGroup searches available ldap groups
 
 This endpoint searches the available ldap groups based on related configuration parameters. support to search by groupname or groupdn.
-
 */
 func (a *Client) SearchLdapGroup(ctx context.Context, params *SearchLdapGroupParams) (*SearchLdapGroupOK, error) {
 
@@ -149,7 +146,6 @@ func (a *Client) SearchLdapGroup(ctx context.Context, params *SearchLdapGroupPar
 SearchLdapUser searches available ldap users
 
 This endpoint searches the available ldap users based on related configuration parameters. Support searched by input ladp configuration, load configuration from the system and specific filter.
-
 */
 func (a *Client) SearchLdapUser(ctx context.Context, params *SearchLdapUserParams) (*SearchLdapUserOK, error) {
 

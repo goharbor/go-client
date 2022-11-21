@@ -65,7 +65,6 @@ func (o *CreateInstanceReader) ReadResponse(response runtime.ClientResponse, con
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -76,30 +75,70 @@ func NewCreateInstanceCreated() *CreateInstanceCreated {
 	return &CreateInstanceCreated{}
 }
 
-/*CreateInstanceCreated handles this case with default header values.
+/*
+CreateInstanceCreated describes a response with status code 201, with default header values.
 
 Created
 */
 type CreateInstanceCreated struct {
-	/*The location of the resource
+
+	/* The location of the resource
 	 */
 	Location string
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
+}
+
+// IsSuccess returns true when this create instance created response has a 2xx status code
+func (o *CreateInstanceCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create instance created response has a 3xx status code
+func (o *CreateInstanceCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create instance created response has a 4xx status code
+func (o *CreateInstanceCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create instance created response has a 5xx status code
+func (o *CreateInstanceCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create instance created response a status code equal to that given
+func (o *CreateInstanceCreated) IsCode(code int) bool {
+	return code == 201
 }
 
 func (o *CreateInstanceCreated) Error() string {
 	return fmt.Sprintf("[POST /p2p/preheat/instances][%d] createInstanceCreated ", 201)
 }
 
+func (o *CreateInstanceCreated) String() string {
+	return fmt.Sprintf("[POST /p2p/preheat/instances][%d] createInstanceCreated ", 201)
+}
+
 func (o *CreateInstanceCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header Location
-	o.Location = response.GetHeader("Location")
+	// hydrates response header Location
+	hdrLocation := response.GetHeader("Location")
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	if hdrLocation != "" {
+		o.Location = hdrLocation
+	}
+
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	return nil
 }
@@ -109,19 +148,50 @@ func NewCreateInstanceBadRequest() *CreateInstanceBadRequest {
 	return &CreateInstanceBadRequest{}
 }
 
-/*CreateInstanceBadRequest handles this case with default header values.
+/*
+CreateInstanceBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
 type CreateInstanceBadRequest struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create instance bad request response has a 2xx status code
+func (o *CreateInstanceBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create instance bad request response has a 3xx status code
+func (o *CreateInstanceBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create instance bad request response has a 4xx status code
+func (o *CreateInstanceBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create instance bad request response has a 5xx status code
+func (o *CreateInstanceBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create instance bad request response a status code equal to that given
+func (o *CreateInstanceBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *CreateInstanceBadRequest) Error() string {
+	return fmt.Sprintf("[POST /p2p/preheat/instances][%d] createInstanceBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *CreateInstanceBadRequest) String() string {
 	return fmt.Sprintf("[POST /p2p/preheat/instances][%d] createInstanceBadRequest  %+v", 400, o.Payload)
 }
 
@@ -131,8 +201,12 @@ func (o *CreateInstanceBadRequest) GetPayload() *models.Errors {
 
 func (o *CreateInstanceBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -149,19 +223,50 @@ func NewCreateInstanceUnauthorized() *CreateInstanceUnauthorized {
 	return &CreateInstanceUnauthorized{}
 }
 
-/*CreateInstanceUnauthorized handles this case with default header values.
+/*
+CreateInstanceUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type CreateInstanceUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create instance unauthorized response has a 2xx status code
+func (o *CreateInstanceUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create instance unauthorized response has a 3xx status code
+func (o *CreateInstanceUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create instance unauthorized response has a 4xx status code
+func (o *CreateInstanceUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create instance unauthorized response has a 5xx status code
+func (o *CreateInstanceUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create instance unauthorized response a status code equal to that given
+func (o *CreateInstanceUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *CreateInstanceUnauthorized) Error() string {
+	return fmt.Sprintf("[POST /p2p/preheat/instances][%d] createInstanceUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *CreateInstanceUnauthorized) String() string {
 	return fmt.Sprintf("[POST /p2p/preheat/instances][%d] createInstanceUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -171,8 +276,12 @@ func (o *CreateInstanceUnauthorized) GetPayload() *models.Errors {
 
 func (o *CreateInstanceUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -189,19 +298,50 @@ func NewCreateInstanceForbidden() *CreateInstanceForbidden {
 	return &CreateInstanceForbidden{}
 }
 
-/*CreateInstanceForbidden handles this case with default header values.
+/*
+CreateInstanceForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type CreateInstanceForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create instance forbidden response has a 2xx status code
+func (o *CreateInstanceForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create instance forbidden response has a 3xx status code
+func (o *CreateInstanceForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create instance forbidden response has a 4xx status code
+func (o *CreateInstanceForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create instance forbidden response has a 5xx status code
+func (o *CreateInstanceForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create instance forbidden response a status code equal to that given
+func (o *CreateInstanceForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *CreateInstanceForbidden) Error() string {
+	return fmt.Sprintf("[POST /p2p/preheat/instances][%d] createInstanceForbidden  %+v", 403, o.Payload)
+}
+
+func (o *CreateInstanceForbidden) String() string {
 	return fmt.Sprintf("[POST /p2p/preheat/instances][%d] createInstanceForbidden  %+v", 403, o.Payload)
 }
 
@@ -211,8 +351,12 @@ func (o *CreateInstanceForbidden) GetPayload() *models.Errors {
 
 func (o *CreateInstanceForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -229,19 +373,50 @@ func NewCreateInstanceNotFound() *CreateInstanceNotFound {
 	return &CreateInstanceNotFound{}
 }
 
-/*CreateInstanceNotFound handles this case with default header values.
+/*
+CreateInstanceNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
 type CreateInstanceNotFound struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create instance not found response has a 2xx status code
+func (o *CreateInstanceNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create instance not found response has a 3xx status code
+func (o *CreateInstanceNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create instance not found response has a 4xx status code
+func (o *CreateInstanceNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create instance not found response has a 5xx status code
+func (o *CreateInstanceNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create instance not found response a status code equal to that given
+func (o *CreateInstanceNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *CreateInstanceNotFound) Error() string {
+	return fmt.Sprintf("[POST /p2p/preheat/instances][%d] createInstanceNotFound  %+v", 404, o.Payload)
+}
+
+func (o *CreateInstanceNotFound) String() string {
 	return fmt.Sprintf("[POST /p2p/preheat/instances][%d] createInstanceNotFound  %+v", 404, o.Payload)
 }
 
@@ -251,8 +426,12 @@ func (o *CreateInstanceNotFound) GetPayload() *models.Errors {
 
 func (o *CreateInstanceNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -269,19 +448,50 @@ func NewCreateInstanceConflict() *CreateInstanceConflict {
 	return &CreateInstanceConflict{}
 }
 
-/*CreateInstanceConflict handles this case with default header values.
+/*
+CreateInstanceConflict describes a response with status code 409, with default header values.
 
 Conflict
 */
 type CreateInstanceConflict struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create instance conflict response has a 2xx status code
+func (o *CreateInstanceConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create instance conflict response has a 3xx status code
+func (o *CreateInstanceConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create instance conflict response has a 4xx status code
+func (o *CreateInstanceConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create instance conflict response has a 5xx status code
+func (o *CreateInstanceConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create instance conflict response a status code equal to that given
+func (o *CreateInstanceConflict) IsCode(code int) bool {
+	return code == 409
+}
+
 func (o *CreateInstanceConflict) Error() string {
+	return fmt.Sprintf("[POST /p2p/preheat/instances][%d] createInstanceConflict  %+v", 409, o.Payload)
+}
+
+func (o *CreateInstanceConflict) String() string {
 	return fmt.Sprintf("[POST /p2p/preheat/instances][%d] createInstanceConflict  %+v", 409, o.Payload)
 }
 
@@ -291,8 +501,12 @@ func (o *CreateInstanceConflict) GetPayload() *models.Errors {
 
 func (o *CreateInstanceConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -309,19 +523,50 @@ func NewCreateInstanceInternalServerError() *CreateInstanceInternalServerError {
 	return &CreateInstanceInternalServerError{}
 }
 
-/*CreateInstanceInternalServerError handles this case with default header values.
+/*
+CreateInstanceInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type CreateInstanceInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create instance internal server error response has a 2xx status code
+func (o *CreateInstanceInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create instance internal server error response has a 3xx status code
+func (o *CreateInstanceInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create instance internal server error response has a 4xx status code
+func (o *CreateInstanceInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create instance internal server error response has a 5xx status code
+func (o *CreateInstanceInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this create instance internal server error response a status code equal to that given
+func (o *CreateInstanceInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *CreateInstanceInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /p2p/preheat/instances][%d] createInstanceInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *CreateInstanceInternalServerError) String() string {
 	return fmt.Sprintf("[POST /p2p/preheat/instances][%d] createInstanceInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -331,8 +576,12 @@ func (o *CreateInstanceInternalServerError) GetPayload() *models.Errors {
 
 func (o *CreateInstanceInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

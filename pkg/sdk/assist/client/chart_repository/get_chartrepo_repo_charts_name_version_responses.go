@@ -53,7 +53,6 @@ func (o *GetChartrepoRepoChartsNameVersionReader) ReadResponse(response runtime.
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -64,7 +63,8 @@ func NewGetChartrepoRepoChartsNameVersionOK() *GetChartrepoRepoChartsNameVersion
 	return &GetChartrepoRepoChartsNameVersionOK{}
 }
 
-/*GetChartrepoRepoChartsNameVersionOK handles this case with default header values.
+/*
+GetChartrepoRepoChartsNameVersionOK describes a response with status code 200, with default header values.
 
 Successfully retrieved the chart version
 */
@@ -72,7 +72,36 @@ type GetChartrepoRepoChartsNameVersionOK struct {
 	Payload *models.ChartVersionDetails
 }
 
+// IsSuccess returns true when this get chartrepo repo charts name version o k response has a 2xx status code
+func (o *GetChartrepoRepoChartsNameVersionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get chartrepo repo charts name version o k response has a 3xx status code
+func (o *GetChartrepoRepoChartsNameVersionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get chartrepo repo charts name version o k response has a 4xx status code
+func (o *GetChartrepoRepoChartsNameVersionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get chartrepo repo charts name version o k response has a 5xx status code
+func (o *GetChartrepoRepoChartsNameVersionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get chartrepo repo charts name version o k response a status code equal to that given
+func (o *GetChartrepoRepoChartsNameVersionOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetChartrepoRepoChartsNameVersionOK) Error() string {
+	return fmt.Sprintf("[GET /chartrepo/{repo}/charts/{name}/{version}][%d] getChartrepoRepoChartsNameVersionOK  %+v", 200, o.Payload)
+}
+
+func (o *GetChartrepoRepoChartsNameVersionOK) String() string {
 	return fmt.Sprintf("[GET /chartrepo/{repo}/charts/{name}/{version}][%d] getChartrepoRepoChartsNameVersionOK  %+v", 200, o.Payload)
 }
 
@@ -97,14 +126,44 @@ func NewGetChartrepoRepoChartsNameVersionUnauthorized() *GetChartrepoRepoChartsN
 	return &GetChartrepoRepoChartsNameVersionUnauthorized{}
 }
 
-/*GetChartrepoRepoChartsNameVersionUnauthorized handles this case with default header values.
+/*
+GetChartrepoRepoChartsNameVersionUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type GetChartrepoRepoChartsNameVersionUnauthorized struct {
 }
 
+// IsSuccess returns true when this get chartrepo repo charts name version unauthorized response has a 2xx status code
+func (o *GetChartrepoRepoChartsNameVersionUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get chartrepo repo charts name version unauthorized response has a 3xx status code
+func (o *GetChartrepoRepoChartsNameVersionUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get chartrepo repo charts name version unauthorized response has a 4xx status code
+func (o *GetChartrepoRepoChartsNameVersionUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get chartrepo repo charts name version unauthorized response has a 5xx status code
+func (o *GetChartrepoRepoChartsNameVersionUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get chartrepo repo charts name version unauthorized response a status code equal to that given
+func (o *GetChartrepoRepoChartsNameVersionUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *GetChartrepoRepoChartsNameVersionUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /chartrepo/{repo}/charts/{name}/{version}][%d] getChartrepoRepoChartsNameVersionUnauthorized ", 401)
+}
+
+func (o *GetChartrepoRepoChartsNameVersionUnauthorized) String() string {
 	return fmt.Sprintf("[GET /chartrepo/{repo}/charts/{name}/{version}][%d] getChartrepoRepoChartsNameVersionUnauthorized ", 401)
 }
 
@@ -118,14 +177,44 @@ func NewGetChartrepoRepoChartsNameVersionForbidden() *GetChartrepoRepoChartsName
 	return &GetChartrepoRepoChartsNameVersionForbidden{}
 }
 
-/*GetChartrepoRepoChartsNameVersionForbidden handles this case with default header values.
+/*
+GetChartrepoRepoChartsNameVersionForbidden describes a response with status code 403, with default header values.
 
 Operation is forbidden or quota exceeded
 */
 type GetChartrepoRepoChartsNameVersionForbidden struct {
 }
 
+// IsSuccess returns true when this get chartrepo repo charts name version forbidden response has a 2xx status code
+func (o *GetChartrepoRepoChartsNameVersionForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get chartrepo repo charts name version forbidden response has a 3xx status code
+func (o *GetChartrepoRepoChartsNameVersionForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get chartrepo repo charts name version forbidden response has a 4xx status code
+func (o *GetChartrepoRepoChartsNameVersionForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get chartrepo repo charts name version forbidden response has a 5xx status code
+func (o *GetChartrepoRepoChartsNameVersionForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get chartrepo repo charts name version forbidden response a status code equal to that given
+func (o *GetChartrepoRepoChartsNameVersionForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *GetChartrepoRepoChartsNameVersionForbidden) Error() string {
+	return fmt.Sprintf("[GET /chartrepo/{repo}/charts/{name}/{version}][%d] getChartrepoRepoChartsNameVersionForbidden ", 403)
+}
+
+func (o *GetChartrepoRepoChartsNameVersionForbidden) String() string {
 	return fmt.Sprintf("[GET /chartrepo/{repo}/charts/{name}/{version}][%d] getChartrepoRepoChartsNameVersionForbidden ", 403)
 }
 
@@ -139,14 +228,44 @@ func NewGetChartrepoRepoChartsNameVersionNotFound() *GetChartrepoRepoChartsNameV
 	return &GetChartrepoRepoChartsNameVersionNotFound{}
 }
 
-/*GetChartrepoRepoChartsNameVersionNotFound handles this case with default header values.
+/*
+GetChartrepoRepoChartsNameVersionNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
 type GetChartrepoRepoChartsNameVersionNotFound struct {
 }
 
+// IsSuccess returns true when this get chartrepo repo charts name version not found response has a 2xx status code
+func (o *GetChartrepoRepoChartsNameVersionNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get chartrepo repo charts name version not found response has a 3xx status code
+func (o *GetChartrepoRepoChartsNameVersionNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get chartrepo repo charts name version not found response has a 4xx status code
+func (o *GetChartrepoRepoChartsNameVersionNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get chartrepo repo charts name version not found response has a 5xx status code
+func (o *GetChartrepoRepoChartsNameVersionNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get chartrepo repo charts name version not found response a status code equal to that given
+func (o *GetChartrepoRepoChartsNameVersionNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *GetChartrepoRepoChartsNameVersionNotFound) Error() string {
+	return fmt.Sprintf("[GET /chartrepo/{repo}/charts/{name}/{version}][%d] getChartrepoRepoChartsNameVersionNotFound ", 404)
+}
+
+func (o *GetChartrepoRepoChartsNameVersionNotFound) String() string {
 	return fmt.Sprintf("[GET /chartrepo/{repo}/charts/{name}/{version}][%d] getChartrepoRepoChartsNameVersionNotFound ", 404)
 }
 
@@ -160,14 +279,44 @@ func NewGetChartrepoRepoChartsNameVersionInternalServerError() *GetChartrepoRepo
 	return &GetChartrepoRepoChartsNameVersionInternalServerError{}
 }
 
-/*GetChartrepoRepoChartsNameVersionInternalServerError handles this case with default header values.
+/*
+GetChartrepoRepoChartsNameVersionInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error occurred
 */
 type GetChartrepoRepoChartsNameVersionInternalServerError struct {
 }
 
+// IsSuccess returns true when this get chartrepo repo charts name version internal server error response has a 2xx status code
+func (o *GetChartrepoRepoChartsNameVersionInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get chartrepo repo charts name version internal server error response has a 3xx status code
+func (o *GetChartrepoRepoChartsNameVersionInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get chartrepo repo charts name version internal server error response has a 4xx status code
+func (o *GetChartrepoRepoChartsNameVersionInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get chartrepo repo charts name version internal server error response has a 5xx status code
+func (o *GetChartrepoRepoChartsNameVersionInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get chartrepo repo charts name version internal server error response a status code equal to that given
+func (o *GetChartrepoRepoChartsNameVersionInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *GetChartrepoRepoChartsNameVersionInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /chartrepo/{repo}/charts/{name}/{version}][%d] getChartrepoRepoChartsNameVersionInternalServerError ", 500)
+}
+
+func (o *GetChartrepoRepoChartsNameVersionInternalServerError) String() string {
 	return fmt.Sprintf("[GET /chartrepo/{repo}/charts/{name}/{version}][%d] getChartrepoRepoChartsNameVersionInternalServerError ", 500)
 }
 

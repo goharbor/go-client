@@ -59,7 +59,6 @@ func (o *ListProvidersReader) ReadResponse(response runtime.ClientResponse, cons
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -70,7 +69,8 @@ func NewListProvidersOK() *ListProvidersOK {
 	return &ListProvidersOK{}
 }
 
-/*ListProvidersOK handles this case with default header values.
+/*
+ListProvidersOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -78,7 +78,36 @@ type ListProvidersOK struct {
 	Payload []*models.Metadata
 }
 
+// IsSuccess returns true when this list providers o k response has a 2xx status code
+func (o *ListProvidersOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list providers o k response has a 3xx status code
+func (o *ListProvidersOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list providers o k response has a 4xx status code
+func (o *ListProvidersOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list providers o k response has a 5xx status code
+func (o *ListProvidersOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list providers o k response a status code equal to that given
+func (o *ListProvidersOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ListProvidersOK) Error() string {
+	return fmt.Sprintf("[GET /p2p/preheat/providers][%d] listProvidersOK  %+v", 200, o.Payload)
+}
+
+func (o *ListProvidersOK) String() string {
 	return fmt.Sprintf("[GET /p2p/preheat/providers][%d] listProvidersOK  %+v", 200, o.Payload)
 }
 
@@ -101,19 +130,50 @@ func NewListProvidersBadRequest() *ListProvidersBadRequest {
 	return &ListProvidersBadRequest{}
 }
 
-/*ListProvidersBadRequest handles this case with default header values.
+/*
+ListProvidersBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
 type ListProvidersBadRequest struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list providers bad request response has a 2xx status code
+func (o *ListProvidersBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list providers bad request response has a 3xx status code
+func (o *ListProvidersBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list providers bad request response has a 4xx status code
+func (o *ListProvidersBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list providers bad request response has a 5xx status code
+func (o *ListProvidersBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list providers bad request response a status code equal to that given
+func (o *ListProvidersBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *ListProvidersBadRequest) Error() string {
+	return fmt.Sprintf("[GET /p2p/preheat/providers][%d] listProvidersBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *ListProvidersBadRequest) String() string {
 	return fmt.Sprintf("[GET /p2p/preheat/providers][%d] listProvidersBadRequest  %+v", 400, o.Payload)
 }
 
@@ -123,8 +183,12 @@ func (o *ListProvidersBadRequest) GetPayload() *models.Errors {
 
 func (o *ListProvidersBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -141,19 +205,50 @@ func NewListProvidersUnauthorized() *ListProvidersUnauthorized {
 	return &ListProvidersUnauthorized{}
 }
 
-/*ListProvidersUnauthorized handles this case with default header values.
+/*
+ListProvidersUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type ListProvidersUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list providers unauthorized response has a 2xx status code
+func (o *ListProvidersUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list providers unauthorized response has a 3xx status code
+func (o *ListProvidersUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list providers unauthorized response has a 4xx status code
+func (o *ListProvidersUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list providers unauthorized response has a 5xx status code
+func (o *ListProvidersUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list providers unauthorized response a status code equal to that given
+func (o *ListProvidersUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *ListProvidersUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /p2p/preheat/providers][%d] listProvidersUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *ListProvidersUnauthorized) String() string {
 	return fmt.Sprintf("[GET /p2p/preheat/providers][%d] listProvidersUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -163,8 +258,12 @@ func (o *ListProvidersUnauthorized) GetPayload() *models.Errors {
 
 func (o *ListProvidersUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -181,19 +280,50 @@ func NewListProvidersForbidden() *ListProvidersForbidden {
 	return &ListProvidersForbidden{}
 }
 
-/*ListProvidersForbidden handles this case with default header values.
+/*
+ListProvidersForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type ListProvidersForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list providers forbidden response has a 2xx status code
+func (o *ListProvidersForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list providers forbidden response has a 3xx status code
+func (o *ListProvidersForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list providers forbidden response has a 4xx status code
+func (o *ListProvidersForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list providers forbidden response has a 5xx status code
+func (o *ListProvidersForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list providers forbidden response a status code equal to that given
+func (o *ListProvidersForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *ListProvidersForbidden) Error() string {
+	return fmt.Sprintf("[GET /p2p/preheat/providers][%d] listProvidersForbidden  %+v", 403, o.Payload)
+}
+
+func (o *ListProvidersForbidden) String() string {
 	return fmt.Sprintf("[GET /p2p/preheat/providers][%d] listProvidersForbidden  %+v", 403, o.Payload)
 }
 
@@ -203,8 +333,12 @@ func (o *ListProvidersForbidden) GetPayload() *models.Errors {
 
 func (o *ListProvidersForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -221,19 +355,50 @@ func NewListProvidersNotFound() *ListProvidersNotFound {
 	return &ListProvidersNotFound{}
 }
 
-/*ListProvidersNotFound handles this case with default header values.
+/*
+ListProvidersNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
 type ListProvidersNotFound struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list providers not found response has a 2xx status code
+func (o *ListProvidersNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list providers not found response has a 3xx status code
+func (o *ListProvidersNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list providers not found response has a 4xx status code
+func (o *ListProvidersNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list providers not found response has a 5xx status code
+func (o *ListProvidersNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list providers not found response a status code equal to that given
+func (o *ListProvidersNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *ListProvidersNotFound) Error() string {
+	return fmt.Sprintf("[GET /p2p/preheat/providers][%d] listProvidersNotFound  %+v", 404, o.Payload)
+}
+
+func (o *ListProvidersNotFound) String() string {
 	return fmt.Sprintf("[GET /p2p/preheat/providers][%d] listProvidersNotFound  %+v", 404, o.Payload)
 }
 
@@ -243,8 +408,12 @@ func (o *ListProvidersNotFound) GetPayload() *models.Errors {
 
 func (o *ListProvidersNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -261,19 +430,50 @@ func NewListProvidersInternalServerError() *ListProvidersInternalServerError {
 	return &ListProvidersInternalServerError{}
 }
 
-/*ListProvidersInternalServerError handles this case with default header values.
+/*
+ListProvidersInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type ListProvidersInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list providers internal server error response has a 2xx status code
+func (o *ListProvidersInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list providers internal server error response has a 3xx status code
+func (o *ListProvidersInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list providers internal server error response has a 4xx status code
+func (o *ListProvidersInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list providers internal server error response has a 5xx status code
+func (o *ListProvidersInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list providers internal server error response a status code equal to that given
+func (o *ListProvidersInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *ListProvidersInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /p2p/preheat/providers][%d] listProvidersInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *ListProvidersInternalServerError) String() string {
 	return fmt.Sprintf("[GET /p2p/preheat/providers][%d] listProvidersInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -283,8 +483,12 @@ func (o *ListProvidersInternalServerError) GetPayload() *models.Errors {
 
 func (o *ListProvidersInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

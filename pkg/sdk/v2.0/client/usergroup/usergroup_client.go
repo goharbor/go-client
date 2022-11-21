@@ -35,7 +35,7 @@ type API interface {
 	/*
 	   ListUserGroups gets all user groups information
 
-	   Get all user groups information*/
+	   Get all user groups information, it is open for system admin*/
 	ListUserGroups(ctx context.Context, params *ListUserGroupsParams) (*ListUserGroupsOK, error)
 	/*
 	   SearchUserGroups searches groups by groupname
@@ -152,7 +152,7 @@ func (a *Client) GetUserGroup(ctx context.Context, params *GetUserGroupParams) (
 /*
 ListUserGroups gets all user groups information
 
-Get all user groups information
+Get all user groups information, it is open for system admin
 */
 func (a *Client) ListUserGroups(ctx context.Context, params *ListUserGroupsParams) (*ListUserGroupsOK, error) {
 
@@ -180,7 +180,6 @@ func (a *Client) ListUserGroups(ctx context.Context, params *ListUserGroupsParam
 SearchUserGroups searches groups by groupname
 
 This endpoint is to search groups by group name.  It's open for all authenticated requests.
-
 */
 func (a *Client) SearchUserGroups(ctx context.Context, params *SearchUserGroupsParams) (*SearchUserGroupsOK, error) {
 

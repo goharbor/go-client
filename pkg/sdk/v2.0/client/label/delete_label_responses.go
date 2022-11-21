@@ -53,7 +53,6 @@ func (o *DeleteLabelReader) ReadResponse(response runtime.ClientResponse, consum
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -64,24 +63,59 @@ func NewDeleteLabelOK() *DeleteLabelOK {
 	return &DeleteLabelOK{}
 }
 
-/*DeleteLabelOK handles this case with default header values.
+/*
+DeleteLabelOK describes a response with status code 200, with default header values.
 
 Success
 */
 type DeleteLabelOK struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
+}
+
+// IsSuccess returns true when this delete label o k response has a 2xx status code
+func (o *DeleteLabelOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this delete label o k response has a 3xx status code
+func (o *DeleteLabelOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete label o k response has a 4xx status code
+func (o *DeleteLabelOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete label o k response has a 5xx status code
+func (o *DeleteLabelOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete label o k response a status code equal to that given
+func (o *DeleteLabelOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *DeleteLabelOK) Error() string {
 	return fmt.Sprintf("[DELETE /labels/{label_id}][%d] deleteLabelOK ", 200)
 }
 
+func (o *DeleteLabelOK) String() string {
+	return fmt.Sprintf("[DELETE /labels/{label_id}][%d] deleteLabelOK ", 200)
+}
+
 func (o *DeleteLabelOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	return nil
 }
@@ -91,19 +125,50 @@ func NewDeleteLabelBadRequest() *DeleteLabelBadRequest {
 	return &DeleteLabelBadRequest{}
 }
 
-/*DeleteLabelBadRequest handles this case with default header values.
+/*
+DeleteLabelBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
 type DeleteLabelBadRequest struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete label bad request response has a 2xx status code
+func (o *DeleteLabelBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete label bad request response has a 3xx status code
+func (o *DeleteLabelBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete label bad request response has a 4xx status code
+func (o *DeleteLabelBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete label bad request response has a 5xx status code
+func (o *DeleteLabelBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete label bad request response a status code equal to that given
+func (o *DeleteLabelBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *DeleteLabelBadRequest) Error() string {
+	return fmt.Sprintf("[DELETE /labels/{label_id}][%d] deleteLabelBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *DeleteLabelBadRequest) String() string {
 	return fmt.Sprintf("[DELETE /labels/{label_id}][%d] deleteLabelBadRequest  %+v", 400, o.Payload)
 }
 
@@ -113,8 +178,12 @@ func (o *DeleteLabelBadRequest) GetPayload() *models.Errors {
 
 func (o *DeleteLabelBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -131,19 +200,50 @@ func NewDeleteLabelUnauthorized() *DeleteLabelUnauthorized {
 	return &DeleteLabelUnauthorized{}
 }
 
-/*DeleteLabelUnauthorized handles this case with default header values.
+/*
+DeleteLabelUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type DeleteLabelUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete label unauthorized response has a 2xx status code
+func (o *DeleteLabelUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete label unauthorized response has a 3xx status code
+func (o *DeleteLabelUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete label unauthorized response has a 4xx status code
+func (o *DeleteLabelUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete label unauthorized response has a 5xx status code
+func (o *DeleteLabelUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete label unauthorized response a status code equal to that given
+func (o *DeleteLabelUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *DeleteLabelUnauthorized) Error() string {
+	return fmt.Sprintf("[DELETE /labels/{label_id}][%d] deleteLabelUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *DeleteLabelUnauthorized) String() string {
 	return fmt.Sprintf("[DELETE /labels/{label_id}][%d] deleteLabelUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -153,8 +253,12 @@ func (o *DeleteLabelUnauthorized) GetPayload() *models.Errors {
 
 func (o *DeleteLabelUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -171,19 +275,50 @@ func NewDeleteLabelNotFound() *DeleteLabelNotFound {
 	return &DeleteLabelNotFound{}
 }
 
-/*DeleteLabelNotFound handles this case with default header values.
+/*
+DeleteLabelNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
 type DeleteLabelNotFound struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete label not found response has a 2xx status code
+func (o *DeleteLabelNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete label not found response has a 3xx status code
+func (o *DeleteLabelNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete label not found response has a 4xx status code
+func (o *DeleteLabelNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete label not found response has a 5xx status code
+func (o *DeleteLabelNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete label not found response a status code equal to that given
+func (o *DeleteLabelNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *DeleteLabelNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /labels/{label_id}][%d] deleteLabelNotFound  %+v", 404, o.Payload)
+}
+
+func (o *DeleteLabelNotFound) String() string {
 	return fmt.Sprintf("[DELETE /labels/{label_id}][%d] deleteLabelNotFound  %+v", 404, o.Payload)
 }
 
@@ -193,8 +328,12 @@ func (o *DeleteLabelNotFound) GetPayload() *models.Errors {
 
 func (o *DeleteLabelNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -211,19 +350,50 @@ func NewDeleteLabelInternalServerError() *DeleteLabelInternalServerError {
 	return &DeleteLabelInternalServerError{}
 }
 
-/*DeleteLabelInternalServerError handles this case with default header values.
+/*
+DeleteLabelInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type DeleteLabelInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete label internal server error response has a 2xx status code
+func (o *DeleteLabelInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete label internal server error response has a 3xx status code
+func (o *DeleteLabelInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete label internal server error response has a 4xx status code
+func (o *DeleteLabelInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete label internal server error response has a 5xx status code
+func (o *DeleteLabelInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this delete label internal server error response a status code equal to that given
+func (o *DeleteLabelInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *DeleteLabelInternalServerError) Error() string {
+	return fmt.Sprintf("[DELETE /labels/{label_id}][%d] deleteLabelInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *DeleteLabelInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /labels/{label_id}][%d] deleteLabelInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -233,8 +403,12 @@ func (o *DeleteLabelInternalServerError) GetPayload() *models.Errors {
 
 func (o *DeleteLabelInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

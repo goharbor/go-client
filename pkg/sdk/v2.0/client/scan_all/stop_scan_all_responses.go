@@ -53,7 +53,6 @@ func (o *StopScanAllReader) ReadResponse(response runtime.ClientResponse, consum
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -64,24 +63,59 @@ func NewStopScanAllAccepted() *StopScanAllAccepted {
 	return &StopScanAllAccepted{}
 }
 
-/*StopScanAllAccepted handles this case with default header values.
+/*
+StopScanAllAccepted describes a response with status code 202, with default header values.
 
 Accepted
 */
 type StopScanAllAccepted struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
+}
+
+// IsSuccess returns true when this stop scan all accepted response has a 2xx status code
+func (o *StopScanAllAccepted) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this stop scan all accepted response has a 3xx status code
+func (o *StopScanAllAccepted) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stop scan all accepted response has a 4xx status code
+func (o *StopScanAllAccepted) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this stop scan all accepted response has a 5xx status code
+func (o *StopScanAllAccepted) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stop scan all accepted response a status code equal to that given
+func (o *StopScanAllAccepted) IsCode(code int) bool {
+	return code == 202
 }
 
 func (o *StopScanAllAccepted) Error() string {
 	return fmt.Sprintf("[POST /system/scanAll/stop][%d] stopScanAllAccepted ", 202)
 }
 
+func (o *StopScanAllAccepted) String() string {
+	return fmt.Sprintf("[POST /system/scanAll/stop][%d] stopScanAllAccepted ", 202)
+}
+
 func (o *StopScanAllAccepted) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	return nil
 }
@@ -91,19 +125,50 @@ func NewStopScanAllBadRequest() *StopScanAllBadRequest {
 	return &StopScanAllBadRequest{}
 }
 
-/*StopScanAllBadRequest handles this case with default header values.
+/*
+StopScanAllBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
 type StopScanAllBadRequest struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this stop scan all bad request response has a 2xx status code
+func (o *StopScanAllBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stop scan all bad request response has a 3xx status code
+func (o *StopScanAllBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stop scan all bad request response has a 4xx status code
+func (o *StopScanAllBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stop scan all bad request response has a 5xx status code
+func (o *StopScanAllBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stop scan all bad request response a status code equal to that given
+func (o *StopScanAllBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *StopScanAllBadRequest) Error() string {
+	return fmt.Sprintf("[POST /system/scanAll/stop][%d] stopScanAllBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *StopScanAllBadRequest) String() string {
 	return fmt.Sprintf("[POST /system/scanAll/stop][%d] stopScanAllBadRequest  %+v", 400, o.Payload)
 }
 
@@ -113,8 +178,12 @@ func (o *StopScanAllBadRequest) GetPayload() *models.Errors {
 
 func (o *StopScanAllBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -131,19 +200,50 @@ func NewStopScanAllUnauthorized() *StopScanAllUnauthorized {
 	return &StopScanAllUnauthorized{}
 }
 
-/*StopScanAllUnauthorized handles this case with default header values.
+/*
+StopScanAllUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type StopScanAllUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this stop scan all unauthorized response has a 2xx status code
+func (o *StopScanAllUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stop scan all unauthorized response has a 3xx status code
+func (o *StopScanAllUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stop scan all unauthorized response has a 4xx status code
+func (o *StopScanAllUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stop scan all unauthorized response has a 5xx status code
+func (o *StopScanAllUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stop scan all unauthorized response a status code equal to that given
+func (o *StopScanAllUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *StopScanAllUnauthorized) Error() string {
+	return fmt.Sprintf("[POST /system/scanAll/stop][%d] stopScanAllUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *StopScanAllUnauthorized) String() string {
 	return fmt.Sprintf("[POST /system/scanAll/stop][%d] stopScanAllUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -153,8 +253,12 @@ func (o *StopScanAllUnauthorized) GetPayload() *models.Errors {
 
 func (o *StopScanAllUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -171,19 +275,50 @@ func NewStopScanAllForbidden() *StopScanAllForbidden {
 	return &StopScanAllForbidden{}
 }
 
-/*StopScanAllForbidden handles this case with default header values.
+/*
+StopScanAllForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type StopScanAllForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this stop scan all forbidden response has a 2xx status code
+func (o *StopScanAllForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stop scan all forbidden response has a 3xx status code
+func (o *StopScanAllForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stop scan all forbidden response has a 4xx status code
+func (o *StopScanAllForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stop scan all forbidden response has a 5xx status code
+func (o *StopScanAllForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stop scan all forbidden response a status code equal to that given
+func (o *StopScanAllForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *StopScanAllForbidden) Error() string {
+	return fmt.Sprintf("[POST /system/scanAll/stop][%d] stopScanAllForbidden  %+v", 403, o.Payload)
+}
+
+func (o *StopScanAllForbidden) String() string {
 	return fmt.Sprintf("[POST /system/scanAll/stop][%d] stopScanAllForbidden  %+v", 403, o.Payload)
 }
 
@@ -193,8 +328,12 @@ func (o *StopScanAllForbidden) GetPayload() *models.Errors {
 
 func (o *StopScanAllForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -211,19 +350,50 @@ func NewStopScanAllInternalServerError() *StopScanAllInternalServerError {
 	return &StopScanAllInternalServerError{}
 }
 
-/*StopScanAllInternalServerError handles this case with default header values.
+/*
+StopScanAllInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type StopScanAllInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this stop scan all internal server error response has a 2xx status code
+func (o *StopScanAllInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stop scan all internal server error response has a 3xx status code
+func (o *StopScanAllInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stop scan all internal server error response has a 4xx status code
+func (o *StopScanAllInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this stop scan all internal server error response has a 5xx status code
+func (o *StopScanAllInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this stop scan all internal server error response a status code equal to that given
+func (o *StopScanAllInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *StopScanAllInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /system/scanAll/stop][%d] stopScanAllInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *StopScanAllInternalServerError) String() string {
 	return fmt.Sprintf("[POST /system/scanAll/stop][%d] stopScanAllInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -233,8 +403,12 @@ func (o *StopScanAllInternalServerError) GetPayload() *models.Errors {
 
 func (o *StopScanAllInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

@@ -50,7 +50,6 @@ func (o *DeleteChartrepoRepoChartsNameVersionReader) ReadResponse(response runti
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -61,14 +60,44 @@ func NewDeleteChartrepoRepoChartsNameVersionOK() *DeleteChartrepoRepoChartsNameV
 	return &DeleteChartrepoRepoChartsNameVersionOK{}
 }
 
-/*DeleteChartrepoRepoChartsNameVersionOK handles this case with default header values.
+/*
+DeleteChartrepoRepoChartsNameVersionOK describes a response with status code 200, with default header values.
 
 The specified chart entry is successfully deleted.
 */
 type DeleteChartrepoRepoChartsNameVersionOK struct {
 }
 
+// IsSuccess returns true when this delete chartrepo repo charts name version o k response has a 2xx status code
+func (o *DeleteChartrepoRepoChartsNameVersionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this delete chartrepo repo charts name version o k response has a 3xx status code
+func (o *DeleteChartrepoRepoChartsNameVersionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete chartrepo repo charts name version o k response has a 4xx status code
+func (o *DeleteChartrepoRepoChartsNameVersionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete chartrepo repo charts name version o k response has a 5xx status code
+func (o *DeleteChartrepoRepoChartsNameVersionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete chartrepo repo charts name version o k response a status code equal to that given
+func (o *DeleteChartrepoRepoChartsNameVersionOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DeleteChartrepoRepoChartsNameVersionOK) Error() string {
+	return fmt.Sprintf("[DELETE /chartrepo/{repo}/charts/{name}/{version}][%d] deleteChartrepoRepoChartsNameVersionOK ", 200)
+}
+
+func (o *DeleteChartrepoRepoChartsNameVersionOK) String() string {
 	return fmt.Sprintf("[DELETE /chartrepo/{repo}/charts/{name}/{version}][%d] deleteChartrepoRepoChartsNameVersionOK ", 200)
 }
 
@@ -82,14 +111,44 @@ func NewDeleteChartrepoRepoChartsNameVersionUnauthorized() *DeleteChartrepoRepoC
 	return &DeleteChartrepoRepoChartsNameVersionUnauthorized{}
 }
 
-/*DeleteChartrepoRepoChartsNameVersionUnauthorized handles this case with default header values.
+/*
+DeleteChartrepoRepoChartsNameVersionUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type DeleteChartrepoRepoChartsNameVersionUnauthorized struct {
 }
 
+// IsSuccess returns true when this delete chartrepo repo charts name version unauthorized response has a 2xx status code
+func (o *DeleteChartrepoRepoChartsNameVersionUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete chartrepo repo charts name version unauthorized response has a 3xx status code
+func (o *DeleteChartrepoRepoChartsNameVersionUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete chartrepo repo charts name version unauthorized response has a 4xx status code
+func (o *DeleteChartrepoRepoChartsNameVersionUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete chartrepo repo charts name version unauthorized response has a 5xx status code
+func (o *DeleteChartrepoRepoChartsNameVersionUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete chartrepo repo charts name version unauthorized response a status code equal to that given
+func (o *DeleteChartrepoRepoChartsNameVersionUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *DeleteChartrepoRepoChartsNameVersionUnauthorized) Error() string {
+	return fmt.Sprintf("[DELETE /chartrepo/{repo}/charts/{name}/{version}][%d] deleteChartrepoRepoChartsNameVersionUnauthorized ", 401)
+}
+
+func (o *DeleteChartrepoRepoChartsNameVersionUnauthorized) String() string {
 	return fmt.Sprintf("[DELETE /chartrepo/{repo}/charts/{name}/{version}][%d] deleteChartrepoRepoChartsNameVersionUnauthorized ", 401)
 }
 
@@ -103,14 +162,44 @@ func NewDeleteChartrepoRepoChartsNameVersionForbidden() *DeleteChartrepoRepoChar
 	return &DeleteChartrepoRepoChartsNameVersionForbidden{}
 }
 
-/*DeleteChartrepoRepoChartsNameVersionForbidden handles this case with default header values.
+/*
+DeleteChartrepoRepoChartsNameVersionForbidden describes a response with status code 403, with default header values.
 
 Operation is forbidden or quota exceeded
 */
 type DeleteChartrepoRepoChartsNameVersionForbidden struct {
 }
 
+// IsSuccess returns true when this delete chartrepo repo charts name version forbidden response has a 2xx status code
+func (o *DeleteChartrepoRepoChartsNameVersionForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete chartrepo repo charts name version forbidden response has a 3xx status code
+func (o *DeleteChartrepoRepoChartsNameVersionForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete chartrepo repo charts name version forbidden response has a 4xx status code
+func (o *DeleteChartrepoRepoChartsNameVersionForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete chartrepo repo charts name version forbidden response has a 5xx status code
+func (o *DeleteChartrepoRepoChartsNameVersionForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete chartrepo repo charts name version forbidden response a status code equal to that given
+func (o *DeleteChartrepoRepoChartsNameVersionForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *DeleteChartrepoRepoChartsNameVersionForbidden) Error() string {
+	return fmt.Sprintf("[DELETE /chartrepo/{repo}/charts/{name}/{version}][%d] deleteChartrepoRepoChartsNameVersionForbidden ", 403)
+}
+
+func (o *DeleteChartrepoRepoChartsNameVersionForbidden) String() string {
 	return fmt.Sprintf("[DELETE /chartrepo/{repo}/charts/{name}/{version}][%d] deleteChartrepoRepoChartsNameVersionForbidden ", 403)
 }
 
@@ -124,14 +213,44 @@ func NewDeleteChartrepoRepoChartsNameVersionNotFound() *DeleteChartrepoRepoChart
 	return &DeleteChartrepoRepoChartsNameVersionNotFound{}
 }
 
-/*DeleteChartrepoRepoChartsNameVersionNotFound handles this case with default header values.
+/*
+DeleteChartrepoRepoChartsNameVersionNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
 type DeleteChartrepoRepoChartsNameVersionNotFound struct {
 }
 
+// IsSuccess returns true when this delete chartrepo repo charts name version not found response has a 2xx status code
+func (o *DeleteChartrepoRepoChartsNameVersionNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete chartrepo repo charts name version not found response has a 3xx status code
+func (o *DeleteChartrepoRepoChartsNameVersionNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete chartrepo repo charts name version not found response has a 4xx status code
+func (o *DeleteChartrepoRepoChartsNameVersionNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete chartrepo repo charts name version not found response has a 5xx status code
+func (o *DeleteChartrepoRepoChartsNameVersionNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete chartrepo repo charts name version not found response a status code equal to that given
+func (o *DeleteChartrepoRepoChartsNameVersionNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *DeleteChartrepoRepoChartsNameVersionNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /chartrepo/{repo}/charts/{name}/{version}][%d] deleteChartrepoRepoChartsNameVersionNotFound ", 404)
+}
+
+func (o *DeleteChartrepoRepoChartsNameVersionNotFound) String() string {
 	return fmt.Sprintf("[DELETE /chartrepo/{repo}/charts/{name}/{version}][%d] deleteChartrepoRepoChartsNameVersionNotFound ", 404)
 }
 
@@ -145,14 +264,44 @@ func NewDeleteChartrepoRepoChartsNameVersionInternalServerError() *DeleteChartre
 	return &DeleteChartrepoRepoChartsNameVersionInternalServerError{}
 }
 
-/*DeleteChartrepoRepoChartsNameVersionInternalServerError handles this case with default header values.
+/*
+DeleteChartrepoRepoChartsNameVersionInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error occurred
 */
 type DeleteChartrepoRepoChartsNameVersionInternalServerError struct {
 }
 
+// IsSuccess returns true when this delete chartrepo repo charts name version internal server error response has a 2xx status code
+func (o *DeleteChartrepoRepoChartsNameVersionInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete chartrepo repo charts name version internal server error response has a 3xx status code
+func (o *DeleteChartrepoRepoChartsNameVersionInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete chartrepo repo charts name version internal server error response has a 4xx status code
+func (o *DeleteChartrepoRepoChartsNameVersionInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete chartrepo repo charts name version internal server error response has a 5xx status code
+func (o *DeleteChartrepoRepoChartsNameVersionInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this delete chartrepo repo charts name version internal server error response a status code equal to that given
+func (o *DeleteChartrepoRepoChartsNameVersionInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *DeleteChartrepoRepoChartsNameVersionInternalServerError) Error() string {
+	return fmt.Sprintf("[DELETE /chartrepo/{repo}/charts/{name}/{version}][%d] deleteChartrepoRepoChartsNameVersionInternalServerError ", 500)
+}
+
+func (o *DeleteChartrepoRepoChartsNameVersionInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /chartrepo/{repo}/charts/{name}/{version}][%d] deleteChartrepoRepoChartsNameVersionInternalServerError ", 500)
 }
 

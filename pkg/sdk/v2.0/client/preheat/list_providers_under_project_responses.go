@@ -59,7 +59,6 @@ func (o *ListProvidersUnderProjectReader) ReadResponse(response runtime.ClientRe
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -70,7 +69,8 @@ func NewListProvidersUnderProjectOK() *ListProvidersUnderProjectOK {
 	return &ListProvidersUnderProjectOK{}
 }
 
-/*ListProvidersUnderProjectOK handles this case with default header values.
+/*
+ListProvidersUnderProjectOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -78,7 +78,36 @@ type ListProvidersUnderProjectOK struct {
 	Payload []*models.ProviderUnderProject
 }
 
+// IsSuccess returns true when this list providers under project o k response has a 2xx status code
+func (o *ListProvidersUnderProjectOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list providers under project o k response has a 3xx status code
+func (o *ListProvidersUnderProjectOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list providers under project o k response has a 4xx status code
+func (o *ListProvidersUnderProjectOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list providers under project o k response has a 5xx status code
+func (o *ListProvidersUnderProjectOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list providers under project o k response a status code equal to that given
+func (o *ListProvidersUnderProjectOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ListProvidersUnderProjectOK) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/preheat/providers][%d] listProvidersUnderProjectOK  %+v", 200, o.Payload)
+}
+
+func (o *ListProvidersUnderProjectOK) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/preheat/providers][%d] listProvidersUnderProjectOK  %+v", 200, o.Payload)
 }
 
@@ -101,19 +130,50 @@ func NewListProvidersUnderProjectBadRequest() *ListProvidersUnderProjectBadReque
 	return &ListProvidersUnderProjectBadRequest{}
 }
 
-/*ListProvidersUnderProjectBadRequest handles this case with default header values.
+/*
+ListProvidersUnderProjectBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
 type ListProvidersUnderProjectBadRequest struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list providers under project bad request response has a 2xx status code
+func (o *ListProvidersUnderProjectBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list providers under project bad request response has a 3xx status code
+func (o *ListProvidersUnderProjectBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list providers under project bad request response has a 4xx status code
+func (o *ListProvidersUnderProjectBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list providers under project bad request response has a 5xx status code
+func (o *ListProvidersUnderProjectBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list providers under project bad request response a status code equal to that given
+func (o *ListProvidersUnderProjectBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *ListProvidersUnderProjectBadRequest) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/preheat/providers][%d] listProvidersUnderProjectBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *ListProvidersUnderProjectBadRequest) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/preheat/providers][%d] listProvidersUnderProjectBadRequest  %+v", 400, o.Payload)
 }
 
@@ -123,8 +183,12 @@ func (o *ListProvidersUnderProjectBadRequest) GetPayload() *models.Errors {
 
 func (o *ListProvidersUnderProjectBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -141,19 +205,50 @@ func NewListProvidersUnderProjectUnauthorized() *ListProvidersUnderProjectUnauth
 	return &ListProvidersUnderProjectUnauthorized{}
 }
 
-/*ListProvidersUnderProjectUnauthorized handles this case with default header values.
+/*
+ListProvidersUnderProjectUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type ListProvidersUnderProjectUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list providers under project unauthorized response has a 2xx status code
+func (o *ListProvidersUnderProjectUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list providers under project unauthorized response has a 3xx status code
+func (o *ListProvidersUnderProjectUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list providers under project unauthorized response has a 4xx status code
+func (o *ListProvidersUnderProjectUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list providers under project unauthorized response has a 5xx status code
+func (o *ListProvidersUnderProjectUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list providers under project unauthorized response a status code equal to that given
+func (o *ListProvidersUnderProjectUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *ListProvidersUnderProjectUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/preheat/providers][%d] listProvidersUnderProjectUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *ListProvidersUnderProjectUnauthorized) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/preheat/providers][%d] listProvidersUnderProjectUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -163,8 +258,12 @@ func (o *ListProvidersUnderProjectUnauthorized) GetPayload() *models.Errors {
 
 func (o *ListProvidersUnderProjectUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -181,19 +280,50 @@ func NewListProvidersUnderProjectForbidden() *ListProvidersUnderProjectForbidden
 	return &ListProvidersUnderProjectForbidden{}
 }
 
-/*ListProvidersUnderProjectForbidden handles this case with default header values.
+/*
+ListProvidersUnderProjectForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type ListProvidersUnderProjectForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list providers under project forbidden response has a 2xx status code
+func (o *ListProvidersUnderProjectForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list providers under project forbidden response has a 3xx status code
+func (o *ListProvidersUnderProjectForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list providers under project forbidden response has a 4xx status code
+func (o *ListProvidersUnderProjectForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list providers under project forbidden response has a 5xx status code
+func (o *ListProvidersUnderProjectForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list providers under project forbidden response a status code equal to that given
+func (o *ListProvidersUnderProjectForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *ListProvidersUnderProjectForbidden) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/preheat/providers][%d] listProvidersUnderProjectForbidden  %+v", 403, o.Payload)
+}
+
+func (o *ListProvidersUnderProjectForbidden) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/preheat/providers][%d] listProvidersUnderProjectForbidden  %+v", 403, o.Payload)
 }
 
@@ -203,8 +333,12 @@ func (o *ListProvidersUnderProjectForbidden) GetPayload() *models.Errors {
 
 func (o *ListProvidersUnderProjectForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -221,19 +355,50 @@ func NewListProvidersUnderProjectNotFound() *ListProvidersUnderProjectNotFound {
 	return &ListProvidersUnderProjectNotFound{}
 }
 
-/*ListProvidersUnderProjectNotFound handles this case with default header values.
+/*
+ListProvidersUnderProjectNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
 type ListProvidersUnderProjectNotFound struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list providers under project not found response has a 2xx status code
+func (o *ListProvidersUnderProjectNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list providers under project not found response has a 3xx status code
+func (o *ListProvidersUnderProjectNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list providers under project not found response has a 4xx status code
+func (o *ListProvidersUnderProjectNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list providers under project not found response has a 5xx status code
+func (o *ListProvidersUnderProjectNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list providers under project not found response a status code equal to that given
+func (o *ListProvidersUnderProjectNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *ListProvidersUnderProjectNotFound) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/preheat/providers][%d] listProvidersUnderProjectNotFound  %+v", 404, o.Payload)
+}
+
+func (o *ListProvidersUnderProjectNotFound) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/preheat/providers][%d] listProvidersUnderProjectNotFound  %+v", 404, o.Payload)
 }
 
@@ -243,8 +408,12 @@ func (o *ListProvidersUnderProjectNotFound) GetPayload() *models.Errors {
 
 func (o *ListProvidersUnderProjectNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -261,19 +430,50 @@ func NewListProvidersUnderProjectInternalServerError() *ListProvidersUnderProjec
 	return &ListProvidersUnderProjectInternalServerError{}
 }
 
-/*ListProvidersUnderProjectInternalServerError handles this case with default header values.
+/*
+ListProvidersUnderProjectInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type ListProvidersUnderProjectInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list providers under project internal server error response has a 2xx status code
+func (o *ListProvidersUnderProjectInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list providers under project internal server error response has a 3xx status code
+func (o *ListProvidersUnderProjectInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list providers under project internal server error response has a 4xx status code
+func (o *ListProvidersUnderProjectInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list providers under project internal server error response has a 5xx status code
+func (o *ListProvidersUnderProjectInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list providers under project internal server error response a status code equal to that given
+func (o *ListProvidersUnderProjectInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *ListProvidersUnderProjectInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/preheat/providers][%d] listProvidersUnderProjectInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *ListProvidersUnderProjectInternalServerError) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/preheat/providers][%d] listProvidersUnderProjectInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -283,8 +483,12 @@ func (o *ListProvidersUnderProjectInternalServerError) GetPayload() *models.Erro
 
 func (o *ListProvidersUnderProjectInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

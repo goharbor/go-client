@@ -50,7 +50,6 @@ func (o *PostChartrepoRepoProvReader) ReadResponse(response runtime.ClientRespon
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -61,14 +60,44 @@ func NewPostChartrepoRepoProvCreated() *PostChartrepoRepoProvCreated {
 	return &PostChartrepoRepoProvCreated{}
 }
 
-/*PostChartrepoRepoProvCreated handles this case with default header values.
+/*
+PostChartrepoRepoProvCreated describes a response with status code 201, with default header values.
 
 The provance file is successfully uploaded.
 */
 type PostChartrepoRepoProvCreated struct {
 }
 
+// IsSuccess returns true when this post chartrepo repo prov created response has a 2xx status code
+func (o *PostChartrepoRepoProvCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this post chartrepo repo prov created response has a 3xx status code
+func (o *PostChartrepoRepoProvCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post chartrepo repo prov created response has a 4xx status code
+func (o *PostChartrepoRepoProvCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this post chartrepo repo prov created response has a 5xx status code
+func (o *PostChartrepoRepoProvCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post chartrepo repo prov created response a status code equal to that given
+func (o *PostChartrepoRepoProvCreated) IsCode(code int) bool {
+	return code == 201
+}
+
 func (o *PostChartrepoRepoProvCreated) Error() string {
+	return fmt.Sprintf("[POST /chartrepo/{repo}/prov][%d] postChartrepoRepoProvCreated ", 201)
+}
+
+func (o *PostChartrepoRepoProvCreated) String() string {
 	return fmt.Sprintf("[POST /chartrepo/{repo}/prov][%d] postChartrepoRepoProvCreated ", 201)
 }
 
@@ -82,14 +111,44 @@ func NewPostChartrepoRepoProvUnauthorized() *PostChartrepoRepoProvUnauthorized {
 	return &PostChartrepoRepoProvUnauthorized{}
 }
 
-/*PostChartrepoRepoProvUnauthorized handles this case with default header values.
+/*
+PostChartrepoRepoProvUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type PostChartrepoRepoProvUnauthorized struct {
 }
 
+// IsSuccess returns true when this post chartrepo repo prov unauthorized response has a 2xx status code
+func (o *PostChartrepoRepoProvUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post chartrepo repo prov unauthorized response has a 3xx status code
+func (o *PostChartrepoRepoProvUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post chartrepo repo prov unauthorized response has a 4xx status code
+func (o *PostChartrepoRepoProvUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post chartrepo repo prov unauthorized response has a 5xx status code
+func (o *PostChartrepoRepoProvUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post chartrepo repo prov unauthorized response a status code equal to that given
+func (o *PostChartrepoRepoProvUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *PostChartrepoRepoProvUnauthorized) Error() string {
+	return fmt.Sprintf("[POST /chartrepo/{repo}/prov][%d] postChartrepoRepoProvUnauthorized ", 401)
+}
+
+func (o *PostChartrepoRepoProvUnauthorized) String() string {
 	return fmt.Sprintf("[POST /chartrepo/{repo}/prov][%d] postChartrepoRepoProvUnauthorized ", 401)
 }
 
@@ -103,14 +162,44 @@ func NewPostChartrepoRepoProvForbidden() *PostChartrepoRepoProvForbidden {
 	return &PostChartrepoRepoProvForbidden{}
 }
 
-/*PostChartrepoRepoProvForbidden handles this case with default header values.
+/*
+PostChartrepoRepoProvForbidden describes a response with status code 403, with default header values.
 
 Operation is forbidden or quota exceeded
 */
 type PostChartrepoRepoProvForbidden struct {
 }
 
+// IsSuccess returns true when this post chartrepo repo prov forbidden response has a 2xx status code
+func (o *PostChartrepoRepoProvForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post chartrepo repo prov forbidden response has a 3xx status code
+func (o *PostChartrepoRepoProvForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post chartrepo repo prov forbidden response has a 4xx status code
+func (o *PostChartrepoRepoProvForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post chartrepo repo prov forbidden response has a 5xx status code
+func (o *PostChartrepoRepoProvForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post chartrepo repo prov forbidden response a status code equal to that given
+func (o *PostChartrepoRepoProvForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *PostChartrepoRepoProvForbidden) Error() string {
+	return fmt.Sprintf("[POST /chartrepo/{repo}/prov][%d] postChartrepoRepoProvForbidden ", 403)
+}
+
+func (o *PostChartrepoRepoProvForbidden) String() string {
 	return fmt.Sprintf("[POST /chartrepo/{repo}/prov][%d] postChartrepoRepoProvForbidden ", 403)
 }
 
@@ -124,14 +213,44 @@ func NewPostChartrepoRepoProvInternalServerError() *PostChartrepoRepoProvInterna
 	return &PostChartrepoRepoProvInternalServerError{}
 }
 
-/*PostChartrepoRepoProvInternalServerError handles this case with default header values.
+/*
+PostChartrepoRepoProvInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error occurred
 */
 type PostChartrepoRepoProvInternalServerError struct {
 }
 
+// IsSuccess returns true when this post chartrepo repo prov internal server error response has a 2xx status code
+func (o *PostChartrepoRepoProvInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post chartrepo repo prov internal server error response has a 3xx status code
+func (o *PostChartrepoRepoProvInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post chartrepo repo prov internal server error response has a 4xx status code
+func (o *PostChartrepoRepoProvInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this post chartrepo repo prov internal server error response has a 5xx status code
+func (o *PostChartrepoRepoProvInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this post chartrepo repo prov internal server error response a status code equal to that given
+func (o *PostChartrepoRepoProvInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *PostChartrepoRepoProvInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /chartrepo/{repo}/prov][%d] postChartrepoRepoProvInternalServerError ", 500)
+}
+
+func (o *PostChartrepoRepoProvInternalServerError) String() string {
 	return fmt.Sprintf("[POST /chartrepo/{repo}/prov][%d] postChartrepoRepoProvInternalServerError ", 500)
 }
 
@@ -145,14 +264,44 @@ func NewPostChartrepoRepoProvInsufficientStorage() *PostChartrepoRepoProvInsuffi
 	return &PostChartrepoRepoProvInsufficientStorage{}
 }
 
-/*PostChartrepoRepoProvInsufficientStorage handles this case with default header values.
+/*
+PostChartrepoRepoProvInsufficientStorage describes a response with status code 507, with default header values.
 
 Insufficient storage
 */
 type PostChartrepoRepoProvInsufficientStorage struct {
 }
 
+// IsSuccess returns true when this post chartrepo repo prov insufficient storage response has a 2xx status code
+func (o *PostChartrepoRepoProvInsufficientStorage) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post chartrepo repo prov insufficient storage response has a 3xx status code
+func (o *PostChartrepoRepoProvInsufficientStorage) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post chartrepo repo prov insufficient storage response has a 4xx status code
+func (o *PostChartrepoRepoProvInsufficientStorage) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this post chartrepo repo prov insufficient storage response has a 5xx status code
+func (o *PostChartrepoRepoProvInsufficientStorage) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this post chartrepo repo prov insufficient storage response a status code equal to that given
+func (o *PostChartrepoRepoProvInsufficientStorage) IsCode(code int) bool {
+	return code == 507
+}
+
 func (o *PostChartrepoRepoProvInsufficientStorage) Error() string {
+	return fmt.Sprintf("[POST /chartrepo/{repo}/prov][%d] postChartrepoRepoProvInsufficientStorage ", 507)
+}
+
+func (o *PostChartrepoRepoProvInsufficientStorage) String() string {
 	return fmt.Sprintf("[POST /chartrepo/{repo}/prov][%d] postChartrepoRepoProvInsufficientStorage ", 507)
 }
 

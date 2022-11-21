@@ -41,7 +41,6 @@ func (o *GetSystemCVEAllowlistReader) ReadResponse(response runtime.ClientRespon
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -52,7 +51,8 @@ func NewGetSystemCVEAllowlistOK() *GetSystemCVEAllowlistOK {
 	return &GetSystemCVEAllowlistOK{}
 }
 
-/*GetSystemCVEAllowlistOK handles this case with default header values.
+/*
+GetSystemCVEAllowlistOK describes a response with status code 200, with default header values.
 
 Successfully retrieved the CVE allowlist.
 */
@@ -60,7 +60,36 @@ type GetSystemCVEAllowlistOK struct {
 	Payload *models.CVEAllowlist
 }
 
+// IsSuccess returns true when this get system Cve allowlist o k response has a 2xx status code
+func (o *GetSystemCVEAllowlistOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get system Cve allowlist o k response has a 3xx status code
+func (o *GetSystemCVEAllowlistOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get system Cve allowlist o k response has a 4xx status code
+func (o *GetSystemCVEAllowlistOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get system Cve allowlist o k response has a 5xx status code
+func (o *GetSystemCVEAllowlistOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get system Cve allowlist o k response a status code equal to that given
+func (o *GetSystemCVEAllowlistOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetSystemCVEAllowlistOK) Error() string {
+	return fmt.Sprintf("[GET /system/CVEAllowlist][%d] getSystemCveAllowlistOK  %+v", 200, o.Payload)
+}
+
+func (o *GetSystemCVEAllowlistOK) String() string {
 	return fmt.Sprintf("[GET /system/CVEAllowlist][%d] getSystemCveAllowlistOK  %+v", 200, o.Payload)
 }
 
@@ -85,19 +114,50 @@ func NewGetSystemCVEAllowlistUnauthorized() *GetSystemCVEAllowlistUnauthorized {
 	return &GetSystemCVEAllowlistUnauthorized{}
 }
 
-/*GetSystemCVEAllowlistUnauthorized handles this case with default header values.
+/*
+GetSystemCVEAllowlistUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type GetSystemCVEAllowlistUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get system Cve allowlist unauthorized response has a 2xx status code
+func (o *GetSystemCVEAllowlistUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get system Cve allowlist unauthorized response has a 3xx status code
+func (o *GetSystemCVEAllowlistUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get system Cve allowlist unauthorized response has a 4xx status code
+func (o *GetSystemCVEAllowlistUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get system Cve allowlist unauthorized response has a 5xx status code
+func (o *GetSystemCVEAllowlistUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get system Cve allowlist unauthorized response a status code equal to that given
+func (o *GetSystemCVEAllowlistUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *GetSystemCVEAllowlistUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /system/CVEAllowlist][%d] getSystemCveAllowlistUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *GetSystemCVEAllowlistUnauthorized) String() string {
 	return fmt.Sprintf("[GET /system/CVEAllowlist][%d] getSystemCveAllowlistUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -107,8 +167,12 @@ func (o *GetSystemCVEAllowlistUnauthorized) GetPayload() *models.Errors {
 
 func (o *GetSystemCVEAllowlistUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -125,19 +189,50 @@ func NewGetSystemCVEAllowlistInternalServerError() *GetSystemCVEAllowlistInterna
 	return &GetSystemCVEAllowlistInternalServerError{}
 }
 
-/*GetSystemCVEAllowlistInternalServerError handles this case with default header values.
+/*
+GetSystemCVEAllowlistInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type GetSystemCVEAllowlistInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get system Cve allowlist internal server error response has a 2xx status code
+func (o *GetSystemCVEAllowlistInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get system Cve allowlist internal server error response has a 3xx status code
+func (o *GetSystemCVEAllowlistInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get system Cve allowlist internal server error response has a 4xx status code
+func (o *GetSystemCVEAllowlistInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get system Cve allowlist internal server error response has a 5xx status code
+func (o *GetSystemCVEAllowlistInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get system Cve allowlist internal server error response a status code equal to that given
+func (o *GetSystemCVEAllowlistInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *GetSystemCVEAllowlistInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /system/CVEAllowlist][%d] getSystemCveAllowlistInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *GetSystemCVEAllowlistInternalServerError) String() string {
 	return fmt.Sprintf("[GET /system/CVEAllowlist][%d] getSystemCveAllowlistInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -147,8 +242,12 @@ func (o *GetSystemCVEAllowlistInternalServerError) GetPayload() *models.Errors {
 
 func (o *GetSystemCVEAllowlistInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

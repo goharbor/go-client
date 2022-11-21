@@ -49,7 +49,6 @@ func (o *ListRegistriesReader) ReadResponse(response runtime.ClientResponse, con
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -60,22 +59,54 @@ func NewListRegistriesOK() *ListRegistriesOK {
 	return &ListRegistriesOK{}
 }
 
-/*ListRegistriesOK handles this case with default header values.
+/*
+ListRegistriesOK describes a response with status code 200, with default header values.
 
 Success
 */
 type ListRegistriesOK struct {
-	/*Link refers to the previous page and next page
+
+	/* Link refers to the previous page and next page
 	 */
 	Link string
-	/*The total count of the resources
+
+	/* The total count of the resources
 	 */
 	XTotalCount int64
 
 	Payload []*models.Registry
 }
 
+// IsSuccess returns true when this list registries o k response has a 2xx status code
+func (o *ListRegistriesOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list registries o k response has a 3xx status code
+func (o *ListRegistriesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list registries o k response has a 4xx status code
+func (o *ListRegistriesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list registries o k response has a 5xx status code
+func (o *ListRegistriesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list registries o k response a status code equal to that given
+func (o *ListRegistriesOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ListRegistriesOK) Error() string {
+	return fmt.Sprintf("[GET /registries][%d] listRegistriesOK  %+v", 200, o.Payload)
+}
+
+func (o *ListRegistriesOK) String() string {
 	return fmt.Sprintf("[GET /registries][%d] listRegistriesOK  %+v", 200, o.Payload)
 }
 
@@ -85,15 +116,23 @@ func (o *ListRegistriesOK) GetPayload() []*models.Registry {
 
 func (o *ListRegistriesOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header Link
-	o.Link = response.GetHeader("Link")
+	// hydrates response header Link
+	hdrLink := response.GetHeader("Link")
 
-	// response header X-Total-Count
-	xTotalCount, err := swag.ConvertInt64(response.GetHeader("X-Total-Count"))
-	if err != nil {
-		return errors.InvalidType("X-Total-Count", "header", "int64", response.GetHeader("X-Total-Count"))
+	if hdrLink != "" {
+		o.Link = hdrLink
 	}
-	o.XTotalCount = xTotalCount
+
+	// hydrates response header X-Total-Count
+	hdrXTotalCount := response.GetHeader("X-Total-Count")
+
+	if hdrXTotalCount != "" {
+		valxTotalCount, err := swag.ConvertInt64(hdrXTotalCount)
+		if err != nil {
+			return errors.InvalidType("X-Total-Count", "header", "int64", hdrXTotalCount)
+		}
+		o.XTotalCount = valxTotalCount
+	}
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
@@ -108,19 +147,50 @@ func NewListRegistriesUnauthorized() *ListRegistriesUnauthorized {
 	return &ListRegistriesUnauthorized{}
 }
 
-/*ListRegistriesUnauthorized handles this case with default header values.
+/*
+ListRegistriesUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type ListRegistriesUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list registries unauthorized response has a 2xx status code
+func (o *ListRegistriesUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list registries unauthorized response has a 3xx status code
+func (o *ListRegistriesUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list registries unauthorized response has a 4xx status code
+func (o *ListRegistriesUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list registries unauthorized response has a 5xx status code
+func (o *ListRegistriesUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list registries unauthorized response a status code equal to that given
+func (o *ListRegistriesUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *ListRegistriesUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /registries][%d] listRegistriesUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *ListRegistriesUnauthorized) String() string {
 	return fmt.Sprintf("[GET /registries][%d] listRegistriesUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -130,8 +200,12 @@ func (o *ListRegistriesUnauthorized) GetPayload() *models.Errors {
 
 func (o *ListRegistriesUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -148,19 +222,50 @@ func NewListRegistriesForbidden() *ListRegistriesForbidden {
 	return &ListRegistriesForbidden{}
 }
 
-/*ListRegistriesForbidden handles this case with default header values.
+/*
+ListRegistriesForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type ListRegistriesForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list registries forbidden response has a 2xx status code
+func (o *ListRegistriesForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list registries forbidden response has a 3xx status code
+func (o *ListRegistriesForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list registries forbidden response has a 4xx status code
+func (o *ListRegistriesForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list registries forbidden response has a 5xx status code
+func (o *ListRegistriesForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list registries forbidden response a status code equal to that given
+func (o *ListRegistriesForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *ListRegistriesForbidden) Error() string {
+	return fmt.Sprintf("[GET /registries][%d] listRegistriesForbidden  %+v", 403, o.Payload)
+}
+
+func (o *ListRegistriesForbidden) String() string {
 	return fmt.Sprintf("[GET /registries][%d] listRegistriesForbidden  %+v", 403, o.Payload)
 }
 
@@ -170,8 +275,12 @@ func (o *ListRegistriesForbidden) GetPayload() *models.Errors {
 
 func (o *ListRegistriesForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -188,19 +297,50 @@ func NewListRegistriesInternalServerError() *ListRegistriesInternalServerError {
 	return &ListRegistriesInternalServerError{}
 }
 
-/*ListRegistriesInternalServerError handles this case with default header values.
+/*
+ListRegistriesInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type ListRegistriesInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list registries internal server error response has a 2xx status code
+func (o *ListRegistriesInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list registries internal server error response has a 3xx status code
+func (o *ListRegistriesInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list registries internal server error response has a 4xx status code
+func (o *ListRegistriesInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list registries internal server error response has a 5xx status code
+func (o *ListRegistriesInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list registries internal server error response a status code equal to that given
+func (o *ListRegistriesInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *ListRegistriesInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /registries][%d] listRegistriesInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *ListRegistriesInternalServerError) String() string {
 	return fmt.Sprintf("[GET /registries][%d] listRegistriesInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -210,8 +350,12 @@ func (o *ListRegistriesInternalServerError) GetPayload() *models.Errors {
 
 func (o *ListRegistriesInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

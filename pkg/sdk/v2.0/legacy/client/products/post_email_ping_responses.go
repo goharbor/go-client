@@ -56,7 +56,6 @@ func (o *PostEmailPingReader) ReadResponse(response runtime.ClientResponse, cons
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -67,14 +66,44 @@ func NewPostEmailPingOK() *PostEmailPingOK {
 	return &PostEmailPingOK{}
 }
 
-/*PostEmailPingOK handles this case with default header values.
+/*
+PostEmailPingOK describes a response with status code 200, with default header values.
 
 Ping email server successfully.
 */
 type PostEmailPingOK struct {
 }
 
+// IsSuccess returns true when this post email ping o k response has a 2xx status code
+func (o *PostEmailPingOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this post email ping o k response has a 3xx status code
+func (o *PostEmailPingOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post email ping o k response has a 4xx status code
+func (o *PostEmailPingOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this post email ping o k response has a 5xx status code
+func (o *PostEmailPingOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post email ping o k response a status code equal to that given
+func (o *PostEmailPingOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *PostEmailPingOK) Error() string {
+	return fmt.Sprintf("[POST /email/ping][%d] postEmailPingOK ", 200)
+}
+
+func (o *PostEmailPingOK) String() string {
 	return fmt.Sprintf("[POST /email/ping][%d] postEmailPingOK ", 200)
 }
 
@@ -88,14 +117,44 @@ func NewPostEmailPingBadRequest() *PostEmailPingBadRequest {
 	return &PostEmailPingBadRequest{}
 }
 
-/*PostEmailPingBadRequest handles this case with default header values.
+/*
+PostEmailPingBadRequest describes a response with status code 400, with default header values.
 
 Inviald email server settings.
 */
 type PostEmailPingBadRequest struct {
 }
 
+// IsSuccess returns true when this post email ping bad request response has a 2xx status code
+func (o *PostEmailPingBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post email ping bad request response has a 3xx status code
+func (o *PostEmailPingBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post email ping bad request response has a 4xx status code
+func (o *PostEmailPingBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post email ping bad request response has a 5xx status code
+func (o *PostEmailPingBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post email ping bad request response a status code equal to that given
+func (o *PostEmailPingBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *PostEmailPingBadRequest) Error() string {
+	return fmt.Sprintf("[POST /email/ping][%d] postEmailPingBadRequest ", 400)
+}
+
+func (o *PostEmailPingBadRequest) String() string {
 	return fmt.Sprintf("[POST /email/ping][%d] postEmailPingBadRequest ", 400)
 }
 
@@ -109,14 +168,44 @@ func NewPostEmailPingUnauthorized() *PostEmailPingUnauthorized {
 	return &PostEmailPingUnauthorized{}
 }
 
-/*PostEmailPingUnauthorized handles this case with default header values.
+/*
+PostEmailPingUnauthorized describes a response with status code 401, with default header values.
 
 User need to login first.
 */
 type PostEmailPingUnauthorized struct {
 }
 
+// IsSuccess returns true when this post email ping unauthorized response has a 2xx status code
+func (o *PostEmailPingUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post email ping unauthorized response has a 3xx status code
+func (o *PostEmailPingUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post email ping unauthorized response has a 4xx status code
+func (o *PostEmailPingUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post email ping unauthorized response has a 5xx status code
+func (o *PostEmailPingUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post email ping unauthorized response a status code equal to that given
+func (o *PostEmailPingUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *PostEmailPingUnauthorized) Error() string {
+	return fmt.Sprintf("[POST /email/ping][%d] postEmailPingUnauthorized ", 401)
+}
+
+func (o *PostEmailPingUnauthorized) String() string {
 	return fmt.Sprintf("[POST /email/ping][%d] postEmailPingUnauthorized ", 401)
 }
 
@@ -130,14 +219,44 @@ func NewPostEmailPingForbidden() *PostEmailPingForbidden {
 	return &PostEmailPingForbidden{}
 }
 
-/*PostEmailPingForbidden handles this case with default header values.
+/*
+PostEmailPingForbidden describes a response with status code 403, with default header values.
 
 Only admin has this authority.
 */
 type PostEmailPingForbidden struct {
 }
 
+// IsSuccess returns true when this post email ping forbidden response has a 2xx status code
+func (o *PostEmailPingForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post email ping forbidden response has a 3xx status code
+func (o *PostEmailPingForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post email ping forbidden response has a 4xx status code
+func (o *PostEmailPingForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post email ping forbidden response has a 5xx status code
+func (o *PostEmailPingForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post email ping forbidden response a status code equal to that given
+func (o *PostEmailPingForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *PostEmailPingForbidden) Error() string {
+	return fmt.Sprintf("[POST /email/ping][%d] postEmailPingForbidden ", 403)
+}
+
+func (o *PostEmailPingForbidden) String() string {
 	return fmt.Sprintf("[POST /email/ping][%d] postEmailPingForbidden ", 403)
 }
 
@@ -151,14 +270,44 @@ func NewPostEmailPingUnsupportedMediaType() *PostEmailPingUnsupportedMediaType {
 	return &PostEmailPingUnsupportedMediaType{}
 }
 
-/*PostEmailPingUnsupportedMediaType handles this case with default header values.
+/*
+PostEmailPingUnsupportedMediaType describes a response with status code 415, with default header values.
 
 The Media Type of the request is not supported, it has to be "application/json"
 */
 type PostEmailPingUnsupportedMediaType struct {
 }
 
+// IsSuccess returns true when this post email ping unsupported media type response has a 2xx status code
+func (o *PostEmailPingUnsupportedMediaType) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post email ping unsupported media type response has a 3xx status code
+func (o *PostEmailPingUnsupportedMediaType) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post email ping unsupported media type response has a 4xx status code
+func (o *PostEmailPingUnsupportedMediaType) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this post email ping unsupported media type response has a 5xx status code
+func (o *PostEmailPingUnsupportedMediaType) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this post email ping unsupported media type response a status code equal to that given
+func (o *PostEmailPingUnsupportedMediaType) IsCode(code int) bool {
+	return code == 415
+}
+
 func (o *PostEmailPingUnsupportedMediaType) Error() string {
+	return fmt.Sprintf("[POST /email/ping][%d] postEmailPingUnsupportedMediaType ", 415)
+}
+
+func (o *PostEmailPingUnsupportedMediaType) String() string {
 	return fmt.Sprintf("[POST /email/ping][%d] postEmailPingUnsupportedMediaType ", 415)
 }
 
@@ -172,14 +321,44 @@ func NewPostEmailPingInternalServerError() *PostEmailPingInternalServerError {
 	return &PostEmailPingInternalServerError{}
 }
 
-/*PostEmailPingInternalServerError handles this case with default header values.
+/*
+PostEmailPingInternalServerError describes a response with status code 500, with default header values.
 
 Unexpected internal errors.
 */
 type PostEmailPingInternalServerError struct {
 }
 
+// IsSuccess returns true when this post email ping internal server error response has a 2xx status code
+func (o *PostEmailPingInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post email ping internal server error response has a 3xx status code
+func (o *PostEmailPingInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post email ping internal server error response has a 4xx status code
+func (o *PostEmailPingInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this post email ping internal server error response has a 5xx status code
+func (o *PostEmailPingInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this post email ping internal server error response a status code equal to that given
+func (o *PostEmailPingInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *PostEmailPingInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /email/ping][%d] postEmailPingInternalServerError ", 500)
+}
+
+func (o *PostEmailPingInternalServerError) String() string {
 	return fmt.Sprintf("[POST /email/ping][%d] postEmailPingInternalServerError ", 500)
 }
 

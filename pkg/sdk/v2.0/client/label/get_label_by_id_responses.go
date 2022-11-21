@@ -47,7 +47,6 @@ func (o *GetLabelByIDReader) ReadResponse(response runtime.ClientResponse, consu
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -58,7 +57,8 @@ func NewGetLabelByIDOK() *GetLabelByIDOK {
 	return &GetLabelByIDOK{}
 }
 
-/*GetLabelByIDOK handles this case with default header values.
+/*
+GetLabelByIDOK describes a response with status code 200, with default header values.
 
 Get successfully.
 */
@@ -66,7 +66,36 @@ type GetLabelByIDOK struct {
 	Payload *models.Label
 }
 
+// IsSuccess returns true when this get label by Id o k response has a 2xx status code
+func (o *GetLabelByIDOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get label by Id o k response has a 3xx status code
+func (o *GetLabelByIDOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get label by Id o k response has a 4xx status code
+func (o *GetLabelByIDOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get label by Id o k response has a 5xx status code
+func (o *GetLabelByIDOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get label by Id o k response a status code equal to that given
+func (o *GetLabelByIDOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetLabelByIDOK) Error() string {
+	return fmt.Sprintf("[GET /labels/{label_id}][%d] getLabelByIdOK  %+v", 200, o.Payload)
+}
+
+func (o *GetLabelByIDOK) String() string {
 	return fmt.Sprintf("[GET /labels/{label_id}][%d] getLabelByIdOK  %+v", 200, o.Payload)
 }
 
@@ -91,19 +120,50 @@ func NewGetLabelByIDUnauthorized() *GetLabelByIDUnauthorized {
 	return &GetLabelByIDUnauthorized{}
 }
 
-/*GetLabelByIDUnauthorized handles this case with default header values.
+/*
+GetLabelByIDUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type GetLabelByIDUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get label by Id unauthorized response has a 2xx status code
+func (o *GetLabelByIDUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get label by Id unauthorized response has a 3xx status code
+func (o *GetLabelByIDUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get label by Id unauthorized response has a 4xx status code
+func (o *GetLabelByIDUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get label by Id unauthorized response has a 5xx status code
+func (o *GetLabelByIDUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get label by Id unauthorized response a status code equal to that given
+func (o *GetLabelByIDUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *GetLabelByIDUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /labels/{label_id}][%d] getLabelByIdUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *GetLabelByIDUnauthorized) String() string {
 	return fmt.Sprintf("[GET /labels/{label_id}][%d] getLabelByIdUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -113,8 +173,12 @@ func (o *GetLabelByIDUnauthorized) GetPayload() *models.Errors {
 
 func (o *GetLabelByIDUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -131,19 +195,50 @@ func NewGetLabelByIDNotFound() *GetLabelByIDNotFound {
 	return &GetLabelByIDNotFound{}
 }
 
-/*GetLabelByIDNotFound handles this case with default header values.
+/*
+GetLabelByIDNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
 type GetLabelByIDNotFound struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get label by Id not found response has a 2xx status code
+func (o *GetLabelByIDNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get label by Id not found response has a 3xx status code
+func (o *GetLabelByIDNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get label by Id not found response has a 4xx status code
+func (o *GetLabelByIDNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get label by Id not found response has a 5xx status code
+func (o *GetLabelByIDNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get label by Id not found response a status code equal to that given
+func (o *GetLabelByIDNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *GetLabelByIDNotFound) Error() string {
+	return fmt.Sprintf("[GET /labels/{label_id}][%d] getLabelByIdNotFound  %+v", 404, o.Payload)
+}
+
+func (o *GetLabelByIDNotFound) String() string {
 	return fmt.Sprintf("[GET /labels/{label_id}][%d] getLabelByIdNotFound  %+v", 404, o.Payload)
 }
 
@@ -153,8 +248,12 @@ func (o *GetLabelByIDNotFound) GetPayload() *models.Errors {
 
 func (o *GetLabelByIDNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -171,19 +270,50 @@ func NewGetLabelByIDInternalServerError() *GetLabelByIDInternalServerError {
 	return &GetLabelByIDInternalServerError{}
 }
 
-/*GetLabelByIDInternalServerError handles this case with default header values.
+/*
+GetLabelByIDInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type GetLabelByIDInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get label by Id internal server error response has a 2xx status code
+func (o *GetLabelByIDInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get label by Id internal server error response has a 3xx status code
+func (o *GetLabelByIDInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get label by Id internal server error response has a 4xx status code
+func (o *GetLabelByIDInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get label by Id internal server error response has a 5xx status code
+func (o *GetLabelByIDInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get label by Id internal server error response a status code equal to that given
+func (o *GetLabelByIDInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *GetLabelByIDInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /labels/{label_id}][%d] getLabelByIdInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *GetLabelByIDInternalServerError) String() string {
 	return fmt.Sprintf("[GET /labels/{label_id}][%d] getLabelByIdInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -193,8 +323,12 @@ func (o *GetLabelByIDInternalServerError) GetPayload() *models.Errors {
 
 func (o *GetLabelByIDInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

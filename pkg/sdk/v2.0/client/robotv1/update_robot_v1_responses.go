@@ -65,7 +65,6 @@ func (o *UpdateRobotV1Reader) ReadResponse(response runtime.ClientResponse, cons
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -76,24 +75,59 @@ func NewUpdateRobotV1OK() *UpdateRobotV1OK {
 	return &UpdateRobotV1OK{}
 }
 
-/*UpdateRobotV1OK handles this case with default header values.
+/*
+UpdateRobotV1OK describes a response with status code 200, with default header values.
 
 Success
 */
 type UpdateRobotV1OK struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
+}
+
+// IsSuccess returns true when this update robot v1 o k response has a 2xx status code
+func (o *UpdateRobotV1OK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this update robot v1 o k response has a 3xx status code
+func (o *UpdateRobotV1OK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update robot v1 o k response has a 4xx status code
+func (o *UpdateRobotV1OK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update robot v1 o k response has a 5xx status code
+func (o *UpdateRobotV1OK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update robot v1 o k response a status code equal to that given
+func (o *UpdateRobotV1OK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *UpdateRobotV1OK) Error() string {
 	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/robots/{robot_id}][%d] updateRobotV1OK ", 200)
 }
 
+func (o *UpdateRobotV1OK) String() string {
+	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/robots/{robot_id}][%d] updateRobotV1OK ", 200)
+}
+
 func (o *UpdateRobotV1OK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	return nil
 }
@@ -103,19 +137,50 @@ func NewUpdateRobotV1BadRequest() *UpdateRobotV1BadRequest {
 	return &UpdateRobotV1BadRequest{}
 }
 
-/*UpdateRobotV1BadRequest handles this case with default header values.
+/*
+UpdateRobotV1BadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
 type UpdateRobotV1BadRequest struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update robot v1 bad request response has a 2xx status code
+func (o *UpdateRobotV1BadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update robot v1 bad request response has a 3xx status code
+func (o *UpdateRobotV1BadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update robot v1 bad request response has a 4xx status code
+func (o *UpdateRobotV1BadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update robot v1 bad request response has a 5xx status code
+func (o *UpdateRobotV1BadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update robot v1 bad request response a status code equal to that given
+func (o *UpdateRobotV1BadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *UpdateRobotV1BadRequest) Error() string {
+	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/robots/{robot_id}][%d] updateRobotV1BadRequest  %+v", 400, o.Payload)
+}
+
+func (o *UpdateRobotV1BadRequest) String() string {
 	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/robots/{robot_id}][%d] updateRobotV1BadRequest  %+v", 400, o.Payload)
 }
 
@@ -125,8 +190,12 @@ func (o *UpdateRobotV1BadRequest) GetPayload() *models.Errors {
 
 func (o *UpdateRobotV1BadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -143,19 +212,50 @@ func NewUpdateRobotV1Unauthorized() *UpdateRobotV1Unauthorized {
 	return &UpdateRobotV1Unauthorized{}
 }
 
-/*UpdateRobotV1Unauthorized handles this case with default header values.
+/*
+UpdateRobotV1Unauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type UpdateRobotV1Unauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update robot v1 unauthorized response has a 2xx status code
+func (o *UpdateRobotV1Unauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update robot v1 unauthorized response has a 3xx status code
+func (o *UpdateRobotV1Unauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update robot v1 unauthorized response has a 4xx status code
+func (o *UpdateRobotV1Unauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update robot v1 unauthorized response has a 5xx status code
+func (o *UpdateRobotV1Unauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update robot v1 unauthorized response a status code equal to that given
+func (o *UpdateRobotV1Unauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *UpdateRobotV1Unauthorized) Error() string {
+	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/robots/{robot_id}][%d] updateRobotV1Unauthorized  %+v", 401, o.Payload)
+}
+
+func (o *UpdateRobotV1Unauthorized) String() string {
 	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/robots/{robot_id}][%d] updateRobotV1Unauthorized  %+v", 401, o.Payload)
 }
 
@@ -165,8 +265,12 @@ func (o *UpdateRobotV1Unauthorized) GetPayload() *models.Errors {
 
 func (o *UpdateRobotV1Unauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -183,19 +287,50 @@ func NewUpdateRobotV1Forbidden() *UpdateRobotV1Forbidden {
 	return &UpdateRobotV1Forbidden{}
 }
 
-/*UpdateRobotV1Forbidden handles this case with default header values.
+/*
+UpdateRobotV1Forbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type UpdateRobotV1Forbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update robot v1 forbidden response has a 2xx status code
+func (o *UpdateRobotV1Forbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update robot v1 forbidden response has a 3xx status code
+func (o *UpdateRobotV1Forbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update robot v1 forbidden response has a 4xx status code
+func (o *UpdateRobotV1Forbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update robot v1 forbidden response has a 5xx status code
+func (o *UpdateRobotV1Forbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update robot v1 forbidden response a status code equal to that given
+func (o *UpdateRobotV1Forbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *UpdateRobotV1Forbidden) Error() string {
+	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/robots/{robot_id}][%d] updateRobotV1Forbidden  %+v", 403, o.Payload)
+}
+
+func (o *UpdateRobotV1Forbidden) String() string {
 	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/robots/{robot_id}][%d] updateRobotV1Forbidden  %+v", 403, o.Payload)
 }
 
@@ -205,8 +340,12 @@ func (o *UpdateRobotV1Forbidden) GetPayload() *models.Errors {
 
 func (o *UpdateRobotV1Forbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -223,19 +362,50 @@ func NewUpdateRobotV1NotFound() *UpdateRobotV1NotFound {
 	return &UpdateRobotV1NotFound{}
 }
 
-/*UpdateRobotV1NotFound handles this case with default header values.
+/*
+UpdateRobotV1NotFound describes a response with status code 404, with default header values.
 
 Not found
 */
 type UpdateRobotV1NotFound struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update robot v1 not found response has a 2xx status code
+func (o *UpdateRobotV1NotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update robot v1 not found response has a 3xx status code
+func (o *UpdateRobotV1NotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update robot v1 not found response has a 4xx status code
+func (o *UpdateRobotV1NotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update robot v1 not found response has a 5xx status code
+func (o *UpdateRobotV1NotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update robot v1 not found response a status code equal to that given
+func (o *UpdateRobotV1NotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *UpdateRobotV1NotFound) Error() string {
+	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/robots/{robot_id}][%d] updateRobotV1NotFound  %+v", 404, o.Payload)
+}
+
+func (o *UpdateRobotV1NotFound) String() string {
 	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/robots/{robot_id}][%d] updateRobotV1NotFound  %+v", 404, o.Payload)
 }
 
@@ -245,8 +415,12 @@ func (o *UpdateRobotV1NotFound) GetPayload() *models.Errors {
 
 func (o *UpdateRobotV1NotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -263,19 +437,50 @@ func NewUpdateRobotV1Conflict() *UpdateRobotV1Conflict {
 	return &UpdateRobotV1Conflict{}
 }
 
-/*UpdateRobotV1Conflict handles this case with default header values.
+/*
+UpdateRobotV1Conflict describes a response with status code 409, with default header values.
 
 Conflict
 */
 type UpdateRobotV1Conflict struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update robot v1 conflict response has a 2xx status code
+func (o *UpdateRobotV1Conflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update robot v1 conflict response has a 3xx status code
+func (o *UpdateRobotV1Conflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update robot v1 conflict response has a 4xx status code
+func (o *UpdateRobotV1Conflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update robot v1 conflict response has a 5xx status code
+func (o *UpdateRobotV1Conflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update robot v1 conflict response a status code equal to that given
+func (o *UpdateRobotV1Conflict) IsCode(code int) bool {
+	return code == 409
+}
+
 func (o *UpdateRobotV1Conflict) Error() string {
+	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/robots/{robot_id}][%d] updateRobotV1Conflict  %+v", 409, o.Payload)
+}
+
+func (o *UpdateRobotV1Conflict) String() string {
 	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/robots/{robot_id}][%d] updateRobotV1Conflict  %+v", 409, o.Payload)
 }
 
@@ -285,8 +490,12 @@ func (o *UpdateRobotV1Conflict) GetPayload() *models.Errors {
 
 func (o *UpdateRobotV1Conflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -303,19 +512,50 @@ func NewUpdateRobotV1InternalServerError() *UpdateRobotV1InternalServerError {
 	return &UpdateRobotV1InternalServerError{}
 }
 
-/*UpdateRobotV1InternalServerError handles this case with default header values.
+/*
+UpdateRobotV1InternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type UpdateRobotV1InternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update robot v1 internal server error response has a 2xx status code
+func (o *UpdateRobotV1InternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update robot v1 internal server error response has a 3xx status code
+func (o *UpdateRobotV1InternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update robot v1 internal server error response has a 4xx status code
+func (o *UpdateRobotV1InternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update robot v1 internal server error response has a 5xx status code
+func (o *UpdateRobotV1InternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this update robot v1 internal server error response a status code equal to that given
+func (o *UpdateRobotV1InternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *UpdateRobotV1InternalServerError) Error() string {
+	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/robots/{robot_id}][%d] updateRobotV1InternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *UpdateRobotV1InternalServerError) String() string {
 	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/robots/{robot_id}][%d] updateRobotV1InternalServerError  %+v", 500, o.Payload)
 }
 
@@ -325,8 +565,12 @@ func (o *UpdateRobotV1InternalServerError) GetPayload() *models.Errors {
 
 func (o *UpdateRobotV1InternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

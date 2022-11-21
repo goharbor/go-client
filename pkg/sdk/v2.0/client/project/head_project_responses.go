@@ -41,7 +41,6 @@ func (o *HeadProjectReader) ReadResponse(response runtime.ClientResponse, consum
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -52,24 +51,59 @@ func NewHeadProjectOK() *HeadProjectOK {
 	return &HeadProjectOK{}
 }
 
-/*HeadProjectOK handles this case with default header values.
+/*
+HeadProjectOK describes a response with status code 200, with default header values.
 
 Success
 */
 type HeadProjectOK struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
+}
+
+// IsSuccess returns true when this head project o k response has a 2xx status code
+func (o *HeadProjectOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this head project o k response has a 3xx status code
+func (o *HeadProjectOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this head project o k response has a 4xx status code
+func (o *HeadProjectOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this head project o k response has a 5xx status code
+func (o *HeadProjectOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this head project o k response a status code equal to that given
+func (o *HeadProjectOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *HeadProjectOK) Error() string {
 	return fmt.Sprintf("[HEAD /projects][%d] headProjectOK ", 200)
 }
 
+func (o *HeadProjectOK) String() string {
+	return fmt.Sprintf("[HEAD /projects][%d] headProjectOK ", 200)
+}
+
 func (o *HeadProjectOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	return nil
 }
@@ -79,19 +113,50 @@ func NewHeadProjectNotFound() *HeadProjectNotFound {
 	return &HeadProjectNotFound{}
 }
 
-/*HeadProjectNotFound handles this case with default header values.
+/*
+HeadProjectNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
 type HeadProjectNotFound struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this head project not found response has a 2xx status code
+func (o *HeadProjectNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this head project not found response has a 3xx status code
+func (o *HeadProjectNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this head project not found response has a 4xx status code
+func (o *HeadProjectNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this head project not found response has a 5xx status code
+func (o *HeadProjectNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this head project not found response a status code equal to that given
+func (o *HeadProjectNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *HeadProjectNotFound) Error() string {
+	return fmt.Sprintf("[HEAD /projects][%d] headProjectNotFound  %+v", 404, o.Payload)
+}
+
+func (o *HeadProjectNotFound) String() string {
 	return fmt.Sprintf("[HEAD /projects][%d] headProjectNotFound  %+v", 404, o.Payload)
 }
 
@@ -101,8 +166,12 @@ func (o *HeadProjectNotFound) GetPayload() *models.Errors {
 
 func (o *HeadProjectNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -119,19 +188,50 @@ func NewHeadProjectInternalServerError() *HeadProjectInternalServerError {
 	return &HeadProjectInternalServerError{}
 }
 
-/*HeadProjectInternalServerError handles this case with default header values.
+/*
+HeadProjectInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type HeadProjectInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this head project internal server error response has a 2xx status code
+func (o *HeadProjectInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this head project internal server error response has a 3xx status code
+func (o *HeadProjectInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this head project internal server error response has a 4xx status code
+func (o *HeadProjectInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this head project internal server error response has a 5xx status code
+func (o *HeadProjectInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this head project internal server error response a status code equal to that given
+func (o *HeadProjectInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *HeadProjectInternalServerError) Error() string {
+	return fmt.Sprintf("[HEAD /projects][%d] headProjectInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *HeadProjectInternalServerError) String() string {
 	return fmt.Sprintf("[HEAD /projects][%d] headProjectInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -141,8 +241,12 @@ func (o *HeadProjectInternalServerError) GetPayload() *models.Errors {
 
 func (o *HeadProjectInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

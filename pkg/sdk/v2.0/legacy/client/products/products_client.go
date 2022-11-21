@@ -23,9 +23,9 @@ type API interface {
 	   Remove label from the specified chart version.*/
 	DeleteChartrepoRepoChartsNameVersionLabelsID(ctx context.Context, params *DeleteChartrepoRepoChartsNameVersionLabelsIDParams) (*DeleteChartrepoRepoChartsNameVersionLabelsIDOK, error)
 	/*
-	   GetChartrepoRepoChartsNameVersionLabels returns the attahced labels of chart
+	   GetChartrepoRepoChartsNameVersionLabels returns the attached labels of chart
 
-	   Return the attahced labels of the specified chart version.*/
+	   Return the attached labels of the specified chart version.*/
 	GetChartrepoRepoChartsNameVersionLabels(ctx context.Context, params *GetChartrepoRepoChartsNameVersionLabelsParams) (*GetChartrepoRepoChartsNameVersionLabelsOK, error)
 	/*
 	   PostChartrepoRepoChartsNameVersionLabels marks label to chart
@@ -86,9 +86,9 @@ func (a *Client) DeleteChartrepoRepoChartsNameVersionLabelsID(ctx context.Contex
 }
 
 /*
-GetChartrepoRepoChartsNameVersionLabels returns the attahced labels of chart
+GetChartrepoRepoChartsNameVersionLabels returns the attached labels of chart
 
-Return the attahced labels of the specified chart version.
+Return the attached labels of the specified chart version.
 */
 func (a *Client) GetChartrepoRepoChartsNameVersionLabels(ctx context.Context, params *GetChartrepoRepoChartsNameVersionLabelsParams) (*GetChartrepoRepoChartsNameVersionLabelsOK, error) {
 
@@ -143,7 +143,6 @@ func (a *Client) PostChartrepoRepoChartsNameVersionLabels(ctx context.Context, p
 PostEmailPing tests connection and authentication with email server
 
 Test connection and authentication with email server.
-
 */
 func (a *Client) PostEmailPing(ctx context.Context, params *PostEmailPingParams) (*PostEmailPingOK, error) {
 

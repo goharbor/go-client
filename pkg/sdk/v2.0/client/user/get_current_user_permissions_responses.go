@@ -41,7 +41,6 @@ func (o *GetCurrentUserPermissionsReader) ReadResponse(response runtime.ClientRe
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -52,7 +51,8 @@ func NewGetCurrentUserPermissionsOK() *GetCurrentUserPermissionsOK {
 	return &GetCurrentUserPermissionsOK{}
 }
 
-/*GetCurrentUserPermissionsOK handles this case with default header values.
+/*
+GetCurrentUserPermissionsOK describes a response with status code 200, with default header values.
 
 Get current user permission successfully.
 */
@@ -60,7 +60,36 @@ type GetCurrentUserPermissionsOK struct {
 	Payload []*models.Permission
 }
 
+// IsSuccess returns true when this get current user permissions o k response has a 2xx status code
+func (o *GetCurrentUserPermissionsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get current user permissions o k response has a 3xx status code
+func (o *GetCurrentUserPermissionsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get current user permissions o k response has a 4xx status code
+func (o *GetCurrentUserPermissionsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get current user permissions o k response has a 5xx status code
+func (o *GetCurrentUserPermissionsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get current user permissions o k response a status code equal to that given
+func (o *GetCurrentUserPermissionsOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetCurrentUserPermissionsOK) Error() string {
+	return fmt.Sprintf("[GET /users/current/permissions][%d] getCurrentUserPermissionsOK  %+v", 200, o.Payload)
+}
+
+func (o *GetCurrentUserPermissionsOK) String() string {
 	return fmt.Sprintf("[GET /users/current/permissions][%d] getCurrentUserPermissionsOK  %+v", 200, o.Payload)
 }
 
@@ -83,14 +112,44 @@ func NewGetCurrentUserPermissionsUnauthorized() *GetCurrentUserPermissionsUnauth
 	return &GetCurrentUserPermissionsUnauthorized{}
 }
 
-/*GetCurrentUserPermissionsUnauthorized handles this case with default header values.
+/*
+GetCurrentUserPermissionsUnauthorized describes a response with status code 401, with default header values.
 
 User need to log in first.
 */
 type GetCurrentUserPermissionsUnauthorized struct {
 }
 
+// IsSuccess returns true when this get current user permissions unauthorized response has a 2xx status code
+func (o *GetCurrentUserPermissionsUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get current user permissions unauthorized response has a 3xx status code
+func (o *GetCurrentUserPermissionsUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get current user permissions unauthorized response has a 4xx status code
+func (o *GetCurrentUserPermissionsUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get current user permissions unauthorized response has a 5xx status code
+func (o *GetCurrentUserPermissionsUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get current user permissions unauthorized response a status code equal to that given
+func (o *GetCurrentUserPermissionsUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *GetCurrentUserPermissionsUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /users/current/permissions][%d] getCurrentUserPermissionsUnauthorized ", 401)
+}
+
+func (o *GetCurrentUserPermissionsUnauthorized) String() string {
 	return fmt.Sprintf("[GET /users/current/permissions][%d] getCurrentUserPermissionsUnauthorized ", 401)
 }
 
@@ -104,14 +163,44 @@ func NewGetCurrentUserPermissionsInternalServerError() *GetCurrentUserPermission
 	return &GetCurrentUserPermissionsInternalServerError{}
 }
 
-/*GetCurrentUserPermissionsInternalServerError handles this case with default header values.
+/*
+GetCurrentUserPermissionsInternalServerError describes a response with status code 500, with default header values.
 
 Internal errors.
 */
 type GetCurrentUserPermissionsInternalServerError struct {
 }
 
+// IsSuccess returns true when this get current user permissions internal server error response has a 2xx status code
+func (o *GetCurrentUserPermissionsInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get current user permissions internal server error response has a 3xx status code
+func (o *GetCurrentUserPermissionsInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get current user permissions internal server error response has a 4xx status code
+func (o *GetCurrentUserPermissionsInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get current user permissions internal server error response has a 5xx status code
+func (o *GetCurrentUserPermissionsInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get current user permissions internal server error response a status code equal to that given
+func (o *GetCurrentUserPermissionsInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *GetCurrentUserPermissionsInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /users/current/permissions][%d] getCurrentUserPermissionsInternalServerError ", 500)
+}
+
+func (o *GetCurrentUserPermissionsInternalServerError) String() string {
 	return fmt.Sprintf("[GET /users/current/permissions][%d] getCurrentUserPermissionsInternalServerError ", 500)
 }
 

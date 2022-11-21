@@ -55,7 +55,6 @@ func (o *ListImmuRulesReader) ReadResponse(response runtime.ClientResponse, cons
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -66,22 +65,54 @@ func NewListImmuRulesOK() *ListImmuRulesOK {
 	return &ListImmuRulesOK{}
 }
 
-/*ListImmuRulesOK handles this case with default header values.
+/*
+ListImmuRulesOK describes a response with status code 200, with default header values.
 
 Success
 */
 type ListImmuRulesOK struct {
-	/*Link refers to the previous page and next page
+
+	/* Link refers to the previous page and next page
 	 */
 	Link string
-	/*The total count of immutable tag
+
+	/* The total count of immutable tag
 	 */
 	XTotalCount int64
 
 	Payload []*models.ImmutableRule
 }
 
+// IsSuccess returns true when this list immu rules o k response has a 2xx status code
+func (o *ListImmuRulesOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list immu rules o k response has a 3xx status code
+func (o *ListImmuRulesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list immu rules o k response has a 4xx status code
+func (o *ListImmuRulesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list immu rules o k response has a 5xx status code
+func (o *ListImmuRulesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list immu rules o k response a status code equal to that given
+func (o *ListImmuRulesOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ListImmuRulesOK) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/immutabletagrules][%d] listImmuRulesOK  %+v", 200, o.Payload)
+}
+
+func (o *ListImmuRulesOK) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/immutabletagrules][%d] listImmuRulesOK  %+v", 200, o.Payload)
 }
 
@@ -91,15 +122,23 @@ func (o *ListImmuRulesOK) GetPayload() []*models.ImmutableRule {
 
 func (o *ListImmuRulesOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header Link
-	o.Link = response.GetHeader("Link")
+	// hydrates response header Link
+	hdrLink := response.GetHeader("Link")
 
-	// response header X-Total-Count
-	xTotalCount, err := swag.ConvertInt64(response.GetHeader("X-Total-Count"))
-	if err != nil {
-		return errors.InvalidType("X-Total-Count", "header", "int64", response.GetHeader("X-Total-Count"))
+	if hdrLink != "" {
+		o.Link = hdrLink
 	}
-	o.XTotalCount = xTotalCount
+
+	// hydrates response header X-Total-Count
+	hdrXTotalCount := response.GetHeader("X-Total-Count")
+
+	if hdrXTotalCount != "" {
+		valxTotalCount, err := swag.ConvertInt64(hdrXTotalCount)
+		if err != nil {
+			return errors.InvalidType("X-Total-Count", "header", "int64", hdrXTotalCount)
+		}
+		o.XTotalCount = valxTotalCount
+	}
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
@@ -114,19 +153,50 @@ func NewListImmuRulesBadRequest() *ListImmuRulesBadRequest {
 	return &ListImmuRulesBadRequest{}
 }
 
-/*ListImmuRulesBadRequest handles this case with default header values.
+/*
+ListImmuRulesBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
 type ListImmuRulesBadRequest struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list immu rules bad request response has a 2xx status code
+func (o *ListImmuRulesBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list immu rules bad request response has a 3xx status code
+func (o *ListImmuRulesBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list immu rules bad request response has a 4xx status code
+func (o *ListImmuRulesBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list immu rules bad request response has a 5xx status code
+func (o *ListImmuRulesBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list immu rules bad request response a status code equal to that given
+func (o *ListImmuRulesBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *ListImmuRulesBadRequest) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/immutabletagrules][%d] listImmuRulesBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *ListImmuRulesBadRequest) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/immutabletagrules][%d] listImmuRulesBadRequest  %+v", 400, o.Payload)
 }
 
@@ -136,8 +206,12 @@ func (o *ListImmuRulesBadRequest) GetPayload() *models.Errors {
 
 func (o *ListImmuRulesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -154,19 +228,50 @@ func NewListImmuRulesUnauthorized() *ListImmuRulesUnauthorized {
 	return &ListImmuRulesUnauthorized{}
 }
 
-/*ListImmuRulesUnauthorized handles this case with default header values.
+/*
+ListImmuRulesUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type ListImmuRulesUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list immu rules unauthorized response has a 2xx status code
+func (o *ListImmuRulesUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list immu rules unauthorized response has a 3xx status code
+func (o *ListImmuRulesUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list immu rules unauthorized response has a 4xx status code
+func (o *ListImmuRulesUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list immu rules unauthorized response has a 5xx status code
+func (o *ListImmuRulesUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list immu rules unauthorized response a status code equal to that given
+func (o *ListImmuRulesUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *ListImmuRulesUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/immutabletagrules][%d] listImmuRulesUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *ListImmuRulesUnauthorized) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/immutabletagrules][%d] listImmuRulesUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -176,8 +281,12 @@ func (o *ListImmuRulesUnauthorized) GetPayload() *models.Errors {
 
 func (o *ListImmuRulesUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -194,19 +303,50 @@ func NewListImmuRulesForbidden() *ListImmuRulesForbidden {
 	return &ListImmuRulesForbidden{}
 }
 
-/*ListImmuRulesForbidden handles this case with default header values.
+/*
+ListImmuRulesForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type ListImmuRulesForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list immu rules forbidden response has a 2xx status code
+func (o *ListImmuRulesForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list immu rules forbidden response has a 3xx status code
+func (o *ListImmuRulesForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list immu rules forbidden response has a 4xx status code
+func (o *ListImmuRulesForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list immu rules forbidden response has a 5xx status code
+func (o *ListImmuRulesForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list immu rules forbidden response a status code equal to that given
+func (o *ListImmuRulesForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *ListImmuRulesForbidden) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/immutabletagrules][%d] listImmuRulesForbidden  %+v", 403, o.Payload)
+}
+
+func (o *ListImmuRulesForbidden) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/immutabletagrules][%d] listImmuRulesForbidden  %+v", 403, o.Payload)
 }
 
@@ -216,8 +356,12 @@ func (o *ListImmuRulesForbidden) GetPayload() *models.Errors {
 
 func (o *ListImmuRulesForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -234,19 +378,50 @@ func NewListImmuRulesInternalServerError() *ListImmuRulesInternalServerError {
 	return &ListImmuRulesInternalServerError{}
 }
 
-/*ListImmuRulesInternalServerError handles this case with default header values.
+/*
+ListImmuRulesInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type ListImmuRulesInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list immu rules internal server error response has a 2xx status code
+func (o *ListImmuRulesInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list immu rules internal server error response has a 3xx status code
+func (o *ListImmuRulesInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list immu rules internal server error response has a 4xx status code
+func (o *ListImmuRulesInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list immu rules internal server error response has a 5xx status code
+func (o *ListImmuRulesInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list immu rules internal server error response a status code equal to that given
+func (o *ListImmuRulesInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *ListImmuRulesInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/immutabletagrules][%d] listImmuRulesInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *ListImmuRulesInternalServerError) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/immutabletagrules][%d] listImmuRulesInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -256,8 +431,12 @@ func (o *ListImmuRulesInternalServerError) GetPayload() *models.Errors {
 
 func (o *ListImmuRulesInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

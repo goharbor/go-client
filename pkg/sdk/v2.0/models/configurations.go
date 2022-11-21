@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -14,6 +16,9 @@ import (
 //
 // swagger:model Configurations
 type Configurations struct {
+
+	// The audit log forward endpoint
+	AuditLogForwardEndpoint *string `json:"audit_log_forward_endpoint,omitempty"`
 
 	// The auth mode of current system, such as "db_auth", "ldap_auth", "oidc_auth"
 	AuthMode *string `json:"auth_mode,omitempty"`
@@ -162,6 +167,9 @@ type Configurations struct {
 	// Whether the Harbor instance supports self-registration.  If it''s set to false, admin need to add user to the instance.
 	SelfRegistration *bool `json:"self_registration,omitempty"`
 
+	// Skip audit log database
+	SkipAuditLogDatabase *bool `json:"skip_audit_log_database,omitempty"`
+
 	// The storage quota per project
 	StoragePerProject *int64 `json:"storage_per_project,omitempty"`
 
@@ -183,6 +191,11 @@ type Configurations struct {
 
 // Validate validates this configurations
 func (m *Configurations) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this configurations based on context it is used
+func (m *Configurations) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

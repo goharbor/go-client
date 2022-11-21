@@ -6,6 +6,7 @@ package chart_repository
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"fmt"
 	"io"
 
@@ -40,7 +41,6 @@ func (o *GetChartrepoHealthReader) ReadResponse(response runtime.ClientResponse,
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -51,7 +51,8 @@ func NewGetChartrepoHealthOK() *GetChartrepoHealthOK {
 	return &GetChartrepoHealthOK{}
 }
 
-/*GetChartrepoHealthOK handles this case with default header values.
+/*
+GetChartrepoHealthOK describes a response with status code 200, with default header values.
 
 Health status of chart repository service is returned.
 */
@@ -59,7 +60,36 @@ type GetChartrepoHealthOK struct {
 	Payload *GetChartrepoHealthOKBody
 }
 
+// IsSuccess returns true when this get chartrepo health o k response has a 2xx status code
+func (o *GetChartrepoHealthOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get chartrepo health o k response has a 3xx status code
+func (o *GetChartrepoHealthOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get chartrepo health o k response has a 4xx status code
+func (o *GetChartrepoHealthOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get chartrepo health o k response has a 5xx status code
+func (o *GetChartrepoHealthOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get chartrepo health o k response a status code equal to that given
+func (o *GetChartrepoHealthOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetChartrepoHealthOK) Error() string {
+	return fmt.Sprintf("[GET /chartrepo/health][%d] getChartrepoHealthOK  %+v", 200, o.Payload)
+}
+
+func (o *GetChartrepoHealthOK) String() string {
 	return fmt.Sprintf("[GET /chartrepo/health][%d] getChartrepoHealthOK  %+v", 200, o.Payload)
 }
 
@@ -84,14 +114,44 @@ func NewGetChartrepoHealthUnauthorized() *GetChartrepoHealthUnauthorized {
 	return &GetChartrepoHealthUnauthorized{}
 }
 
-/*GetChartrepoHealthUnauthorized handles this case with default header values.
+/*
+GetChartrepoHealthUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type GetChartrepoHealthUnauthorized struct {
 }
 
+// IsSuccess returns true when this get chartrepo health unauthorized response has a 2xx status code
+func (o *GetChartrepoHealthUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get chartrepo health unauthorized response has a 3xx status code
+func (o *GetChartrepoHealthUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get chartrepo health unauthorized response has a 4xx status code
+func (o *GetChartrepoHealthUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get chartrepo health unauthorized response has a 5xx status code
+func (o *GetChartrepoHealthUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get chartrepo health unauthorized response a status code equal to that given
+func (o *GetChartrepoHealthUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *GetChartrepoHealthUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /chartrepo/health][%d] getChartrepoHealthUnauthorized ", 401)
+}
+
+func (o *GetChartrepoHealthUnauthorized) String() string {
 	return fmt.Sprintf("[GET /chartrepo/health][%d] getChartrepoHealthUnauthorized ", 401)
 }
 
@@ -105,14 +165,44 @@ func NewGetChartrepoHealthForbidden() *GetChartrepoHealthForbidden {
 	return &GetChartrepoHealthForbidden{}
 }
 
-/*GetChartrepoHealthForbidden handles this case with default header values.
+/*
+GetChartrepoHealthForbidden describes a response with status code 403, with default header values.
 
 Operation is forbidden or quota exceeded
 */
 type GetChartrepoHealthForbidden struct {
 }
 
+// IsSuccess returns true when this get chartrepo health forbidden response has a 2xx status code
+func (o *GetChartrepoHealthForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get chartrepo health forbidden response has a 3xx status code
+func (o *GetChartrepoHealthForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get chartrepo health forbidden response has a 4xx status code
+func (o *GetChartrepoHealthForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get chartrepo health forbidden response has a 5xx status code
+func (o *GetChartrepoHealthForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get chartrepo health forbidden response a status code equal to that given
+func (o *GetChartrepoHealthForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *GetChartrepoHealthForbidden) Error() string {
+	return fmt.Sprintf("[GET /chartrepo/health][%d] getChartrepoHealthForbidden ", 403)
+}
+
+func (o *GetChartrepoHealthForbidden) String() string {
 	return fmt.Sprintf("[GET /chartrepo/health][%d] getChartrepoHealthForbidden ", 403)
 }
 
@@ -121,7 +211,8 @@ func (o *GetChartrepoHealthForbidden) readResponse(response runtime.ClientRespon
 	return nil
 }
 
-/*GetChartrepoHealthOKBody get chartrepo health o k body
+/*
+GetChartrepoHealthOKBody get chartrepo health o k body
 swagger:model GetChartrepoHealthOKBody
 */
 type GetChartrepoHealthOKBody struct {
@@ -132,6 +223,11 @@ type GetChartrepoHealthOKBody struct {
 
 // Validate validates this get chartrepo health o k body
 func (o *GetChartrepoHealthOKBody) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this get chartrepo health o k body based on context it is used
+func (o *GetChartrepoHealthOKBody) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

@@ -47,7 +47,6 @@ type Client struct {
 ListWebhookJobs lists project webhook jobs
 
 This endpoint returns webhook jobs of a project.
-
 */
 func (a *Client) ListWebhookJobs(ctx context.Context, params *ListWebhookJobsParams) (*ListWebhookJobsOK, error) {
 

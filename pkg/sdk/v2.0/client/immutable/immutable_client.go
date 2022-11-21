@@ -59,7 +59,6 @@ type Client struct {
 CreateImmuRule adds an immutable tag rule to current project
 
 This endpoint add an immutable tag rule to the project
-
 */
 func (a *Client) CreateImmuRule(ctx context.Context, params *CreateImmuRuleParams) (*CreateImmuRuleCreated, error) {
 
@@ -112,7 +111,6 @@ func (a *Client) DeleteImmuRule(ctx context.Context, params *DeleteImmuRuleParam
 ListImmuRules lists all immutable tag rules of current project
 
 This endpoint returns the immutable tag rules of a project
-
 */
 func (a *Client) ListImmuRules(ctx context.Context, params *ListImmuRulesParams) (*ListImmuRulesOK, error) {
 

@@ -47,7 +47,6 @@ func (o *GetInternalconfigReader) ReadResponse(response runtime.ClientResponse, 
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -58,7 +57,8 @@ func NewGetInternalconfigOK() *GetInternalconfigOK {
 	return &GetInternalconfigOK{}
 }
 
-/*GetInternalconfigOK handles this case with default header values.
+/*
+GetInternalconfigOK describes a response with status code 200, with default header values.
 
 Get system configurations successfully. The response body is a map.
 */
@@ -66,7 +66,36 @@ type GetInternalconfigOK struct {
 	Payload models.InternalConfigurationsResponse
 }
 
+// IsSuccess returns true when this get internalconfig o k response has a 2xx status code
+func (o *GetInternalconfigOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get internalconfig o k response has a 3xx status code
+func (o *GetInternalconfigOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get internalconfig o k response has a 4xx status code
+func (o *GetInternalconfigOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get internalconfig o k response has a 5xx status code
+func (o *GetInternalconfigOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get internalconfig o k response a status code equal to that given
+func (o *GetInternalconfigOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetInternalconfigOK) Error() string {
+	return fmt.Sprintf("[GET /internalconfig][%d] getInternalconfigOK  %+v", 200, o.Payload)
+}
+
+func (o *GetInternalconfigOK) String() string {
 	return fmt.Sprintf("[GET /internalconfig][%d] getInternalconfigOK  %+v", 200, o.Payload)
 }
 
@@ -89,14 +118,44 @@ func NewGetInternalconfigUnauthorized() *GetInternalconfigUnauthorized {
 	return &GetInternalconfigUnauthorized{}
 }
 
-/*GetInternalconfigUnauthorized handles this case with default header values.
+/*
+GetInternalconfigUnauthorized describes a response with status code 401, with default header values.
 
 User need to log in first.
 */
 type GetInternalconfigUnauthorized struct {
 }
 
+// IsSuccess returns true when this get internalconfig unauthorized response has a 2xx status code
+func (o *GetInternalconfigUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get internalconfig unauthorized response has a 3xx status code
+func (o *GetInternalconfigUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get internalconfig unauthorized response has a 4xx status code
+func (o *GetInternalconfigUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get internalconfig unauthorized response has a 5xx status code
+func (o *GetInternalconfigUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get internalconfig unauthorized response a status code equal to that given
+func (o *GetInternalconfigUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *GetInternalconfigUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /internalconfig][%d] getInternalconfigUnauthorized ", 401)
+}
+
+func (o *GetInternalconfigUnauthorized) String() string {
 	return fmt.Sprintf("[GET /internalconfig][%d] getInternalconfigUnauthorized ", 401)
 }
 
@@ -110,14 +169,44 @@ func NewGetInternalconfigForbidden() *GetInternalconfigForbidden {
 	return &GetInternalconfigForbidden{}
 }
 
-/*GetInternalconfigForbidden handles this case with default header values.
+/*
+GetInternalconfigForbidden describes a response with status code 403, with default header values.
 
 User does not have permission of admin role.
 */
 type GetInternalconfigForbidden struct {
 }
 
+// IsSuccess returns true when this get internalconfig forbidden response has a 2xx status code
+func (o *GetInternalconfigForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get internalconfig forbidden response has a 3xx status code
+func (o *GetInternalconfigForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get internalconfig forbidden response has a 4xx status code
+func (o *GetInternalconfigForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get internalconfig forbidden response has a 5xx status code
+func (o *GetInternalconfigForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get internalconfig forbidden response a status code equal to that given
+func (o *GetInternalconfigForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *GetInternalconfigForbidden) Error() string {
+	return fmt.Sprintf("[GET /internalconfig][%d] getInternalconfigForbidden ", 403)
+}
+
+func (o *GetInternalconfigForbidden) String() string {
 	return fmt.Sprintf("[GET /internalconfig][%d] getInternalconfigForbidden ", 403)
 }
 
@@ -131,14 +220,44 @@ func NewGetInternalconfigInternalServerError() *GetInternalconfigInternalServerE
 	return &GetInternalconfigInternalServerError{}
 }
 
-/*GetInternalconfigInternalServerError handles this case with default header values.
+/*
+GetInternalconfigInternalServerError describes a response with status code 500, with default header values.
 
 Unexpected internal errors.
 */
 type GetInternalconfigInternalServerError struct {
 }
 
+// IsSuccess returns true when this get internalconfig internal server error response has a 2xx status code
+func (o *GetInternalconfigInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get internalconfig internal server error response has a 3xx status code
+func (o *GetInternalconfigInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get internalconfig internal server error response has a 4xx status code
+func (o *GetInternalconfigInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get internalconfig internal server error response has a 5xx status code
+func (o *GetInternalconfigInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get internalconfig internal server error response a status code equal to that given
+func (o *GetInternalconfigInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *GetInternalconfigInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /internalconfig][%d] getInternalconfigInternalServerError ", 500)
+}
+
+func (o *GetInternalconfigInternalServerError) String() string {
 	return fmt.Sprintf("[GET /internalconfig][%d] getInternalconfigInternalServerError ", 500)
 }
 

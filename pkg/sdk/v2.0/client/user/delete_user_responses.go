@@ -53,7 +53,6 @@ func (o *DeleteUserReader) ReadResponse(response runtime.ClientResponse, consume
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -64,24 +63,59 @@ func NewDeleteUserOK() *DeleteUserOK {
 	return &DeleteUserOK{}
 }
 
-/*DeleteUserOK handles this case with default header values.
+/*
+DeleteUserOK describes a response with status code 200, with default header values.
 
 Success
 */
 type DeleteUserOK struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
+}
+
+// IsSuccess returns true when this delete user o k response has a 2xx status code
+func (o *DeleteUserOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this delete user o k response has a 3xx status code
+func (o *DeleteUserOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete user o k response has a 4xx status code
+func (o *DeleteUserOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete user o k response has a 5xx status code
+func (o *DeleteUserOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete user o k response a status code equal to that given
+func (o *DeleteUserOK) IsCode(code int) bool {
+	return code == 200
 }
 
 func (o *DeleteUserOK) Error() string {
 	return fmt.Sprintf("[DELETE /users/{user_id}][%d] deleteUserOK ", 200)
 }
 
+func (o *DeleteUserOK) String() string {
+	return fmt.Sprintf("[DELETE /users/{user_id}][%d] deleteUserOK ", 200)
+}
+
 func (o *DeleteUserOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	return nil
 }
@@ -91,19 +125,50 @@ func NewDeleteUserUnauthorized() *DeleteUserUnauthorized {
 	return &DeleteUserUnauthorized{}
 }
 
-/*DeleteUserUnauthorized handles this case with default header values.
+/*
+DeleteUserUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type DeleteUserUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete user unauthorized response has a 2xx status code
+func (o *DeleteUserUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete user unauthorized response has a 3xx status code
+func (o *DeleteUserUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete user unauthorized response has a 4xx status code
+func (o *DeleteUserUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete user unauthorized response has a 5xx status code
+func (o *DeleteUserUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete user unauthorized response a status code equal to that given
+func (o *DeleteUserUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *DeleteUserUnauthorized) Error() string {
+	return fmt.Sprintf("[DELETE /users/{user_id}][%d] deleteUserUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *DeleteUserUnauthorized) String() string {
 	return fmt.Sprintf("[DELETE /users/{user_id}][%d] deleteUserUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -113,8 +178,12 @@ func (o *DeleteUserUnauthorized) GetPayload() *models.Errors {
 
 func (o *DeleteUserUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -131,19 +200,50 @@ func NewDeleteUserForbidden() *DeleteUserForbidden {
 	return &DeleteUserForbidden{}
 }
 
-/*DeleteUserForbidden handles this case with default header values.
+/*
+DeleteUserForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type DeleteUserForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete user forbidden response has a 2xx status code
+func (o *DeleteUserForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete user forbidden response has a 3xx status code
+func (o *DeleteUserForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete user forbidden response has a 4xx status code
+func (o *DeleteUserForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete user forbidden response has a 5xx status code
+func (o *DeleteUserForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete user forbidden response a status code equal to that given
+func (o *DeleteUserForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *DeleteUserForbidden) Error() string {
+	return fmt.Sprintf("[DELETE /users/{user_id}][%d] deleteUserForbidden  %+v", 403, o.Payload)
+}
+
+func (o *DeleteUserForbidden) String() string {
 	return fmt.Sprintf("[DELETE /users/{user_id}][%d] deleteUserForbidden  %+v", 403, o.Payload)
 }
 
@@ -153,8 +253,12 @@ func (o *DeleteUserForbidden) GetPayload() *models.Errors {
 
 func (o *DeleteUserForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -171,19 +275,50 @@ func NewDeleteUserNotFound() *DeleteUserNotFound {
 	return &DeleteUserNotFound{}
 }
 
-/*DeleteUserNotFound handles this case with default header values.
+/*
+DeleteUserNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
 type DeleteUserNotFound struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete user not found response has a 2xx status code
+func (o *DeleteUserNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete user not found response has a 3xx status code
+func (o *DeleteUserNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete user not found response has a 4xx status code
+func (o *DeleteUserNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete user not found response has a 5xx status code
+func (o *DeleteUserNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete user not found response a status code equal to that given
+func (o *DeleteUserNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
 func (o *DeleteUserNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /users/{user_id}][%d] deleteUserNotFound  %+v", 404, o.Payload)
+}
+
+func (o *DeleteUserNotFound) String() string {
 	return fmt.Sprintf("[DELETE /users/{user_id}][%d] deleteUserNotFound  %+v", 404, o.Payload)
 }
 
@@ -193,8 +328,12 @@ func (o *DeleteUserNotFound) GetPayload() *models.Errors {
 
 func (o *DeleteUserNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -211,19 +350,50 @@ func NewDeleteUserInternalServerError() *DeleteUserInternalServerError {
 	return &DeleteUserInternalServerError{}
 }
 
-/*DeleteUserInternalServerError handles this case with default header values.
+/*
+DeleteUserInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type DeleteUserInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete user internal server error response has a 2xx status code
+func (o *DeleteUserInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete user internal server error response has a 3xx status code
+func (o *DeleteUserInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete user internal server error response has a 4xx status code
+func (o *DeleteUserInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete user internal server error response has a 5xx status code
+func (o *DeleteUserInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this delete user internal server error response a status code equal to that given
+func (o *DeleteUserInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *DeleteUserInternalServerError) Error() string {
+	return fmt.Sprintf("[DELETE /users/{user_id}][%d] deleteUserInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *DeleteUserInternalServerError) String() string {
 	return fmt.Sprintf("[DELETE /users/{user_id}][%d] deleteUserInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -233,8 +403,12 @@ func (o *DeleteUserInternalServerError) GetPayload() *models.Errors {
 
 func (o *DeleteUserInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

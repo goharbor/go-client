@@ -35,7 +35,6 @@ func (o *GetSystemInfoReader) ReadResponse(response runtime.ClientResponse, cons
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -46,7 +45,8 @@ func NewGetSystemInfoOK() *GetSystemInfoOK {
 	return &GetSystemInfoOK{}
 }
 
-/*GetSystemInfoOK handles this case with default header values.
+/*
+GetSystemInfoOK describes a response with status code 200, with default header values.
 
 Get general info successfully.
 */
@@ -54,7 +54,36 @@ type GetSystemInfoOK struct {
 	Payload *models.GeneralInfo
 }
 
+// IsSuccess returns true when this get system info o k response has a 2xx status code
+func (o *GetSystemInfoOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get system info o k response has a 3xx status code
+func (o *GetSystemInfoOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get system info o k response has a 4xx status code
+func (o *GetSystemInfoOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get system info o k response has a 5xx status code
+func (o *GetSystemInfoOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get system info o k response a status code equal to that given
+func (o *GetSystemInfoOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetSystemInfoOK) Error() string {
+	return fmt.Sprintf("[GET /systeminfo][%d] getSystemInfoOK  %+v", 200, o.Payload)
+}
+
+func (o *GetSystemInfoOK) String() string {
 	return fmt.Sprintf("[GET /systeminfo][%d] getSystemInfoOK  %+v", 200, o.Payload)
 }
 
@@ -79,19 +108,50 @@ func NewGetSystemInfoInternalServerError() *GetSystemInfoInternalServerError {
 	return &GetSystemInfoInternalServerError{}
 }
 
-/*GetSystemInfoInternalServerError handles this case with default header values.
+/*
+GetSystemInfoInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type GetSystemInfoInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get system info internal server error response has a 2xx status code
+func (o *GetSystemInfoInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get system info internal server error response has a 3xx status code
+func (o *GetSystemInfoInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get system info internal server error response has a 4xx status code
+func (o *GetSystemInfoInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get system info internal server error response has a 5xx status code
+func (o *GetSystemInfoInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get system info internal server error response a status code equal to that given
+func (o *GetSystemInfoInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *GetSystemInfoInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /systeminfo][%d] getSystemInfoInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *GetSystemInfoInternalServerError) String() string {
 	return fmt.Sprintf("[GET /systeminfo][%d] getSystemInfoInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -101,8 +161,12 @@ func (o *GetSystemInfoInternalServerError) GetPayload() *models.Errors {
 
 func (o *GetSystemInfoInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

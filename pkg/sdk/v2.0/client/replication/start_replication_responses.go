@@ -53,7 +53,6 @@ func (o *StartReplicationReader) ReadResponse(response runtime.ClientResponse, c
 			return nil, err
 		}
 		return nil, result
-
 	default:
 		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
@@ -64,30 +63,70 @@ func NewStartReplicationCreated() *StartReplicationCreated {
 	return &StartReplicationCreated{}
 }
 
-/*StartReplicationCreated handles this case with default header values.
+/*
+StartReplicationCreated describes a response with status code 201, with default header values.
 
 Created
 */
 type StartReplicationCreated struct {
-	/*The location of the resource
+
+	/* The location of the resource
 	 */
 	Location string
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
+}
+
+// IsSuccess returns true when this start replication created response has a 2xx status code
+func (o *StartReplicationCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this start replication created response has a 3xx status code
+func (o *StartReplicationCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this start replication created response has a 4xx status code
+func (o *StartReplicationCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this start replication created response has a 5xx status code
+func (o *StartReplicationCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this start replication created response a status code equal to that given
+func (o *StartReplicationCreated) IsCode(code int) bool {
+	return code == 201
 }
 
 func (o *StartReplicationCreated) Error() string {
 	return fmt.Sprintf("[POST /replication/executions][%d] startReplicationCreated ", 201)
 }
 
+func (o *StartReplicationCreated) String() string {
+	return fmt.Sprintf("[POST /replication/executions][%d] startReplicationCreated ", 201)
+}
+
 func (o *StartReplicationCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header Location
-	o.Location = response.GetHeader("Location")
+	// hydrates response header Location
+	hdrLocation := response.GetHeader("Location")
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	if hdrLocation != "" {
+		o.Location = hdrLocation
+	}
+
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	return nil
 }
@@ -97,19 +136,50 @@ func NewStartReplicationBadRequest() *StartReplicationBadRequest {
 	return &StartReplicationBadRequest{}
 }
 
-/*StartReplicationBadRequest handles this case with default header values.
+/*
+StartReplicationBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
 type StartReplicationBadRequest struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this start replication bad request response has a 2xx status code
+func (o *StartReplicationBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this start replication bad request response has a 3xx status code
+func (o *StartReplicationBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this start replication bad request response has a 4xx status code
+func (o *StartReplicationBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this start replication bad request response has a 5xx status code
+func (o *StartReplicationBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this start replication bad request response a status code equal to that given
+func (o *StartReplicationBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
 func (o *StartReplicationBadRequest) Error() string {
+	return fmt.Sprintf("[POST /replication/executions][%d] startReplicationBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *StartReplicationBadRequest) String() string {
 	return fmt.Sprintf("[POST /replication/executions][%d] startReplicationBadRequest  %+v", 400, o.Payload)
 }
 
@@ -119,8 +189,12 @@ func (o *StartReplicationBadRequest) GetPayload() *models.Errors {
 
 func (o *StartReplicationBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -137,19 +211,50 @@ func NewStartReplicationUnauthorized() *StartReplicationUnauthorized {
 	return &StartReplicationUnauthorized{}
 }
 
-/*StartReplicationUnauthorized handles this case with default header values.
+/*
+StartReplicationUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
 type StartReplicationUnauthorized struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this start replication unauthorized response has a 2xx status code
+func (o *StartReplicationUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this start replication unauthorized response has a 3xx status code
+func (o *StartReplicationUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this start replication unauthorized response has a 4xx status code
+func (o *StartReplicationUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this start replication unauthorized response has a 5xx status code
+func (o *StartReplicationUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this start replication unauthorized response a status code equal to that given
+func (o *StartReplicationUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *StartReplicationUnauthorized) Error() string {
+	return fmt.Sprintf("[POST /replication/executions][%d] startReplicationUnauthorized  %+v", 401, o.Payload)
+}
+
+func (o *StartReplicationUnauthorized) String() string {
 	return fmt.Sprintf("[POST /replication/executions][%d] startReplicationUnauthorized  %+v", 401, o.Payload)
 }
 
@@ -159,8 +264,12 @@ func (o *StartReplicationUnauthorized) GetPayload() *models.Errors {
 
 func (o *StartReplicationUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -177,19 +286,50 @@ func NewStartReplicationForbidden() *StartReplicationForbidden {
 	return &StartReplicationForbidden{}
 }
 
-/*StartReplicationForbidden handles this case with default header values.
+/*
+StartReplicationForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
 type StartReplicationForbidden struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this start replication forbidden response has a 2xx status code
+func (o *StartReplicationForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this start replication forbidden response has a 3xx status code
+func (o *StartReplicationForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this start replication forbidden response has a 4xx status code
+func (o *StartReplicationForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this start replication forbidden response has a 5xx status code
+func (o *StartReplicationForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this start replication forbidden response a status code equal to that given
+func (o *StartReplicationForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *StartReplicationForbidden) Error() string {
+	return fmt.Sprintf("[POST /replication/executions][%d] startReplicationForbidden  %+v", 403, o.Payload)
+}
+
+func (o *StartReplicationForbidden) String() string {
 	return fmt.Sprintf("[POST /replication/executions][%d] startReplicationForbidden  %+v", 403, o.Payload)
 }
 
@@ -199,8 +339,12 @@ func (o *StartReplicationForbidden) GetPayload() *models.Errors {
 
 func (o *StartReplicationForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 
@@ -217,19 +361,50 @@ func NewStartReplicationInternalServerError() *StartReplicationInternalServerErr
 	return &StartReplicationInternalServerError{}
 }
 
-/*StartReplicationInternalServerError handles this case with default header values.
+/*
+StartReplicationInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
 type StartReplicationInternalServerError struct {
-	/*The ID of the corresponding request for the response
+
+	/* The ID of the corresponding request for the response
 	 */
 	XRequestID string
 
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this start replication internal server error response has a 2xx status code
+func (o *StartReplicationInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this start replication internal server error response has a 3xx status code
+func (o *StartReplicationInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this start replication internal server error response has a 4xx status code
+func (o *StartReplicationInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this start replication internal server error response has a 5xx status code
+func (o *StartReplicationInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this start replication internal server error response a status code equal to that given
+func (o *StartReplicationInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
 func (o *StartReplicationInternalServerError) Error() string {
+	return fmt.Sprintf("[POST /replication/executions][%d] startReplicationInternalServerError  %+v", 500, o.Payload)
+}
+
+func (o *StartReplicationInternalServerError) String() string {
 	return fmt.Sprintf("[POST /replication/executions][%d] startReplicationInternalServerError  %+v", 500, o.Payload)
 }
 
@@ -239,8 +414,12 @@ func (o *StartReplicationInternalServerError) GetPayload() *models.Errors {
 
 func (o *StartReplicationInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	// response header X-Request-Id
-	o.XRequestID = response.GetHeader("X-Request-Id")
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
 
 	o.Payload = new(models.Errors)
 

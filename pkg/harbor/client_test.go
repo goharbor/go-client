@@ -9,12 +9,8 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/goharbor/go-client/pkg/harbor"
 	"github.com/goharbor/go-client/pkg/harbor/test"
-	assistclient "github.com/goharbor/go-client/pkg/sdk/assist/client"
-	"github.com/goharbor/go-client/pkg/sdk/assist/client/version"
 	v2client "github.com/goharbor/go-client/pkg/sdk/v2.0/client"
 	"github.com/goharbor/go-client/pkg/sdk/v2.0/client/health"
-	legacyclient "github.com/goharbor/go-client/pkg/sdk/v2.0/legacy/client"
-	"github.com/goharbor/go-client/pkg/sdk/v2.0/legacy/client/products"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -26,9 +22,7 @@ var (
 type clientType string
 
 var (
-	v2Type     clientType = "v2"
-	assistType clientType = "assist"
-	legacyType clientType = "legacy"
+	v2Type clientType = "v2"
 )
 
 type testParam struct {
@@ -66,50 +60,6 @@ var params = []testParam{
 		expectedAuthInfo:  nil,
 		clientType:        v2Type,
 	},
-	{
-		url:               "//10.0.0.1:443",
-		transport:         harbor.InsecureTransport,
-		authInfo:          nil,
-		expectedHost:      "10.0.0.1:443",
-		expectedBasePath:  assistclient.DefaultBasePath,
-		expectedScheme:    httpsSchema,
-		expectedTransport: harbor.InsecureTransport,
-		expectedAuthInfo:  nil,
-		clientType:        assistType,
-	},
-	testParam{
-		url:               "http://10.0.0.1",
-		transport:         harbor.InsecureTransport,
-		authInfo:          nil,
-		expectedHost:      "10.0.0.1",
-		expectedBasePath:  assistclient.DefaultBasePath,
-		expectedScheme:    httpSchema,
-		expectedTransport: harbor.InsecureTransport,
-		expectedAuthInfo:  nil,
-		clientType:        assistType,
-	},
-	{
-		url:               "//10.0.0.1:443",
-		transport:         harbor.InsecureTransport,
-		authInfo:          nil,
-		expectedHost:      "10.0.0.1:443",
-		expectedBasePath:  legacyclient.DefaultBasePath,
-		expectedScheme:    httpsSchema,
-		expectedTransport: harbor.InsecureTransport,
-		expectedAuthInfo:  nil,
-		clientType:        legacyType,
-	},
-	testParam{
-		url:               "http://10.0.0.1",
-		transport:         harbor.InsecureTransport,
-		authInfo:          nil,
-		expectedHost:      "10.0.0.1",
-		expectedBasePath:  legacyclient.DefaultBasePath,
-		expectedScheme:    httpSchema,
-		expectedTransport: harbor.InsecureTransport,
-		expectedAuthInfo:  nil,
-		clientType:        legacyType,
-	},
 }
 
 func TestToConfig(t *testing.T) {
@@ -131,22 +81,6 @@ func TestToConfig(t *testing.T) {
 			assert.Equal(test.expectedBasePath, v2c.URL.Path)
 			assert.Equal(test.expectedTransport, v2c.Transport)
 			assert.Equal(test.expectedAuthInfo, v2c.AuthInfo)
-		} else if test.clientType == legacyType {
-			lc := c.ToLegacyConfig()
-			assert.NotNil(lc)
-			assert.Equal(test.expectedHost, lc.URL.Host)
-			assert.Equal(test.expectedScheme, lc.URL.Scheme)
-			assert.Equal(test.expectedBasePath, lc.URL.Path)
-			assert.Equal(test.expectedTransport, lc.Transport)
-			assert.Equal(test.expectedAuthInfo, lc.AuthInfo)
-		} else if test.clientType == assistType {
-			ac := c.ToAssistConfig()
-			assert.NotNil(ac)
-			assert.Equal(test.expectedHost, ac.URL.Host)
-			assert.Equal(test.expectedScheme, ac.URL.Scheme)
-			assert.Equal(test.expectedBasePath, ac.URL.Path)
-			assert.Equal(test.expectedTransport, ac.Transport)
-			assert.Equal(test.expectedAuthInfo, ac.AuthInfo)
 		} else {
 			t.Errorf("Unexpected client type %s", test.clientType)
 		}
@@ -175,12 +109,6 @@ func TestClientSet(t *testing.T) {
 		cs, err := harbor.NewClientSet(c)
 		assert.NotNil(cs)
 		assert.Nil(err)
-
-		assistClient := cs.Assist()
-		assert.NotNil(assistClient)
-
-		legacyClient := cs.Legacy()
-		assert.NotNil(legacyClient)
 
 		v2Client := cs.V2()
 		assert.NotNil(v2Client)
@@ -215,14 +143,4 @@ func TestClients(t *testing.T) {
 	assert.Nil(err)
 
 	assert.Equal(result, resGetHealth.Payload.Status)
-
-	// test legacy client
-	_, err = cs.Legacy().Products.PostEmailPing(context.TODO(), products.NewPostEmailPingParams())
-	assert.Nil(err)
-
-	// test assist client
-	resGetVersion, err := cs.Assist().Version.GetVersion(context.TODO(), version.NewGetVersionParams())
-	assert.Nil(err)
-
-	assert.Equal(v, resGetVersion.Payload.Version)
 }

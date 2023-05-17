@@ -20,7 +20,7 @@ type API interface {
 	/*
 	   GetHealth checks the status of harbor components
 
-	   Check the status of Harbor components*/
+	   Check the status of Harbor components. This path does not require authentication.*/
 	GetHealth(ctx context.Context, params *GetHealthParams) (*GetHealthOK, error)
 }
 
@@ -45,7 +45,7 @@ type Client struct {
 /*
 GetHealth checks the status of harbor components
 
-Check the status of Harbor components
+Check the status of Harbor components. This path does not require authentication.
 */
 func (a *Client) GetHealth(ctx context.Context, params *GetHealthParams) (*GetHealthOK, error) {
 

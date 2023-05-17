@@ -30,9 +30,15 @@ type API interface {
 	*/
 	DeleteWebhookPolicyOfProject(ctx context.Context, params *DeleteWebhookPolicyOfProjectParams) (*DeleteWebhookPolicyOfProjectOK, error)
 	/*
+	   GetLogsOfWebhookTask gets logs for a specific webhook task
+
+	   This endpoint returns the logs of a specific webhook task.
+	*/
+	GetLogsOfWebhookTask(ctx context.Context, params *GetLogsOfWebhookTaskParams) (*GetLogsOfWebhookTaskOK, error)
+	/*
 	   GetSupportedEventTypes gets supported event types and notify types
 
-	   Get supportted event types and notify types.*/
+	   Get supported event types and notify types.*/
 	GetSupportedEventTypes(ctx context.Context, params *GetSupportedEventTypesParams) (*GetSupportedEventTypesOK, error)
 	/*
 	   GetWebhookPolicyOfProject gets project webhook policy
@@ -46,6 +52,18 @@ type API interface {
 	   This endpoint returns last trigger information of project webhook policy.
 	*/
 	LastTrigger(ctx context.Context, params *LastTriggerParams) (*LastTriggerOK, error)
+	/*
+	   ListExecutionsOfWebhookPolicy lists executions for a specific webhook policy
+
+	   This endpoint returns the executions of a specific webhook policy.
+	*/
+	ListExecutionsOfWebhookPolicy(ctx context.Context, params *ListExecutionsOfWebhookPolicyParams) (*ListExecutionsOfWebhookPolicyOK, error)
+	/*
+	   ListTasksOfWebhookExecution lists tasks for a specific webhook execution
+
+	   This endpoint returns the tasks of a specific webhook execution.
+	*/
+	ListTasksOfWebhookExecution(ctx context.Context, params *ListTasksOfWebhookExecutionParams) (*ListTasksOfWebhookExecutionOK, error)
 	/*
 	   ListWebhookPoliciesOfProject lists project webhook policies
 
@@ -133,9 +151,36 @@ func (a *Client) DeleteWebhookPolicyOfProject(ctx context.Context, params *Delet
 }
 
 /*
+GetLogsOfWebhookTask gets logs for a specific webhook task
+
+This endpoint returns the logs of a specific webhook task.
+*/
+func (a *Client) GetLogsOfWebhookTask(ctx context.Context, params *GetLogsOfWebhookTaskParams) (*GetLogsOfWebhookTaskOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetLogsOfWebhookTask",
+		Method:             "GET",
+		PathPattern:        "/projects/{project_name_or_id}/webhook/policies/{webhook_policy_id}/executions/{execution_id}/tasks/{task_id}/log",
+		ProducesMediaTypes: []string{"text/plain"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetLogsOfWebhookTaskReader{formats: a.formats},
+		AuthInfo:           a.authInfo,
+		Context:            ctx,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetLogsOfWebhookTaskOK), nil
+
+}
+
+/*
 GetSupportedEventTypes gets supported event types and notify types
 
-Get supportted event types and notify types.
+Get supported event types and notify types.
 */
 func (a *Client) GetSupportedEventTypes(ctx context.Context, params *GetSupportedEventTypesParams) (*GetSupportedEventTypesOK, error) {
 
@@ -210,6 +255,60 @@ func (a *Client) LastTrigger(ctx context.Context, params *LastTriggerParams) (*L
 		return nil, err
 	}
 	return result.(*LastTriggerOK), nil
+
+}
+
+/*
+ListExecutionsOfWebhookPolicy lists executions for a specific webhook policy
+
+This endpoint returns the executions of a specific webhook policy.
+*/
+func (a *Client) ListExecutionsOfWebhookPolicy(ctx context.Context, params *ListExecutionsOfWebhookPolicyParams) (*ListExecutionsOfWebhookPolicyOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "ListExecutionsOfWebhookPolicy",
+		Method:             "GET",
+		PathPattern:        "/projects/{project_name_or_id}/webhook/policies/{webhook_policy_id}/executions",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &ListExecutionsOfWebhookPolicyReader{formats: a.formats},
+		AuthInfo:           a.authInfo,
+		Context:            ctx,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*ListExecutionsOfWebhookPolicyOK), nil
+
+}
+
+/*
+ListTasksOfWebhookExecution lists tasks for a specific webhook execution
+
+This endpoint returns the tasks of a specific webhook execution.
+*/
+func (a *Client) ListTasksOfWebhookExecution(ctx context.Context, params *ListTasksOfWebhookExecutionParams) (*ListTasksOfWebhookExecutionOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "ListTasksOfWebhookExecution",
+		Method:             "GET",
+		PathPattern:        "/projects/{project_name_or_id}/webhook/policies/{webhook_policy_id}/executions/{execution_id}/tasks",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &ListTasksOfWebhookExecutionReader{formats: a.formats},
+		AuthInfo:           a.authInfo,
+		Context:            ctx,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*ListTasksOfWebhookExecutionOK), nil
 
 }
 

@@ -24,27 +24,6 @@ type ConfigurationsResponse struct {
 	// The auth mode of current system, such as "db_auth", "ldap_auth", "oidc_auth"
 	AuthMode *StringConfigItem `json:"auth_mode,omitempty"`
 
-	// The sender name for Email notification.
-	EmailFrom *StringConfigItem `json:"email_from,omitempty"`
-
-	// The hostname of SMTP server that sends Email notification.
-	EmailHost *StringConfigItem `json:"email_host,omitempty"`
-
-	// By default it's empty so the email_username is picked
-	EmailIdentity *StringConfigItem `json:"email_identity,omitempty"`
-
-	// Whether or not the certificate will be verified when Harbor tries to access the email server.
-	EmailInsecure *BoolConfigItem `json:"email_insecure,omitempty"`
-
-	// The port of SMTP server
-	EmailPort *IntegerConfigItem `json:"email_port,omitempty"`
-
-	// When it''s set to true the system will access Email server via TLS by default.  If it''s set to false, it still will handle "STARTTLS" from server side.
-	EmailSsl *BoolConfigItem `json:"email_ssl,omitempty"`
-
-	// The username for authenticate against SMTP server
-	EmailUsername *StringConfigItem `json:"email_username,omitempty"`
-
 	// The group which has the harbor admin privileges
 	HTTPAuthproxyAdminGroups *StringConfigItem `json:"http_authproxy_admin_groups,omitempty"`
 
@@ -126,6 +105,9 @@ type ConfigurationsResponse struct {
 	// Extra parameters to add when redirect request to OIDC provider
 	OIDCExtraRedirectParms *StringConfigItem `json:"oidc_extra_redirect_parms,omitempty"`
 
+	// The OIDC group filter which filters out the group doesn't match the regular expression
+	OIDCGroupFilter *StringConfigItem `json:"oidc_group_filter,omitempty"`
+
 	// The attribute claims the group name
 	OIDCGroupsClaim *StringConfigItem `json:"oidc_groups_claim,omitempty"`
 
@@ -140,6 +122,9 @@ type ConfigurationsResponse struct {
 
 	// Verify the OIDC provider's certificate'
 	OIDCVerifyCert *BoolConfigItem `json:"oidc_verify_cert,omitempty"`
+
+	// The flag to indicate whether the current auth mode should consider as a primary one.
+	PrimaryAuthMode *BoolConfigItem `json:"primary_auth_mode,omitempty"`
 
 	// Indicate who can create projects, it could be ''adminonly'' or ''everyone''.
 	ProjectCreationRestriction *StringConfigItem `json:"project_creation_restriction,omitempty"`
@@ -159,8 +144,14 @@ type ConfigurationsResponse struct {
 	// scan all policy
 	ScanAllPolicy *ConfigurationsResponseScanAllPolicy `json:"scan_all_policy,omitempty"`
 
+	// Whether or not to skip update the pull time for scanner
+	ScannerSkipUpdatePulltime *BoolConfigItem `json:"scanner_skip_update_pulltime,omitempty"`
+
 	// Whether the Harbor instance supports self-registration.  If it''s set to false, admin need to add user to the instance.
 	SelfRegistration *BoolConfigItem `json:"self_registration,omitempty"`
+
+	// The session timeout in minutes
+	SessionTimeout *IntegerConfigItem `json:"session_timeout,omitempty"`
 
 	// Whether skip the audit log in database
 	SkipAuditLogDatabase *BoolConfigItem `json:"skip_audit_log_database,omitempty"`
@@ -193,34 +184,6 @@ func (m *ConfigurationsResponse) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateAuthMode(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateEmailFrom(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateEmailHost(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateEmailIdentity(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateEmailInsecure(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateEmailPort(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateEmailSsl(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateEmailUsername(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -332,6 +295,10 @@ func (m *ConfigurationsResponse) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateOIDCGroupFilter(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateOIDCGroupsClaim(formats); err != nil {
 		res = append(res, err)
 	}
@@ -349,6 +316,10 @@ func (m *ConfigurationsResponse) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateOIDCVerifyCert(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePrimaryAuthMode(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -376,7 +347,15 @@ func (m *ConfigurationsResponse) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateScannerSkipUpdatePulltime(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateSelfRegistration(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSessionTimeout(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -444,139 +423,6 @@ func (m *ConfigurationsResponse) validateAuthMode(formats strfmt.Registry) error
 				return ve.ValidateName("auth_mode")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("auth_mode")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *ConfigurationsResponse) validateEmailFrom(formats strfmt.Registry) error {
-	if swag.IsZero(m.EmailFrom) { // not required
-		return nil
-	}
-
-	if m.EmailFrom != nil {
-		if err := m.EmailFrom.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("email_from")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("email_from")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *ConfigurationsResponse) validateEmailHost(formats strfmt.Registry) error {
-	if swag.IsZero(m.EmailHost) { // not required
-		return nil
-	}
-
-	if m.EmailHost != nil {
-		if err := m.EmailHost.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("email_host")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("email_host")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *ConfigurationsResponse) validateEmailIdentity(formats strfmt.Registry) error {
-	if swag.IsZero(m.EmailIdentity) { // not required
-		return nil
-	}
-
-	if m.EmailIdentity != nil {
-		if err := m.EmailIdentity.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("email_identity")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("email_identity")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *ConfigurationsResponse) validateEmailInsecure(formats strfmt.Registry) error {
-	if swag.IsZero(m.EmailInsecure) { // not required
-		return nil
-	}
-
-	if m.EmailInsecure != nil {
-		if err := m.EmailInsecure.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("email_insecure")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("email_insecure")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *ConfigurationsResponse) validateEmailPort(formats strfmt.Registry) error {
-	if swag.IsZero(m.EmailPort) { // not required
-		return nil
-	}
-
-	if m.EmailPort != nil {
-		if err := m.EmailPort.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("email_port")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("email_port")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *ConfigurationsResponse) validateEmailSsl(formats strfmt.Registry) error {
-	if swag.IsZero(m.EmailSsl) { // not required
-		return nil
-	}
-
-	if m.EmailSsl != nil {
-		if err := m.EmailSsl.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("email_ssl")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("email_ssl")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *ConfigurationsResponse) validateEmailUsername(formats strfmt.Registry) error {
-	if swag.IsZero(m.EmailUsername) { // not required
-		return nil
-	}
-
-	if m.EmailUsername != nil {
-		if err := m.EmailUsername.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("email_username")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("email_username")
 			}
 			return err
 		}
@@ -1098,6 +944,25 @@ func (m *ConfigurationsResponse) validateOIDCExtraRedirectParms(formats strfmt.R
 	return nil
 }
 
+func (m *ConfigurationsResponse) validateOIDCGroupFilter(formats strfmt.Registry) error {
+	if swag.IsZero(m.OIDCGroupFilter) { // not required
+		return nil
+	}
+
+	if m.OIDCGroupFilter != nil {
+		if err := m.OIDCGroupFilter.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("oidc_group_filter")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("oidc_group_filter")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *ConfigurationsResponse) validateOIDCGroupsClaim(formats strfmt.Registry) error {
 	if swag.IsZero(m.OIDCGroupsClaim) { // not required
 		return nil
@@ -1185,6 +1050,25 @@ func (m *ConfigurationsResponse) validateOIDCVerifyCert(formats strfmt.Registry)
 				return ve.ValidateName("oidc_verify_cert")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("oidc_verify_cert")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ConfigurationsResponse) validatePrimaryAuthMode(formats strfmt.Registry) error {
+	if swag.IsZero(m.PrimaryAuthMode) { // not required
+		return nil
+	}
+
+	if m.PrimaryAuthMode != nil {
+		if err := m.PrimaryAuthMode.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("primary_auth_mode")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("primary_auth_mode")
 			}
 			return err
 		}
@@ -1307,6 +1191,25 @@ func (m *ConfigurationsResponse) validateScanAllPolicy(formats strfmt.Registry) 
 	return nil
 }
 
+func (m *ConfigurationsResponse) validateScannerSkipUpdatePulltime(formats strfmt.Registry) error {
+	if swag.IsZero(m.ScannerSkipUpdatePulltime) { // not required
+		return nil
+	}
+
+	if m.ScannerSkipUpdatePulltime != nil {
+		if err := m.ScannerSkipUpdatePulltime.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("scanner_skip_update_pulltime")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("scanner_skip_update_pulltime")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *ConfigurationsResponse) validateSelfRegistration(formats strfmt.Registry) error {
 	if swag.IsZero(m.SelfRegistration) { // not required
 		return nil
@@ -1318,6 +1221,25 @@ func (m *ConfigurationsResponse) validateSelfRegistration(formats strfmt.Registr
 				return ve.ValidateName("self_registration")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("self_registration")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ConfigurationsResponse) validateSessionTimeout(formats strfmt.Registry) error {
+	if swag.IsZero(m.SessionTimeout) { // not required
+		return nil
+	}
+
+	if m.SessionTimeout != nil {
+		if err := m.SessionTimeout.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("session_timeout")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("session_timeout")
 			}
 			return err
 		}
@@ -1471,34 +1393,6 @@ func (m *ConfigurationsResponse) ContextValidate(ctx context.Context, formats st
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateEmailFrom(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateEmailHost(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateEmailIdentity(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateEmailInsecure(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateEmailPort(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateEmailSsl(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateEmailUsername(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateHTTPAuthproxyAdminGroups(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -1607,6 +1501,10 @@ func (m *ConfigurationsResponse) ContextValidate(ctx context.Context, formats st
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateOIDCGroupFilter(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateOIDCGroupsClaim(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -1624,6 +1522,10 @@ func (m *ConfigurationsResponse) ContextValidate(ctx context.Context, formats st
 	}
 
 	if err := m.contextValidateOIDCVerifyCert(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidatePrimaryAuthMode(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -1651,7 +1553,15 @@ func (m *ConfigurationsResponse) ContextValidate(ctx context.Context, formats st
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateScannerSkipUpdatePulltime(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateSelfRegistration(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSessionTimeout(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -1713,118 +1623,6 @@ func (m *ConfigurationsResponse) contextValidateAuthMode(ctx context.Context, fo
 				return ve.ValidateName("auth_mode")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("auth_mode")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *ConfigurationsResponse) contextValidateEmailFrom(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.EmailFrom != nil {
-		if err := m.EmailFrom.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("email_from")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("email_from")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *ConfigurationsResponse) contextValidateEmailHost(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.EmailHost != nil {
-		if err := m.EmailHost.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("email_host")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("email_host")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *ConfigurationsResponse) contextValidateEmailIdentity(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.EmailIdentity != nil {
-		if err := m.EmailIdentity.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("email_identity")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("email_identity")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *ConfigurationsResponse) contextValidateEmailInsecure(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.EmailInsecure != nil {
-		if err := m.EmailInsecure.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("email_insecure")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("email_insecure")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *ConfigurationsResponse) contextValidateEmailPort(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.EmailPort != nil {
-		if err := m.EmailPort.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("email_port")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("email_port")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *ConfigurationsResponse) contextValidateEmailSsl(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.EmailSsl != nil {
-		if err := m.EmailSsl.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("email_ssl")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("email_ssl")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *ConfigurationsResponse) contextValidateEmailUsername(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.EmailUsername != nil {
-		if err := m.EmailUsername.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("email_username")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("email_username")
 			}
 			return err
 		}
@@ -2265,6 +2063,22 @@ func (m *ConfigurationsResponse) contextValidateOIDCExtraRedirectParms(ctx conte
 	return nil
 }
 
+func (m *ConfigurationsResponse) contextValidateOIDCGroupFilter(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.OIDCGroupFilter != nil {
+		if err := m.OIDCGroupFilter.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("oidc_group_filter")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("oidc_group_filter")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *ConfigurationsResponse) contextValidateOIDCGroupsClaim(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.OIDCGroupsClaim != nil {
@@ -2337,6 +2151,22 @@ func (m *ConfigurationsResponse) contextValidateOIDCVerifyCert(ctx context.Conte
 				return ve.ValidateName("oidc_verify_cert")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("oidc_verify_cert")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ConfigurationsResponse) contextValidatePrimaryAuthMode(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.PrimaryAuthMode != nil {
+		if err := m.PrimaryAuthMode.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("primary_auth_mode")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("primary_auth_mode")
 			}
 			return err
 		}
@@ -2441,6 +2271,22 @@ func (m *ConfigurationsResponse) contextValidateScanAllPolicy(ctx context.Contex
 	return nil
 }
 
+func (m *ConfigurationsResponse) contextValidateScannerSkipUpdatePulltime(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ScannerSkipUpdatePulltime != nil {
+		if err := m.ScannerSkipUpdatePulltime.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("scanner_skip_update_pulltime")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("scanner_skip_update_pulltime")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *ConfigurationsResponse) contextValidateSelfRegistration(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.SelfRegistration != nil {
@@ -2449,6 +2295,22 @@ func (m *ConfigurationsResponse) contextValidateSelfRegistration(ctx context.Con
 				return ve.ValidateName("self_registration")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("self_registration")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ConfigurationsResponse) contextValidateSessionTimeout(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.SessionTimeout != nil {
+		if err := m.SessionTimeout.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("session_timeout")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("session_timeout")
 			}
 			return err
 		}

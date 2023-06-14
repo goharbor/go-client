@@ -16,7 +16,7 @@ api/
 
 ## Download swagger spec by version
 
-Currently, the default Harbor version is `v2.5.0`.
+Currently, the default Harbor version is `v2.8.2`.
 
 *NOTE* Default version need to be updated manually inside [Makefile](Makefile)
 
@@ -29,13 +29,13 @@ make update-spec
 To download swagger spec from previous Harbor version, add `VERSION` as an argument:
 
 ```sh
-make update-spec VERSION=v2.5.0
+make update-spec VERSION=v2.8.2
 ```
 
 ## Generate Clients
 
 ```sh
-make gen-harbor-api VERSION=v2.5.0
+make gen-harbor-api VERSION=v2.8.2
 ```
 
 ## Check all available make commands

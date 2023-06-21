@@ -8,6 +8,7 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -23,6 +24,9 @@ type WebhookTargetObject struct {
 	// The webhook auth header.
 	AuthHeader string `json:"auth_header,omitempty"`
 
+	// The payload format of webhook, by default is Default for http type.
+	PayloadFormat PayloadFormatType `json:"payload_format,omitempty"`
+
 	// Whether or not to skip cert verify.
 	SkipCertVerify bool `json:"skip_cert_verify,omitempty"`
 
@@ -32,11 +36,60 @@ type WebhookTargetObject struct {
 
 // Validate validates this webhook target object
 func (m *WebhookTargetObject) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validatePayloadFormat(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this webhook target object based on context it is used
+func (m *WebhookTargetObject) validatePayloadFormat(formats strfmt.Registry) error {
+	if swag.IsZero(m.PayloadFormat) { // not required
+		return nil
+	}
+
+	if err := m.PayloadFormat.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("payload_format")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("payload_format")
+		}
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this webhook target object based on the context it is used
 func (m *WebhookTargetObject) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidatePayloadFormat(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *WebhookTargetObject) contextValidatePayloadFormat(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := m.PayloadFormat.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("payload_format")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("payload_format")
+		}
+		return err
+	}
+
 	return nil
 }
 

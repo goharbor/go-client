@@ -23,30 +23,6 @@ type Configurations struct {
 	// The auth mode of current system, such as "db_auth", "ldap_auth", "oidc_auth"
 	AuthMode *string `json:"auth_mode,omitempty"`
 
-	// The sender name for Email notification.
-	EmailFrom *string `json:"email_from,omitempty"`
-
-	// The hostname of SMTP server that sends Email notification.
-	EmailHost *string `json:"email_host,omitempty"`
-
-	// By default it's empty so the email_username is picked
-	EmailIdentity *string `json:"email_identity,omitempty"`
-
-	// Whether or not the certificate will be verified when Harbor tries to access the email server.
-	EmailInsecure *bool `json:"email_insecure,omitempty"`
-
-	// Email password
-	EmailPassword *string `json:"email_password,omitempty"`
-
-	// The port of SMTP server
-	EmailPort *int64 `json:"email_port,omitempty"`
-
-	// When it''s set to true the system will access Email server via TLS by default.  If it''s set to false, it still will handle "STARTTLS" from server side.
-	EmailSsl *bool `json:"email_ssl,omitempty"`
-
-	// The username for authenticate against SMTP server
-	EmailUsername *string `json:"email_username,omitempty"`
-
 	// The group which has the harbor admin privileges
 	HTTPAuthproxyAdminGroups *string `json:"http_authproxy_admin_groups,omitempty"`
 
@@ -134,6 +110,9 @@ type Configurations struct {
 	// Extra parameters to add when redirect request to OIDC provider
 	OIDCExtraRedirectParms *string `json:"oidc_extra_redirect_parms,omitempty"`
 
+	// The OIDC group filter which filters out the group name doesn't match the regular expression
+	OIDCGroupFilter *string `json:"oidc_group_filter,omitempty"`
+
 	// The attribute claims the group name
 	OIDCGroupsClaim *string `json:"oidc_groups_claim,omitempty"`
 
@@ -148,6 +127,9 @@ type Configurations struct {
 
 	// Verify the OIDC provider's certificate'
 	OIDCVerifyCert *bool `json:"oidc_verify_cert,omitempty"`
+
+	// The flag to indicate whether the current auth mode should consider as a primary one.
+	PrimaryAuthMode *bool `json:"primary_auth_mode,omitempty"`
 
 	// Indicate who can create projects, it could be ''adminonly'' or ''everyone''.
 	ProjectCreationRestriction *string `json:"project_creation_restriction,omitempty"`
@@ -164,8 +146,14 @@ type Configurations struct {
 	// The robot account token duration in days
 	RobotTokenDuration *int64 `json:"robot_token_duration,omitempty"`
 
+	// Whether or not to skip update pull time for scanner
+	ScannerSkipUpdatePulltime *bool `json:"scanner_skip_update_pulltime,omitempty"`
+
 	// Whether the Harbor instance supports self-registration.  If it''s set to false, admin need to add user to the instance.
 	SelfRegistration *bool `json:"self_registration,omitempty"`
+
+	// The session timeout for harbor, in minutes.
+	SessionTimeout *int64 `json:"session_timeout,omitempty"`
 
 	// Skip audit log database
 	SkipAuditLogDatabase *bool `json:"skip_audit_log_database,omitempty"`

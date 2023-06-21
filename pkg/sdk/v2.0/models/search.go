@@ -19,9 +19,6 @@ import (
 // swagger:model Search
 type Search struct {
 
-	// Search results of the charts that macthed the filter keywords.
-	Chart []*SearchResult `json:"chart,omitempty"`
-
 	// Search results of the projects that matched the filter keywords.
 	Project []*Project `json:"project"`
 
@@ -32,10 +29,6 @@ type Search struct {
 // Validate validates this search
 func (m *Search) Validate(formats strfmt.Registry) error {
 	var res []error
-
-	if err := m.validateChart(formats); err != nil {
-		res = append(res, err)
-	}
 
 	if err := m.validateProject(formats); err != nil {
 		res = append(res, err)
@@ -48,32 +41,6 @@ func (m *Search) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *Search) validateChart(formats strfmt.Registry) error {
-	if swag.IsZero(m.Chart) { // not required
-		return nil
-	}
-
-	for i := 0; i < len(m.Chart); i++ {
-		if swag.IsZero(m.Chart[i]) { // not required
-			continue
-		}
-
-		if m.Chart[i] != nil {
-			if err := m.Chart[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("chart" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("chart" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
 	return nil
 }
 
@@ -133,10 +100,6 @@ func (m *Search) validateRepository(formats strfmt.Registry) error {
 func (m *Search) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateChart(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateProject(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -148,26 +111,6 @@ func (m *Search) ContextValidate(ctx context.Context, formats strfmt.Registry) e
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *Search) contextValidateChart(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.Chart); i++ {
-
-		if m.Chart[i] != nil {
-			if err := m.Chart[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("chart" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("chart" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
 	return nil
 }
 

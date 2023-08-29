@@ -123,7 +123,7 @@ func NewGetConfigurationsUnauthorized() *GetConfigurationsUnauthorized {
 /*
 GetConfigurationsUnauthorized describes a response with status code 401, with default header values.
 
-User need to log in first.ß
+User need to log in first.
 */
 type GetConfigurationsUnauthorized struct {
 }

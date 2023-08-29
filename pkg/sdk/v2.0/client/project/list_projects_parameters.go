@@ -101,8 +101,6 @@ type ListProjectsParams struct {
 	/* Public.
 
 	   The project is public or private.
-
-	   Format: int32
 	*/
 	Public *bool
 

@@ -43,6 +43,7 @@ import (
 	"github.com/goharbor/go-client/pkg/sdk/v2.0/client/scanner"
 	"github.com/goharbor/go-client/pkg/sdk/v2.0/client/schedule"
 	"github.com/goharbor/go-client/pkg/sdk/v2.0/client/search"
+	"github.com/goharbor/go-client/pkg/sdk/v2.0/client/securityhub"
 	"github.com/goharbor/go-client/pkg/sdk/v2.0/client/statistic"
 	"github.com/goharbor/go-client/pkg/sdk/v2.0/client/system_cve_allowlist"
 	"github.com/goharbor/go-client/pkg/sdk/v2.0/client/systeminfo"
@@ -124,6 +125,7 @@ func New(c Config) *HarborAPI {
 	cli.Scanner = scanner.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Schedule = schedule.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Search = search.New(transport, strfmt.Default, c.AuthInfo)
+	cli.Securityhub = securityhub.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Statistic = statistic.New(transport, strfmt.Default, c.AuthInfo)
 	cli.SystemCVEAllowlist = system_cve_allowlist.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Systeminfo = systeminfo.New(transport, strfmt.Default, c.AuthInfo)
@@ -166,6 +168,7 @@ type HarborAPI struct {
 	Scanner            *scanner.Client
 	Schedule           *schedule.Client
 	Search             *search.Client
+	Securityhub        *securityhub.Client
 	Statistic          *statistic.Client
 	SystemCVEAllowlist *system_cve_allowlist.Client
 	Systeminfo         *systeminfo.Client

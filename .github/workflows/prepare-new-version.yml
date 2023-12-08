@@ -1,0 +1,43 @@
+name: Prepare new Release
+run-name: ${{ github.actor }} is preparing a new Release 🚀
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Define Harbor Version
+
+jobs:
+  prepare_new_release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare Repository
+        run: |
+          git fetch
+          git switch release-version-${{ github.event.inputs.version }} || git switch -c release-version-${{ github.event.inputs.version }}
+          git config user.name ${{ github.actor }}
+          git config user.email '${{ github.actor }}@users.noreply.github.com'
+      - name: Update Version
+        run: |
+          sed -E "s/v[0-9]+\.[0-9]+\.[0-9]+/v${{ github.event.inputs.version }}/g" -i README.md
+          sed -E "s/(VERSION := )v[0-9]+\.[0-9]+\.[0-9]+/\1v${{ github.event.inputs.version }}/g" -i Makefile
+          make gen-harbor-api
+      - name: Commit and Push Changes
+        run: |
+          git add -A
+          git commit -m "Release Version ${{ github.event.inputs.version }}" || echo "Nothing to commit"
+          git push origin release-version-${{ github.event.inputs.version }}
+      - name: Create Pull Request
+        run: |
+          if gh pr view release-version-${{ github.event.inputs.version }}; then
+            echo "Pull request release-version-${{ github.event.inputs.version }} already exists"
+            exit 0
+          else
+            echo "Creating Pull request release-version-${{ github.event.inputs.version }}"
+            gh pr create -B main -H release-version-${{ github.event.inputs.version }} --title 'Release Version ${{ github.event.inputs.version }}' --body 'Created by Github action'
+          fi
+        env:
+          GITHUB_TOKEN: ${{ github.token }}

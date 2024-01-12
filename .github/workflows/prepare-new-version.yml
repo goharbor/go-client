@@ -28,7 +28,7 @@ jobs:
       - name: Commit and Push Changes
         run: |
           git add -A
-          git commit -m "Release Version ${{ github.event.inputs.version }}" || echo "Nothing to commit"
+          git commit --signoff -m "Release Version ${{ github.event.inputs.version }}" || echo "Nothing to commit"
           git push origin release-version-${{ github.event.inputs.version }}
       - name: Create Pull Request
         run: |

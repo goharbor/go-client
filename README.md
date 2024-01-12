@@ -1,19 +1,6 @@
 # go-client
 Client library with golang for accessing Harbor API.
 
-## Client Types
-
-There are 3 swagger files in this repo.
-
-```sh
-api/
-    v2.0/
-        legacy_swagger.yaml    # legacy client
-        swagger.yaml           # v2 client
-    swagger.yaml               # assist client contains version and chart healthcheck
-
-```
-
 ## Download swagger spec by version
 
 Currently, the default Harbor version is `v2.8.2`.
@@ -62,6 +49,4 @@ c := Config{
 cs := NewClientSet(c)
 
 cs.V2() // v2 client
-cs.Legacy() // legacy client
-cs.Assist() // assist client
 ```

@@ -1,0 +1,26 @@
+name: Release new Version Tag
+run-name: ${{ github.actor }} is tagging a new Release 🚀
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release_version:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: create tag
+        run: |
+          version=$(make get-go-version)
+          if gh release view ${version} &> /dev/null; then
+            echo "Release ${version} already exists"
+            exit 0
+          else
+            echo "Creating Release ${version}"
+            gh release create "${version}"
+          fi
+        env:
+          GITHUB_TOKEN: ${{ github.token }}

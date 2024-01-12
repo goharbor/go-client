@@ -239,7 +239,7 @@ paths:
           schema:
             $ref: '#/definitions/ConfigurationsResponse'
         '401':
-          description: User need to log in first.ß
+          description: User need to log in first.
         '403':
           description: User does not have permission of admin role.
         '500':
@@ -291,7 +291,6 @@ paths:
           description: The project is public or private.
           required: false
           type: boolean
-          format: int32
         - name: owner
           in: query
           description: The name of project owner.
@@ -4451,9 +4450,9 @@ paths:
           schema:
             $ref: '#/definitions/Schedule'
           description: |
-            The purge job's schedule, it is a json object. ｜
-            The sample format is ｜
-            {"parameters":{"audit_retention_hour":168,"dry_run":true, "include_operations":"create,delete,pull"},"schedule":{"type":"Hourly","cron":"0 0 * * * *"}} ｜
+            The purge job's schedule, it is a json object. |
+            The sample format is |
+            {"parameters":{"audit_retention_hour":168,"dry_run":true, "include_operations":"create,delete,pull"},"schedule":{"type":"Hourly","cron":"0 0 * * * *"}} |
             the include_operation should be a comma separated string, e.g. create,delete,pull, if it is empty, no operation will be purged.
       tags:
         - purge
@@ -4481,9 +4480,9 @@ paths:
           schema:
             $ref: '#/definitions/Schedule'
           description: |
-            The purge job's schedule, it is a json object. ｜
-            The sample format is ｜
-            {"parameters":{"audit_retention_hour":168,"dry_run":true, "include_operations":"create,delete,pull"},"schedule":{"type":"Hourly","cron":"0 0 * * * *"}} ｜
+            The purge job's schedule, it is a json object. |
+            The sample format is |
+            {"parameters":{"audit_retention_hour":168,"dry_run":true, "include_operations":"create,delete,pull"},"schedule":{"type":"Hourly","cron":"0 0 * * * *"}} |
             the include_operation should be a comma separated string, e.g. create,delete,pull, if it is empty, no operation will be purged.
       tags:
         - purge
@@ -6053,6 +6052,119 @@ paths:
           $ref: '#/responses/404'
         '500':
           $ref: '#/responses/500'
+  /security/summary:
+    get:
+      summary: Get vulnerability system summary
+      description: Retrieve the vulnerability summary of the system
+      tags:
+        - securityhub
+      operationId: getSecuritySummary
+      parameters:
+        - $ref: '#/parameters/requestId'
+        - name: with_dangerous_cve
+          in: query
+          description: Specify whether the dangerous CVEs are included inside summary information
+          type: boolean
+          required: false
+          default: false
+        - name: with_dangerous_artifact
+          in: query
+          description: Specify whether the dangerous Artifact are included inside summary information
+          type: boolean
+          required: false
+          default: false                  
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SecuritySummary'
+        '401':
+          $ref: '#/responses/401'
+        '403':
+          $ref: '#/responses/403'
+        '404':
+          $ref: '#/responses/404'
+        '500':
+          $ref: '#/responses/500'
+
+  /security/vul:
+    get:
+      summary: Get the vulnerability list.
+      description: |
+        Get the vulnerability list. use q to pass the query condition, 
+        supported conditions:
+        cve_id(exact match)
+        cvss_score_v3(range condition)
+        severity(exact match)
+        repository_name(exact match) 
+        project_id(exact match) 
+        package(exact match)
+        tag(exact match) 
+        digest(exact match)
+      tags:
+        - securityhub
+      operationId: ListVulnerabilities
+      parameters:
+        - $ref: '#/parameters/requestId'
+        - $ref: '#/parameters/query'
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/pageSize'
+        - name: tune_count
+          in: query
+          description: Enable to ignore X-Total-Count when the total count > 1000, if the total count is less than 1000, the real total count is returned, else -1.
+          type: boolean
+          required: false
+          default: false
+        - name: with_tag
+          in: query
+          description: Specify whether the tag information is included inside vulnerability information
+          type: boolean
+          required: false
+          default: false
+      responses:
+        '200':
+          description: The vulnerability list.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/VulnerabilityItem'
+          headers:
+            X-Total-Count:
+              description: The total count of vulnerabilities
+              type: integer
+            Link:
+              description: Link refers to the previous page and next page
+              type: string
+        '400':
+          $ref: '#/responses/400'
+        '401':
+          $ref: '#/responses/401'
+        '500':
+          $ref: '#/responses/500'
+
+  /permissions:
+    get:
+      summary: Get system or project level permissions info.
+      operationId: getPermissions
+      description: |
+        This endpoint is for retrieving resource and action info that only provides for admin user(system admin and project admin).
+      tags:
+        - permissions
+      parameters:
+        - $ref: '#/parameters/requestId'
+      responses:
+        '200':
+          description: Get permissions successfully.
+          schema:
+            $ref: '#/definitions/Permissions'
+        '401':
+          $ref: '#/responses/401'
+        '403':
+          $ref: '#/responses/403'
+        '404':
+          $ref: '#/responses/404'
+        '500':
+          $ref: '#/responses/500'
 
 parameters:
   query:
@@ -6063,7 +6175,7 @@ parameters:
     required: false
   sort:
     name: sort
-    description: Sort the resource list in ascending or descending order. e.g. sort by field1 in ascending orderr and field2 in descending order with "sort=field1,-field2"
+    description: Sort the resource list in ascending or descending order. e.g. sort by field1 in ascending order and field2 in descending order with "sort=field1,-field2"
     in: query
     type: string
     required: false
@@ -6128,7 +6240,7 @@ parameters:
   repositoryName:
     name: repository_name
     in: path
-    description: The name of the repository. If it contains slash, encode it with URL encoding. e.g. a/b -> a%252Fb
+    description: The name of the repository. If it contains slash, encode it twice over with URL encoding. e.g. a/b -> a%2Fb -> a%252Fb
     required: true
     type: string
   reference:
@@ -6516,10 +6628,6 @@ definitions:
         type: boolean
         x-omitempty: false
         description: The immutable status of the tag
-      signed:
-        type: boolean
-        x-omitempty: false
-        description: The attribute indicates whether the tag is signed or not
   ExtraAttrs:
     type: object
     additionalProperties:
@@ -7687,17 +7795,18 @@ definitions:
   GeneralInfo:
     type: object
     properties:
+      banner_message:
+        type: string
+        x-nullable: true
+        x-omitempty: true
+        description: The banner message for the UI. It is the stringified result of the banner message object.
+        example: "{\"closable\":true,\"message\":\"your banner message content\",\"type\":\"warning\",\"fromDate\":\"06/19/2023\",\"toDate\":\"06/21/2023\"}"
       current_time:
         type: string
         format: date-time
         x-nullable: true
         x-omitempty: true
         description: The current time of the server.
-      with_notary:
-        type: boolean
-        x-nullable: true
-        x-omitempty: true
-        description: If the Harbor instance is deployed with nested notary.
       registry_url:
         type: string
         x-nullable: true
@@ -7758,6 +7867,11 @@ definitions:
         x-nullable: true
         x-omitempty: true
         $ref: '#/definitions/AuthproxySetting'
+      oidc_provider_name:
+        type: string
+        x-nullable: true
+        x-omitempty: true
+        description: The OIDC provider name, empty if current auth is not OIDC_auth or OIDC provider is not configured.
   AuthproxySetting:
     type: object
     properties:
@@ -7880,8 +7994,9 @@ definitions:
       type:
         type: string
         description: |
-          The schedule type. The valid values are 'Hourly', 'Daily', 'Weekly', 'Custom', 'Manual' and 'None'.
-          'Manual' means to trigger it right away and 'None' means to cancel the schedule.
+          The schedule type. The valid values are 'Hourly', 'Daily', 'Weekly', 'Custom', 'Manual', 'None' and 'Schedule'.
+          'Manual' means to trigger it right away, 'Schedule' means to trigger it by a specified cron schedule and 
+          'None' means to cancel the schedule.
         enum:
           - Hourly
           - Daily
@@ -7889,6 +8004,7 @@ definitions:
           - Custom
           - Manual
           - None
+          - Schedule
       cron:
         type: string
         description: A cron expression, a time-based job scheduler.
@@ -8186,7 +8302,7 @@ definitions:
         x-omitempty: false
       url:
         type: string
-        format: url
+        format: uri
         description: A base URL of the scanner adapter
         example: http://harbor-scanner-trivy:8080
       disabled:
@@ -8830,6 +8946,9 @@ definitions:
       session_timeout:
         $ref: '#/definitions/IntegerConfigItem'
         description: The session timeout in minutes
+      banner_message:
+        $ref: '#/definitions/StringConfigItem'
+        description: The banner message for the UI.It is the stringified result of the banner message object
   Configurations:
     type: object
     properties:
@@ -9098,6 +9217,11 @@ definitions:
         description: Whether or not to skip update pull time for scanner
         x-omitempty: true
         x-isnullable: true
+      banner_message:
+        type: string
+        description: The banner message for the UI.It is the stringified result of the banner message object
+        x-omitempty: true
+        x-isnullable: true
   StringConfigItem:
     type: object
     properties:
@@ -9302,6 +9426,19 @@ definitions:
       action:
         type: string
         description: The permission action
+  Permissions:
+    type: object
+    properties:
+      system:
+        type: array
+        description: The system level permissions
+        items:
+          $ref: '#/definitions/Permission'
+      project:
+        type: array
+        description: The project level permissions
+        items:
+          $ref: '#/definitions/Permission'
   OIDCCliSecretReq:
     type: object
     properties:
@@ -9610,3 +9747,163 @@ definitions:
         type: boolean
         description: if the scheduler is paused
         x-omitempty: false
+  SecuritySummary:
+    type: object
+    description: the security summary
+    properties:
+      critical_cnt:
+        type: integer
+        format: int64
+        x-omitempty: false
+        description: the count of critical vulnerabilities
+      high_cnt:
+        type: integer
+        format: int64
+        description: the count of high vulnerabilities
+      medium_cnt:
+        type: integer
+        format: int64
+        x-omitempty: false
+        description: the count of medium vulnerabilities
+      low_cnt:
+        type: integer
+        format: int64
+        x-omitempty: false
+        description: the count of low vulnerabilities
+      none_cnt:
+        type: integer
+        format: int64
+        description: the count of none vulnerabilities
+      unknown_cnt:
+        type: integer
+        format: int64
+        description: the count of unknown vulnerabilities
+      total_vuls:
+        type: integer
+        format: int64
+        x-omitempty: false
+        description: the count of total vulnerabilities
+      scanned_cnt:
+        type: integer
+        format: int64
+        x-omitempty: false
+        description: the count of scanned artifacts
+      total_artifact:
+        type: integer
+        format: int64
+        x-omitempty: false
+        description: the total count of artifacts
+      fixable_cnt:
+        type: integer
+        format: int64
+        x-omitempty: false
+        description: the count of fixable vulnerabilities
+      dangerous_cves:
+        type: array
+        x-omitempty: true
+        description: the list of dangerous CVEs
+        items:
+          $ref: '#/definitions/DangerousCVE'
+      dangerous_artifacts:
+        type: array
+        x-omitempty: true
+        description: the list of dangerous artifacts
+        items:
+          $ref: '#/definitions/DangerousArtifact'
+  DangerousCVE:
+    type: object
+    description: the dangerous CVE information
+    properties:
+      cve_id: 
+        type: string
+        description: the cve id
+      severity:
+        type: string
+        description: the severity of the CVE        
+      cvss_score_v3:
+        type: number
+        format: float64
+        description: the cvss score v3
+      desc:
+        type: string
+        description: the description of the CVE
+      package:
+        type: string
+        description: the package of the CVE      
+      version:
+        type: string
+        description: the version of the package
+  DangerousArtifact:
+    type: object
+    description: the dangerous artifact information
+    properties:
+      project_id: 
+        type: integer
+        format: int64
+        description: the project id of the artifact
+      repository_name:
+        type: string
+        description: the repository name of the artifact
+      digest: 
+        type: string
+        description: the digest of the artifact
+      critical_cnt:
+        type: integer
+        x-omitempty: false
+        description: the count of critical vulnerabilities
+      high_cnt:
+        type: integer
+        format: int64
+        x-omitempty: false
+        description: the count of high vulnerabilities
+      medium_cnt:
+        type: integer
+        x-omitempty: false
+        description: the count of medium vulnerabilities
+
+  VulnerabilityItem:
+    type: object
+    description: the vulnerability item info
+    properties:
+      project_id:
+        type: integer
+        format: int64
+        description: the project ID of the artifact
+      repository_name:
+        type: string
+        description: the repository name of the artifact
+      digest:
+        type: string
+        description: the digest of the artifact
+      tags:
+        type: array
+        items:
+          type: string
+        description: the tags of the artifact
+      cve_id:
+        type: string
+        description: the CVE id of the vulnerability.
+      severity:
+        type: string
+        description: the severity of the vulnerability
+      cvss_v3_score:
+        type: number
+        format: float
+        description: the nvd cvss v3 score of the vulnerability
+      package:
+        type: string
+        description: the package of the vulnerability
+      version:
+        type: string
+        description: the version of the package
+      fixed_version:
+        type: string
+        description: the fixed version of the package
+      desc:
+        type: string
+        description: The description of the vulnerability
+      links:
+        type: array
+        items: 
+          type: string
+        description: Links of the vulnerability

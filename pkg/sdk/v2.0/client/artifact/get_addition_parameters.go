@@ -87,7 +87,7 @@ type GetAdditionParams struct {
 
 	/* RepositoryName.
 
-	   The name of the repository. If it contains slash, encode it with URL encoding. e.g. a/b -> a%252Fb
+	   The name of the repository. If it contains slash, encode it twice over with URL encoding. e.g. a/b -> a%2Fb -> a%252Fb
 	*/
 	RepositoryName string
 

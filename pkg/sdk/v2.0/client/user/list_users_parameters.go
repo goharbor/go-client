@@ -94,7 +94,7 @@ type ListUsersParams struct {
 
 	/* Sort.
 
-	   Sort the resource list in ascending or descending order. e.g. sort by field1 in ascending orderr and field2 in descending order with "sort=field1,-field2"
+	   Sort the resource list in ascending or descending order. e.g. sort by field1 in ascending order and field2 in descending order with "sort=field1,-field2"
 	*/
 	Sort *string
 

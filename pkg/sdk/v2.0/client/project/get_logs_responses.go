@@ -74,7 +74,7 @@ type GetLogsOK struct {
 	 */
 	XTotalCount int64
 
-	Payload []*models.AuditLog
+	Payload []models.AuditLog
 }
 
 // IsSuccess returns true when this get logs o k response has a 2xx status code
@@ -110,7 +110,7 @@ func (o *GetLogsOK) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/logs][%d] getLogsOK  %+v", 200, o.Payload)
 }
 
-func (o *GetLogsOK) GetPayload() []*models.AuditLog {
+func (o *GetLogsOK) GetPayload() []models.AuditLog {
 	return o.Payload
 }
 

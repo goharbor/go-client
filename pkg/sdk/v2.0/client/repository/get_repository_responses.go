@@ -75,7 +75,7 @@ GetRepositoryOK describes a response with status code 200, with default header v
 Success
 */
 type GetRepositoryOK struct {
-	Payload *models.Repository
+	Payload []models.Repository
 }
 
 // IsSuccess returns true when this get repository o k response has a 2xx status code
@@ -111,16 +111,16 @@ func (o *GetRepositoryOK) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}][%d] getRepositoryOK  %+v", 200, o.Payload)
 }
 
-func (o *GetRepositoryOK) GetPayload() *models.Repository {
+func (o *GetRepositoryOK) GetPayload() []models.Repository {
 	return o.Payload
 }
 
 func (o *GetRepositoryOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.Repository)
+	o.Payload = make([]models.Repository, 0)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

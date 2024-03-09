@@ -80,7 +80,7 @@ type ListScannerCandidatesOfProjectOK struct {
 	 */
 	XTotalCount int64
 
-	Payload []*models.ScannerRegistration
+	Payload []models.ScannerRegistration
 }
 
 // IsSuccess returns true when this list scanner candidates of project o k response has a 2xx status code
@@ -116,7 +116,7 @@ func (o *ListScannerCandidatesOfProjectOK) String() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/scanner/candidates][%d] listScannerCandidatesOfProjectOK  %+v", 200, o.Payload)
 }
 
-func (o *ListScannerCandidatesOfProjectOK) GetPayload() []*models.ScannerRegistration {
+func (o *ListScannerCandidatesOfProjectOK) GetPayload() []models.ScannerRegistration {
 	return o.Payload
 }
 

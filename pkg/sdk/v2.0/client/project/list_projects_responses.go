@@ -68,7 +68,7 @@ type ListProjectsOK struct {
 	 */
 	XTotalCount int64
 
-	Payload []*models.Project
+	Payload []models.Project
 }
 
 // IsSuccess returns true when this list projects o k response has a 2xx status code
@@ -104,7 +104,7 @@ func (o *ListProjectsOK) String() string {
 	return fmt.Sprintf("[GET /projects][%d] listProjectsOK  %+v", 200, o.Payload)
 }
 
-func (o *ListProjectsOK) GetPayload() []*models.Project {
+func (o *ListProjectsOK) GetPayload() []models.Project {
 	return o.Payload
 }
 

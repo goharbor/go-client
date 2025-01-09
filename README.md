@@ -1,4 +1,6 @@
 # go-client
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fgoharbor%2Fgo-client.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fgoharbor%2Fgo-client?ref=badge_shield)
+
 Client library with golang for accessing Harbor API.
 
 ## Download swagger spec by version
@@ -50,3 +52,7 @@ cs := NewClientSet(c)
 
 cs.V2() // v2 client
 ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fgoharbor%2Fgo-client.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fgoharbor%2Fgo-client?ref=badge_large)

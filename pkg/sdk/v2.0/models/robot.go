@@ -24,14 +24,20 @@ type Robot struct {
 	// Format: date-time
 	CreationTime strfmt.DateTime `json:"creation_time,omitempty"`
 
+	// The reference of the robot creator, like the id of harbor user.
+	CreatorRef int64 `json:"creator_ref,omitempty"`
+
+	// The type of the robot creator, like local(harbor_user) or robot.
+	CreatorType string `json:"creator_type,omitempty"`
+
 	// The description of the robot
 	Description string `json:"description,omitempty"`
 
 	// The disable status of the robot
 	Disable bool `json:"disable"`
 
-	// The duration of the robot in days
-	Duration int64 `json:"duration,omitempty"`
+	// The duration of the robot in days, duration must be either -1(Never) or a positive integer
+	Duration *int64 `json:"duration,omitempty"`
 
 	// The editable status of the robot
 	Editable bool `json:"editable"`

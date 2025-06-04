@@ -137,17 +137,17 @@ type ListArtifactsParams struct {
 	*/
 	WithLabel *bool
 
+	/* WithSbomOverview.
+
+	   Specify whether the SBOM overview is included in returning artifacts, when this option is true, the SBOM overview will be included in the response
+	*/
+	WithSbomOverview *bool
+
 	/* WithScanOverview.
 
 	   Specify whether the scan overview is included inside the returning artifacts
 	*/
 	WithScanOverview *bool
-
-	/* WithSignature.
-
-	   Specify whether the signature is included inside the tags of the returning artifacts. Only works when setting "with_tag=true"
-	*/
-	WithSignature *bool
 
 	/* WithTag.
 
@@ -187,9 +187,9 @@ func (o *ListArtifactsParams) SetDefaults() {
 
 		withLabelDefault = bool(false)
 
-		withScanOverviewDefault = bool(false)
+		withSbomOverviewDefault = bool(false)
 
-		withSignatureDefault = bool(false)
+		withScanOverviewDefault = bool(false)
 
 		withTagDefault = bool(true)
 	)
@@ -201,8 +201,8 @@ func (o *ListArtifactsParams) SetDefaults() {
 		WithAccessory:          &withAccessoryDefault,
 		WithImmutableStatus:    &withImmutableStatusDefault,
 		WithLabel:              &withLabelDefault,
+		WithSbomOverview:       &withSbomOverviewDefault,
 		WithScanOverview:       &withScanOverviewDefault,
-		WithSignature:          &withSignatureDefault,
 		WithTag:                &withTagDefault,
 	}
 
@@ -366,6 +366,17 @@ func (o *ListArtifactsParams) SetWithLabel(withLabel *bool) {
 	o.WithLabel = withLabel
 }
 
+// WithWithSbomOverview adds the withSbomOverview to the list artifacts params
+func (o *ListArtifactsParams) WithWithSbomOverview(withSbomOverview *bool) *ListArtifactsParams {
+	o.SetWithSbomOverview(withSbomOverview)
+	return o
+}
+
+// SetWithSbomOverview adds the withSbomOverview to the list artifacts params
+func (o *ListArtifactsParams) SetWithSbomOverview(withSbomOverview *bool) {
+	o.WithSbomOverview = withSbomOverview
+}
+
 // WithWithScanOverview adds the withScanOverview to the list artifacts params
 func (o *ListArtifactsParams) WithWithScanOverview(withScanOverview *bool) *ListArtifactsParams {
 	o.SetWithScanOverview(withScanOverview)
@@ -375,17 +386,6 @@ func (o *ListArtifactsParams) WithWithScanOverview(withScanOverview *bool) *List
 // SetWithScanOverview adds the withScanOverview to the list artifacts params
 func (o *ListArtifactsParams) SetWithScanOverview(withScanOverview *bool) {
 	o.WithScanOverview = withScanOverview
-}
-
-// WithWithSignature adds the withSignature to the list artifacts params
-func (o *ListArtifactsParams) WithWithSignature(withSignature *bool) *ListArtifactsParams {
-	o.SetWithSignature(withSignature)
-	return o
-}
-
-// SetWithSignature adds the withSignature to the list artifacts params
-func (o *ListArtifactsParams) SetWithSignature(withSignature *bool) {
-	o.WithSignature = withSignature
 }
 
 // WithWithTag adds the withTag to the list artifacts params
@@ -552,6 +552,23 @@ func (o *ListArtifactsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		}
 	}
 
+	if o.WithSbomOverview != nil {
+
+		// query param with_sbom_overview
+		var qrWithSbomOverview bool
+
+		if o.WithSbomOverview != nil {
+			qrWithSbomOverview = *o.WithSbomOverview
+		}
+		qWithSbomOverview := swag.FormatBool(qrWithSbomOverview)
+		if qWithSbomOverview != "" {
+
+			if err := r.SetQueryParam("with_sbom_overview", qWithSbomOverview); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.WithScanOverview != nil {
 
 		// query param with_scan_overview
@@ -564,23 +581,6 @@ func (o *ListArtifactsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		if qWithScanOverview != "" {
 
 			if err := r.SetQueryParam("with_scan_overview", qWithScanOverview); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.WithSignature != nil {
-
-		// query param with_signature
-		var qrWithSignature bool
-
-		if o.WithSignature != nil {
-			qrWithSignature = *o.WithSignature
-		}
-		qWithSignature := swag.FormatBool(qrWithSignature)
-		if qWithSignature != "" {
-
-			if err := r.SetQueryParam("with_signature", qWithSignature); err != nil {
 				return err
 			}
 		}

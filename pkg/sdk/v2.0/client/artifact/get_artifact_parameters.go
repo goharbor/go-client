@@ -131,6 +131,12 @@ type GetArtifactParams struct {
 	*/
 	WithLabel *bool
 
+	/* WithSbomOverview.
+
+	   Specify whether the SBOM overview is included in returning artifact, when this option is true, the SBOM overview will be included in the response
+	*/
+	WithSbomOverview *bool
+
 	/* WithScanOverview.
 
 	   Specify whether the scan overview is inclued inside the returning artifacts
@@ -181,6 +187,8 @@ func (o *GetArtifactParams) SetDefaults() {
 
 		withLabelDefault = bool(false)
 
+		withSbomOverviewDefault = bool(false)
+
 		withScanOverviewDefault = bool(false)
 
 		withSignatureDefault = bool(false)
@@ -195,6 +203,7 @@ func (o *GetArtifactParams) SetDefaults() {
 		WithAccessory:          &withAccessoryDefault,
 		WithImmutableStatus:    &withImmutableStatusDefault,
 		WithLabel:              &withLabelDefault,
+		WithSbomOverview:       &withSbomOverviewDefault,
 		WithScanOverview:       &withScanOverviewDefault,
 		WithSignature:          &withSignatureDefault,
 		WithTag:                &withTagDefault,
@@ -349,6 +358,17 @@ func (o *GetArtifactParams) SetWithLabel(withLabel *bool) {
 	o.WithLabel = withLabel
 }
 
+// WithWithSbomOverview adds the withSbomOverview to the get artifact params
+func (o *GetArtifactParams) WithWithSbomOverview(withSbomOverview *bool) *GetArtifactParams {
+	o.SetWithSbomOverview(withSbomOverview)
+	return o
+}
+
+// SetWithSbomOverview adds the withSbomOverview to the get artifact params
+func (o *GetArtifactParams) SetWithSbomOverview(withSbomOverview *bool) {
+	o.WithSbomOverview = withSbomOverview
+}
+
 // WithWithScanOverview adds the withScanOverview to the get artifact params
 func (o *GetArtifactParams) WithWithScanOverview(withScanOverview *bool) *GetArtifactParams {
 	o.SetWithScanOverview(withScanOverview)
@@ -501,6 +521,23 @@ func (o *GetArtifactParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 		if qWithLabel != "" {
 
 			if err := r.SetQueryParam("with_label", qWithLabel); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.WithSbomOverview != nil {
+
+		// query param with_sbom_overview
+		var qrWithSbomOverview bool
+
+		if o.WithSbomOverview != nil {
+			qrWithSbomOverview = *o.WithSbomOverview
+		}
+		qWithSbomOverview := swag.FormatBool(qrWithSbomOverview)
+		if qWithSbomOverview != "" {
+
+			if err := r.SetQueryParam("with_sbom_overview", qWithSbomOverview); err != nil {
 				return err
 			}
 		}

@@ -18,9 +18,21 @@ import (
 // API is the interface of the auditlog client
 type API interface {
 	/*
-	   ListAuditLogs gets recent logs of the projects which the user is a member of
+	   ListAuditLogEventTypes gets all event types of audit log
 
-	   This endpoint let user see the recent operation logs of the projects which he is member of
+	   Get all event types of audit log
+	*/
+	ListAuditLogEventTypes(ctx context.Context, params *ListAuditLogEventTypesParams) (*ListAuditLogEventTypesOK, error)
+	/*
+	   ListAuditLogExts gets recent logs of the projects which the user is a member with project admin role or return all audit logs for system admin user
+
+	   This endpoint let user see the recent operation logs of the projects which he is member with project_admin role, or return all audit logs for system admin user.
+	*/
+	ListAuditLogExts(ctx context.Context, params *ListAuditLogExtsParams) (*ListAuditLogExtsOK, error)
+	/*
+	   ListAuditLogs gets recent logs of projects which the user is a member with project admin role or return all audit logs for system admin user deprecated
+
+	   This endpoint let the user see the recent operation logs of projects which the user is a member with project admin role,, or return all audit logs for system admin user, it only query the audit log in previous version.
 	*/
 	ListAuditLogs(ctx context.Context, params *ListAuditLogsParams) (*ListAuditLogsOK, error)
 }
@@ -44,9 +56,63 @@ type Client struct {
 }
 
 /*
-ListAuditLogs gets recent logs of the projects which the user is a member of
+ListAuditLogEventTypes gets all event types of audit log
 
-This endpoint let user see the recent operation logs of the projects which he is member of
+Get all event types of audit log
+*/
+func (a *Client) ListAuditLogEventTypes(ctx context.Context, params *ListAuditLogEventTypesParams) (*ListAuditLogEventTypesOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "listAuditLogEventTypes",
+		Method:             "GET",
+		PathPattern:        "/auditlog-exts/events",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &ListAuditLogEventTypesReader{formats: a.formats},
+		AuthInfo:           a.authInfo,
+		Context:            ctx,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*ListAuditLogEventTypesOK), nil
+
+}
+
+/*
+ListAuditLogExts gets recent logs of the projects which the user is a member with project admin role or return all audit logs for system admin user
+
+This endpoint let user see the recent operation logs of the projects which he is member with project_admin role, or return all audit logs for system admin user.
+*/
+func (a *Client) ListAuditLogExts(ctx context.Context, params *ListAuditLogExtsParams) (*ListAuditLogExtsOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "listAuditLogExts",
+		Method:             "GET",
+		PathPattern:        "/auditlog-exts",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &ListAuditLogExtsReader{formats: a.formats},
+		AuthInfo:           a.authInfo,
+		Context:            ctx,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*ListAuditLogExtsOK), nil
+
+}
+
+/*
+ListAuditLogs gets recent logs of projects which the user is a member with project admin role or return all audit logs for system admin user deprecated
+
+This endpoint let the user see the recent operation logs of projects which the user is a member with project admin role,, or return all audit logs for system admin user, it only query the audit log in previous version.
 */
 func (a *Client) ListAuditLogs(ctx context.Context, params *ListAuditLogsParams) (*ListAuditLogsOK, error) {
 

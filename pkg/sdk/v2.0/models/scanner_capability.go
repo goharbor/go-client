@@ -22,6 +22,11 @@ type ScannerCapability struct {
 
 	// produces mime types
 	ProducesMimeTypes []string `json:"produces_mime_types"`
+
+	// Specify the type of scanner capability, like vulnerability or sbom
+	//
+	// Example: sbom
+	Type string `json:"type"`
 }
 
 // Validate validates this scanner capability

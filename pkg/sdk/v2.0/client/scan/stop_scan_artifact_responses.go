@@ -53,6 +53,12 @@ func (o *StopScanArtifactReader) ReadResponse(response runtime.ClientResponse, c
 			return nil, err
 		}
 		return nil, result
+	case 422:
+		result := NewStopScanArtifactUnprocessableEntity()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 500:
 		result := NewStopScanArtifactInternalServerError()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -408,6 +414,81 @@ func (o *StopScanArtifactNotFound) GetPayload() *models.Errors {
 }
 
 func (o *StopScanArtifactNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
+
+	o.Payload = new(models.Errors)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewStopScanArtifactUnprocessableEntity creates a StopScanArtifactUnprocessableEntity with default headers values
+func NewStopScanArtifactUnprocessableEntity() *StopScanArtifactUnprocessableEntity {
+	return &StopScanArtifactUnprocessableEntity{}
+}
+
+/*
+StopScanArtifactUnprocessableEntity describes a response with status code 422, with default header values.
+
+Unsupported Type
+*/
+type StopScanArtifactUnprocessableEntity struct {
+
+	/* The ID of the corresponding request for the response
+	 */
+	XRequestID string
+
+	Payload *models.Errors
+}
+
+// IsSuccess returns true when this stop scan artifact unprocessable entity response has a 2xx status code
+func (o *StopScanArtifactUnprocessableEntity) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stop scan artifact unprocessable entity response has a 3xx status code
+func (o *StopScanArtifactUnprocessableEntity) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stop scan artifact unprocessable entity response has a 4xx status code
+func (o *StopScanArtifactUnprocessableEntity) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stop scan artifact unprocessable entity response has a 5xx status code
+func (o *StopScanArtifactUnprocessableEntity) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stop scan artifact unprocessable entity response a status code equal to that given
+func (o *StopScanArtifactUnprocessableEntity) IsCode(code int) bool {
+	return code == 422
+}
+
+func (o *StopScanArtifactUnprocessableEntity) Error() string {
+	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan/stop][%d] stopScanArtifactUnprocessableEntity  %+v", 422, o.Payload)
+}
+
+func (o *StopScanArtifactUnprocessableEntity) String() string {
+	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan/stop][%d] stopScanArtifactUnprocessableEntity  %+v", 422, o.Payload)
+}
+
+func (o *StopScanArtifactUnprocessableEntity) GetPayload() *models.Errors {
+	return o.Payload
+}
+
+func (o *StopScanArtifactUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// hydrates response header X-Request-Id
 	hdrXRequestID := response.GetHeader("X-Request-Id")

@@ -7,7 +7,7 @@ SWAGGER_VERSION=v0.30.3
 SWAGGER := $(DOCKERCMD) run --rm -t -u "$(shell id -u):$(shell id -g)" -v $(shell pwd):/src -w /src quay.io/goswagger/swagger:$(SWAGGER_VERSION)
 
 ifeq ($(VERSION),)
-VERSION := v2.10.0
+VERSION := v2.13.1
 endif
 
 HARBOR_2.0_SPEC=api/v2.0/swagger.yaml

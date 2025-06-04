@@ -26,6 +26,9 @@ type Configurations struct {
 	// The banner message for the UI.It is the stringified result of the banner message object
 	BannerMessage *string `json:"banner_message,omitempty"`
 
+	// the list to disable log audit event types.
+	DisabledAuditLogEventTypes *string `json:"disabled_audit_log_event_types,omitempty"`
+
 	// The group which has the harbor admin privileges
 	HTTPAuthproxyAdminGroups *string `json:"http_authproxy_admin_groups,omitempty"`
 
@@ -55,6 +58,9 @@ type Configurations struct {
 
 	// Specify the ldap group which have the same privilege with Harbor admin
 	LdapGroupAdminDn *string `json:"ldap_group_admin_dn,omitempty"`
+
+	// Attach LDAP user group information in parallel, the parallel worker count is 5
+	LdapGroupAttachParallel *bool `json:"ldap_group_attach_parallel,omitempty"`
 
 	// The attribute which is used as identity of the LDAP group, default is cn.'
 	LdapGroupAttributeName *string `json:"ldap_group_attribute_name,omitempty"`
@@ -118,6 +124,9 @@ type Configurations struct {
 
 	// The attribute claims the group name
 	OIDCGroupsClaim *string `json:"oidc_groups_claim,omitempty"`
+
+	// Logout OIDC user session
+	OIDCLogout *bool `json:"oidc_logout,omitempty"`
 
 	// The OIDC provider name
 	OIDCName *string `json:"oidc_name,omitempty"`

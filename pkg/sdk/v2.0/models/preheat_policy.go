@@ -29,6 +29,9 @@ type PreheatPolicy struct {
 	// Whether the preheat policy enabled
 	Enabled bool `json:"enabled"`
 
+	// The extra attributes of preheat policy
+	ExtraAttrs string `json:"extra_attrs,omitempty"`
+
 	// The Filters of preheat policy
 	Filters string `json:"filters,omitempty"`
 

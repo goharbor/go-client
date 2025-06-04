@@ -37,7 +37,6 @@ import (
 	"github.com/goharbor/go-client/pkg/sdk/v2.0/client/repository"
 	"github.com/goharbor/go-client/pkg/sdk/v2.0/client/retention"
 	"github.com/goharbor/go-client/pkg/sdk/v2.0/client/robot"
-	"github.com/goharbor/go-client/pkg/sdk/v2.0/client/robotv1"
 	"github.com/goharbor/go-client/pkg/sdk/v2.0/client/scan"
 	"github.com/goharbor/go-client/pkg/sdk/v2.0/client/scan_all"
 	"github.com/goharbor/go-client/pkg/sdk/v2.0/client/scan_data_export"
@@ -120,7 +119,6 @@ func New(c Config) *HarborAPI {
 	cli.Repository = repository.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Retention = retention.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Robot = robot.New(transport, strfmt.Default, c.AuthInfo)
-	cli.Robotv1 = robotv1.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Scan = scan.New(transport, strfmt.Default, c.AuthInfo)
 	cli.ScanAll = scan_all.New(transport, strfmt.Default, c.AuthInfo)
 	cli.ScanDataExport = scan_data_export.New(transport, strfmt.Default, c.AuthInfo)
@@ -164,7 +162,6 @@ type HarborAPI struct {
 	Repository         *repository.Client
 	Retention          *retention.Client
 	Robot              *robot.Client
-	Robotv1            *robotv1.Client
 	Scan               *scan.Client
 	ScanAll            *scan_all.Client
 	ScanDataExport     *scan_data_export.Client

@@ -29,6 +29,9 @@ type Artifact struct {
 	// annotations
 	Annotations Annotations `json:"annotations,omitempty"`
 
+	// The artifact_type in the manifest of the artifact
+	ArtifactType string `json:"artifact_type,omitempty"`
+
 	// The digest of the artifact
 	Digest string `json:"digest,omitempty"`
 
@@ -66,6 +69,12 @@ type Artifact struct {
 
 	// The ID of the repository that the artifact belongs to
 	RepositoryID int64 `json:"repository_id,omitempty"`
+
+	// The name of the repository that the artifact belongs to
+	RepositoryName string `json:"repository_name,omitempty"`
+
+	// The overview of the generating SBOM progress
+	SbomOverview *SBOMOverview `json:"sbom_overview,omitempty"`
 
 	// The overview of the scan result.
 	ScanOverview ScanOverview `json:"scan_overview,omitempty"`
@@ -113,6 +122,10 @@ func (m *Artifact) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateReferences(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSbomOverview(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -289,6 +302,25 @@ func (m *Artifact) validateReferences(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *Artifact) validateSbomOverview(formats strfmt.Registry) error {
+	if swag.IsZero(m.SbomOverview) { // not required
+		return nil
+	}
+
+	if m.SbomOverview != nil {
+		if err := m.SbomOverview.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("sbom_overview")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("sbom_overview")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Artifact) validateScanOverview(formats strfmt.Registry) error {
 	if swag.IsZero(m.ScanOverview) { // not required
 		return nil
@@ -359,6 +391,10 @@ func (m *Artifact) ContextValidate(ctx context.Context, formats strfmt.Registry)
 	}
 
 	if err := m.contextValidateReferences(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSbomOverview(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -473,6 +509,22 @@ func (m *Artifact) contextValidateReferences(ctx context.Context, formats strfmt
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *Artifact) contextValidateSbomOverview(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.SbomOverview != nil {
+		if err := m.SbomOverview.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("sbom_overview")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("sbom_overview")
+			}
+			return err
+		}
 	}
 
 	return nil

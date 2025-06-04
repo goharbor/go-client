@@ -29,6 +29,12 @@ func (o *GetReportLogReader) ReadResponse(response runtime.ClientResponse, consu
 			return nil, err
 		}
 		return result, nil
+	case 400:
+		result := NewGetReportLogBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 401:
 		result := NewGetReportLogUnauthorized()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -113,6 +119,81 @@ func (o *GetReportLogOK) readResponse(response runtime.ClientResponse, consumer 
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetReportLogBadRequest creates a GetReportLogBadRequest with default headers values
+func NewGetReportLogBadRequest() *GetReportLogBadRequest {
+	return &GetReportLogBadRequest{}
+}
+
+/*
+GetReportLogBadRequest describes a response with status code 400, with default header values.
+
+Bad request
+*/
+type GetReportLogBadRequest struct {
+
+	/* The ID of the corresponding request for the response
+	 */
+	XRequestID string
+
+	Payload *models.Errors
+}
+
+// IsSuccess returns true when this get report log bad request response has a 2xx status code
+func (o *GetReportLogBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get report log bad request response has a 3xx status code
+func (o *GetReportLogBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get report log bad request response has a 4xx status code
+func (o *GetReportLogBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get report log bad request response has a 5xx status code
+func (o *GetReportLogBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get report log bad request response a status code equal to that given
+func (o *GetReportLogBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+func (o *GetReportLogBadRequest) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan/{report_id}/log][%d] getReportLogBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GetReportLogBadRequest) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan/{report_id}/log][%d] getReportLogBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GetReportLogBadRequest) GetPayload() *models.Errors {
+	return o.Payload
+}
+
+func (o *GetReportLogBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
+
+	o.Payload = new(models.Errors)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

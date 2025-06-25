@@ -122,12 +122,6 @@ type ListTagsParams struct {
 	*/
 	WithImmutableStatus *bool
 
-	/* WithSignature.
-
-	   Specify whether the signature is included inside the returning tags
-	*/
-	WithSignature *bool
-
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -151,15 +145,12 @@ func (o *ListTagsParams) SetDefaults() {
 		pageSizeDefault = int64(10)
 
 		withImmutableStatusDefault = bool(false)
-
-		withSignatureDefault = bool(false)
 	)
 
 	val := ListTagsParams{
 		Page:                &pageDefault,
 		PageSize:            &pageSizeDefault,
 		WithImmutableStatus: &withImmutableStatusDefault,
-		WithSignature:       &withSignatureDefault,
 	}
 
 	val.timeout = o.timeout
@@ -300,17 +291,6 @@ func (o *ListTagsParams) SetWithImmutableStatus(withImmutableStatus *bool) {
 	o.WithImmutableStatus = withImmutableStatus
 }
 
-// WithWithSignature adds the withSignature to the list tags params
-func (o *ListTagsParams) WithWithSignature(withSignature *bool) *ListTagsParams {
-	o.SetWithSignature(withSignature)
-	return o
-}
-
-// SetWithSignature adds the withSignature to the list tags params
-func (o *ListTagsParams) SetWithSignature(withSignature *bool) {
-	o.WithSignature = withSignature
-}
-
 // WriteToRequest writes these params to a swagger request
 func (o *ListTagsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -422,23 +402,6 @@ func (o *ListTagsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regi
 		if qWithImmutableStatus != "" {
 
 			if err := r.SetQueryParam("with_immutable_status", qWithImmutableStatus); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.WithSignature != nil {
-
-		// query param with_signature
-		var qrWithSignature bool
-
-		if o.WithSignature != nil {
-			qrWithSignature = *o.WithSignature
-		}
-		qWithSignature := swag.FormatBool(qrWithSignature)
-		if qWithSignature != "" {
-
-			if err := r.SetQueryParam("with_signature", qWithSignature); err != nil {
 				return err
 			}
 		}

@@ -47,6 +47,12 @@ func (o *ActionPendingJobsReader) ReadResponse(response runtime.ClientResponse, 
 			return nil, err
 		}
 		return nil, result
+	case 422:
+		result := NewActionPendingJobsUnprocessableEntity()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 500:
 		result := NewActionPendingJobsInternalServerError()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -316,6 +322,81 @@ func (o *ActionPendingJobsNotFound) GetPayload() *models.Errors {
 }
 
 func (o *ActionPendingJobsNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
+
+	o.Payload = new(models.Errors)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewActionPendingJobsUnprocessableEntity creates a ActionPendingJobsUnprocessableEntity with default headers values
+func NewActionPendingJobsUnprocessableEntity() *ActionPendingJobsUnprocessableEntity {
+	return &ActionPendingJobsUnprocessableEntity{}
+}
+
+/*
+ActionPendingJobsUnprocessableEntity describes a response with status code 422, with default header values.
+
+Unsupported Type
+*/
+type ActionPendingJobsUnprocessableEntity struct {
+
+	/* The ID of the corresponding request for the response
+	 */
+	XRequestID string
+
+	Payload *models.Errors
+}
+
+// IsSuccess returns true when this action pending jobs unprocessable entity response has a 2xx status code
+func (o *ActionPendingJobsUnprocessableEntity) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this action pending jobs unprocessable entity response has a 3xx status code
+func (o *ActionPendingJobsUnprocessableEntity) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this action pending jobs unprocessable entity response has a 4xx status code
+func (o *ActionPendingJobsUnprocessableEntity) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this action pending jobs unprocessable entity response has a 5xx status code
+func (o *ActionPendingJobsUnprocessableEntity) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this action pending jobs unprocessable entity response a status code equal to that given
+func (o *ActionPendingJobsUnprocessableEntity) IsCode(code int) bool {
+	return code == 422
+}
+
+func (o *ActionPendingJobsUnprocessableEntity) Error() string {
+	return fmt.Sprintf("[PUT /jobservice/queues/{job_type}][%d] actionPendingJobsUnprocessableEntity  %+v", 422, o.Payload)
+}
+
+func (o *ActionPendingJobsUnprocessableEntity) String() string {
+	return fmt.Sprintf("[PUT /jobservice/queues/{job_type}][%d] actionPendingJobsUnprocessableEntity  %+v", 422, o.Payload)
+}
+
+func (o *ActionPendingJobsUnprocessableEntity) GetPayload() *models.Errors {
+	return o.Payload
+}
+
+func (o *ActionPendingJobsUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// hydrates response header X-Request-Id
 	hdrXRequestID := response.GetHeader("X-Request-Id")

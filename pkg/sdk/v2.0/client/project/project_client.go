@@ -28,9 +28,14 @@ type API interface {
 	   This endpoint is aimed to delete project by project ID.*/
 	DeleteProject(ctx context.Context, params *DeleteProjectParams) (*DeleteProjectOK, error)
 	/*
-	   GetLogs gets recent logs of the projects
+	   GetLogExts gets recent logs of the projects
 
 	   Get recent logs of the projects*/
+	GetLogExts(ctx context.Context, params *GetLogExtsParams) (*GetLogExtsOK, error)
+	/*
+	   GetLogs gets recent logs of the projects deprecated
+
+	   Get recent logs of the projects, it only query the previous version's audit log*/
 	GetLogs(ctx context.Context, params *GetLogsParams) (*GetLogsOK, error)
 	/*
 	   GetProject returns specific project detail information
@@ -57,6 +62,11 @@ type API interface {
 
 	   This endpoint is used to check if the project name provided already exist.*/
 	HeadProject(ctx context.Context, params *HeadProjectParams) (*HeadProjectOK, error)
+	/*
+	   ListArtifactsOfProject lists artifacts
+
+	   List artifacts of the specified project*/
+	ListArtifactsOfProject(ctx context.Context, params *ListArtifactsOfProjectParams) (*ListArtifactsOfProjectOK, error)
 	/*
 	   ListProjects lists projects
 
@@ -152,9 +162,36 @@ func (a *Client) DeleteProject(ctx context.Context, params *DeleteProjectParams)
 }
 
 /*
-GetLogs gets recent logs of the projects
+GetLogExts gets recent logs of the projects
 
 Get recent logs of the projects
+*/
+func (a *Client) GetLogExts(ctx context.Context, params *GetLogExtsParams) (*GetLogExtsOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "getLogExts",
+		Method:             "GET",
+		PathPattern:        "/projects/{project_name}/auditlog-exts",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetLogExtsReader{formats: a.formats},
+		AuthInfo:           a.authInfo,
+		Context:            ctx,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetLogExtsOK), nil
+
+}
+
+/*
+GetLogs gets recent logs of the projects deprecated
+
+Get recent logs of the projects, it only query the previous version's audit log
 */
 func (a *Client) GetLogs(ctx context.Context, params *GetLogsParams) (*GetLogsOK, error) {
 
@@ -310,6 +347,33 @@ func (a *Client) HeadProject(ctx context.Context, params *HeadProjectParams) (*H
 		return nil, err
 	}
 	return result.(*HeadProjectOK), nil
+
+}
+
+/*
+ListArtifactsOfProject lists artifacts
+
+List artifacts of the specified project
+*/
+func (a *Client) ListArtifactsOfProject(ctx context.Context, params *ListArtifactsOfProjectParams) (*ListArtifactsOfProjectOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "listArtifactsOfProject",
+		Method:             "GET",
+		PathPattern:        "/projects/{project_name_or_id}/artifacts",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &ListArtifactsOfProjectReader{formats: a.formats},
+		AuthInfo:           a.authInfo,
+		Context:            ctx,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*ListArtifactsOfProjectOK), nil
 
 }
 

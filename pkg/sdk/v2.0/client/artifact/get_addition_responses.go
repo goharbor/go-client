@@ -53,6 +53,12 @@ func (o *GetAdditionReader) ReadResponse(response runtime.ClientResponse, consum
 			return nil, err
 		}
 		return nil, result
+	case 422:
+		result := NewGetAdditionUnprocessableEntity()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 500:
 		result := NewGetAdditionInternalServerError()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -419,6 +425,81 @@ func (o *GetAdditionNotFound) GetPayload() *models.Errors {
 }
 
 func (o *GetAdditionNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
+
+	o.Payload = new(models.Errors)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetAdditionUnprocessableEntity creates a GetAdditionUnprocessableEntity with default headers values
+func NewGetAdditionUnprocessableEntity() *GetAdditionUnprocessableEntity {
+	return &GetAdditionUnprocessableEntity{}
+}
+
+/*
+GetAdditionUnprocessableEntity describes a response with status code 422, with default header values.
+
+Unsupported Type
+*/
+type GetAdditionUnprocessableEntity struct {
+
+	/* The ID of the corresponding request for the response
+	 */
+	XRequestID string
+
+	Payload *models.Errors
+}
+
+// IsSuccess returns true when this get addition unprocessable entity response has a 2xx status code
+func (o *GetAdditionUnprocessableEntity) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get addition unprocessable entity response has a 3xx status code
+func (o *GetAdditionUnprocessableEntity) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get addition unprocessable entity response has a 4xx status code
+func (o *GetAdditionUnprocessableEntity) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get addition unprocessable entity response has a 5xx status code
+func (o *GetAdditionUnprocessableEntity) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get addition unprocessable entity response a status code equal to that given
+func (o *GetAdditionUnprocessableEntity) IsCode(code int) bool {
+	return code == 422
+}
+
+func (o *GetAdditionUnprocessableEntity) Error() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/additions/{addition}][%d] getAdditionUnprocessableEntity  %+v", 422, o.Payload)
+}
+
+func (o *GetAdditionUnprocessableEntity) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/additions/{addition}][%d] getAdditionUnprocessableEntity  %+v", 422, o.Payload)
+}
+
+func (o *GetAdditionUnprocessableEntity) GetPayload() *models.Errors {
+	return o.Payload
+}
+
+func (o *GetAdditionUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// hydrates response header X-Request-Id
 	hdrXRequestID := response.GetHeader("X-Request-Id")

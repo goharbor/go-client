@@ -17,6 +17,9 @@ import (
 // swagger:model ProjectMetadata
 type ProjectMetadata struct {
 
+	// Whether generating SBOM automatically when pushing a subject artifact. The valid values are "true", "false".
+	AutoSbomGeneration *string `json:"auto_sbom_generation,omitempty"`
+
 	// Whether scan images automatically when pushing. The valid values are "true", "false".
 	AutoScan *string `json:"auto_scan,omitempty"`
 
@@ -28,6 +31,9 @@ type ProjectMetadata struct {
 
 	// Whether prevent the vulnerable images from running. The valid values are "true", "false".
 	PreventVul *string `json:"prevent_vul,omitempty"`
+
+	// The bandwidth limit of proxy cache, in Kbps (kilobits per second). It limits the communication between Harbor and the upstream registry, not the client and the Harbor.
+	ProxySpeedKb *string `json:"proxy_speed_kb,omitempty"`
 
 	// The public status of the project. The valid values are "true", "false".
 	Public string `json:"public,omitempty"`

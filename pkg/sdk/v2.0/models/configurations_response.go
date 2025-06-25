@@ -27,6 +27,9 @@ type ConfigurationsResponse struct {
 	// The banner message for the UI.It is the stringified result of the banner message object
 	BannerMessage *StringConfigItem `json:"banner_message,omitempty"`
 
+	// The audit log event types to skip to log in database
+	DisabledAuditLogEventTypes *StringConfigItem `json:"disabled_audit_log_event_types,omitempty"`
+
 	// The group which has the harbor admin privileges
 	HTTPAuthproxyAdminGroups *StringConfigItem `json:"http_authproxy_admin_groups,omitempty"`
 
@@ -56,6 +59,9 @@ type ConfigurationsResponse struct {
 
 	// Specify the ldap group which have the same privilege with Harbor admin
 	LdapGroupAdminDn *StringConfigItem `json:"ldap_group_admin_dn,omitempty"`
+
+	// Attach LDAP user group information in parallel.
+	LdapGroupAttachParallel *BoolConfigItem `json:"ldap_group_attach_parallel,omitempty"`
 
 	// The attribute which is used as identity of the LDAP group, default is cn.'
 	LdapGroupAttributeName *StringConfigItem `json:"ldap_group_attribute_name,omitempty"`
@@ -113,6 +119,9 @@ type ConfigurationsResponse struct {
 
 	// The attribute claims the group name
 	OIDCGroupsClaim *StringConfigItem `json:"oidc_groups_claim,omitempty"`
+
+	// Extra parameters to logout user session from the OIDC provider
+	OIDCLogout *BoolConfigItem `json:"oidc_logout,omitempty"`
 
 	// The OIDC provider name
 	OIDCName *StringConfigItem `json:"oidc_name,omitempty"`
@@ -194,6 +203,10 @@ func (m *ConfigurationsResponse) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateDisabledAuditLogEventTypes(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateHTTPAuthproxyAdminGroups(formats); err != nil {
 		res = append(res, err)
 	}
@@ -231,6 +244,10 @@ func (m *ConfigurationsResponse) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateLdapGroupAdminDn(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateLdapGroupAttachParallel(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -307,6 +324,10 @@ func (m *ConfigurationsResponse) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateOIDCGroupsClaim(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateOIDCLogout(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -449,6 +470,25 @@ func (m *ConfigurationsResponse) validateBannerMessage(formats strfmt.Registry) 
 				return ve.ValidateName("banner_message")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("banner_message")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ConfigurationsResponse) validateDisabledAuditLogEventTypes(formats strfmt.Registry) error {
+	if swag.IsZero(m.DisabledAuditLogEventTypes) { // not required
+		return nil
+	}
+
+	if m.DisabledAuditLogEventTypes != nil {
+		if err := m.DisabledAuditLogEventTypes.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("disabled_audit_log_event_types")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("disabled_audit_log_event_types")
 			}
 			return err
 		}
@@ -639,6 +679,25 @@ func (m *ConfigurationsResponse) validateLdapGroupAdminDn(formats strfmt.Registr
 				return ve.ValidateName("ldap_group_admin_dn")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("ldap_group_admin_dn")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ConfigurationsResponse) validateLdapGroupAttachParallel(formats strfmt.Registry) error {
+	if swag.IsZero(m.LdapGroupAttachParallel) { // not required
+		return nil
+	}
+
+	if m.LdapGroupAttachParallel != nil {
+		if err := m.LdapGroupAttachParallel.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("ldap_group_attach_parallel")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("ldap_group_attach_parallel")
 			}
 			return err
 		}
@@ -1000,6 +1059,25 @@ func (m *ConfigurationsResponse) validateOIDCGroupsClaim(formats strfmt.Registry
 				return ve.ValidateName("oidc_groups_claim")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("oidc_groups_claim")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ConfigurationsResponse) validateOIDCLogout(formats strfmt.Registry) error {
+	if swag.IsZero(m.OIDCLogout) { // not required
+		return nil
+	}
+
+	if m.OIDCLogout != nil {
+		if err := m.OIDCLogout.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("oidc_logout")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("oidc_logout")
 			}
 			return err
 		}
@@ -1423,6 +1501,10 @@ func (m *ConfigurationsResponse) ContextValidate(ctx context.Context, formats st
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateDisabledAuditLogEventTypes(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateHTTPAuthproxyAdminGroups(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -1460,6 +1542,10 @@ func (m *ConfigurationsResponse) ContextValidate(ctx context.Context, formats st
 	}
 
 	if err := m.contextValidateLdapGroupAdminDn(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateLdapGroupAttachParallel(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -1536,6 +1622,10 @@ func (m *ConfigurationsResponse) ContextValidate(ctx context.Context, formats st
 	}
 
 	if err := m.contextValidateOIDCGroupsClaim(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateOIDCLogout(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -1669,6 +1759,22 @@ func (m *ConfigurationsResponse) contextValidateBannerMessage(ctx context.Contex
 				return ve.ValidateName("banner_message")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("banner_message")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ConfigurationsResponse) contextValidateDisabledAuditLogEventTypes(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.DisabledAuditLogEventTypes != nil {
+		if err := m.DisabledAuditLogEventTypes.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("disabled_audit_log_event_types")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("disabled_audit_log_event_types")
 			}
 			return err
 		}
@@ -1829,6 +1935,22 @@ func (m *ConfigurationsResponse) contextValidateLdapGroupAdminDn(ctx context.Con
 				return ve.ValidateName("ldap_group_admin_dn")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("ldap_group_admin_dn")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ConfigurationsResponse) contextValidateLdapGroupAttachParallel(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.LdapGroupAttachParallel != nil {
+		if err := m.LdapGroupAttachParallel.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("ldap_group_attach_parallel")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("ldap_group_attach_parallel")
 			}
 			return err
 		}
@@ -2133,6 +2255,22 @@ func (m *ConfigurationsResponse) contextValidateOIDCGroupsClaim(ctx context.Cont
 				return ve.ValidateName("oidc_groups_claim")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("oidc_groups_claim")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ConfigurationsResponse) contextValidateOIDCLogout(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.OIDCLogout != nil {
+		if err := m.OIDCLogout.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("oidc_logout")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("oidc_logout")
 			}
 			return err
 		}

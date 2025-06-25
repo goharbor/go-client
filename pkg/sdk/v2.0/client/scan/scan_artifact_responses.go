@@ -53,6 +53,12 @@ func (o *ScanArtifactReader) ReadResponse(response runtime.ClientResponse, consu
 			return nil, err
 		}
 		return nil, result
+	case 422:
+		result := NewScanArtifactUnprocessableEntity()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 500:
 		result := NewScanArtifactInternalServerError()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -408,6 +414,81 @@ func (o *ScanArtifactNotFound) GetPayload() *models.Errors {
 }
 
 func (o *ScanArtifactNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
+
+	o.Payload = new(models.Errors)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewScanArtifactUnprocessableEntity creates a ScanArtifactUnprocessableEntity with default headers values
+func NewScanArtifactUnprocessableEntity() *ScanArtifactUnprocessableEntity {
+	return &ScanArtifactUnprocessableEntity{}
+}
+
+/*
+ScanArtifactUnprocessableEntity describes a response with status code 422, with default header values.
+
+Unsupported Type
+*/
+type ScanArtifactUnprocessableEntity struct {
+
+	/* The ID of the corresponding request for the response
+	 */
+	XRequestID string
+
+	Payload *models.Errors
+}
+
+// IsSuccess returns true when this scan artifact unprocessable entity response has a 2xx status code
+func (o *ScanArtifactUnprocessableEntity) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this scan artifact unprocessable entity response has a 3xx status code
+func (o *ScanArtifactUnprocessableEntity) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this scan artifact unprocessable entity response has a 4xx status code
+func (o *ScanArtifactUnprocessableEntity) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this scan artifact unprocessable entity response has a 5xx status code
+func (o *ScanArtifactUnprocessableEntity) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this scan artifact unprocessable entity response a status code equal to that given
+func (o *ScanArtifactUnprocessableEntity) IsCode(code int) bool {
+	return code == 422
+}
+
+func (o *ScanArtifactUnprocessableEntity) Error() string {
+	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan][%d] scanArtifactUnprocessableEntity  %+v", 422, o.Payload)
+}
+
+func (o *ScanArtifactUnprocessableEntity) String() string {
+	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan][%d] scanArtifactUnprocessableEntity  %+v", 422, o.Payload)
+}
+
+func (o *ScanArtifactUnprocessableEntity) GetPayload() *models.Errors {
+	return o.Payload
+}
+
+func (o *ScanArtifactUnprocessableEntity) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// hydrates response header X-Request-Id
 	hdrXRequestID := response.GetHeader("X-Request-Id")

@@ -25,7 +25,7 @@ type RobotCreate struct {
 	// The disable status of the robot
 	Disable bool `json:"disable,omitempty"`
 
-	// The duration of the robot in days
+	// The duration of the robot in days, duration must be either -1(Never) or a positive integer
 	Duration int64 `json:"duration,omitempty"`
 
 	// The level of the robot, project or system

@@ -38,7 +38,7 @@ type API interface {
 	/*
 	   SearchLdapUser searches available ldap users
 
-	   This endpoint searches the available ldap users based on related configuration parameters. Support searched by input ladp configuration, load configuration from the system and specific filter.
+	   This endpoint searches the available ldap users based on related configuration parameters. Support searched by input ldap configuration, load configuration from the system and specific filter.
 	*/
 	SearchLdapUser(ctx context.Context, params *SearchLdapUserParams) (*SearchLdapUserOK, error)
 }
@@ -145,7 +145,7 @@ func (a *Client) SearchLdapGroup(ctx context.Context, params *SearchLdapGroupPar
 /*
 SearchLdapUser searches available ldap users
 
-This endpoint searches the available ldap users based on related configuration parameters. Support searched by input ladp configuration, load configuration from the system and specific filter.
+This endpoint searches the available ldap users based on related configuration parameters. Support searched by input ldap configuration, load configuration from the system and specific filter.
 */
 func (a *Client) SearchLdapUser(ctx context.Context, params *SearchLdapUserParams) (*SearchLdapUserOK, error) {
 

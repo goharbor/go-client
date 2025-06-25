@@ -14,6 +14,8 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/goharbor/go-client/pkg/sdk/v2.0/models"
 )
 
 // NewScanArtifactParams creates a new ScanArtifactParams object,
@@ -84,6 +86,9 @@ type ScanArtifactParams struct {
 	   The name of the repository. If it contains slash, encode it twice over with URL encoding. e.g. a/b -> a%2Fb -> a%252Fb
 	*/
 	RepositoryName string
+
+	// ScanType.
+	ScanType *models.ScanType
 
 	timeout    time.Duration
 	Context    context.Context
@@ -182,6 +187,17 @@ func (o *ScanArtifactParams) SetRepositoryName(repositoryName string) {
 	o.RepositoryName = repositoryName
 }
 
+// WithScanType adds the scanType to the scan artifact params
+func (o *ScanArtifactParams) WithScanType(scanType *models.ScanType) *ScanArtifactParams {
+	o.SetScanType(scanType)
+	return o
+}
+
+// SetScanType adds the scanType to the scan artifact params
+func (o *ScanArtifactParams) SetScanType(scanType *models.ScanType) {
+	o.ScanType = scanType
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *ScanArtifactParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -211,6 +227,11 @@ func (o *ScanArtifactParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 	// path param repository_name
 	if err := r.SetPathParam("repository_name", o.RepositoryName); err != nil {
 		return err
+	}
+	if o.ScanType != nil {
+		if err := r.SetBodyParam(o.ScanType); err != nil {
+			return err
+		}
 	}
 
 	if len(res) > 0 {

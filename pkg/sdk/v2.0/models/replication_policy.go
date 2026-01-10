@@ -61,6 +61,10 @@ type ReplicationPolicy struct {
 	// Whether to replicate the deletion operation.
 	ReplicateDeletion bool `json:"replicate_deletion,omitempty"`
 
+	// Whether to skip execution until the previous active execution finishes,
+	// avoiding the execution of the same replication rules multiple times in parallel.
+	SingleActiveReplication *bool `json:"single_active_replication,omitempty"`
+
 	// speed limit for each task
 	Speed *int32 `json:"speed,omitempty"`
 

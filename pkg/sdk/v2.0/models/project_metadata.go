@@ -29,6 +29,9 @@ type ProjectMetadata struct {
 	// Whether cosign content trust is enabled or not. If it is enabled, user can't pull images without cosign signature from this project. The valid values are "true", "false".
 	EnableContentTrustCosign *string `json:"enable_content_trust_cosign,omitempty"`
 
+	// The max connection per artifact to the upstream registry in current proxy cache project, if it is -1, no limit to upstream registry connections
+	MaxUpstreamConn *string `json:"max_upstream_conn,omitempty"`
+
 	// Whether prevent the vulnerable images from running. The valid values are "true", "false".
 	PreventVul *string `json:"prevent_vul,omitempty"`
 

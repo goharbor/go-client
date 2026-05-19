@@ -28,6 +28,12 @@ func (o *UpdateRegistryReader) ReadResponse(response runtime.ClientResponse, con
 			return nil, err
 		}
 		return result, nil
+	case 400:
+		result := NewUpdateRegistryBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 401:
 		result := NewUpdateRegistryUnauthorized()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -125,6 +131,88 @@ func (o *UpdateRegistryOK) readResponse(response runtime.ClientResponse, consume
 
 	if hdrXRequestID != "" {
 		o.XRequestID = hdrXRequestID
+	}
+
+	return nil
+}
+
+// NewUpdateRegistryBadRequest creates a UpdateRegistryBadRequest with default headers values
+func NewUpdateRegistryBadRequest() *UpdateRegistryBadRequest {
+	return &UpdateRegistryBadRequest{}
+}
+
+/*
+UpdateRegistryBadRequest describes a response with status code 400, with default header values.
+
+Bad request
+*/
+type UpdateRegistryBadRequest struct {
+
+	/* The ID of the corresponding request for the response
+	 */
+	XRequestID string
+
+	Payload *models.Errors
+}
+
+// IsSuccess returns true when this update registry bad request response has a 2xx status code
+func (o *UpdateRegistryBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update registry bad request response has a 3xx status code
+func (o *UpdateRegistryBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update registry bad request response has a 4xx status code
+func (o *UpdateRegistryBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update registry bad request response has a 5xx status code
+func (o *UpdateRegistryBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update registry bad request response a status code equal to that given
+func (o *UpdateRegistryBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the update registry bad request response
+func (o *UpdateRegistryBadRequest) Code() int {
+	return 400
+}
+
+func (o *UpdateRegistryBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /registries/{id}][%d] updateRegistryBadRequest %s", 400, payload)
+}
+
+func (o *UpdateRegistryBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /registries/{id}][%d] updateRegistryBadRequest %s", 400, payload)
+}
+
+func (o *UpdateRegistryBadRequest) GetPayload() *models.Errors {
+	return o.Payload
+}
+
+func (o *UpdateRegistryBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
+
+	o.Payload = new(models.Errors)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
+		return err
 	}
 
 	return nil

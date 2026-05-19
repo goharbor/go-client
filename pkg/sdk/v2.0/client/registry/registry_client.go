@@ -466,6 +466,8 @@ func (a *Client) UpdateRegistry(ctx context.Context, params *UpdateRegistryParam
 	switch value := result.(type) {
 	case *UpdateRegistryOK:
 		return value, nil
+	case *UpdateRegistryBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
 	case *UpdateRegistryUnauthorized:
 		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
 	case *UpdateRegistryForbidden:

@@ -18,6 +18,11 @@ type ScannerRegistrationReq struct {
 
 	// An optional value of the HTTP Authorization header sent with each request to the Scanner Adapter API.
 	//
+	// When updating a registration (PUT `/scanners/{registration_id}`), if this field is omitted or empty
+	// and `auth` is still one of Basic, Bearer, or APIKey, the previously stored credential is kept
+	// unchanged. Provide a non-empty value to set or rotate the credential. Clearing `auth` removes the
+	// need for a credential; in that case an empty `access_credential` does not restore the old secret.
+	//
 	// Example: Bearer: JWTTOKENGOESHERE
 	AccessCredential string `json:"access_credential,omitempty"`
 

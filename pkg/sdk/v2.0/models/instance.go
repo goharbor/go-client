@@ -14,7 +14,11 @@ import (
 // swagger:model Instance
 type Instance struct {
 
-	// The auth credential data if exists
+	// The auth credential data if it exists.
+	//
+	// When updating an instance (PUT `/p2p/preheat/instances/{preheat_instance_name}`), if this object
+	// is omitted or empty and `auth_mode` is not `NONE`, the previously stored credentials are kept.
+	//
 	AuthInfo map[string]string `json:"auth_info,omitempty"`
 
 	// The authentication way supported

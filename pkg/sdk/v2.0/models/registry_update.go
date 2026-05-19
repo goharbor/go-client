@@ -20,6 +20,9 @@ type RegistryUpdate struct {
 	// The registry access secret.
 	AccessSecret *string `json:"access_secret,omitempty"`
 
+	// The PEM-encoded CA certificate for this registry endpoint.
+	CaCertificate *string `json:"ca_certificate,omitempty"`
+
 	// Credential type of the registry, e.g. 'basic'.
 	CredentialType *string `json:"credential_type,omitempty"`
 

@@ -276,6 +276,8 @@ func (a *Client) SearchUserGroups(ctx context.Context, params *SearchUserGroupsP
 		return value, nil
 	case *SearchUserGroupsUnauthorized:
 		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *SearchUserGroupsConflict:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
 	case *SearchUserGroupsInternalServerError:
 		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
 	}

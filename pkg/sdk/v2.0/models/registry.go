@@ -17,6 +17,9 @@ import (
 // swagger:model Registry
 type Registry struct {
 
+	// The PEM-encoded CA certificate for this registry endpoint. If provided, this CA will be used to verify the registry's certificate instead of the system CA pool.
+	CaCertificate *string `json:"ca_certificate,omitempty"`
+
 	// The create time of the policy.
 	// Format: date-time
 	CreationTime strfmt.DateTime `json:"creation_time,omitempty"`

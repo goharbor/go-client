@@ -61,6 +61,10 @@ type API interface {
 	   UpdateScanner updates a scanner registration
 
 	   Updates the specified scanner registration.
+
+	   If `access_credential` is omitted or empty in the request body and the registration still uses
+	   an authentication type that requires a credential (Basic, Bearer, or APIKey), the existing stored
+	   credential is left unchanged. Send a non-empty `access_credential` to set or rotate the secret.
 	*/
 	UpdateScanner(ctx context.Context, params *UpdateScannerParams) (*UpdateScannerOK, error)
 }
@@ -398,6 +402,10 @@ func (a *Client) SetScannerAsDefault(ctx context.Context, params *SetScannerAsDe
 UpdateScanner updates a scanner registration
 
 Updates the specified scanner registration.
+
+If `access_credential` is omitted or empty in the request body and the registration still uses
+an authentication type that requires a credential (Basic, Bearer, or APIKey), the existing stored
+credential is left unchanged. Send a non-empty `access_credential` to set or rotate the secret.
 */
 func (a *Client) UpdateScanner(ctx context.Context, params *UpdateScannerParams) (*UpdateScannerOK, error) {
 	result, err := a.transport.Submit(&runtime.ClientOperation{

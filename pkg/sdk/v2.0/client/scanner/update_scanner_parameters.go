@@ -68,7 +68,7 @@ type UpdateScannerParams struct {
 
 	/* Registration.
 
-	   A scanner registraiton to be updated.
+	   A scanner registration to be updated.
 	*/
 	Registration *models.ScannerRegistrationReq
 

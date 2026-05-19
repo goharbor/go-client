@@ -88,7 +88,7 @@ type CreateTagParams struct {
 
 	   The JSON object of tag.
 	*/
-	Tag *models.Tag
+	Tag *models.NewTag
 
 	timeout    time.Duration
 	Context    context.Context
@@ -188,13 +188,13 @@ func (o *CreateTagParams) SetRepositoryName(repositoryName string) {
 }
 
 // WithTag adds the tag to the create tag params
-func (o *CreateTagParams) WithTag(tag *models.Tag) *CreateTagParams {
+func (o *CreateTagParams) WithTag(tag *models.NewTag) *CreateTagParams {
 	o.SetTag(tag)
 	return o
 }
 
 // SetTag adds the tag to the create tag params
-func (o *CreateTagParams) SetTag(tag *models.Tag) {
+func (o *CreateTagParams) SetTag(tag *models.NewTag) {
 	o.Tag = tag
 }
 

@@ -489,6 +489,8 @@ func (a *Client) HeadProject(ctx context.Context, params *HeadProjectParams) (*H
 	switch value := result.(type) {
 	case *HeadProjectOK:
 		return value, nil
+	case *HeadProjectBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
 	case *HeadProjectNotFound:
 		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
 	case *HeadProjectInternalServerError:

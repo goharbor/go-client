@@ -104,7 +104,13 @@ type API interface {
 	/*
 	   UpdateInstance updates the specified p2 p provider instance
 
-	   Update the specified P2P provider instance*/
+	   Update the specified P2P provider instance.
+
+	   If `auth_info` is omitted or empty in the request body and the effective `auth_mode` is not `NONE`
+	   (either sent in the request or left unchanged from the stored registration), the previously stored
+	   auth credentials are kept. Send a non-empty `auth_info` object to set or replace credentials.
+	   Set `auth_mode` to `NONE` to disable authentication without retaining the old credentials.
+	*/
 	UpdateInstance(ctx context.Context, params *UpdateInstanceParams) (*UpdateInstanceOK, error)
 	/*
 	   UpdatePolicy updates preheat policy
@@ -929,7 +935,12 @@ func (a *Client) StopExecution(ctx context.Context, params *StopExecutionParams)
 /*
 UpdateInstance updates the specified p2 p provider instance
 
-Update the specified P2P provider instance
+Update the specified P2P provider instance.
+
+If `auth_info` is omitted or empty in the request body and the effective `auth_mode` is not `NONE`
+(either sent in the request or left unchanged from the stored registration), the previously stored
+auth credentials are kept. Send a non-empty `auth_info` object to set or replace credentials.
+Set `auth_mode` to `NONE` to disable authentication without retaining the old credentials.
 */
 func (a *Client) UpdateInstance(ctx context.Context, params *UpdateInstanceParams) (*UpdateInstanceOK, error) {
 	result, err := a.transport.Submit(&runtime.ClientOperation{

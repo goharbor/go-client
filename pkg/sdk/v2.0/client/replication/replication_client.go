@@ -562,6 +562,8 @@ func (a *Client) UpdateReplicationPolicy(ctx context.Context, params *UpdateRepl
 	switch value := result.(type) {
 	case *UpdateReplicationPolicyOK:
 		return value, nil
+	case *UpdateReplicationPolicyBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
 	case *UpdateReplicationPolicyUnauthorized:
 		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
 	case *UpdateReplicationPolicyForbidden:

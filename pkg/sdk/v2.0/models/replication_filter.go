@@ -20,7 +20,7 @@ type ReplicationFilter struct {
 	// The replication policy filter type.
 	Type string `json:"type,omitempty"`
 
-	// The value of replication policy filter.
+	// The value of replication policy filter. For name, tag, and resource filters, this should be a string. For label filters, this should be an array of strings.
 	Value any `json:"value,omitempty"`
 }
 

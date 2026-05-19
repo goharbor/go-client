@@ -28,6 +28,12 @@ func (o *HeadProjectReader) ReadResponse(response runtime.ClientResponse, consum
 			return nil, err
 		}
 		return result, nil
+	case 400:
+		result := NewHeadProjectBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	case 404:
 		result := NewHeadProjectNotFound()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -107,6 +113,88 @@ func (o *HeadProjectOK) readResponse(response runtime.ClientResponse, consumer r
 
 	if hdrXRequestID != "" {
 		o.XRequestID = hdrXRequestID
+	}
+
+	return nil
+}
+
+// NewHeadProjectBadRequest creates a HeadProjectBadRequest with default headers values
+func NewHeadProjectBadRequest() *HeadProjectBadRequest {
+	return &HeadProjectBadRequest{}
+}
+
+/*
+HeadProjectBadRequest describes a response with status code 400, with default header values.
+
+Bad request
+*/
+type HeadProjectBadRequest struct {
+
+	/* The ID of the corresponding request for the response
+	 */
+	XRequestID string
+
+	Payload *models.Errors
+}
+
+// IsSuccess returns true when this head project bad request response has a 2xx status code
+func (o *HeadProjectBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this head project bad request response has a 3xx status code
+func (o *HeadProjectBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this head project bad request response has a 4xx status code
+func (o *HeadProjectBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this head project bad request response has a 5xx status code
+func (o *HeadProjectBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this head project bad request response a status code equal to that given
+func (o *HeadProjectBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the head project bad request response
+func (o *HeadProjectBadRequest) Code() int {
+	return 400
+}
+
+func (o *HeadProjectBadRequest) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[HEAD /projects][%d] headProjectBadRequest %s", 400, payload)
+}
+
+func (o *HeadProjectBadRequest) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[HEAD /projects][%d] headProjectBadRequest %s", 400, payload)
+}
+
+func (o *HeadProjectBadRequest) GetPayload() *models.Errors {
+	return o.Payload
+}
+
+func (o *HeadProjectBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	// hydrates response header X-Request-Id
+	hdrXRequestID := response.GetHeader("X-Request-Id")
+
+	if hdrXRequestID != "" {
+		o.XRequestID = hdrXRequestID
+	}
+
+	o.Payload = new(models.Errors)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
+		return err
 	}
 
 	return nil

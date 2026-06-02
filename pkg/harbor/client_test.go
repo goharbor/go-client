@@ -60,6 +60,18 @@ var params = []testParam{
 		expectedAuthInfo:  nil,
 		clientType:        v2Type,
 	},
+	testParam{
+		// no transport set should default to a verifying transport, not InsecureTransport
+		url:               "//10.0.0.1:443",
+		transport:         nil,
+		authInfo:          nil,
+		expectedHost:      "10.0.0.1:443",
+		expectedBasePath:  v2client.DefaultBasePath,
+		expectedScheme:    httpsSchema,
+		expectedTransport: http.DefaultTransport,
+		expectedAuthInfo:  nil,
+		clientType:        v2Type,
+	},
 }
 
 func TestToConfig(t *testing.T) {

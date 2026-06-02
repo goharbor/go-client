@@ -76,7 +76,7 @@ func (c *Config) ToV2Config() v2client.Config {
 	}
 
 	if t == nil {
-		t = InsecureTransport
+		t = http.DefaultTransport
 	}
 
 	return v2client.Config{
